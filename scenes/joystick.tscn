@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg60ibjocgcy4"]
+
+[ext_resource type="Texture2D" uid="uid://b0ihq0lmiwb65" path="res://assets/coin_blank.png" id="1_g36iv"]
+[ext_resource type="Script" uid="uid://cnp5cs268tycu" path="res://code/joystick.gd" id="1_m03u7"]
+[ext_resource type="Texture2D" uid="uid://thu4medbs8i" path="res://assets/coin_logo.png" id="2_qxmy8"]
+
+[node name="Joystick" type="CanvasLayer"]
+script = ExtResource("1_m03u7")
+
+[node name="JoystickBase" type="Node2D" parent="."]
+position = Vector2(0, 648)
+
+[node name="Sprite2D" type="Sprite2D" parent="JoystickBase"]
+texture = ExtResource("1_g36iv")
+offset = Vector2(64, -64)
+
+[node name="JoystickButton" type="Node2D" parent="JoystickBase"]
+position = Vector2(64, -64)
+rotation = -6.28318
+
+[node name="Sprite2D" type="Sprite2D" parent="JoystickBase/JoystickButton"]
+position = Vector2(-0.000282288, -31.9998)
+rotation = -6.28318
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qxmy8")

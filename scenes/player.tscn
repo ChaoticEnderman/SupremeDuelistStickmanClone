@@ -1,0 +1,175 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqj3jblf4fr0w"]
+
+[ext_resource type="Script" uid="uid://cxwla5qduiw3p" path="res://code/ragdoll_physics.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://b70piq6y3ibwn" path="res://code/player.gd" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://ce2rhj0h5e3x7" path="res://assets/icon.svg" id="2_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://dg60ibjocgcy4" path="res://scenes/joystick.tscn" id="4_dqkch"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(10, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(10, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(10, 30)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_qhqgy")
+
+[node name="RagdollPhysicsManager" type="Node2D" parent="."]
+script = ExtResource("1_g2els")
+
+[node name="Torso" type="RigidBody2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, -26)
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Torso"]
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Torso"]
+scale = Vector2(0.078125, 0.390625)
+texture = ExtResource("2_qhqgy")
+
+[node name="Stomach" type="RigidBody2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, 25)
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Stomach"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Stomach"]
+position = Vector2(-4.76837e-07, -3.8147e-06)
+rotation = -6.28318
+scale = Vector2(0.078125, 0.390625)
+texture = ExtResource("2_qhqgy")
+
+[node name="R Thigh" type="RigidBody2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, 79)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Thigh"]
+shape = SubResource("RectangleShape2D_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/R Thigh"]
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(0.078125, 0.390625)
+texture = ExtResource("2_qhqgy")
+
+[node name="L Thigh" type="RigidBody2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, 79)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Thigh"]
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/L Thigh"]
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(0.078125, 0.390625)
+texture = ExtResource("2_qhqgy")
+
+[node name="Hip Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, -1)
+rotation = 1.57079
+node_a = NodePath("../Torso")
+node_b = NodePath("../Stomach")
+bias = 0.9
+disable_collision = false
+softness = 16.0
+angular_limit_lower = -0.261799
+angular_limit_upper = 0.261799
+
+[node name="L Pelvis Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, 50.0002)
+rotation = 3.14158
+node_a = NodePath("../Stomach")
+node_b = NodePath("../L Thigh")
+bias = 0.9
+disable_collision = false
+softness = 16.0
+angular_limit_lower = -0.261799
+angular_limit_upper = 0.261799
+
+[node name="R Pelvis Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+position = Vector2(-0.00098002, 50)
+rotation = -2.50975e-05
+node_a = NodePath("../Stomach")
+node_b = NodePath("../R Thigh")
+bias = 0.9
+disable_collision = false
+softness = 16.0
+angular_limit_lower = -0.261799
+angular_limit_upper = 0.261799
+
+[node name="L Shin" type="RigidBody2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, 134)
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Shin"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/L Shin"]
+position = Vector2(-4.76837e-07, -3.8147e-06)
+rotation = -6.28318
+scale = Vector2(0.078125, 0.390625)
+texture = ExtResource("2_qhqgy")
+
+[node name="L Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, 109)
+rotation = 1.57079
+node_a = NodePath("../L Thigh")
+node_b = NodePath("../L Shin")
+bias = 0.9
+disable_collision = false
+softness = 16.0
+angular_limit_lower = -0.261799
+angular_limit_upper = 0.261799
+
+[node name="R Shin" type="RigidBody2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, 134)
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Shin"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/R Shin"]
+rotation = -6.28318
+scale = Vector2(0.078125, 0.390625)
+texture = ExtResource("2_qhqgy")
+
+[node name="R Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, 109)
+rotation = 1.57079
+node_a = NodePath("../R Thigh")
+node_b = NodePath("../R Shin")
+bias = 0.9
+disable_collision = false
+softness = 16.0
+angular_limit_lower = -0.261799
+angular_limit_upper = 0.261799
+
+[node name="Head" type="RigidBody2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, -67)
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Head"]
+shape = SubResource("RectangleShape2D_qhqgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Head"]
+position = Vector2(9.53674e-07, 4.76837e-07)
+scale = Vector2(0.234375, 0.234375)
+texture = ExtResource("2_qhqgy")
+
+[node name="Neck Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, -51)
+node_a = NodePath("../Torso")
+node_b = NodePath("../Head")
+disable_collision = false
+
+[node name="Joystick" parent="." instance=ExtResource("4_dqkch")]
