@@ -17,14 +17,15 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-Globals="*res://code/globals.gd"
+Globals="*res://code/globals/globals.gd"
+WeaponGlobals="*res://code/globals/weapon_globals.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep_height"
 
 [input]
 
@@ -54,7 +55,12 @@ UseSkill={
 ]
 }
 
+[physics]
+
+2d/run_on_separate_thread=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

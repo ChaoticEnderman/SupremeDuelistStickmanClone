@@ -2,10 +2,9 @@ extends CanvasLayer
 
 @onready var base_joystick : Node2D = get_node("JoystickBase")
 @onready var knob_joystick : Node2D = get_node("JoystickBase/JoystickButton")
+@onready var knob_position : Vector2 = knob_joystick.position # This is like a constant
 
-@onready var knob_position : Vector2 = knob_joystick.position
-
-var joystick_scale : float = 2.0
+var joystick_scale : float = 1.5
 
 var joystick_direction : Vector2
 var joystick_angle : float
@@ -17,10 +16,9 @@ var jumping_time : int = 0
 
 func _ready() -> void:
 	base_joystick.apply_scale(Vector2(joystick_scale, joystick_scale))
-	#knob_joystick.apply_scale(Vector2(joystick_scale, joystick_scale))
 	knob_joystick.rotation = 0.0
+	base_joystick.visible = true
 	knob_joystick.position = Vector2(knob_joystick.position.x, knob_joystick.position.y + 32)
-	
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch or event is InputEventMouseButton:
@@ -30,16 +28,13 @@ func _input(event: InputEvent) -> void:
 		else:
 			dragging = false
 			knob_joystick.rotation = 0.0
-			knob_joystick.position = Vector2(knob_joystick.position.x, knob_joystick.position.y + 32)
-			
+			knob_joystick.position = Vector2(knob_position.x, knob_position.y + 32)
 
 	elif event is InputEventScreenDrag or event is InputEventMouseMotion:
 		if dragging:
 			joystick_direction = (event.position - knob_joystick.global_position).normalized()
-			# Add 90 degree because of the normals problem , before flipping the y
-			joystick_angle = (joystick_direction.angle() + deg_to_rad(90.0))
-			#Flip the y because of the normals problem, might be changed later on bruh like wtf is going on
-			joystick_direction = Vector2(joystick_direction.x, -joystick_direction.y)
+			 # Since the normals is different, we compare the relative rotation too the vector up
+			joystick_angle = Vector2.UP.angle_to(joystick_direction)
 			knob_joystick.rotation = joystick_angle
 
 ## Function called every tick to check the direction of the joystick movement
@@ -48,15 +43,15 @@ func tick_input() -> Vector2:
 		return joystick_direction
 	return Vector2(0.0, 0.0)
 
-
 ## Function called every tick to check whether the player do an impulse action of releasing the joystick
 func tick_input_is_releasing() -> bool:
 	previous_dragging = dragging
 	return previous_dragging and not dragging
 
+## Function called every tick to check if the player is jumping at the current tick
 func tick_input_is_jumping() -> bool:
 	#print("A ", jumping_time, "  ", rad_to_deg(joystick_angle))
-	if rad_to_deg(joystick_angle) < 30.0 and rad_to_deg(joystick_angle) > -30.0 and dragging:
+	if rad_to_deg(joystick_angle) < Globals.JUMPING_ANGLE_DEGREES and rad_to_deg(joystick_angle) > -Globals.JUMPING_ANGLE_DEGREES and dragging:
 		jumping_time += 1
 	else:
 		jumping_time = 0

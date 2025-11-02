@@ -1,13 +1,12 @@
 extends Node2D
-## This script control the rather low-level implementation of a physics body
+## This script control the rather low-level implementation of a physics body for each player
 
-@onready var PlayerNode: Node2D = get_node(".")
-const Globals = preload("res://code/Globals.gd")
-
-var is_dragging : bool = false
-var offset : Vector2
 var is_airborne : bool = false
-
+# Force multiplier when the player is airborne, making a drag effect when falling players will drag slower
+var airborne_multiplier : float = 1.0
+# Every instance the player touch the ground, they can still jump after like falling down
+# So the jump cache will be the time where players can actually jump after falling
+var jump_cache : int = 60
 
 @onready var head : RigidBody2D = get_node("Head")
 @onready var torso : RigidBody2D = get_node("Torso")
@@ -18,27 +17,25 @@ var is_airborne : bool = false
 @onready var b_thigh : RigidBody2D = get_node("R Thigh")
 @onready var a_shin : RigidBody2D = get_node("L Shin")
 @onready var b_shin : RigidBody2D = get_node("R Shin")
-# True leg name
+
+# Pseudo leg name, will be changed each tick depend on the position
 @onready var l_thigh : RigidBody2D = a_thigh
 @onready var r_thigh : RigidBody2D = b_thigh
 @onready var l_shin : RigidBody2D = a_shin
 @onready var r_shin : RigidBody2D = b_shin
-
 
 func _ready() -> void:
 	for child in self.get_children():
 		if child is RigidBody2D:
 			child.linear_damp = Globals.LINEAR_DAMP
 			child.angular_damp = Globals.ANGULAR_DAMP
-			child.linear_damp = 0.2
-			child.angular_damp = 0.2
 			child.contact_monitor = true
 			child.max_contacts_reported = 100 # Upper bound, can be changed later
 		if child is PinJoint2D:
 			child.softness = 0.0
-			
 	
-	#This monstrosity need to be refactored
+	# Making the legs dont touch eachother
+	# This monstrosity need to be refactored
 	l_thigh.add_collision_exception_with(r_thigh)
 	r_thigh.add_collision_exception_with(l_thigh)
 	l_shin.add_collision_exception_with(r_shin)
@@ -48,48 +45,26 @@ func _ready() -> void:
 	l_shin.add_collision_exception_with(r_thigh)
 	r_shin.add_collision_exception_with(l_thigh)
 
-
-#func _input(event: InputEvent) -> void:
-	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		## Freeze/unfreeze all children and move them by the mouse offset, virtually creating the dragging effect
-		#if event.pressed:
-			#is_dragging = true
-			#offset = get_global_mouse_position() - global_position
-			#for child in get_children():
-				#if child is RigidBody2D:
-					#child.freeze = true
-		#else:
-			#is_dragging = false
-			#for child in get_children():
-				#if child is RigidBody2D:
-					#child.freeze = false
-
-
+## Master tick function to runs all other tick functions per physics tick
 func tick_ragdoll(force: Vector2) -> void:
-	#Flipping the normals again, since the game normal is always like this
-	add_ragdoll_central_force(Vector2(force.x, -force.y), Globals.MOVE_FORCE)
+	#Flipping the normals since the game normal is always like this
+	add_ragdoll_central_force(Vector2(force.x, -force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
 	tick_check_legs()
 	tick_check_airborne()
-	apply_constant_leg_spacing()
 	apply_central_torque(200.0, 0.0)
 	apply_leg_torque(200.0, 0.0)
+	apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, 0.0)
+	#walking(force)
 
-#func _process(_delta: float) -> void:
-	#if is_dragging:
-		#global_position = get_global_mouse_position() - offset
-		## Keep children aligned to parent manually
-		#for child in get_children():
-			#if child is RigidBody2D:
-				#child.global_position = child.global_position
-
-
+## A base function to move the ragdoll entirely by just the central parts, the torso and stomach
+## Other functions can assume this is a full ragdoll movement force
 func add_ragdoll_central_force(direction: Vector2, strength: float):
-	# direction should be a normalized vector
+	# Direction should be a normalized vector
 	if direction == Vector2.ZERO:
 		return
-
-	torso.apply_force(direction * strength * torso.mass)
-	stomach.apply_force(direction * strength * stomach.mass)
+	
+	torso.apply_force(direction * strength)
+	stomach.apply_force(direction * strength)
 
 ## Simple function to determine which of the two identical legs are left and right, based on their rotation
 func tick_check_legs():
@@ -104,30 +79,65 @@ func tick_check_legs():
 		r_thigh = a_thigh
 		r_shin = a_shin
 
+## Function to check if the ragdoll shins is airborne, since these limbs are what dictate the air state of the ragdoll
 func tick_check_airborne():
-	print(l_shin.get_colliding_bodies())
+	is_airborne = true
+	# When airborne (falling) the movement is slower and limited
+	airborne_multiplier = 0.2
+	# Checking both the legs
+	for body in l_shin.get_colliding_bodies():
+		if body is TileMapLayer:
+			is_airborne = false
+			airborne_multiplier = 1.0
+			jump_cache = 60
+			return
+	for body in r_shin.get_colliding_bodies():
+		if body is TileMapLayer:
+			is_airborne = false
+			airborne_multiplier = 1.0
+			jump_cache = 60
+			return
+	if jump_cache > 0:
+		jump_cache = jump_cache - 1
 
+## Do we really need documentation on this?
 func jump():
-	#print("jumping!")
-	add_ragdoll_central_force(Vector2.UP, Globals.JUMP_FORCE)
+	if jump_cache > 0:
+		add_ragdoll_central_force(Vector2.UP, Globals.RAGDOLL_JUMP_FORCE)
+		jump_cache = 0
 
+## Function to add walk animation if the direction is not in the jumping direction
+#func walking(force: Vector2) -> bool:
+	## This is kinda redundant so just ignore this probably, the walk effect that the leg create is enough
+	#if force == Vector2.ZERO:
+		#return false
+	#var temp_angle : float = rad_to_deg(force.angle()) - 90
+	#if not (temp_angle < Globals.JUMPING_ANGLE_DEGREES and temp_angle > -Globals.JUMPING_ANGLE_DEGREES):
+		##l_thigh.apply_torque(100000.0)
+		##r_thigh.apply_torque(-100000.0)
+		#return true
+	#return false
+
+## Custom angular limit system that apply the torque that scale quadratically by the angle difference
+## To make the quadratic function keep the sign, one of the variable is the absolute value
 func apply_angular_limit_torque(body: RigidBody2D, target_angle : float, force : float, damp : float):
 	var angle_displacement = rad_to_deg(body.global_rotation) - target_angle
 	var torque = (-force * angle_displacement * abs(angle_displacement)) - (damp * body.angular_velocity)
 	body.apply_torque(torque)
 
+## Make the ragdoll stand rather upright
 func apply_central_torque(force : float, damp : float):
-	apply_angular_limit_torque(torso, 0.0, Globals.UPRIGHT_TORQUE_FORCE, 0.0)
-	apply_angular_limit_torque(stomach, 0.0, Globals.UPRIGHT_TORQUE_FORCE * 4, 0.0)
+	apply_angular_limit_torque(torso, 0.0, force, damp)
+	apply_angular_limit_torque(stomach, 0.0, force * 4, damp)
 
+## Make the shins standing in a stable manner
 func apply_leg_torque(force : float, damp : float):
 	apply_angular_limit_torque(l_shin, l_thigh.rotation, force, damp)
 	apply_angular_limit_torque(r_shin, r_thigh.rotation, force, damp)
 
-func apply_constant_leg_spacing():
-	var leg_distance = l_thigh.rotation - r_thigh.rotation
-	#print(rad_to_deg(leg_distance))
-	apply_angular_limit_torque(l_thigh, 30.0, Globals.UPRIGHT_TORQUE_FORCE / 2, 0.0)
-	apply_angular_limit_torque(r_thigh, -30.0, Globals.UPRIGHT_TORQUE_FORCE / 2, 0.0)
-	apply_angular_limit_torque(l_shin, 0.0, Globals.UPRIGHT_TORQUE_FORCE, 0.0)
-	apply_angular_limit_torque(r_shin, 0.0, Globals.UPRIGHT_TORQUE_FORCE, 0.0)
+func apply_constant_leg_spacing(force: float, damp: float):
+	#var leg_distance = l_thigh.rotation - r_thigh.rotation
+	apply_angular_limit_torque(l_thigh, 30.0, force / 2, damp)
+	apply_angular_limit_torque(r_thigh, -30.0, force / 2, damp)
+	apply_angular_limit_torque(l_shin, 0.0, force, damp)
+	apply_angular_limit_torque(r_shin, 0.0, force, damp)

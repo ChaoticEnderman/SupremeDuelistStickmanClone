@@ -8,7 +8,7 @@
 script = ExtResource("1_m03u7")
 
 [node name="JoystickBase" type="Node2D" parent="."]
-position = Vector2(0, 648)
+position = Vector2(0, 720)
 
 [node name="Sprite2D" type="Sprite2D" parent="JoystickBase"]
 texture = ExtResource("1_g36iv")

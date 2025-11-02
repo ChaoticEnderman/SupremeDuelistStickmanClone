@@ -173,3 +173,14 @@ node_b = NodePath("../Head")
 disable_collision = false
 
 [node name="Joystick" parent="." instance=ExtResource("4_dqkch")]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -30.0
+offset_top = -90.0
+offset_right = -25.0
+offset_bottom = -30.0
+rotation = -1.57079
+max_value = 60.0
+value = 43.68
+fill_mode = 2
+show_percentage = false
