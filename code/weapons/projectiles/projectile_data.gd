@@ -9,3 +9,4 @@ class_name ProjectileData
 @export var can_go_through_wall: bool = false
 
 @export var hitbox_scene : PackedScene
+@export var sprite : NodePath

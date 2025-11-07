@@ -2,19 +2,28 @@
 ## Contain a ragdoll, one input manager which is a joystick or other types of input such as controllers or keyboard
 ## Also contain specific HUD elements tied to that player such as hp bar and jump bar
 extends Node2D
+class_name Player
 
 ## The physical body of this player
 @onready var ragdoll : Node2D = get_node("RagdollPhysicsManager")
-## Input manager scene that handle all types of input
-@onready var input_manager : CanvasLayer = get_node("Joystick")
+
 ## HUD jump bar
 @onready var jump_bar : ProgressBar = get_node("ProgressBar")
+
+## Input manager scene that handle all types of input
+var input_manager = CanvasLayer
 
 # Position and direction
 var player_position : Vector2 = Vector2.ZERO
 var player_direction : Vector2 = Vector2.ZERO
 
-func _physics_process(delta: float) -> void:
+func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION):
+	if is_real_player:
+		input_manager = load("res://scenes/joystick.tscn").instantiate()
+		add_child(input_manager)
+		input_manager.set_joystick_corner(joystick_position)
+
+func tick_player():
 	# Get input for this tick from input manager and store, first step
 	player_direction = input_manager.tick_input()
 	# Check for abilities being used, this method is unused but left here as a reminder later on

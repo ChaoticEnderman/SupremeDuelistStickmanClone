@@ -12,14 +12,12 @@ position = Vector2(0, 720)
 
 [node name="Sprite2D" type="Sprite2D" parent="JoystickBase"]
 texture = ExtResource("1_g36iv")
-offset = Vector2(64, -64)
 
 [node name="JoystickButton" type="Node2D" parent="JoystickBase"]
-position = Vector2(64, -64)
 rotation = -6.28318
 
 [node name="Sprite2D" type="Sprite2D" parent="JoystickBase/JoystickButton"]
-position = Vector2(-0.000282288, -31.9998)
+position = Vector2(-0.000162249, -32)
 rotation = -6.28318
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_qxmy8")

@@ -1,12 +1,16 @@
-extends Node2D
 ## This script control the rather low-level implementation of a physics body for each player
+extends Node2D
+class_name Ragdoll
 
 var is_airborne : bool = false
-# Force multiplier when the player is airborne, making a drag effect when falling players will drag slower
+## Force multiplier when the player is airborne, making a drag effect when falling players will drag slower
 var airborne_multiplier : float = 1.0
-# Every instance the player touch the ground, they can still jump after like falling down
-# So the jump cache will be the time where players can actually jump after falling
+## Every instance the player touch the ground, they can still jump after like falling down
+## So the jump cache will be the time where players can actually jump after falling
 var jump_cache : int = 60
+## This will override the airborne check function, until the player is fully airborne
+## This is because jumps are not instant and some ticks later the player is still on the ground
+var recently_jumped : bool = false
 
 @onready var head : RigidBody2D = get_node("Head")
 @onready var torso : RigidBody2D = get_node("Torso")
@@ -55,6 +59,7 @@ func tick_ragdoll(force: Vector2) -> void:
 	apply_leg_torque(200.0, 0.0)
 	apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, 0.0)
 	#walking(force)
+	print(is_airborne, "   ", recently_jumped)
 
 ## A base function to move the ragdoll entirely by just the central parts, the torso and stomach
 ## Other functions can assume this is a full ragdoll movement force
@@ -84,27 +89,37 @@ func tick_check_airborne():
 	is_airborne = true
 	# When airborne (falling) the movement is slower and limited
 	airborne_multiplier = 0.2
-	# Checking both the legs
-	for body in l_shin.get_colliding_bodies():
-		if body is TileMapLayer:
-			is_airborne = false
-			airborne_multiplier = 1.0
-			jump_cache = 60
-			return
-	for body in r_shin.get_colliding_bodies():
-		if body is TileMapLayer:
-			is_airborne = false
-			airborne_multiplier = 1.0
-			jump_cache = 60
-			return
+	# Checking both the legs touch the map
+	tick_check_airborne_one_shin(l_shin)
+	tick_check_airborne_one_shin(r_shin)
+	
+	# If the player has recently jumped, this will override the airborne code and instead reset the variable
+	if recently_jumped:
+		# Overide the jump_cache code until the player is fully airborne
+		if is_airborne:
+			recently_jumped = false
+			jump_cache = 0
+		return
+	
+	if not is_airborne:
+		airborne_multiplier = 1.0
+		jump_cache = 60
 	if jump_cache > 0:
 		jump_cache = jump_cache - 1
+
+func tick_check_airborne_one_shin(shin: RigidBody2D):
+	for body in shin.get_colliding_bodies():
+		if body is TileMapLayer:
+			is_airborne = false
+			return
 
 ## Do we really need documentation on this?
 func jump():
 	if jump_cache > 0:
 		add_ragdoll_central_force(Vector2.UP, Globals.RAGDOLL_JUMP_FORCE)
+		recently_jumped = true
 		jump_cache = 0
+
 
 ## Function to add walk animation if the direction is not in the jumping direction
 #func walking(force: Vector2) -> bool:

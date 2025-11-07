@@ -2,14 +2,14 @@
 extends Node
 
 ## Values for Godot's built-in damping value for the ragdolls
-const LINEAR_DAMP := 0.2
-const ANGULAR_DAMP := 0.2
+const LINEAR_DAMP := 0.5
+const ANGULAR_DAMP := 0.5
 
 ## The movement force of the ragdoll, including several types of movement
 const RAGDOLL_MOVE_FORCE : float = 5000.0 
 ## Jump force of the ragdoll
 const RAGDOLL_JUMP_FORCE : float = 200000.0 
-
+## Torque force for a custom angular limit system
 const RAGDOLL_TORQUE_FORCE : float = 1000.0
 
 ## Baseline tps for the game, that is the number of physics tick per second
@@ -17,9 +17,14 @@ const TPS : int = 60
 
 ## Measured in ticks, so this is equivalent to one second
 const JUMP_TIME : int = 60 
+## The time that it need to wait right after a jump
+const JUMP_COOLDOWN : int = 15
 ## The angle a is the range from a to -a that the joystick direction is considered a jumping range
 ## For example 45.0 jumping angle will call a jump when the joystick direction is between -45.0 and 45.0
 const JUMPING_ANGLE_DEGREES : float = 45.0
+
+## List of all 4 possible positions for the joystick
+enum JOYSTICK_POSITION {JOYSTICK_POSITION_TOP_LEFT, JOYSTICK_POSITION_BOTTOM_LEFT, JOYSTICK_POSITION_TOP_RIGHT, JOYSTICK_POSITION_BOTTOM_RIGHT}
 
 ## Change the range of angles from -180 <= x <= 180 to 0 <= x <= 360
 func angle_to_360(angle_degree: float) -> float:
