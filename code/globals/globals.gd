@@ -2,8 +2,8 @@
 extends Node
 
 ## Values for Godot's built-in damping value for the ragdolls
-const LINEAR_DAMP := 0.5
-const ANGULAR_DAMP := 0.5
+const LINEAR_DAMP := 2.0
+const ANGULAR_DAMP := 2.0
 
 ## The movement force of the ragdoll, including several types of movement
 const RAGDOLL_MOVE_FORCE : float = 5000.0 
@@ -24,7 +24,7 @@ const JUMP_COOLDOWN : int = 15
 const JUMPING_ANGLE_DEGREES : float = 45.0
 
 ## List of all 4 possible positions for the joystick
-enum JOYSTICK_POSITION {JOYSTICK_POSITION_TOP_LEFT, JOYSTICK_POSITION_BOTTOM_LEFT, JOYSTICK_POSITION_TOP_RIGHT, JOYSTICK_POSITION_BOTTOM_RIGHT}
+enum JOYSTICK_POSITION {TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT}
 
 ## Change the range of angles from -180 <= x <= 180 to 0 <= x <= 360
 func angle_to_360(angle_degree: float) -> float:

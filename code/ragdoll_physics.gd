@@ -11,10 +11,16 @@ var jump_cache : int = 60
 ## This will override the airborne check function, until the player is fully airborne
 ## This is because jumps are not instant and some ticks later the player is still on the ground
 var recently_jumped : bool = false
+## When the player is killed, the physics functions will stop
+var is_alive : bool = true
 
 @onready var head : RigidBody2D = get_node("Head")
 @onready var torso : RigidBody2D = get_node("Torso")
 @onready var stomach : RigidBody2D = get_node("Stomach")
+
+# P for primary, which will be the arm that have the weapon
+@onready var p_arm : RigidBody2D = get_node("P Arm")
+@onready var p_forearm : RigidBody2D = get_node("P Forearm")
 
 # The legs name is dependent on the current position of the limbs, not the true name. So if a leg is more in the left direction, it will be the left
 @onready var a_thigh : RigidBody2D = get_node("L Thigh")
@@ -38,8 +44,9 @@ func _ready() -> void:
 		if child is PinJoint2D:
 			child.softness = 0.0
 	
+	# This monstrosity need to be refactored but Im procastinating
+	
 	# Making the legs dont touch eachother
-	# This monstrosity need to be refactored
 	l_thigh.add_collision_exception_with(r_thigh)
 	r_thigh.add_collision_exception_with(l_thigh)
 	l_shin.add_collision_exception_with(r_shin)
@@ -48,28 +55,42 @@ func _ready() -> void:
 	r_thigh.add_collision_exception_with(l_shin)
 	l_shin.add_collision_exception_with(r_thigh)
 	r_shin.add_collision_exception_with(l_thigh)
+	
+	# Making the arms dont collide with the body and become independent
+	p_arm.add_collision_exception_with(head)
+	p_arm.add_collision_exception_with(torso)
+	p_arm.add_collision_exception_with(stomach)
+	p_forearm.add_collision_exception_with(head)
+	p_forearm.add_collision_exception_with(torso)
+	p_forearm.add_collision_exception_with(stomach)
+	p_forearm.add_collision_exception_with(l_shin)
+	p_forearm.add_collision_exception_with(r_shin)
+	p_forearm.add_collision_exception_with(l_thigh)
+	p_forearm.add_collision_exception_with(r_thigh)
 
 ## Master tick function to runs all other tick functions per physics tick
 func tick_ragdoll(force: Vector2) -> void:
-	#Flipping the normals since the game normal is always like this
-	add_ragdoll_central_force(Vector2(force.x, -force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
-	tick_check_legs()
-	tick_check_airborne()
-	apply_central_torque(200.0, 0.0)
-	apply_leg_torque(200.0, 0.0)
-	apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, 0.0)
-	#walking(force)
-	print(is_airborne, "   ", recently_jumped)
+	if is_alive:
+		#Flipping the normals since the game normal is always like this
+		apply_ragdoll_central_force(Vector2(force.x, -force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
+		tick_check_legs()
+		tick_check_airborne()
+		tick_move_arms(force)
+		apply_central_torque(200.0, Globals.ANGULAR_DAMP)
+		apply_leg_torque(200.0, Globals.ANGULAR_DAMP)
+		apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, Globals.ANGULAR_DAMP)
+		#walking(force)
 
 ## A base function to move the ragdoll entirely by just the central parts, the torso and stomach
 ## Other functions can assume this is a full ragdoll movement force
-func add_ragdoll_central_force(direction: Vector2, strength: float):
-	# Direction should be a normalized vector
+func apply_ragdoll_central_force(direction: Vector2, strength: float):
+	# Direction should be normalized
 	if direction == Vector2.ZERO:
 		return
 	
-	torso.apply_force(direction * strength)
-	stomach.apply_force(direction * strength)
+	torso.apply_central_force(direction * strength)
+	stomach.apply_central_force(direction * strength)
+
 
 ## Simple function to determine which of the two identical legs are left and right, based on their rotation
 func tick_check_legs():
@@ -113,13 +134,39 @@ func tick_check_airborne_one_shin(shin: RigidBody2D):
 			is_airborne = false
 			return
 
-## Do we really need documentation on this?
-func jump():
-	if jump_cache > 0:
-		add_ragdoll_central_force(Vector2.UP, Globals.RAGDOLL_JUMP_FORCE)
+func tick_move_arms(direction: Vector2):
+	# Multiply with airborne to prevent slow falling
+	p_forearm.apply_central_force(direction * Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
+	p_arm.apply_central_force(direction * Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
+	#apply_angular_limit_torque(p_arm, direction.angle(), Globals.RAGDOLL_TORQUE_FORCE, 0.0)
+
+
+## Checking every single limbs for collision to any damagable objects
+## No need for like removing duplicates since it will deal damage multiple times if hit multiple limbs
+## Can be laggy since it's yet to implement broadphase collision checking
+func tick_check_damage_collisions() -> Array[int]:
+	var colliding_bodies : Array[int]
+	for child in self.get_children():
+		if child is RigidBody2D:
+			for body in child.get_colliding_bodies():
+				if body.get_owner().has_node("Damageable"):
+					if not body.get_owner().damageable.owner_stickman == self.get_owner():
+						colliding_bodies.append(body.get_owner().get_damage())
+	return colliding_bodies
+
+## Jump if the direction is not zero. Technically works without the != zero condition but just keep it
+func jump(direction: Vector2):
+	if jump_cache > 0 and direction != Vector2.ZERO and is_alive:
+		apply_ragdoll_central_force(direction, Globals.RAGDOLL_JUMP_FORCE)
 		recently_jumped = true
 		jump_cache = 0
 
+## Animation called once when the ragdoll dies, will remove all pinjoints and stop physics
+func dying_animation():
+	is_alive = false
+	for child in self.get_children():
+		if child is PinJoint2D:
+			child.free()
 
 ## Function to add walk animation if the direction is not in the jumping direction
 #func walking(force: Vector2) -> bool:
@@ -150,6 +197,7 @@ func apply_leg_torque(force : float, damp : float):
 	apply_angular_limit_torque(l_shin, l_thigh.rotation, force, damp)
 	apply_angular_limit_torque(r_shin, r_thigh.rotation, force, damp)
 
+## Spread the legs out from eachother, make it stand and not topple over one side
 func apply_constant_leg_spacing(force: float, damp: float):
 	#var leg_distance = l_thigh.rotation - r_thigh.rotation
 	apply_angular_limit_torque(l_thigh, 30.0, force / 2, damp)

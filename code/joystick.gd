@@ -27,19 +27,22 @@ var previous_dragging : bool
 ## However if the player just stop this will be resetted
 var jumping_time : int = 0
 
+## The unique touch index id of the current streak of drag, to make each touchs independent of eachother
+var touch_index : int = -1
+
 func _ready() -> void:
 	# This is moved to the set_joystick_corner function since it cant accept parameters
 	return
 
 func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	# Not really any way to make this simpler, but it works for now
-	if joystick_position == Globals.JOYSTICK_POSITION.JOYSTICK_POSITION_TOP_LEFT:
+	if joystick_position == Globals.JOYSTICK_POSITION.TOP_LEFT:
 		base_joystick.position = Vector2(0.0, 0.0) + Vector2(64.0, 64.0) * joystick_scale
-	elif joystick_position == Globals.JOYSTICK_POSITION.JOYSTICK_POSITION_BOTTOM_LEFT:
+	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
 		base_joystick.position = Vector2(0.0, 720.0) + Vector2(64.0, -64.0) * joystick_scale
-	elif joystick_position == Globals.JOYSTICK_POSITION.JOYSTICK_POSITION_TOP_RIGHT:
+	elif joystick_position == Globals.JOYSTICK_POSITION.TOP_RIGHT:
 		base_joystick.position = Vector2(1280.0, 0.0) + Vector2(-64.0, 64.0) * joystick_scale
-	elif joystick_position == Globals.JOYSTICK_POSITION.JOYSTICK_POSITION_BOTTOM_RIGHT:
+	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_RIGHT:
 		base_joystick.position = Vector2(1280.0, 720.0) + Vector2(-64.0, -64.0) * joystick_scale
 	
 	# Set the knob position to the default value
@@ -53,26 +56,43 @@ func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	knob_joystick.position = Vector2(knob_joystick.position.x, knob_joystick.position.y + 32)
 
 func _input(event: InputEvent) -> void:
-	if (event is InputEventScreenTouch or event is InputEventMouseButton):
+	if event is InputEventScreenTouch:
 		# The joystick movement can be anywhere, but to initialize the movement, it must be in the joystick
 		# So if the mouse is pressed it will do another layer of check to see if it's actually in the region of the joystick
 		# But for like the else part, the joystick can be released everywhere
+		if base_joystick.position.distance_to(event.position) < joystick_radius * joystick_scale:
+			# This only works if the touch index is not writed or is the same as the touch index
+			if event.pressed == true and (touch_index == -1 or touch_index == event.index):
+				dragging = true
+				knob_joystick.position = knob_position
+				# To uniquely identify each touch input and ignore on mouse inputs
+				touch_index = event.index
+		if event.pressed == false and touch_index == event.index:
+			# Same, only activate reset of the joystick if the index is the same
+			dragging = false
+			knob_joystick.rotation = 0.0
+			knob_joystick.position = Vector2(knob_position.x, knob_position.y + 32)
+			touch_index = -1
+		print(event.index, event.pressed)
+	
+	if event is InputEventMouseButton:
 		if event.pressed == true:
 			if base_joystick.position.distance_to(event.position) < joystick_radius * joystick_scale:
 				dragging = true
 				knob_joystick.position = knob_position
-		else:
+		elif event.pressed == false:
 			dragging = false
 			knob_joystick.rotation = 0.0
 			knob_joystick.position = Vector2(knob_position.x, knob_position.y + 32)
 	
 	# Set the direction of the joystick dynamically
-	if event is InputEventScreenDrag or event is InputEventMouseMotion:
+	if (event is InputEventScreenDrag and touch_index == event.index) or event is InputEventMouseMotion:
 		if dragging:
 			joystick_direction = (event.position - knob_joystick.global_position).normalized()
 			 # Since the normals is different, we compare the relative rotation too the vector up
 			joystick_angle = Vector2.UP.angle_to(joystick_direction)
 			knob_joystick.rotation = joystick_angle
+
 
 ## Function called every tick to check the direction of the joystick movement
 func tick_input() -> Vector2:
@@ -86,15 +106,16 @@ func tick_input_is_releasing() -> bool:
 	return previous_dragging and not dragging
 
 ## Function called every tick to check if the player is jumping at the current tick
-func tick_input_is_jumping() -> bool:
+## Return the jump direction if the player is jumping, otherwise return zero
+func tick_input_is_jumping() -> Vector2:
 	if rad_to_deg(joystick_angle) < Globals.JUMPING_ANGLE_DEGREES and rad_to_deg(joystick_angle) > -Globals.JUMPING_ANGLE_DEGREES and dragging:
 		jumping_time += 1
 	else:
 		jumping_time = 0
 	
 	if jumping_time >= Globals.JUMP_TIME:
-		print("Just jumped now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		jumping_time = -1
-		return true
-	return false
+		return joystick_direction
+	
+	return Vector2.ZERO
 	
