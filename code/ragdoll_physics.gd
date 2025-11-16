@@ -13,6 +13,10 @@ var jump_cache : int = 60
 var recently_jumped : bool = false
 ## When the player is killed, the physics functions will stop
 var is_alive : bool = true
+## The jump action will apply the force 6 times in 6 frames
+var jump_stacking : int = 0
+## This will lock the jumping angle even if the joystick move during the jump stacking period
+var locked_jumping_direction : Vector2
 
 @onready var head : RigidBody2D = get_node("Head")
 @onready var torso : RigidBody2D = get_node("Torso")
@@ -20,7 +24,10 @@ var is_alive : bool = true
 
 # P for primary, which will be the arm that have the weapon
 @onready var p_arm : RigidBody2D = get_node("P Arm")
-@onready var p_forearm : RigidBody2D = get_node("P Forearm")
+#@onready var p_forearm : RigidBody2D = get_node("P Forearm")
+
+#@onready var p_arm = get_node("Shoulder Pivot/P Arm")
+@onready var p_forearm = get_node("P Forearm")
 
 # The legs name is dependent on the current position of the limbs, not the true name. So if a leg is more in the left direction, it will be the left
 @onready var a_thigh : RigidBody2D = get_node("L Thigh")
@@ -41,6 +48,7 @@ func _ready() -> void:
 			child.angular_damp = Globals.ANGULAR_DAMP
 			child.contact_monitor = true
 			child.max_contacts_reported = 100 # Upper bound, can be changed later
+			child.freeze = false
 		if child is PinJoint2D:
 			child.softness = 0.0
 	
@@ -67,12 +75,15 @@ func _ready() -> void:
 	p_forearm.add_collision_exception_with(r_shin)
 	p_forearm.add_collision_exception_with(l_thigh)
 	p_forearm.add_collision_exception_with(r_thigh)
+	
+	# Test
+	p_arm.add_collision_exception_with(p_forearm)
 
 ## Master tick function to runs all other tick functions per physics tick
 func tick_ragdoll(force: Vector2) -> void:
 	if is_alive:
 		#Flipping the normals since the game normal is always like this
-		apply_ragdoll_central_force(Vector2(force.x, -force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
+		apply_ragdoll_central_force(Vector2(force.x, force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
 		tick_check_legs()
 		tick_check_airborne()
 		tick_move_arms(force)
@@ -80,7 +91,9 @@ func tick_ragdoll(force: Vector2) -> void:
 		apply_leg_torque(200.0, Globals.ANGULAR_DAMP)
 		apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, Globals.ANGULAR_DAMP)
 		#walking(force)
-
+		
+		tick_jump_stack()
+		
 ## A base function to move the ragdoll entirely by just the central parts, the torso and stomach
 ## Other functions can assume this is a full ragdoll movement force
 func apply_ragdoll_central_force(direction: Vector2, strength: float):
@@ -135,17 +148,53 @@ func tick_check_airborne_one_shin(shin: RigidBody2D):
 			return
 
 func tick_move_arms(direction: Vector2):
-	# Multiply with airborne to prevent slow falling
-	p_forearm.apply_central_force(direction * Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
-	p_arm.apply_central_force(direction * Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
-	#apply_angular_limit_torque(p_arm, direction.angle(), Globals.RAGDOLL_TORQUE_FORCE, 0.0)
+	if direction == Vector2.ZERO:
+		return
+	var angle = rad_to_deg(Vector2.UP.angle_to(direction)) - 180
+	#p_arm.freeze = true
+	#p_forearm.freeze = true
+	#p_arm.apply_torque(torque * Globals.RAGDOLL_TORQUE_FORCE * 500)
+	
+	var arm_angle_displacement = rad_to_deg(p_arm.global_rotation) - angle
+	var forearm_angle_displacement = rad_to_deg(p_forearm.global_rotation) - angle
+	# To anybody going to maintaince this code, good luck hehehe prepare to die
+	
+	# Ok but still need comments, so this will always make the angle smaller than 180
+	if abs(arm_angle_displacement) > 180:
+		arm_angle_displacement = -(360 - arm_angle_displacement)
+	if abs(forearm_angle_displacement) > 180:
+		forearm_angle_displacement = -(360 - forearm_angle_displacement)
+	
+	
+	# Limit the turning speed of like the arm to stop the bug, otherwise it will go crazy
+	var angle_displacement_limit : int = 15
+	if arm_angle_displacement > angle_displacement_limit:
+		arm_angle_displacement = angle_displacement_limit
+	elif arm_angle_displacement < -angle_displacement_limit:
+		arm_angle_displacement = -angle_displacement_limit
+	if forearm_angle_displacement > angle_displacement_limit:
+		forearm_angle_displacement = angle_displacement_limit
+	elif forearm_angle_displacement < -angle_displacement_limit:
+		forearm_angle_displacement = -angle_displacement_limit
+	
+	# This is rather like the similiar code used in the angular limit but tweaked
+	var arm_torque = (-Globals.RAGDOLL_TORQUE_FORCE * arm_angle_displacement * abs(arm_angle_displacement))
+	var forearm_torque = (-Globals.RAGDOLL_TORQUE_FORCE * forearm_angle_displacement * abs(forearm_angle_displacement))
+	
+	p_arm.apply_torque(arm_torque)
+	p_forearm.apply_torque(forearm_torque)
 
+	
+	#print(rad_to_deg(p_arm.global_rotation))
+	#apply_angular_limit_torque(p_forearm, Globals.angle_to_360(rad_to_deg(p_arm.global_rotation)), Globals.RAGDOLL_TORQUE_FORCE/500, 0.0)
+	
 
 ## Checking every single limbs for collision to any damagable objects
 ## No need for like removing duplicates since it will deal damage multiple times if hit multiple limbs
 ## Can be laggy since it's yet to implement broadphase collision checking
 func tick_check_damage_collisions() -> Array[int]:
 	var colliding_bodies : Array[int]
+	# Nested nightmare
 	for child in self.get_children():
 		if child is RigidBody2D:
 			for body in child.get_colliding_bodies():
@@ -158,8 +207,17 @@ func tick_check_damage_collisions() -> Array[int]:
 func jump(direction: Vector2):
 	if jump_cache > 0 and direction != Vector2.ZERO and is_alive:
 		apply_ragdoll_central_force(direction, Globals.RAGDOLL_JUMP_FORCE)
+		locked_jumping_direction = direction
 		recently_jumped = true
 		jump_cache = 0
+		jump_stacking = 6
+
+## Check if the current jump stack is active, if yes it will continue to jump for next ticks
+func tick_jump_stack():
+	if jump_stacking > 0 and is_alive:
+		jump_stacking -= 1
+		apply_ragdoll_central_force(locked_jumping_direction, Globals.RAGDOLL_JUMP_FORCE)
+		recently_jumped = true
 
 ## Animation called once when the ragdoll dies, will remove all pinjoints and stop physics
 func dying_animation():

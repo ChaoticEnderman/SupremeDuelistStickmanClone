@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnd56a5pch2f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vyy7x"]
+
+[node name="Projectile1" type="CollisionShape2D"]
+shape = SubResource("CircleShape2D_vyy7x")

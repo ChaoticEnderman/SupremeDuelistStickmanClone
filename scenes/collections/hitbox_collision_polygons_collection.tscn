@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b8i8dub0mqi3r"]
+
+[node name="HitboxCollisionPolygonsCollection" type="Node2D"]

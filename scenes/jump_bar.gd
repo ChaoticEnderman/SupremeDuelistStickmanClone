@@ -1,2 +1,0 @@
-extends ProgressBar
-class_name JumpBar

@@ -2,15 +2,15 @@
 extends Node
 
 ## Values for Godot's built-in damping value for the ragdolls
-const LINEAR_DAMP := 2.0
-const ANGULAR_DAMP := 2.0
+const LINEAR_DAMP := 3.0
+const ANGULAR_DAMP := 3.0
 
 ## The movement force of the ragdoll, including several types of movement
-const RAGDOLL_MOVE_FORCE : float = 5000.0 
+const RAGDOLL_MOVE_FORCE : float = 10000.0 
 ## Jump force of the ragdoll
-const RAGDOLL_JUMP_FORCE : float = 200000.0 
+const RAGDOLL_JUMP_FORCE : float = 80000.0 
 ## Torque force for a custom angular limit system
-const RAGDOLL_TORQUE_FORCE : float = 1000.0
+const RAGDOLL_TORQUE_FORCE : float = 500.0
 
 ## Baseline tps for the game, that is the number of physics tick per second
 const TPS : int = 60 

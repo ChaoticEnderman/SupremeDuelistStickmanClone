@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://vdpcg83th2ed"]
+
+[ext_resource type="Texture2D" uid="uid://b0ihq0lmiwb65" path="res://assets/coin_blank.png" id="1_n0agt"]
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("1_n0agt")

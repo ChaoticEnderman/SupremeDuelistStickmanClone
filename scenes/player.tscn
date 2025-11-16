@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cxwla5qduiw3p" path="res://code/ragdoll_physics.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://b70piq6y3ibwn" path="res://code/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://ce2rhj0h5e3x7" path="res://assets/icon.svg" id="2_qhqgy"]
-[ext_resource type="Script" uid="uid://ccjmpy2rhiiuf" path="res://scenes/jump_bar.gd" id="5_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 size = Vector2(10, 50)
@@ -13,6 +12,11 @@ size = Vector2(10, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(10, 30)
+
+[sub_resource type="GDScript" id="GDScript_qhqgy"]
+script/source = "extends ProgressBar
+class_name JumpBar
+"
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_qhqgy")
@@ -178,18 +182,6 @@ node_a = NodePath("../Torso")
 node_b = NodePath("../P Arm")
 disable_collision = false
 
-[node name="P Arm" type="RigidBody2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, -26)
-collision_layer = 15
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm"]
-shape = SubResource("RectangleShape2D_dqkch")
-
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Arm"]
-scale = Vector2(0.078125, 0.390625)
-texture = ExtResource("2_qhqgy")
-
 [node name="P Elbow Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, -1)
 node_a = NodePath("../P Arm")
@@ -198,8 +190,7 @@ disable_collision = false
 
 [node name="P Forearm" type="RigidBody2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, 25)
-collision_layer = 15
-collision_mask = 15
+mass = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Forearm"]
 shape = SubResource("RectangleShape2D_dqkch")
@@ -207,6 +198,20 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Forearm"]
 scale = Vector2(0.078125, 0.390625)
 texture = ExtResource("2_qhqgy")
+
+[node name="P Arm" type="RigidBody2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, -26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm"]
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Arm"]
+scale = Vector2(0.078125, 0.390625)
+texture = ExtResource("2_qhqgy")
+offset = Vector2(9.53674e-07, 0)
+
+[node name="Shoulder Pivot" type="Node2D" parent="RagdollPhysicsManager"]
+position = Vector2(0, -51)
 
 [node name="JumpBar" type="ProgressBar" parent="."]
 offset_left = -30.0
@@ -216,7 +221,7 @@ offset_bottom = -90.0
 max_value = 60.0
 value = 43.68
 show_percentage = false
-script = ExtResource("5_qlg0r")
+script = SubResource("GDScript_qhqgy")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -30.0
@@ -225,4 +230,4 @@ offset_right = 30.0
 offset_bottom = -85.0
 value = 89.86
 show_percentage = false
-script = ExtResource("5_qlg0r")
+script = SubResource("GDScript_qhqgy")

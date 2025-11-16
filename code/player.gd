@@ -6,26 +6,31 @@ class_name Player
 
 ## The physical body of this player
 @onready var ragdoll : Node2D = get_node("RagdollPhysicsManager")
-
 ## HUD jump bar
 @onready var jump_bar : ProgressBar = get_node("JumpBar")
-
 ## HUD health bar
 @onready var health_bar : ProgressBar = get_node("HealthBar")
-
 ## Stylebox element to override hp bar color
 @onready var health_bar_color : StyleBoxFlat = health_bar.get_theme_stylebox("fill").duplicate()
 
 ## Input manager scene that handle all types of input
 var input_manager = CanvasLayer
 
+## The single weapon that this stickman hold, since each stickman have exactly one weapon holding
+var weapon = Weapon
+
 # Position and direction
 var player_position : Vector2 = Vector2.ZERO
 var player_direction : Vector2 = Vector2.ZERO
 
+## Position of the hand, the starting point for melee weapons and projectiles
+var hand_position : Vector2 = Vector2.ZERO
+
+## The hp
 var player_hp : int = 100
 
-func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION):
+func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION, weapon: Weapon):
+	self.weapon = weapon
 	if is_real_player:
 		input_manager = load("res://scenes/joystick.tscn").instantiate()
 		add_child(input_manager)
@@ -37,8 +42,8 @@ func tick_player():
 	# Get input for this tick from input manager and store, first step
 	player_direction = input_manager.tick_input()
 	
-	# Check for abilities being used, this method is unused but left here as a reminder later on
-	input_manager.tick_input_is_releasing()
+	# Check for abilities being used
+	weapon.tick_release_ability(input_manager.tick_input_is_releasing())
 	
 	# Check the last input before ticking ragdoll
 	ragdoll.jump(input_manager.tick_input_is_jumping())
@@ -50,8 +55,14 @@ func tick_player():
 	update_jump_bar()
 	update_health_bar()
 	
+	# Tick the weapon
+	update_weapon()
+	
 	# Testing
 	check_collision()
+	
+	#hand_position = ragdoll.p_arm.global_position
+	hand_position = ragdoll.p_forearm.global_position
 
 func update_jump_bar():
 	# Reset jump when the radgoll just jumped and is airborne
@@ -74,7 +85,12 @@ func update_health_bar():
 	# To create a gradient for the hp bar. Note that the values range from 0 to 1
 	# Also change the color space to srgb to display, the value seems like linear idk
 	health_bar_color.bg_color = Color(((100 - health_bar.value) / 100), (health_bar.value / 100), 0).linear_to_srgb()
-	
+
+func update_weapon():
+	weapon.position = hand_position
+	weapon.tick(player_direction)
+
+
 func check_collision():
 	var damages : Array[int] = ragdoll.tick_check_damage_collisions()
 	if not (damages == null or damages == []):

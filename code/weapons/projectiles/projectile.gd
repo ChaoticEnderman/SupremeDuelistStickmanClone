@@ -12,19 +12,21 @@ var to_kill : bool = false
 
 var direction : Vector2
 
-func setup(owner: Player, data: ProjectileData) -> void:
+func summon(owner: Player, data: ProjectileData, direction: Vector2, position: Vector2) -> void:
 	projectile_data = data
 	hitbox = get_node("Hitbox")
-	damageable = Damageable.new(5)
-	hitbox.position = Vector2(400.0, 400.0) + Vector2(randf_range(-100.0,100.0), randf_range(-100.0,100.0))
+	hitbox.add_child(projectile_data.hitbox_path.instantiate())
+	hitbox.add_child(projectile_data.sprite_path.instantiate())
+	damageable = Damageable.new(projectile_data.damage)
 	
-	#direction = projectile_data.direction 
-	direction = Vector2.from_angle(deg_to_rad(randf_range(0.0, 360.0)))
+	hitbox.position = position
+	direction =direction
 	
 	if projectile_data.is_affected_by_gravity:
 		hitbox.gravity_scale = 0.5
 	else:
 		hitbox.gravity_scale = 0.0
+		
 	hitbox.contact_monitor = true
 	hitbox.max_contacts_reported = 100
 	
@@ -37,8 +39,9 @@ func setup(owner: Player, data: ProjectileData) -> void:
 	# Shooting the projectile
 	hitbox.apply_central_impulse(direction * projectile_data.speed)
 
+## Function to shorten the length of the code to getting the damage value
 func get_damage() -> int:
-	return damageable.get_damage()
+	return damageable.damage_tick
 
 func tick():
 	check_collision()
@@ -48,4 +51,5 @@ func check_collision():
 		if body is TileMapLayer and not projectile_data.can_go_through_wall:
 			to_kill = true
 		if body is RigidBody2D and body.get_owner() is Player:
-			to_kill = true
+			if not body.get_owner() == damageable.owner_stickman:
+				to_kill = true

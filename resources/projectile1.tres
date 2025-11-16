@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="ProjectileData" load_steps=2 format=3 uid="uid://byosaqwtf8sl5"]
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=4 format=3 uid="uid://byosaqwtf8sl5"]
 
+[ext_resource type="PackedScene" uid="uid://dnd56a5pch2f" path="res://scenes/collections/projectile1.tscn" id="1_1sol7"]
 [ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_jhe64"]
+[ext_resource type="PackedScene" uid="uid://vdpcg83th2ed" path="res://scenes/collections/sprite_projectile1.tscn" id="3_g6bi4"]
 
 [resource]
 script = ExtResource("1_jhe64")
 speed = 1000.0
-direction = Vector2(1, 0)
+damage = 2
 is_affected_by_gravity = true
 can_go_through_wall = false
-sprite = NodePath("Hitbox/Sprite2D")
-hitbox = NodePath("Hitbox")
+sprite_path = ExtResource("3_g6bi4")
+hitbox_path = ExtResource("1_1sol7")
 metadata/_custom_type_script = "uid://do2f64yeeylae"

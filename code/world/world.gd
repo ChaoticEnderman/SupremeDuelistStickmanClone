@@ -5,6 +5,10 @@ extends Node2D
 
 var temptick : int = 0
 
+func add_projectile(projectile: Projectile):
+	projectile_list.append(projectile)
+	add_child(projectile)
+
 func _ready() -> void:
 	var player1 : Player = load("res://scenes/player.tscn").instantiate()
 	var player2 : Player = load("res://scenes/player.tscn").instantiate()
@@ -14,20 +18,21 @@ func _ready() -> void:
 	player_list.append(player2)
 	add_child(player1)
 	add_child(player2)
-	player1.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_LEFT)
-	player2.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_RIGHT)
-
+	
+	var weapon1 : Weapon = load("res://scenes/collections/weapon_1.tscn").instantiate()
+	var weapon2 : Weapon = load("res://scenes/collections/weapon_1.tscn").instantiate()
+	weapon1.init(player1)
+	weapon2.init(player2)
+	add_child(weapon1)
+	add_child(weapon2)
+	
+	player1.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_LEFT, weapon1)
+	player2.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_RIGHT, weapon2)
 
 func _physics_process(delta: float) -> void:
 	tick_players()
 	tick_projectiles()
 	temptick = temptick + 1
-	if temptick % 10 == 0:
-		var projectile_scene = load("res://scenes/projectile.tscn").instantiate()
-		projectile_list.append(projectile_scene)
-		add_child(projectile_scene)
-		projectile_scene.setup(player_list.front(), load("res://resources/projectile1.tres"))
-		
 
 func tick_players():
 	for player in player_list:

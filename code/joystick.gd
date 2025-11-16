@@ -22,6 +22,8 @@ var joystick_angle : float
 var dragging : bool
 ## This store the direct previous value of the dragging variable, determine whether the player release the joystick
 var previous_dragging : bool
+## Will be true if there is a difference in the previous dragging and dragging variable, when the player just release the joystick
+var is_releasing : bool
 
 ## Temporary value of the time the joystick is held in jump angle, when this became 60 (time to jump) it will initialize a jump
 ## However if the player just stop this will be resetted
@@ -56,6 +58,9 @@ func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	knob_joystick.position = Vector2(knob_joystick.position.x, knob_joystick.position.y + 32)
 
 func _input(event: InputEvent) -> void:
+	# Store the dragging value of the very previous tick, to compare with the current
+	previous_dragging = dragging
+	
 	if event is InputEventScreenTouch:
 		# The joystick movement can be anywhere, but to initialize the movement, it must be in the joystick
 		# So if the mouse is pressed it will do another layer of check to see if it's actually in the region of the joystick
@@ -73,7 +78,6 @@ func _input(event: InputEvent) -> void:
 			knob_joystick.rotation = 0.0
 			knob_joystick.position = Vector2(knob_position.x, knob_position.y + 32)
 			touch_index = -1
-		print(event.index, event.pressed)
 	
 	if event is InputEventMouseButton:
 		if event.pressed == true:
@@ -92,7 +96,11 @@ func _input(event: InputEvent) -> void:
 			 # Since the normals is different, we compare the relative rotation too the vector up
 			joystick_angle = Vector2.UP.angle_to(joystick_direction)
 			knob_joystick.rotation = joystick_angle
-
+	
+	# This to ensure that the action of releasing the joystick must be resolved in the tick input function
+	# So it wont have things like ghosting of input where when it release the game doesnt receive the input
+	if not is_releasing:
+		is_releasing = previous_dragging and not dragging
 
 ## Function called every tick to check the direction of the joystick movement
 func tick_input() -> Vector2:
@@ -101,9 +109,14 @@ func tick_input() -> Vector2:
 	return Vector2(0.0, 0.0)
 
 ## Function called every tick to check whether the player do an impulse action of releasing the joystick
-func tick_input_is_releasing() -> bool:
-	previous_dragging = dragging
-	return previous_dragging and not dragging
+## After releasing, it still need to return the previous value of the direction
+func tick_input_is_releasing() -> Vector2:
+	if is_releasing:
+		is_releasing = false
+		return joystick_direction
+	else:
+		# Effectively null
+		return Vector2.ZERO
 
 ## Function called every tick to check if the player is jumping at the current tick
 ## Return the jump direction if the player is jumping, otherwise return zero
