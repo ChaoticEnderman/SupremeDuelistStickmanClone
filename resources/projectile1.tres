@@ -8,7 +8,7 @@
 script = ExtResource("1_jhe64")
 speed = 1000.0
 damage = 2
-is_affected_by_gravity = true
+is_affected_by_gravity = false
 can_go_through_wall = false
 sprite_path = ExtResource("3_g6bi4")
 hitbox_path = ExtResource("1_1sol7")

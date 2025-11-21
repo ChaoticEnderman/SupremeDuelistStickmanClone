@@ -90,7 +90,6 @@ func update_weapon():
 	weapon.position = hand_position
 	weapon.tick(player_direction)
 
-
 func check_collision():
 	var damages : Array[int] = ragdoll.tick_check_damage_collisions()
 	if not (damages == null or damages == []):

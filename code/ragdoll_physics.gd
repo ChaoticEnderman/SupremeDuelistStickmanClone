@@ -198,10 +198,16 @@ func tick_check_damage_collisions() -> Array[int]:
 	for child in self.get_children():
 		if child is RigidBody2D:
 			for body in child.get_colliding_bodies():
-				if body.get_owner().has_node("Damageable"):
+				if has_damageable(body.get_owner()):
 					if not body.get_owner().damageable.owner_stickman == self.get_owner():
 						colliding_bodies.append(body.get_owner().get_damage())
 	return colliding_bodies
+
+func has_damageable(parent: Node) -> bool:
+	for child in parent.get_children():
+		if child is Damageable:
+			return true
+	return false
 
 ## Jump if the direction is not zero. Technically works without the != zero condition but just keep it
 func jump(direction: Vector2):

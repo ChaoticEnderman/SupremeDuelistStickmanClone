@@ -19,8 +19,9 @@ func _ready() -> void:
 	add_child(player1)
 	add_child(player2)
 	
-	var weapon1 : Weapon = load("res://scenes/collections/weapon_1.tscn").instantiate()
-	var weapon2 : Weapon = load("res://scenes/collections/weapon_1.tscn").instantiate()
+	var weapon1 : Weapon1 = Weapon1.new()
+	var weapon2 : Weapon1 = Weapon1.new()
+	
 	weapon1.init(player1)
 	weapon2.init(player2)
 	add_child(weapon1)
@@ -39,10 +40,10 @@ func tick_players():
 		player.tick_player()
 
 func tick_projectiles():
-	for projectile in projectile_list:
-		if projectile.to_kill:
-			projectile_list.erase(projectile)
-			remove_child(projectile)
-			projectile.free()
+	projectile_list = projectile_list.filter(is_instance_valid)
+	for p in projectile_list:
+		if p.to_kill:
+			p.free()
+			remove_child(p)
 		else:
-			projectile.tick()
+			p.tick()
