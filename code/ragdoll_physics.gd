@@ -76,11 +76,10 @@ func _ready() -> void:
 	p_forearm.add_collision_exception_with(l_thigh)
 	p_forearm.add_collision_exception_with(r_thigh)
 	
-	# Test
 	p_arm.add_collision_exception_with(p_forearm)
 
 ## Master tick function to runs all other tick functions per physics tick
-func tick_ragdoll(force: Vector2) -> void:
+func tick_ragdoll(force: Vector2):
 	if is_alive:
 		#Flipping the normals since the game normal is always like this
 		apply_ragdoll_central_force(Vector2(force.x, force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
@@ -91,7 +90,6 @@ func tick_ragdoll(force: Vector2) -> void:
 		apply_leg_torque(200.0, Globals.ANGULAR_DAMP)
 		apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, Globals.ANGULAR_DAMP)
 		#walking(force)
-		
 		tick_jump_stack()
 		
 ## A base function to move the ragdoll entirely by just the central parts, the torso and stomach
@@ -183,11 +181,9 @@ func tick_move_arms(direction: Vector2):
 	
 	p_arm.apply_torque(arm_torque)
 	p_forearm.apply_torque(forearm_torque)
-
-	
 	#print(rad_to_deg(p_arm.global_rotation))
 	#apply_angular_limit_torque(p_forearm, Globals.angle_to_360(rad_to_deg(p_arm.global_rotation)), Globals.RAGDOLL_TORQUE_FORCE/500, 0.0)
-	
+
 
 ## Checking every single limbs for collision to any damagable objects
 ## No need for like removing duplicates since it will deal damage multiple times if hit multiple limbs

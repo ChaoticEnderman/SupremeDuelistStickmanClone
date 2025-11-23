@@ -14,41 +14,49 @@ class_name Weapon
 @export var ability_cycle : int = 0
 @export var ability_cycle_max : int
 
+## Index of the current ability, used to loop through them
 @export var ability_index : int = 0
 
+## Cooldown for the weapon, if its in cooldown then it will ignore ability releases
 @export var cooldown : int
 
+## Damageable object for the melee hitbox
 var damageable : Damageable
+## The owner player of the weapon, will be slightly different from just the damageable player
+## Because it can contain more data
 var player : Player
-
-var world : Node2D
 
 func init(player: Player) -> void:
 	self.player = player
 
+## Get the ability list from the child node and set it
 func set_abilities(abilities: Array[AbilityProjectile]):
 	self.abilities = abilities
 
+## Load and add its sprite
 func add_sprite(sprite: Sprite2D, texture: Texture2D):
 	self.sprite = sprite
 	self.sprite.texture = texture
 	sprite.scale = Vector2(0.2, 0.2)
 	add_child(sprite)
 
+## Set the melee damage
 func set_damage(damageable: Damageable):
 	self.damageable = damageable
 
+## Set the cooldown
 func set_cooldown(cooldown: int):
 	self.cooldown = cooldown
 
-func _ready():
-	world = get_tree().get_root().get_node("World")
-
-func tick(rotation: Vector2):
-	cooldown -= 1
+## Runs independenly of physics to change the position and rotation of the weapon
+func tick_rotation(rotation: Vector2):
 	if rotation != Vector2.ZERO:
 		sprite.global_position = self.position
 		sprite.rotation = Vector2.UP.angle_to(rotation)
+
+## Runs each physics tick to reduce cooldown, and change the sprite based on the state
+func tick_cooldown():
+	cooldown -= 1
 	
 	# Prototype dynamic thingy for like the responsive sprite, will be implemented as a full sprite soon
 	if cooldown > 0:

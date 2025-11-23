@@ -10,6 +10,8 @@ class_name Player
 @onready var jump_bar : ProgressBar = get_node("JumpBar")
 ## HUD health bar
 @onready var health_bar : ProgressBar = get_node("HealthBar")
+## HUD score label to display numerical score
+@onready var score_label : Label = get_node("ScoreLabel")
 ## Stylebox element to override hp bar color
 @onready var health_bar_color : StyleBoxFlat = health_bar.get_theme_stylebox("fill").duplicate()
 
@@ -29,8 +31,16 @@ var hand_position : Vector2 = Vector2.ZERO
 ## The hp
 var player_hp : int = 100
 
+## Score of the player, will be carried over rounds of the same session
+var score : int = 0
+
+## Will change when the player is dead (when their hp is zero)
+var is_dead : bool = false
+
 func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION, weapon: Weapon):
 	self.weapon = weapon
+	player_hp = 100
+	is_dead = false
 	if is_real_player:
 		input_manager = load("res://scenes/joystick.tscn").instantiate()
 		add_child(input_manager)
@@ -38,6 +48,7 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	# Create a custom stylebox for changing the hp bar color and override the fill stylebox
 	health_bar.add_theme_stylebox_override("fill", health_bar_color)
 
+## Master tick function to tick the player and its dependencies
 func tick_player():
 	# Get input for this tick from input manager and store, first step
 	player_direction = input_manager.tick_input()
@@ -51,19 +62,25 @@ func tick_player():
 	# Ticking ragdoll, that function will tick other ragdoll functions
 	ragdoll.tick_ragdoll(player_direction)
 	
-	# Just several simple update functions but will be made to a full function for updating HUD later on
-	update_jump_bar()
-	update_health_bar()
-	
-	# Tick the weapon
-	update_weapon()
-	
-	# Testing
+	# Check for hitbox collision to damages
 	check_collision()
 	
-	#hand_position = ragdoll.p_arm.global_position
-	hand_position = ragdoll.p_forearm.global_position
+	# Change cooldown for the weapon
+	weapon.tick_cooldown()
 
+func _process(delta: float) -> void:
+	tick_hud()
+
+## Several simple update functions to update the huds, will work independently on physics tick
+## Including at the game state of lazy loading
+func tick_hud():
+	update_jump_bar()
+	update_health_bar()
+	update_score_label()
+	hand_position = ragdoll.p_forearm.global_position
+	tick_weapon_hud()
+
+## Update the value and the visibility status of the jump bar according to the jump time
 func update_jump_bar():
 	# Reset jump when the radgoll just jumped and is airborne
 	if ragdoll.jump_cache == 0:
@@ -78,23 +95,33 @@ func update_jump_bar():
 		jump_bar.visible = true
 	else:
 		jump_bar.visible = false
-	
+
+## Update health bar to the current hp value
 func update_health_bar():
 	health_bar.value = player_hp
 	health_bar.set_position(ragdoll.head.position + Vector2(-30.0, -30.0))
 	# To create a gradient for the hp bar. Note that the values range from 0 to 1
 	# Also change the color space to srgb to display, the value seems like linear idk
 	health_bar_color.bg_color = Color(((100 - health_bar.value) / 100), (health_bar.value / 100), 0).linear_to_srgb()
+	
+	if player_hp <= 0:
+		ragdoll.dying_animation()
+		self.is_dead = true
 
-func update_weapon():
+## Update score label to follow the player and change according to the rounds score
+func update_score_label():
+	score_label.text = str(score)
+	score_label.scale = Vector2(2.0, 2.0)
+	score_label.set_position(ragdoll.head.position + Vector2(-20.0, -60.0))
+
+## Call the tick function from the weapon
+func tick_weapon_hud():
 	weapon.position = hand_position
-	weapon.tick(player_direction)
+	weapon.tick_rotation(player_direction)
 
+## Check for player collision with anything that can do damage
 func check_collision():
 	var damages : Array[int] = ragdoll.tick_check_damage_collisions()
 	if not (damages == null or damages == []):
 		for d in damages:
 			player_hp -= d
-	
-	if player_hp <= 0:
-		ragdoll.dying_animation()

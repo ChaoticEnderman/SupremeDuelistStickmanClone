@@ -8,6 +8,7 @@ func _init():
 func summon(owner: Player, data: ProjectileData, direction: Vector2, position: Vector2) -> void:
 	super.summon(owner, data, direction, position)
 
+## Since each time the ability is shot it will shoot 3 bullets, this is to make the bullets not touch eachother
 func collision_exception(projectile: Projectile):
 	hitbox.add_collision_exception_with(projectile.hitbox)
 
