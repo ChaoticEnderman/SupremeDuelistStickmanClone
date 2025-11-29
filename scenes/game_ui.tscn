@@ -1,21 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://oj84mtpo6xhu"]
+[gd_scene load_steps=5 format=3 uid="uid://oj84mtpo6xhu"]
 
-[ext_resource type="Texture2D" uid="uid://xj6btdwvi83s" path="res://assets/pause_button_pause.png" id="1_u001w"]
-[ext_resource type="Script" uid="uid://pya52sbsfxtj" path="res://code/pause_button.gd" id="1_yubou"]
+[ext_resource type="Script" uid="uid://pya52sbsfxtj" path="res://code/ui/pause_button.gd" id="1_yubou"]
 [ext_resource type="Texture2D" uid="uid://e61kv2m7ewoe" path="res://assets/pause_button_continue.png" id="2_u2dgd"]
-[ext_resource type="Texture2D" uid="uid://bs0301fo7eb4k" path="res://assets/next_round_button.png" id="4_bt76a"]
-[ext_resource type="Script" uid="uid://biyp6oq3iycca" path="res://scenes/next_round_button.gd" id="5_djwj0"]
+[ext_resource type="Texture2D" uid="uid://djm7qkqoqmtgb" path="res://assets/next_round_button.png" id="4_bt76a"]
+[ext_resource type="Script" uid="uid://biyp6oq3iycca" path="res://code/ui/next_round_button.gd" id="5_djwj0"]
 
 [node name="GameUI" type="Node2D"]
 scale = Vector2(0.25, 0.25)
 
 [node name="PauseButton" type="TextureButton" parent="."]
-offset_right = 512.0
-offset_bottom = 512.0
-toggle_mode = true
+offset_right = 768.0
+offset_bottom = 768.0
 action_mode = 0
 texture_normal = ExtResource("2_u2dgd")
-texture_pressed = ExtResource("1_u001w")
 script = ExtResource("1_yubou")
 
 [node name="NextRoundButton" type="TextureButton" parent="."]

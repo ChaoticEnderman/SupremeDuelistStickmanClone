@@ -2,5 +2,4 @@
 extends Node
 
 func _ready() -> void:
-	SystemManager.start()
-	
+	GameState.change_system_state(GameState.SYSTEM_STATE.GAME)

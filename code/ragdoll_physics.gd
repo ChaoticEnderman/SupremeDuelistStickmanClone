@@ -78,6 +78,11 @@ func _ready() -> void:
 	
 	p_arm.add_collision_exception_with(p_forearm)
 
+func ragdoll_collision_exception(hitbox: PhysicsBody2D):
+	for child in self.get_children():
+		if child is RigidBody2D:
+			child.add_collision_exception_with(hitbox)
+
 ## Master tick function to runs all other tick functions per physics tick
 func tick_ragdoll(force: Vector2):
 	if is_alive:
@@ -102,6 +107,20 @@ func apply_ragdoll_central_force(direction: Vector2, strength: float):
 	torso.apply_central_force(direction * strength)
 	stomach.apply_central_force(direction * strength)
 
+## Impulse the entire ragdoll body to move to a specific direction. Useful when doing abilities like dash or jump and smash
+func move_entire_ragdoll_impulse(direction: Vector2, strength: float):
+	if direction == Vector2.ZERO:
+		return
+	
+	head.apply_central_impulse(direction * strength)
+	torso.apply_central_impulse(direction * strength)
+	stomach.apply_central_impulse(direction * strength)
+	p_arm.apply_central_impulse(direction * strength)
+	p_forearm.apply_central_impulse(direction * strength)
+	l_shin.apply_central_impulse(direction * strength)
+	l_thigh.apply_central_impulse(direction * strength)
+	r_shin.apply_central_impulse(direction * strength)
+	r_thigh.apply_central_impulse(direction * strength)
 
 ## Simple function to determine which of the two identical legs are left and right, based on their rotation
 func tick_check_legs():
@@ -184,12 +203,11 @@ func tick_move_arms(direction: Vector2):
 	#print(rad_to_deg(p_arm.global_rotation))
 	#apply_angular_limit_torque(p_forearm, Globals.angle_to_360(rad_to_deg(p_arm.global_rotation)), Globals.RAGDOLL_TORQUE_FORCE/500, 0.0)
 
-
 ## Checking every single limbs for collision to any damagable objects
 ## No need for like removing duplicates since it will deal damage multiple times if hit multiple limbs
 ## Can be laggy since it's yet to implement broadphase collision checking
-func tick_check_damage_collisions() -> Array[int]:
-	var colliding_bodies : Array[int]
+func tick_check_damage_collisions() -> Array[float]:
+	var colliding_bodies : Array[float]
 	# Nested nightmare
 	for child in self.get_children():
 		if child is RigidBody2D:
@@ -212,7 +230,7 @@ func jump(direction: Vector2):
 		locked_jumping_direction = direction
 		recently_jumped = true
 		jump_cache = 0
-		jump_stacking = 6
+		jump_stacking = Globals.JUMP_HEIGHT
 
 ## Check if the current jump stack is active, if yes it will continue to jump for next ticks
 func tick_jump_stack():
@@ -260,7 +278,7 @@ func apply_leg_torque(force : float, damp : float):
 ## Spread the legs out from eachother, make it stand and not topple over one side
 func apply_constant_leg_spacing(force: float, damp: float):
 	#var leg_distance = l_thigh.rotation - r_thigh.rotation
-	apply_angular_limit_torque(l_thigh, 30.0, force / 2, damp)
-	apply_angular_limit_torque(r_thigh, -30.0, force / 2, damp)
-	apply_angular_limit_torque(l_shin, 0.0, force, damp)
-	apply_angular_limit_torque(r_shin, 0.0, force, damp)
+	apply_angular_limit_torque(l_thigh, 20.0, force / 2, damp)
+	apply_angular_limit_torque(r_thigh, -20.0, force / 2, damp)
+	apply_angular_limit_torque(l_shin, 0.0, force / 4, damp)
+	apply_angular_limit_torque(r_shin, 0.0, force / 4, damp)

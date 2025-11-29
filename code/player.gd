@@ -29,7 +29,7 @@ var player_direction : Vector2 = Vector2.ZERO
 var hand_position : Vector2 = Vector2.ZERO
 
 ## The hp
-var player_hp : int = 100
+var player_hp : float = Globals.STARTING_HP
 
 ## Score of the player, will be carried over rounds of the same session
 var score : int = 0
@@ -39,7 +39,7 @@ var is_dead : bool = false
 
 func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION, weapon: Weapon):
 	self.weapon = weapon
-	player_hp = 100
+	player_hp = 100.0
 	is_dead = false
 	if is_real_player:
 		input_manager = load("res://scenes/joystick.tscn").instantiate()
@@ -47,6 +47,8 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 		input_manager.set_joystick_corner(joystick_position)
 	# Create a custom stylebox for changing the hp bar color and override the fill stylebox
 	health_bar.add_theme_stylebox_override("fill", health_bar_color)
+	
+	ragdoll.ragdoll_collision_exception(weapon.hitbox)
 
 ## Master tick function to tick the player and its dependencies
 func tick_player():
@@ -89,6 +91,8 @@ func update_jump_bar():
 	# Otherwise, update the jump bar by the jumping percentage
 	else:
 		jump_bar.value = input_manager.jumping_time
+	
+	jump_bar.max_value = Globals.JUMP_TIME
 	jump_bar.set_position(ragdoll.head.position + Vector2(-30.0, -40.0)) # Offsetting the bar so it will be on top of the player head
 	
 	if input_manager.jumping_time > 0:
@@ -104,7 +108,7 @@ func update_health_bar():
 	# Also change the color space to srgb to display, the value seems like linear idk
 	health_bar_color.bg_color = Color(((100 - health_bar.value) / 100), (health_bar.value / 100), 0).linear_to_srgb()
 	
-	if player_hp <= 0:
+	if player_hp <= 0.0:
 		ragdoll.dying_animation()
 		self.is_dead = true
 
@@ -121,7 +125,7 @@ func tick_weapon_hud():
 
 ## Check for player collision with anything that can do damage
 func check_collision():
-	var damages : Array[int] = ragdoll.tick_check_damage_collisions()
+	var damages : Array[float] = ragdoll.tick_check_damage_collisions()
 	if not (damages == null or damages == []):
-		for d in damages:
-			player_hp -= d
+		for damage in damages:
+			player_hp -= damage * Globals.DAMAGE_MULTIPLIER

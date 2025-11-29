@@ -3,8 +3,7 @@ extends Resource
 class_name ProjectileData
 
 @export var speed: float
-
-@export var damage: int
+@export var damage: float
 
 @export var is_affected_by_gravity: bool
 @export var can_go_through_wall: bool

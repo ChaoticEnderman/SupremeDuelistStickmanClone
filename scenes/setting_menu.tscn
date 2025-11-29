@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=3 uid="uid://djdlikfugdgp0"]
+
+[ext_resource type="Script" uid="uid://biwmeg0vnecp2" path="res://code/ui/setting_menu/setting_menu.gd" id="1_pgfik"]
+[ext_resource type="Texture2D" uid="uid://thu4medbs8i" path="res://assets/coin_logo.png" id="2_vproo"]
+
+[sub_resource type="Gradient" id="Gradient_qc8n3"]
+colors = PackedColorArray(0, 1, 1, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ogw40"]
+gradient = SubResource("Gradient_qc8n3")
+width = 720
+height = 512
+fill_to = Vector2(0, 1)
+
+[node name="SettingMenu" type="Node2D"]
+process_mode = 3
+z_index = 5
+position = Vector2(640, 360)
+script = ExtResource("1_pgfik")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_ogw40")
+
+[node name="BackButton" type="TextureButton" parent="Sprite2D"]
+offset_left = -488.0
+offset_top = -256.0
+offset_right = -360.0
+offset_bottom = -128.0
+texture_normal = ExtResource("2_vproo")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.0
+offset_top = -164.0
+offset_right = 236.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer"]
+custom_minimum_size = Vector2(512, 288)
+layout_mode = 2
+
+[node name="DamageMultiplierLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DamageMultiplier" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="CooldownLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Cooldown" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+
+[node name="JumpHeightLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="JumpHeight" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+rounded = true
+
+[node name="JumpTimeLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="JumpTime" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 200.0
+value = 60.0
+rounded = true
+
+[node name="Gravity" type="CheckButton" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Gravity"
+
+[node name="EngineTPSLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "AA"
+
+[node name="EngineTPS" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 30.0
+max_value = 500.0
+value = 60.0
+rounded = true
+
+[connection signal="pressed" from="Sprite2D/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/DamageMultiplier" to="." method="_on_damage_multiplier_value_changed"]
+[connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/Cooldown" to="." method="_on_cooldown_value_changed"]
+[connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/JumpHeight" to="." method="_on_jump_height_value_changed"]
+[connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/JumpTime" to="." method="_on_jump_time_value_changed"]
+[connection signal="pressed" from="Control/ScrollContainer/VBoxContainer/Gravity" to="." method="_on_gravity_pressed"]
+[connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/EngineTPS" to="." method="_on_engine_tps_value_changed"]

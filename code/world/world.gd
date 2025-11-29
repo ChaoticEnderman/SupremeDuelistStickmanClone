@@ -7,10 +7,12 @@ extends Node2D
 var player1 : Player
 var player2 : Player
 
-var weapon1 : Weapon1
-var weapon2 : Weapon1
+var weapon1 : Weapon
+var weapon2 : Weapon
 
 @onready var next_round_button : TextureButton = get_node("GameUI/NextRoundButton")
+
+@onready var pause_menu : Node2D = get_node("PauseMenu")
 
 func add_projectile(projectile: Projectile):
 	projectile_list.append(projectile)
@@ -18,6 +20,7 @@ func add_projectile(projectile: Projectile):
 
 func _ready() -> void:
 	get_node("GameUI").process_mode = Node.PROCESS_MODE_ALWAYS
+	GameState.game_state_changed.connect(_on_game_state_changed)
 	player_scores.resize(2)
 	player_scores[0] = 0
 	player_scores[1] = 0
@@ -33,7 +36,7 @@ func clear_round():
 	projectile_list = projectile_list.filter(is_instance_valid)
 	for projectile in projectile_list:
 		projectile.queue_free()
-	GameState.game_state = GameState.GAME_STATE.RUNNING
+	GameState.change_game_state(GameState.GAME_STATE.RUNNING)
 	start_round()
 
 ## Start each individual round of the game, reset some values and process
@@ -55,7 +58,7 @@ func start_round() -> void:
 	
 	# New weapon every round also, since they can be different
 	weapon1 = Weapon1.new()
-	weapon2 = Weapon1.new()
+	weapon2 = Weapon2.new()
 	weapon1.init(player1)
 	weapon2.init(player2)
 	add_child(weapon1)
@@ -63,11 +66,16 @@ func start_round() -> void:
 	
 	player1.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_LEFT, weapon1)
 	player2.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_RIGHT, weapon2)
+	for body in player2.ragdoll.get_children():
+		if body is RigidBody2D:
+			player1.ragdoll.ragdoll_collision_exception(body)
 
-## Impulse command to either pause/unpause in one function
-func pause_or_unpause(is_pause: bool):
+func _on_game_state_changed(state):
 	projectile_list = projectile_list.filter(is_instance_valid)
-	get_tree().paused = is_pause
+	if state == GameState.GAME_STATE.RUNNING:
+		get_tree().paused = false
+	elif state == GameState.GAME_STATE.PAUSING:
+		get_tree().paused = true
 
 ## Main function to run every tick to control whether other tick function can run easily
 func _physics_process(delta: float) -> void:
@@ -83,7 +91,7 @@ func tick_players():
 		player.tick_player()
 		# If one player is dead then add the score to all other players
 		if player.is_dead: 
-			GameState.game_state = GameState.GAME_STATE.LAZY_RUNNING
+			GameState.change_game_state(GameState.GAME_STATE.LAZY_RUNNING)
 			next_round_button.visible = true
 			for i in range(player_list.size()):
 				if player_list[i] != player:

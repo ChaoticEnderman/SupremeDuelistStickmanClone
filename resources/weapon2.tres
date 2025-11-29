@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://boq3l1rtq2b4r"]
+
+[ext_resource type="Script" uid="uid://42bfyewjaivt" path="res://code/weapons/weapon_data.gd" id="1_n0xkb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0xkb"]
+height = 60.0
+
+[resource]
+script = ExtResource("1_n0xkb")
+hitbox = SubResource("CapsuleShape2D_n0xkb")
+metadata/_custom_type_script = "uid://42bfyewjaivt"

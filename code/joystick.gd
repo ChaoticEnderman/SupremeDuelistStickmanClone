@@ -127,6 +127,7 @@ func tick_input_is_jumping() -> Vector2:
 		jumping_time = 0
 	
 	if jumping_time >= Globals.JUMP_TIME:
+		print(jumping_time)
 		jumping_time = -1
 		return joystick_direction
 	
