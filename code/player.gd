@@ -58,7 +58,7 @@ func tick_player():
 	# Check for abilities being used
 	weapon.tick_release_ability(input_manager.tick_input_is_releasing())
 	
-	# Check the last input before ticking ragdoll
+	# Check the last jump input before ticking ragdoll
 	ragdoll.jump(input_manager.tick_input_is_jumping())
 	
 	# Ticking ragdoll, that function will tick other ragdoll functions

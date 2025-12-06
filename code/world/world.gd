@@ -11,8 +11,9 @@ var weapon1 : Weapon
 var weapon2 : Weapon
 
 @onready var next_round_button : TextureButton = get_node("GameUI/NextRoundButton")
-
 @onready var pause_menu : Node2D = get_node("PauseMenu")
+
+var rng = RandomNumberGenerator.new()
 
 func add_projectile(projectile: Projectile):
 	projectile_list.append(projectile)
@@ -21,6 +22,7 @@ func add_projectile(projectile: Projectile):
 func _ready() -> void:
 	get_node("GameUI").process_mode = Node.PROCESS_MODE_ALWAYS
 	GameState.game_state_changed.connect(_on_game_state_changed)
+	GameState.game_tick.connect(_game_tick)
 	player_scores.resize(2)
 	player_scores[0] = 0
 	player_scores[1] = 0
@@ -57,8 +59,8 @@ func start_round() -> void:
 	add_child(player2)
 	
 	# New weapon every round also, since they can be different
-	weapon1 = Weapon1.new()
-	weapon2 = Weapon2.new()
+	weapon1 = randomize_weapon()
+	weapon2 = randomize_weapon()
 	weapon1.init(player1)
 	weapon2.init(player2)
 	add_child(weapon1)
@@ -77,13 +79,14 @@ func _on_game_state_changed(state):
 	elif state == GameState.GAME_STATE.PAUSING:
 		get_tree().paused = true
 
+func randomize_weapon() -> Weapon:
+	var weapons = [Weapon1.new(), Weapon2.new(), Weapon3.new()]
+	return weapons[rng.randi_range(0, weapons.size() - 1)]
+
 ## Main function to run every tick to control whether other tick function can run easily
-func _physics_process(delta: float) -> void:
-	if GameState.game_state == GameState.GAME_STATE.RUNNING:
-		tick_players()
-		tick_projectiles()
-	else:
-		print()
+func _game_tick() -> void:
+	tick_players()
+	tick_projectiles()
 
 ## Call the tick function in each players to do their stuff
 func tick_players():

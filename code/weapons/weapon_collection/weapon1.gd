@@ -20,5 +20,4 @@ func tick_cooldown():
 	super.tick_cooldown()
 
 func tick_release_ability(direction: Vector2) -> bool:
-	var not_in_cooldown : bool = super.tick_release_ability(direction)
-	return not_in_cooldown
+	return super.tick_release_ability(direction)

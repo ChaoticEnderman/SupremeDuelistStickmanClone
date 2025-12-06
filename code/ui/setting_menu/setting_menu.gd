@@ -14,6 +14,7 @@ extends Node2D
 @onready var jump_time = container.get_node("JumpTime")
 
 @onready var gravity = container.get_node("Gravity")
+@onready var keyboard = container.get_node("KeyboardInput")
 
 @onready var engine_tps_label = container.get_node("EngineTPSLabel")
 @onready var engine_tps = container.get_node("EngineTPS")
@@ -43,6 +44,8 @@ func _on_back_button_pressed() -> void:
 	Globals.JUMP_HEIGHT = int(jump_height.value)
 	Globals.JUMP_TIME = int(jump_time.value)
 	
+	Globals.KEYBOARD_INPUT_ENABLED = true if keyboard.pressed else false
+	
 	var gravity_status = Vector2.DOWN if gravity.pressed else Vector2.ZERO
 	PhysicsServer2D.area_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.AREA_PARAM_GRAVITY_VECTOR, gravity_status)
 	
@@ -60,4 +63,6 @@ func _on_jump_time_value_changed(value: float) -> void:
 func _on_gravity_pressed() -> void:
 	update_labels()
 func _on_engine_tps_value_changed(value: float) -> void:
+	update_labels()
+func _on_keyboard_input_pressed() -> void:
 	update_labels()

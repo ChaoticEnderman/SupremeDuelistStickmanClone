@@ -84,6 +84,7 @@ func tick_release_ability(direction: Vector2) -> bool:
 		return false
 	
 	if cooldown < 1:
+		print("WEAPONS/ player ", self.player)
 		cooldown = abilities[ability_index].release_ability(player, direction) * Globals.WEAPON_COOLDOWN_MULTIPLIER
 		# When the ability is outside the range of abilities, it will reset to 0
 		ability_index += 1

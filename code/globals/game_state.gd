@@ -6,6 +6,8 @@ extends Node
 signal game_state_changed(state)
 ## Signal when the system state changed by the function
 signal system_state_changed(state)
+## Signal every physics tick only when the state is in the game
+signal game_tick
 
 ## Enum for all system states
 enum SYSTEM_STATE {MENU, GAME}
@@ -20,6 +22,10 @@ var system_state = SYSTEM_STATE.GAME
 func _ready() -> void:
 	return
 
+func _physics_process(delta: float) -> void:
+	if game_state == GAME_STATE.RUNNING:
+		game_tick.emit()
+
 ## This should be used to change the game state, will automatically emit the signal
 func change_game_state(state: GAME_STATE):
 	game_state = state
@@ -28,7 +34,6 @@ func change_game_state(state: GAME_STATE):
 ## This should be used to change the system state, will automatically emit the signal
 ## Also automatically change the game state to none
 func change_system_state(state: SYSTEM_STATE):
-
 	system_state = state
 	# Automatically change game state to none or n/a or similiar when the system is not running the game
 	if system_state != SYSTEM_STATE.GAME:

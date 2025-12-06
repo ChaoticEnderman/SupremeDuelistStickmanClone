@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://rufdtf7pri6n"]
+
+[ext_resource type="Script" uid="uid://42bfyewjaivt" path="res://code/weapons/weapon_data.gd" id="1_5qt1f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qt1f"]
+size = Vector2(80, 20)
+
+[resource]
+script = ExtResource("1_5qt1f")
+hitbox = SubResource("RectangleShape2D_5qt1f")
+metadata/_custom_type_script = "uid://42bfyewjaivt"

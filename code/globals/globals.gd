@@ -37,6 +37,8 @@ var JUMP_HEIGHT : int = 6
 ## Measured in ticks, so this is equivalent to one second
 var JUMP_TIME : int = 60
 
+var KEYBOARD_INPUT_ENABLED : bool = false
+
 ## Change the range of angles from -180 <= x <= 180 to 0 <= x <= 360
 func angle_to_360(angle_degree: float) -> float:
 	if angle_degree < 0.0:

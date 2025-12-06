@@ -85,6 +85,7 @@ func ragdoll_collision_exception(hitbox: PhysicsBody2D):
 
 ## Master tick function to runs all other tick functions per physics tick
 func tick_ragdoll(force: Vector2):
+	print(torso.global_position)
 	if is_alive:
 		#Flipping the normals since the game normal is always like this
 		apply_ragdoll_central_force(Vector2(force.x, force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
@@ -262,7 +263,18 @@ func dying_animation():
 ## To make the quadratic function keep the sign, one of the variable is the absolute value
 func apply_angular_limit_torque(body: RigidBody2D, target_angle : float, force : float, damp : float):
 	var angle_displacement = rad_to_deg(body.global_rotation) - target_angle
+	angle_displacement = fmod(angle_displacement, 360.0)
+	# Torque calculated by quadratic interpolation. This was used primarily before to create smooth torque
+	# However, the quadratic function grow really fast and might make the ragdoll unstable
 	var torque = (-force * angle_displacement * abs(angle_displacement)) - (damp * body.angular_velocity)
+	# So now we are testing this with linear interpolation, as shown here
+	#var torque = (-force * angle_displacement * 10) - (damp * body.angular_velocity)
+
+	var torque_limit = 64000
+	if torque > torque_limit:
+		torque = torque_limit
+	if torque < -torque_limit:
+		torque = -torque_limit
 	body.apply_torque(torque)
 
 ## Make the ragdoll stand rather upright
