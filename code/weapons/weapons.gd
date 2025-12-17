@@ -27,20 +27,21 @@ var damageable : Damageable
 ## Because it can contain more data than damageable default
 var player : Player
 
-func init(player: Player) -> void:
+func init(player: Player, id: String) -> void:
 	self.player = player
+	weapon_data = load("res://resources/weapon" + id + ".tres")
+	add_sprite(id)
+	set_hitbox(id)
 
 ## Load and add its sprite
-func add_sprite(sprite: Sprite2D, texture: Texture2D):
-	self.sprite = sprite
-	self.sprite.texture = texture
+func add_sprite(id: String):
+	self.sprite = Sprite2D.new()
+	self.sprite.texture = weapon_data.sprite
 	sprite.scale = Vector2(0.2, 0.2)
 	add_child(sprite)
 
 ## Set the hitbox area
 func set_hitbox(id: String):
-	weapon_data = load("res://resources/weapon" + id + ".tres")
-	
 	collision_shape.shape = weapon_data.hitbox
 	hitbox.add_child(collision_shape)
 	
@@ -84,7 +85,6 @@ func tick_release_ability(direction: Vector2) -> bool:
 		return false
 	
 	if cooldown < 1:
-		print("WEAPONS/ player ", self.player)
 		cooldown = abilities[ability_index].release_ability(player, direction) * Globals.WEAPON_COOLDOWN_MULTIPLIER
 		# When the ability is outside the range of abilities, it will reset to 0
 		ability_index += 1

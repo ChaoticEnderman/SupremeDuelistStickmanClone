@@ -10,7 +10,7 @@ signal system_state_changed(state)
 signal game_tick
 
 ## Enum for all system states
-enum SYSTEM_STATE {MENU, GAME}
+enum SYSTEM_STATE {MENU, GAME, READY}
 ## Enum for the game states, only works when the system state is game
 enum GAME_STATE {NONE, RUNNING, PAUSING, PAUSING_SETTING, LAZY_RUNNING}
 
@@ -22,6 +22,9 @@ var system_state = SYSTEM_STATE.GAME
 func _ready() -> void:
 	return
 
+## Runs every tick to signal game tick from this centralised place
+## Not through broken or random game tick many places
+# TODO: Make all components using the game tick use this instead
 func _physics_process(delta: float) -> void:
 	if game_state == GAME_STATE.RUNNING:
 		game_tick.emit()
@@ -35,7 +38,36 @@ func change_game_state(state: GAME_STATE):
 ## Also automatically change the game state to none
 func change_system_state(state: SYSTEM_STATE):
 	system_state = state
+	print("System State is ", get_beautiful_system_state(state))
 	# Automatically change game state to none or n/a or similiar when the system is not running the game
 	if system_state != SYSTEM_STATE.GAME:
 		change_game_state(GAME_STATE.NONE)
 	system_state_changed.emit(state)
+
+## Return a game state string instead of int, for better debugging
+func get_beautiful_game_state(state: GAME_STATE) -> String:
+	match state:
+		GAME_STATE.NONE:
+			return "NONE"
+		GAME_STATE.RUNNING:
+			return "RUNNING"
+		GAME_STATE.PAUSING:
+			return "PAUSING"
+		GAME_STATE.PAUSING_SETTING:
+			return "PAUSING_SETTING"
+		GAME_STATE.LAZY_RUNNING:
+			return "LAZY_RUNNING"
+		_:
+			return str(state)
+
+## Return a system state string instead of int, for better debugging
+func get_beautiful_system_state(state: SYSTEM_STATE) -> String:
+	match state:
+		SYSTEM_STATE.MENU:
+			return "MENU"
+		SYSTEM_STATE.GAME:
+			return "GAME"
+		SYSTEM_STATE.READY:
+			return "READY"
+		_:
+			return str(state)

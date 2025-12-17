@@ -1,19 +1,17 @@
+## Third weapon, a shield that can enlarge
 extends Weapon
 class_name Weapon3
 
 var hitbox_area : Area2D
 
-func init(player: Player) -> void:
-	super.init(player)
+func init(player: Player, id: String) -> void:
+	super.init(player, "3")
 	
 	var ability = Ability4.new()
 	ability.owner = self
 	abilities.append(ability)
 	
-	super.add_sprite(Sprite2D.new(), load("res://assets/weapon3.png"))
-	super.set_hitbox("3")
 	super.set_damage(Damageable.new(0.1))
-	#super.set_cooldown(WeaponGlobals.WEAPON_COOLDOWNS.SHORT)
 	
 func tick_rotation(rotation: Vector2):
 	super.tick_rotation(rotation)

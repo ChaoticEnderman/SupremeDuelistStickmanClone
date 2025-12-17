@@ -1,14 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3xncom53edv8"]
+[gd_scene load_steps=9 format=3 uid="uid://c3xncom53edv8"]
 
 [ext_resource type="Texture2D" uid="uid://cmpblwuk8xqmr" path="res://assets/thumbnail.png" id="1_8ln24"]
+[ext_resource type="Script" uid="uid://5wxurdynpaq8" path="res://code/ui/main_menu/main_menu.gd" id="1_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://fug8srto30t1" path="res://assets/stickman.png" id="2_oa1go"]
 [ext_resource type="Texture2D" uid="uid://df0dv761xxfp1" path="res://assets/menu_1p.png" id="2_rtw2f"]
-[ext_resource type="Script" uid="uid://brjvgkq5md2cx" path="res://code/ui/1p_button.gd" id="3_oa1go"]
+[ext_resource type="Script" uid="uid://brjvgkq5md2cx" path="res://code/ui/main_menu/1p_button.gd" id="3_oa1go"]
 [ext_resource type="Texture2D" uid="uid://b20yis20c6bjc" path="res://assets/logo.png" id="3_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://dlr40m38rdydk" path="res://assets/menu_2p.png" id="4_tbmy8"]
-[ext_resource type="Script" uid="uid://ijqai4qby1yw" path="res://code/ui/2p_button.gd" id="5_jk1qb"]
+[ext_resource type="Script" uid="uid://ijqai4qby1yw" path="res://code/ui/main_menu/2p_button.gd" id="5_jk1qb"]
 
 [node name="MainMenu" type="Node2D"]
+process_mode = 3
+z_index = 1000
+script = ExtResource("1_tbmy8")
 
 [node name="Thumbnail" type="Sprite2D" parent="."]
 texture = ExtResource("1_8ln24")

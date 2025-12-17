@@ -53,7 +53,7 @@ func _ready() -> void:
 			child.softness = 0.0
 	
 	# This monstrosity need to be refactored but Im procastinating
-	
+	# TODO: try to refactor these code
 	# Making the legs dont touch eachother
 	l_thigh.add_collision_exception_with(r_thigh)
 	r_thigh.add_collision_exception_with(l_thigh)
@@ -78,6 +78,7 @@ func _ready() -> void:
 	
 	p_arm.add_collision_exception_with(p_forearm)
 
+## Make the entire ragdoll not collide with a physics body
 func ragdoll_collision_exception(hitbox: PhysicsBody2D):
 	for child in self.get_children():
 		if child is RigidBody2D:
@@ -85,7 +86,6 @@ func ragdoll_collision_exception(hitbox: PhysicsBody2D):
 
 ## Master tick function to runs all other tick functions per physics tick
 func tick_ragdoll(force: Vector2):
-	print(torso.global_position)
 	if is_alive:
 		#Flipping the normals since the game normal is always like this
 		apply_ragdoll_central_force(Vector2(force.x, force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
@@ -113,6 +113,7 @@ func move_entire_ragdoll_impulse(direction: Vector2, strength: float):
 	if direction == Vector2.ZERO:
 		return
 	
+	# TODO: Make a loop for this
 	head.apply_central_impulse(direction * strength)
 	torso.apply_central_impulse(direction * strength)
 	stomach.apply_central_impulse(direction * strength)
@@ -137,6 +138,7 @@ func tick_check_legs():
 		r_shin = a_shin
 
 ## Function to check if the ragdoll shins is airborne, since these limbs are what dictate the air state of the ragdoll
+# TODO: Refactor for better naming
 func tick_check_airborne():
 	is_airborne = true
 	# When airborne (falling) the movement is slower and limited
@@ -270,11 +272,11 @@ func apply_angular_limit_torque(body: RigidBody2D, target_angle : float, force :
 	# So now we are testing this with linear interpolation, as shown here
 	#var torque = (-force * angle_displacement * 10) - (damp * body.angular_velocity)
 
-	var torque_limit = 64000
-	if torque > torque_limit:
-		torque = torque_limit
-	if torque < -torque_limit:
-		torque = -torque_limit
+	#var torque_limit = 64000
+	#if torque > torque_limit:
+		#torque = torque_limit
+	#if torque < -torque_limit:
+		#torque = -torque_limit
 	body.apply_torque(torque)
 
 ## Make the ragdoll stand rather upright

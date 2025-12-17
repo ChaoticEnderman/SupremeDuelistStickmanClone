@@ -1,11 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://oj84mtpo6xhu"]
 
-[ext_resource type="Script" uid="uid://pya52sbsfxtj" path="res://code/ui/pause_button.gd" id="1_yubou"]
+[ext_resource type="Script" uid="uid://pya52sbsfxtj" path="res://code/ui/pause_menu/pause_button.gd" id="1_yubou"]
 [ext_resource type="Texture2D" uid="uid://e61kv2m7ewoe" path="res://assets/pause_button_continue.png" id="2_u2dgd"]
 [ext_resource type="Texture2D" uid="uid://djm7qkqoqmtgb" path="res://assets/next_round_button.png" id="4_bt76a"]
-[ext_resource type="Script" uid="uid://biyp6oq3iycca" path="res://code/ui/next_round_button.gd" id="5_djwj0"]
+[ext_resource type="Script" uid="uid://biyp6oq3iycca" path="res://code/ui/in_game_menu/next_round_button.gd" id="5_djwj0"]
 
 [node name="GameUI" type="Node2D"]
+process_mode = 3
 scale = Vector2(0.25, 0.25)
 
 [node name="PauseButton" type="TextureButton" parent="."]

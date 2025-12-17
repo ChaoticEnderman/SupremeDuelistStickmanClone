@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://beewqyv27qw3h"]
 
 [ext_resource type="Texture2D" uid="uid://cimesxuof3ush" path="res://assets/pausemenu_background.png" id="1_5d2l8"]
-[ext_resource type="Script" uid="uid://c605obkmgve2c" path="res://code/ui/pause_menu.gd" id="1_v4r4p"]
+[ext_resource type="Script" uid="uid://c605obkmgve2c" path="res://code/ui/pause_menu/pause_menu.gd" id="1_v4r4p"]
 [ext_resource type="Texture2D" uid="uid://hy86yl0x6qb3" path="res://assets/pausemenu_title.png" id="2_7l7mv"]
 [ext_resource type="Texture2D" uid="uid://cqhcs4loddc0t" path="res://assets/pausemenu_resume.png" id="3_v4r4p"]
 [ext_resource type="Texture2D" uid="uid://ddt4esh67q2ng" path="res://assets/pausemenu_menu.png" id="4_1s2dm"]
-[ext_resource type="Script" uid="uid://cxnua5b5asa3x" path="res://code/ui/resume_button.gd" id="5_1s2dm"]
-[ext_resource type="Script" uid="uid://dxombpud1o2a3" path="res://code/ui/home_button.gd" id="6_1s2dm"]
+[ext_resource type="Script" uid="uid://cxnua5b5asa3x" path="res://code/ui/pause_menu/resume_button.gd" id="5_1s2dm"]
+[ext_resource type="Script" uid="uid://dxombpud1o2a3" path="res://code/ui/pause_menu/home_button.gd" id="6_1s2dm"]
 [ext_resource type="Texture2D" uid="uid://bc4uliqmntm6q" path="res://assets/pausemenu_setting.png" id="8_knqa7"]
-[ext_resource type="Script" uid="uid://ht76p28bax2t" path="res://code/ui/setting_button.gd" id="9_71k7c"]
+[ext_resource type="Script" uid="uid://ht76p28bax2t" path="res://code/ui/pause_menu/setting_button.gd" id="9_71k7c"]
 
 [node name="PauseMenu" type="Node2D"]
 process_mode = 3

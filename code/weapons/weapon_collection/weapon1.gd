@@ -1,17 +1,15 @@
+# First weapon, a gun like sds gun with the ability to shoot a single bullet
 extends Weapon
 class_name Weapon1
 
 var hitbox_area : Area2D
 
-func init(player: Player) -> void:
-	super.init(player)
+func init(player: Player, id: String) -> void:
+	super.init(player, "1")
 	
 	abilities.append(Ability1.new(Projectile1.new(), "1"))
 	
-	super.add_sprite(Sprite2D.new(), load("res://assets/weapon1.png"))
-	super.set_hitbox("1")
 	super.set_damage(Damageable.new(0.1))
-	#super.set_cooldown(WeaponGlobals.WEAPON_COOLDOWNS.SHORT)
 	
 func tick_rotation(rotation: Vector2):
 	super.tick_rotation(rotation)

@@ -1,0 +1,186 @@
+[gd_scene load_steps=9 format=3 uid="uid://dpaf5kbu8hnh0"]
+
+[ext_resource type="Script" uid="uid://ccdro2y1tgmm3" path="res://code/ui/ready_menu/ready_menu.gd" id="1_aru3y"]
+[ext_resource type="Texture2D" uid="uid://cmpblwuk8xqmr" path="res://assets/thumbnail.png" id="2_ldg7d"]
+[ext_resource type="Texture2D" uid="uid://c2c7qntm73r31" path="res://assets/main_menu_play_button.png" id="3_mw6r2"]
+[ext_resource type="Texture2D" uid="uid://c4pxnu34mwsn4" path="res://assets/main_menu_color.png" id="4_aru3y"]
+[ext_resource type="Texture2D" uid="uid://dji7np2tg2n5h" path="res://assets/main_menu_weapon.png" id="4_ldg7d"]
+[ext_resource type="Texture2D" uid="uid://sbj7me7l8pgc" path="res://assets/main_menu_hat.png" id="5_0b27c"]
+
+[sub_resource type="Gradient" id="Gradient_nhbo6"]
+colors = PackedColorArray(0.176471, 0.756908, 0.823248, 1, 0.185806, 0.631779, 0.326784, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kwq7a"]
+gradient = SubResource("Gradient_nhbo6")
+width = 384
+
+[node name="ReadyMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aru3y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("2_ldg7d")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+
+[node name="PlayButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -186.5
+offset_top = -109.0
+offset_right = 186.5
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(186.5, 109)
+texture_normal = ExtResource("3_mw6r2")
+
+[node name="LeftPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -720.0
+offset_right = 128.0
+grow_vertical = 0
+
+[node name="LeftPanelContainer" type="VBoxContainer" parent="LeftPanel"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+offset_right = 512.0
+offset_bottom = 2880.0
+scale = Vector2(0.25, 0.25)
+alignment = 1
+
+[node name="LWeaponButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("4_ldg7d")
+
+[node name="LColorButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("4_aru3y")
+
+[node name="LHatButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("5_0b27c")
+
+[node name="RightPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -720.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="RightPanelContainer" type="VBoxContainer" parent="RightPanel"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+offset_right = 512.0
+offset_bottom = 2880.0
+scale = Vector2(0.25, 0.25)
+alignment = 1
+
+[node name="LWeaponButton" type="TextureButton" parent="RightPanel/RightPanelContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("4_ldg7d")
+
+[node name="LColorButton" type="TextureButton" parent="RightPanel/RightPanelContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("4_aru3y")
+
+[node name="LHatButton" type="TextureButton" parent="RightPanel/RightPanelContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("5_0b27c")
+
+[node name="LeftPanelPopup" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 384.0
+offset_bottom = 720.0
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftPanelPopup"]
+position = Vector2(192, 360)
+scale = Vector2(1.003, 720)
+texture = SubResource("GradientTexture1D_kwq7a")
+
+[node name="Control" type="Control" parent="LeftPanelPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="LeftPanelPopup/Control"]
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 720.0
+mouse_filter = 0
+columns = 3
+
+[node name="RightPanelPopup" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -384.0
+offset_bottom = 720.0
+grow_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="RightPanelPopup"]
+position = Vector2(192, 360)
+scale = Vector2(1.003, 720)
+texture = SubResource("GradientTexture1D_kwq7a")
+
+[node name="Control" type="Control" parent="RightPanelPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="RightPanelPopup/Control"]
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 720.0
+mouse_filter = 0
+columns = 3
+
+[connection signal="pressed" from="Control/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="LeftPanel/LeftPanelContainer/LWeaponButton" to="." method="_on_l_weapon_button_pressed"]
+[connection signal="pressed" from="RightPanel/RightPanelContainer/LWeaponButton" to="." method="_on_r_weapon_button_pressed"]

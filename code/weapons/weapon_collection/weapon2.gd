@@ -1,18 +1,16 @@
+## Second weapon, dagger, with dashes of different lengths
 extends Weapon
 class_name Weapon2
 
 var hitbox_area : Area2D
 
-func init(player: Player) -> void:
-	super.init(player)
+func init(player: Player, id: String) -> void:
+	super.init(player, "2")
 	
 	abilities.append(Ability2.new(1000.0))
 	abilities.append(Ability3.new(2000.0))
 	
-	super.add_sprite(Sprite2D.new(), load("res://assets/weapon2.png"))
-	super.set_hitbox("2")
 	super.set_damage(Damageable.new(0.1))
-	#super.set_cooldown(WeaponGlobals.WEAPON_COOLDOWNS.SHORT)
 	
 func tick_rotation(rotation: Vector2):
 	super.tick_rotation(rotation)

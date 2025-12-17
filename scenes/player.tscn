@@ -19,6 +19,7 @@ class_name JumpBar
 "
 
 [node name="Player" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_qhqgy")
 
 [node name="RagdollPhysicsManager" type="Node2D" parent="."]
