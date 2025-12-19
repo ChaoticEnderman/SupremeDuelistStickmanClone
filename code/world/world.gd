@@ -69,8 +69,8 @@ func start_round() -> void:
 	add_child(weapon1)
 	add_child(weapon2)
 	
-	player1.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_LEFT, weapon1)
-	player2.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_RIGHT, weapon2)
+	player1.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_LEFT, weapon1, PlayerSpriteGlobals.PLAYER.LEFT)
+	player2.initialize(true, Globals.JOYSTICK_POSITION.BOTTOM_RIGHT, weapon2, PlayerSpriteGlobals.PLAYER.RIGHT)
 	# Make the player body dont touch eachother
 	for body in player2.ragdoll.get_children():
 		if body is RigidBody2D:

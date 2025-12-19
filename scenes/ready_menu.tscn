@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpaf5kbu8hnh0"]
+[gd_scene load_steps=10 format=3 uid="uid://dpaf5kbu8hnh0"]
 
 [ext_resource type="Script" uid="uid://ccdro2y1tgmm3" path="res://code/ui/ready_menu/ready_menu.gd" id="1_aru3y"]
 [ext_resource type="Texture2D" uid="uid://cmpblwuk8xqmr" path="res://assets/thumbnail.png" id="2_ldg7d"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c4pxnu34mwsn4" path="res://assets/main_menu_color.png" id="4_aru3y"]
 [ext_resource type="Texture2D" uid="uid://dji7np2tg2n5h" path="res://assets/main_menu_weapon.png" id="4_ldg7d"]
 [ext_resource type="Texture2D" uid="uid://sbj7me7l8pgc" path="res://assets/main_menu_hat.png" id="5_0b27c"]
+[ext_resource type="Texture2D" uid="uid://thu4medbs8i" path="res://assets/coin_logo.png" id="7_kwq7a"]
 
 [sub_resource type="Gradient" id="Gradient_nhbo6"]
 colors = PackedColorArray(0.176471, 0.756908, 0.823248, 1, 0.185806, 0.631779, 0.326784, 1)
@@ -28,36 +29,6 @@ script = ExtResource("1_aru3y")
 position = Vector2(640, 360)
 texture = ExtResource("2_ldg7d")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.5, 0.5)
-
-[node name="PlayButton" type="TextureButton" parent="Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -186.5
-offset_top = -109.0
-offset_right = 186.5
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2, 2)
-pivot_offset = Vector2(186.5, 109)
-texture_normal = ExtResource("3_mw6r2")
-
 [node name="LeftPanel" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -66,6 +37,18 @@ anchor_bottom = 1.0
 offset_top = -720.0
 offset_right = 128.0
 grow_vertical = 0
+mouse_filter = 1
+
+[node name="LPlayer" type="Control" parent="LeftPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_vertical = 2
+mouse_filter = 1
 
 [node name="LeftPanelContainer" type="VBoxContainer" parent="LeftPanel"]
 custom_minimum_size = Vector2(256, 256)
@@ -90,6 +73,10 @@ custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 texture_normal = ExtResource("5_0b27c")
 
+[node name="LColorPickerButton" type="ColorPickerButton" parent="LeftPanel/LeftPanelContainer"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+
 [node name="RightPanel" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -101,6 +88,29 @@ offset_left = -128.0
 offset_top = -720.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 1
+
+[node name="RPlayer" type="Control" parent="RightPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_bottom = 360.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureButton" type="TextureButton" parent="RightPanel/RPlayer"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 111.0
+offset_right = 528.0
+offset_bottom = 239.0
+texture_normal = ExtResource("7_kwq7a")
 
 [node name="RightPanelContainer" type="VBoxContainer" parent="RightPanel"]
 custom_minimum_size = Vector2(256, 256)
@@ -125,11 +135,16 @@ custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 texture_normal = ExtResource("5_0b27c")
 
+[node name="RColorPickerButton" type="ColorPickerButton" parent="RightPanel/RightPanelContainer"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+
 [node name="LeftPanelPopup" type="Control" parent="."]
 visible = false
 anchors_preset = 0
 offset_right = 384.0
 offset_bottom = 720.0
+mouse_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftPanelPopup"]
 position = Vector2(192, 360)
@@ -160,6 +175,7 @@ anchor_right = 1.0
 offset_left = -384.0
 offset_bottom = 720.0
 grow_horizontal = 0
+mouse_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="RightPanelPopup"]
 position = Vector2(192, 360)
@@ -181,6 +197,38 @@ offset_bottom = 720.0
 mouse_filter = 0
 columns = 3
 
-[connection signal="pressed" from="Control/PlayButton" to="." method="_on_play_button_pressed"]
+[node name="Play" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+
+[node name="PlayButton" type="TextureButton" parent="Play"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -186.5
+offset_top = -109.0
+offset_right = 186.5
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(186.5, 109)
+texture_normal = ExtResource("3_mw6r2")
+
 [connection signal="pressed" from="LeftPanel/LeftPanelContainer/LWeaponButton" to="." method="_on_l_weapon_button_pressed"]
+[connection signal="color_changed" from="LeftPanel/LeftPanelContainer/LColorPickerButton" to="." method="_on_l_color_picker_button_color_changed"]
 [connection signal="pressed" from="RightPanel/RightPanelContainer/LWeaponButton" to="." method="_on_r_weapon_button_pressed"]
+[connection signal="color_changed" from="RightPanel/RightPanelContainer/RColorPickerButton" to="." method="_on_r_color_picker_button_color_changed"]
+[connection signal="pressed" from="Play/PlayButton" to="." method="_on_play_button_pressed"]

@@ -11,4 +11,3 @@ script = ExtResource("1_drxy0")
 hitbox = SubResource("CapsuleShape2D_drxy0")
 name = "Gun"
 sprite = ExtResource("1_k8jba")
-metadata/_custom_type_script = "uid://42bfyewjaivt"

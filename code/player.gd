@@ -37,10 +37,12 @@ var score : int = 0
 ## Will change when the player is dead (when their hp is zero)
 var is_dead : bool = false
 
-func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION, weapon: Weapon):
+func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION, weapon: Weapon, player_side: PlayerSpriteGlobals.PLAYER):
 	self.weapon = weapon
 	player_hp = 100.0
 	is_dead = false
+	# Real player is reserved for bots long ago, but seems like this will probably never be added
+	# This will just be like an artifact of the early stages of development where its kinda unclear
 	if is_real_player:
 		input_manager = load("res://scenes/joystick.tscn").instantiate()
 		add_child(input_manager)
@@ -49,6 +51,18 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	health_bar.add_theme_stylebox_override("fill", health_bar_color)
 	
 	ragdoll.ragdoll_collision_exception(weapon.hitbox)
+	
+	# Add the color to the player
+	ragdoll.torso.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.TORSO, player_side)
+	ragdoll.stomach.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.STOMACH, player_side)
+	ragdoll.a_thigh.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_THIGH, player_side)
+	ragdoll.a_shin.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_SHIN, player_side)
+	ragdoll.b_thigh.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_THIGH, player_side)
+	ragdoll.b_shin.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_SHIN, player_side)
+	ragdoll.p_arm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_ARM, player_side)
+	ragdoll.p_forearm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_FOREARM, player_side)
+	#ragdoll.head.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_ARM, player_side)
+	#ragdoll.head.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_FOREARM, player_side)
 
 ## Master tick function to tick the player and its dependencies
 func tick_player():

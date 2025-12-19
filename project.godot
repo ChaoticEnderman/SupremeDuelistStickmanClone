@@ -21,6 +21,7 @@ Globals="*res://code/globals/globals.gd"
 WeaponGlobals="*res://code/globals/weapon_globals.gd"
 GameState="*res://code/globals/game_state.gd"
 SystemManager="*res://code/system_manager.gd"
+PlayerSpriteGlobals="*res://code/globals/player_sprite_globals.gd"
 
 [display]
 
