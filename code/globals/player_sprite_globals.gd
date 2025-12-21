@@ -18,13 +18,13 @@ enum LIMB_INDEX {HEAD, TORSO, STOMACH, L_THIGH, L_SHIN, R_THIGH, R_SHIN, L_ARM, 
 ## The sides of the player
 enum PLAYER {LEFT, RIGHT}
 
-func _ready() -> void:
+## Set default color to all white, might be changed later to read from file
+func set_default_color() -> void:
 	l_limbs.resize(11)
 	r_limbs.resize(11)
-	for color in l_limbs:
-		color = Color(1,1,1,1)
-	for color in r_limbs:
-		color = Color(1,1,1,1)
+	for i in range(11):
+		l_limbs[i] = Color(1,1,1,1)
+		r_limbs[i] = Color(1,1,1,1)
 
 static func set_brush_color(player: PLAYER, color: Color):
 	if player == PLAYER.LEFT:

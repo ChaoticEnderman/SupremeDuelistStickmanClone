@@ -12,24 +12,39 @@ width = 720
 height = 512
 fill_to = Vector2(0, 1)
 
-[node name="SettingMenu" type="Node2D"]
+[node name="SettingMenu" type="Control"]
 process_mode = 3
 z_index = 5
-position = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_pgfik")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(720, 512)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("GradientTexture2D_ogw40")
+expand_mode = 2
 
 [node name="BackButton" type="TextureButton" parent="Sprite2D"]
-offset_left = -488.0
-offset_top = -256.0
-offset_right = -360.0
-offset_bottom = -128.0
+offset_left = -128.0
+offset_bottom = 128.0
 texture_normal = ExtResource("2_vproo")
 
 [node name="Control" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -95,6 +110,17 @@ max_value = 200.0
 value = 60.0
 rounded = true
 
+[node name="JoystickScaleLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="JoystickScale" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.25
+max_value = 5.0
+step = 0.25
+value = 2.0
+rounded = true
+
 [node name="Gravity" type="CheckButton" parent="Control/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 button_pressed = true
@@ -119,6 +145,7 @@ rounded = true
 [connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/Cooldown" to="." method="_on_cooldown_value_changed"]
 [connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/JumpHeight" to="." method="_on_jump_height_value_changed"]
 [connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/JumpTime" to="." method="_on_jump_time_value_changed"]
+[connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/JoystickScale" to="." method="_on_joystick_scale_value_changed"]
 [connection signal="pressed" from="Control/ScrollContainer/VBoxContainer/Gravity" to="." method="_on_gravity_pressed"]
 [connection signal="pressed" from="Control/ScrollContainer/VBoxContainer/KeyboardInput" to="." method="_on_keyboard_input_pressed"]
 [connection signal="value_changed" from="Control/ScrollContainer/VBoxContainer/EngineTPS" to="." method="_on_engine_tps_value_changed"]

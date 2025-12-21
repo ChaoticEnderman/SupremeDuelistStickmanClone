@@ -209,6 +209,8 @@ func tick_move_arms(direction: Vector2):
 ## Checking every single limbs for collision to any damagable objects
 ## No need for like removing duplicates since it will deal damage multiple times if hit multiple limbs
 ## Can be laggy since it's yet to implement broadphase collision checking
+## Also a lot laggy because the nested function is in higher degree polynomial time
+# TODO: optimize this idk
 func tick_check_damage_collisions() -> Array[float]:
 	var colliding_bodies : Array[float]
 	# Nested nightmare
@@ -218,6 +220,13 @@ func tick_check_damage_collisions() -> Array[float]:
 				if has_damageable(body.get_owner()):
 					if not body.get_owner().damageable.owner_stickman == self.get_owner():
 						colliding_bodies.append(body.get_owner().get_damage())
+				if body is TileMapLayer:
+					# Get the contact tile position to deal the damage if exist
+					# Divide by 64 to scale down the 64x64 pixel size of the tilemap
+					var tile_data = body.get_cell_tile_data((child.global_position / 64).round())
+					
+					if tile_data != null:
+						colliding_bodies.append(tile_data.get_custom_data("damage"))
 	return colliding_bodies
 
 func has_damageable(parent: Node) -> bool:

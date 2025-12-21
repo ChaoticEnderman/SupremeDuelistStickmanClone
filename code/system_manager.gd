@@ -6,12 +6,18 @@ extends Node
 var world : Node2D
 
 ## The main menu, containing the general stuff
-var main_menu : Node2D = load("res://scenes/main_menu.tscn").instantiate()
+var main_menu : Control = load("res://scenes/main_menu.tscn").instantiate()
 
 ## The ready menu, settings before the game
 var ready_menu : Control = load("res://scenes/ready_menu.tscn").instantiate()
 
+## Player1 dynamic position for the camera follow
+var p1_position : Vector2
+## Player2 dynamic position for the camera follow
+var p2_position : Vector2
+
 func _ready():
+	PlayerSpriteGlobals.set_default_color()
 	GameState.game_state_changed.connect(_on_game_state_changed)
 	GameState.system_state_changed.connect(_on_system_state_changed)
 

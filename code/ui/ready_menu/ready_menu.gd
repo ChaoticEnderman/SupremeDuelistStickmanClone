@@ -83,14 +83,9 @@ func create_sprite_stickmen(root_node: Control, player_side: PlayerSpriteGlobals
 	l_forearm.pressed.connect(_on_limb_pressed.bind(player_side, PlayerSpriteGlobals.LIMB_INDEX.L_FOREARM, l_forearm))
 	r_arm.pressed.connect(_on_limb_pressed.bind(player_side, PlayerSpriteGlobals.LIMB_INDEX.R_ARM, r_arm))
 	r_forearm.pressed.connect(_on_limb_pressed.bind(player_side, PlayerSpriteGlobals.LIMB_INDEX.R_FOREARM, r_forearm))
-	head.pressed.connect(_ts.bind(player_side, PlayerSpriteGlobals.LIMB_INDEX.HEAD, head))
-
-func _ts(player_side: PlayerSpriteGlobals.PLAYER, limb_index: PlayerSpriteGlobals.LIMB_INDEX, body: TextureButton):
-	print("RM/touched ok ok ", player_side)
 
 ## Signals runs when any limb is pressed, will change the color and update color of that limb
 func _on_limb_pressed(player_side: PlayerSpriteGlobals.PLAYER, limb_index: PlayerSpriteGlobals.LIMB_INDEX, body: TextureButton):
-	print("RM/body touched ", self, " color ", self.modulate)
 	PlayerSpriteGlobals.set_limb(limb_index, player_side)
 	body.modulate = PlayerSpriteGlobals.get_brush_color(player_side)
 

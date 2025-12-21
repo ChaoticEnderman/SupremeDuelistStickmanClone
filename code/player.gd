@@ -37,19 +37,23 @@ var score : int = 0
 ## Will change when the player is dead (when their hp is zero)
 var is_dead : bool = false
 
+var player_side : PlayerSpriteGlobals.PLAYER
+
 func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION, weapon: Weapon, player_side: PlayerSpriteGlobals.PLAYER):
 	self.weapon = weapon
 	player_hp = 100.0
 	is_dead = false
-	# Real player is reserved for bots long ago, but seems like this will probably never be added
+	# Real player variable is reserved for bots long ago, but seems like this will probably never be added
 	# This will just be like an artifact of the early stages of development where its kinda unclear
 	if is_real_player:
 		input_manager = load("res://scenes/joystick.tscn").instantiate()
 		add_child(input_manager)
 		input_manager.set_joystick_corner(joystick_position)
+	self.player_side = player_side
 	# Create a custom stylebox for changing the hp bar color and override the fill stylebox
 	health_bar.add_theme_stylebox_override("fill", health_bar_color)
 	
+	# Make the player not touch the hitbox
 	ragdoll.ragdoll_collision_exception(weapon.hitbox)
 	
 	# Add the color to the player
@@ -61,10 +65,8 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	ragdoll.b_shin.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_SHIN, player_side)
 	ragdoll.p_arm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_ARM, player_side)
 	ragdoll.p_forearm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_FOREARM, player_side)
-	#ragdoll.head.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_ARM, player_side)
-	#ragdoll.head.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_FOREARM, player_side)
 
-## Master tick function to tick the player and its dependencies
+# Master tick function to tick the player and its dependencies
 func tick_player():
 	# Get input for this tick from input manager and store, first step
 	player_direction = input_manager.tick_input()
@@ -83,6 +85,12 @@ func tick_player():
 	
 	# Change cooldown for the weapon
 	weapon.tick_cooldown()
+	
+	# Update the position
+	if self.player_side == PlayerSpriteGlobals.PLAYER.LEFT:
+		SystemManager.p1_position = self.ragdoll.torso.global_position
+	elif self.player_side == PlayerSpriteGlobals.PLAYER.RIGHT:
+		SystemManager.p2_position = self.ragdoll.torso.global_position
 
 func _process(delta: float) -> void:
 	tick_hud()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpaf5kbu8hnh0"]
+[gd_scene load_steps=9 format=3 uid="uid://dpaf5kbu8hnh0"]
 
 [ext_resource type="Script" uid="uid://ccdro2y1tgmm3" path="res://code/ui/ready_menu/ready_menu.gd" id="1_aru3y"]
 [ext_resource type="Texture2D" uid="uid://cmpblwuk8xqmr" path="res://assets/thumbnail.png" id="2_ldg7d"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://c4pxnu34mwsn4" path="res://assets/main_menu_color.png" id="4_aru3y"]
 [ext_resource type="Texture2D" uid="uid://dji7np2tg2n5h" path="res://assets/main_menu_weapon.png" id="4_ldg7d"]
 [ext_resource type="Texture2D" uid="uid://sbj7me7l8pgc" path="res://assets/main_menu_hat.png" id="5_0b27c"]
-[ext_resource type="Texture2D" uid="uid://thu4medbs8i" path="res://assets/coin_logo.png" id="7_kwq7a"]
 
 [sub_resource type="Gradient" id="Gradient_nhbo6"]
 colors = PackedColorArray(0.176471, 0.756908, 0.823248, 1, 0.185806, 0.631779, 0.326784, 1)
@@ -18,16 +17,30 @@ width = 384
 [node name="ReadyMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 2
+script = ExtResource("1_aru3y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 720)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ldg7d")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_aru3y")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(640, 360)
-texture = ExtResource("2_ldg7d")
 
 [node name="LeftPanel" type="Control" parent="."]
 layout_mode = 1
@@ -103,14 +116,6 @@ offset_bottom = 360.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 1
-
-[node name="TextureButton" type="TextureButton" parent="RightPanel/RPlayer"]
-layout_mode = 0
-offset_left = 400.0
-offset_top = 111.0
-offset_right = 528.0
-offset_bottom = 239.0
-texture_normal = ExtResource("7_kwq7a")
 
 [node name="RightPanelContainer" type="VBoxContainer" parent="RightPanel"]
 custom_minimum_size = Vector2(256, 256)

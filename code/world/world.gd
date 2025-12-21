@@ -10,8 +10,8 @@ var player2 : Player
 var weapon1 : Weapon
 var weapon2 : Weapon
 
-@onready var next_round_button : TextureButton = get_node("GameUI/NextRoundButton")
-@onready var pause_menu : Node2D = get_node("PauseMenu")
+@onready var next_round_button : TextureButton = get_node("UI/GameUI/NextRoundButton")
+@onready var pause_menu : Control = get_node("UI/PauseMenu")
 
 var rng = RandomNumberGenerator.new()
 
@@ -20,7 +20,7 @@ func add_projectile(projectile: Projectile):
 	add_child(projectile)
 
 func _ready() -> void:
-	get_node("GameUI").process_mode = Node.PROCESS_MODE_ALWAYS
+	get_node("UI/GameUI").process_mode = Node.PROCESS_MODE_ALWAYS
 	GameState.game_state_changed.connect(_on_game_state_changed)
 	GameState.system_state_changed.connect(_on_system_state_changed)
 	GameState.game_tick.connect(_game_tick)

@@ -1,5 +1,5 @@
 ## The pause menu, will be visible if the game is paused
-extends Node2D
+extends Control
 # TODO: Combine all seperate pause menu scripts into this script
 
 func _ready():

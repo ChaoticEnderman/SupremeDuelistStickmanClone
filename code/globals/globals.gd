@@ -1,6 +1,8 @@
 ## Contain global constants and utility methods
 extends Node
 
+signal joystick_scale_changed
+
 ## Values for Godot's built-in damping value for the ragdolls
 const LINEAR_DAMP := 4.0
 const ANGULAR_DAMP := 4.0
@@ -15,7 +17,6 @@ const RAGDOLL_TORQUE_FORCE : float = 500.0
 ## Baseline tps for the game, that is the number of physics tick per second
 var TPS : int = Engine.physics_ticks_per_second
 
-
 ## The time that it need to wait right after a jump
 var JUMP_COOLDOWN : int = 15
 ## The angle a is the range from a to -a that the joystick direction is considered a jumping range
@@ -24,6 +25,9 @@ const JUMPING_ANGLE_DEGREES : float = 45.0
 
 ## The hp that players begin with
 const STARTING_HP : float = 100.0
+
+## Scale for the joysticks for all players
+var JOYSTICK_SCALE : float = 2.0
 
 ## List of all 4 possible positions for the joystick
 enum JOYSTICK_POSITION {TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT}
@@ -50,3 +54,7 @@ func angle_to_180(angle_degree: float) -> float:
 	if angle_degree > 180.0:
 		angle_degree -= 360.0
 	return angle_degree
+
+# TODO: Maybe consider removing this
+func reload_settings():
+	joystick_scale_changed.emit()

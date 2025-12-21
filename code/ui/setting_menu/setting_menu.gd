@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 # Path for the innermost container
 @onready var container = get_node("Control/ScrollContainer/VBoxContainer")
@@ -12,6 +12,8 @@ extends Node2D
 @onready var jump_height = container.get_node("JumpHeight")
 @onready var jump_time_label = container.get_node("JumpTimeLabel")
 @onready var jump_time = container.get_node("JumpTime")
+@onready var joystick_scale_label = container.get_node("JoystickScaleLabel")
+@onready var joystick_scale = container.get_node("JoystickScale")
 
 @onready var gravity = container.get_node("Gravity")
 @onready var keyboard = container.get_node("KeyboardInput")
@@ -30,6 +32,7 @@ func update_labels():
 	cooldown_label.text = "Cooldown percentage of weapons: " + str(cooldown.value) + "%"
 	jump_height_label.text = "Jump height: " + str(int(jump_height.value))
 	jump_time_label.text = "Jump time in tick: " + str(int(jump_time.value))
+	joystick_scale_label.text = "Joystick scale multiplier(require restart): " + str(joystick_scale.value)
 	engine_tps_label.text = "TPS (Physics tick per second): " + str(engine_tps.value)
 
 ## Hide when the setting menu disappear
@@ -44,14 +47,18 @@ func _on_back_button_pressed() -> void:
 	Globals.JUMP_HEIGHT = int(jump_height.value)
 	Globals.JUMP_TIME = int(jump_time.value)
 	
-	Globals.KEYBOARD_INPUT_ENABLED = true if keyboard.pressed else false
+	Globals.KEYBOARD_INPUT_ENABLED = true if keyboard.button_pressed else false
 	
-	var gravity_status = Vector2.DOWN if gravity.pressed else Vector2.ZERO
+	var gravity_status = Vector2.DOWN if gravity.button_pressed else Vector2.ZERO
 	PhysicsServer2D.area_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.AREA_PARAM_GRAVITY_VECTOR, gravity_status)
 	
+	Globals.JOYSTICK_SCALE = joystick_scale.value
+	
 	Engine.physics_ticks_per_second = engine_tps.value
+	Globals.reload_settings()
 
 # Update labels once something changes
+# FIXME: somehow make this shorter
 func _on_damage_multiplier_value_changed(value: float) -> void:
 	update_labels()
 func _on_cooldown_value_changed(value: float) -> void:
@@ -65,4 +72,6 @@ func _on_gravity_pressed() -> void:
 func _on_engine_tps_value_changed(value: float) -> void:
 	update_labels()
 func _on_keyboard_input_pressed() -> void:
+	update_labels()
+func _on_joystick_scale_value_changed(value: float) -> void:
 	update_labels()

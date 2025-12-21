@@ -4,15 +4,13 @@ extends CanvasLayer
 class_name Joystick
 
 # Base and knob of the joystick for displaying the movement dynamically
-@onready var base_joystick : Node2D = get_node("JoystickBase")
+@onready var base_joystick : Control = get_node("JoystickBase")
 @onready var knob_joystick : Node2D = get_node("JoystickBase/JoystickButton")
 # This is like a constant for like the original position of the joystick, in the very center, to fallback if the joystick is not touched
 var knob_position : Vector2
 
 ## Radius of the joystick, will be used to calculate distance that the joystick is active
 const joystick_radius : float = 64.0
-## Joystick scale
-var joystick_scale : float = 2.0
 
 ## Direction that the joystick is pointing at, will be zero when its not touched
 var joystick_direction : Vector2
@@ -35,29 +33,32 @@ var is_releasing : bool
 ## However if the player just stop this will be resetted
 var jumping_time : int = 0
 
+## Center of the screen, for partitioning to four quadrants
+var screen_center : Vector2 = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
+
 ## All the accumulated inputs that is recorded in the _input function, will be resolved and cleared every tick
 var current_input_events : Array[InputEvent]
-
-func _ready() -> void:
-	# This is moved to the set_joystick_corner function since it cant accept parameters
-	return
 
 func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	self.joystick_position = joystick_position
 	# Not really any way to make this simpler, but it works for now
 	if joystick_position == Globals.JOYSTICK_POSITION.TOP_LEFT:
-		base_joystick.position = Vector2(0.0, 0.0) + Vector2(64.0, 64.0) * joystick_scale
+		base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_LEFT)
+		base_joystick.position = Vector2(0.0, 0.0) + Vector2(64.0, 64.0) * Globals.JOYSTICK_SCALE
 	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
-		base_joystick.position = Vector2(0.0, 720.0) + Vector2(64.0, -64.0) * joystick_scale
+		base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_LEFT)
+		base_joystick.position = Vector2(0.0, 720.0) + Vector2(64.0, -64.0) * Globals.JOYSTICK_SCALE
 	elif joystick_position == Globals.JOYSTICK_POSITION.TOP_RIGHT:
-		base_joystick.position = Vector2(1280.0, 0.0) + Vector2(-64.0, 64.0) * joystick_scale
+		base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_RIGHT)
+		base_joystick.position = Vector2(1280.0, 0.0) + Vector2(-64.0, 64.0) * Globals.JOYSTICK_SCALE
 	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_RIGHT:
-		base_joystick.position = Vector2(1280.0, 720.0) + Vector2(-64.0, -64.0) * joystick_scale
+		base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_RIGHT)
+		base_joystick.position = Vector2(1280.0, 720.0) + Vector2(-64.0, -64.0) * Globals.JOYSTICK_SCALE
 	
 	# Set the knob position to the default value
 	knob_position = knob_joystick.position
 	# Scale and rotation
-	base_joystick.apply_scale(Vector2(joystick_scale, joystick_scale))
+	base_joystick.scale = Vector2(Globals.JOYSTICK_SCALE, Globals.JOYSTICK_SCALE)
 	knob_joystick.rotation = 0.0
 	base_joystick.visible = true
 	# Make the joystick centralized, will be changed later for modularity but this one works even with scaling
@@ -71,8 +72,8 @@ func touch_input_validation(event: InputEvent) -> bool:
 	# Check the type
 	if (not event is InputEventMouse) and (not event is InputEventScreenTouch):
 		return false
-	# Temporary variable for like checking if joystick position is 
-	var screen_center : Vector2 = Vector2(640.0, 360.0)
+	
+	
 	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
 		if not (event.position.x < screen_center.x and event.position.y > screen_center.y):
 			return false
@@ -153,7 +154,6 @@ func tick_input() -> Vector2:
 			# Return to delete the event or not
 			if touch_input(current_input_events[i]):
 				current_input_events.remove_at(i)
-				
 	if Globals.KEYBOARD_INPUT_ENABLED:
 		if joystick_direction == Vector2.ZERO:
 			change_joystick_direction(false)

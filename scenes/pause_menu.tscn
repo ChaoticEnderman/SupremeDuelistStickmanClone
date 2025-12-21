@@ -10,32 +10,59 @@
 [ext_resource type="Texture2D" uid="uid://bc4uliqmntm6q" path="res://assets/pausemenu_setting.png" id="8_knqa7"]
 [ext_resource type="Script" uid="uid://ht76p28bax2t" path="res://code/ui/pause_menu/setting_button.gd" id="9_71k7c"]
 
-[node name="PauseMenu" type="Node2D"]
+[node name="PauseMenu" type="Control"]
 process_mode = 3
 z_index = 1
-position = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_v4r4p")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(-20, -20)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_5d2l8")
-
-[node name="Title" type="Sprite2D" parent="."]
-position = Vector2(-20, -20)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_7l7mv")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -1069.0
+offset_top = -669.0
+offset_right = 1069.0
+offset_bottom = 669.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(1069, 669)
+texture = ExtResource("1_5d2l8")
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1069.0
+offset_top = -669.0
+offset_right = 1069.0
+offset_bottom = 669.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(1069, 669)
+texture = ExtResource("2_7l7mv")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_top = 80.0
-offset_right = -20.0
 offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -49,11 +76,11 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -312.0
-offset_top = -272.0
+offset_top = -232.0
 offset_right = 312.0
-offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(312, 232)
 texture_normal = ExtResource("3_v4r4p")
 script = ExtResource("5_1s2dm")
 
@@ -63,18 +90,27 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -302.5
-offset_top = 40.0
+offset_top = 80.0
 offset_right = 302.5
-offset_bottom = 239.0
+offset_bottom = 279.0
 grow_horizontal = 2
+pivot_offset = Vector2(302, 0)
 texture_normal = ExtResource("4_1s2dm")
 script = ExtResource("6_1s2dm")
 
 [node name="Setting" type="TextureButton" parent="Control"]
-layout_mode = 0
-offset_left = 320.0
-offset_top = 96.0
-offset_right = 526.0
-offset_bottom = 312.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 250.0
+offset_top = 150.0
+offset_right = 456.0
+offset_bottom = 366.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(103, 108)
 texture_normal = ExtResource("8_knqa7")
 script = ExtResource("9_71k7c")

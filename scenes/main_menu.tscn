@@ -9,31 +9,70 @@
 [ext_resource type="Texture2D" uid="uid://dlr40m38rdydk" path="res://assets/menu_2p.png" id="4_tbmy8"]
 [ext_resource type="Script" uid="uid://ijqai4qby1yw" path="res://code/ui/main_menu/2p_button.gd" id="5_jk1qb"]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Control"]
 process_mode = 3
 z_index = 1000
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_tbmy8")
 
-[node name="Thumbnail" type="Sprite2D" parent="."]
+[node name="Thumbnail" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 720)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_8ln24")
-offset = Vector2(640, 360)
+expand_mode = 1
 
-[node name="Stickmen" type="Sprite2D" parent="."]
+[node name="Stickmen" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_oa1go")
-offset = Vector2(640, 360)
 
-[node name="Logo" type="Sprite2D" parent="."]
-position = Vector2(640, 200)
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -900.0
+offset_right = 900.0
+offset_bottom = 1423.0
+grow_horizontal = 2
 scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(900, 0)
 texture = ExtResource("3_tbmy8")
 
 [node name="1P" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 512.0
-offset_top = 192.0
-offset_right = 768.0
-offset_bottom = 448.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureButton" type="TextureButton" parent="1P"]
 process_mode = 3
@@ -45,12 +84,18 @@ texture_normal = ExtResource("2_rtw2f")
 script = ExtResource("3_oa1go")
 
 [node name="2P" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 512.0
-offset_top = 288.0
-offset_right = 768.0
-offset_bottom = 544.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureButton" type="TextureButton" parent="2P"]
 process_mode = 3
