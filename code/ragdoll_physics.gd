@@ -214,19 +214,16 @@ func tick_move_arms(direction: Vector2):
 func tick_check_damage_collisions() -> Array[float]:
 	var colliding_bodies : Array[float]
 	# Nested nightmare
+	var tile_data : TileData
 	for child in self.get_children():
 		if child is RigidBody2D:
 			for body in child.get_colliding_bodies():
 				if has_damageable(body.get_owner()):
 					if not body.get_owner().damageable.owner_stickman == self.get_owner():
 						colliding_bodies.append(body.get_owner().get_damage())
-				if body is TileMapLayer:
-					# Get the contact tile position to deal the damage if exist
-					# Divide by 64 to scale down the 64x64 pixel size of the tilemap
-					var tile_data = body.get_cell_tile_data((child.global_position / 64).round())
-					
-					if tile_data != null:
-						colliding_bodies.append(tile_data.get_custom_data("damage"))
+			tile_data = SystemManager.game_map.get_cell_tile_data(nn_vector(child.global_position/64))
+			if tile_data != null:
+				colliding_bodies.append(tile_data.get_custom_data("damage"))
 	return colliding_bodies
 
 func has_damageable(parent: Node) -> bool:
@@ -234,6 +231,25 @@ func has_damageable(parent: Node) -> bool:
 		if child is Damageable:
 			return true
 	return false
+
+## Test to find the nearest neighbor of the current limb touching position, to see the contacting tiles
+## Still mostly in the test state
+func nn_vector(v: Vector2):
+	# TODO: refactor this to be better (easier to understand) and drop some math explaination
+	var fract = v - v.floor()
+	var dl = abs(fract.x)
+	var dr = 1 - dl
+	var du = abs(fract.y)
+	var dd = 1 - du
+	var nn = min(dl, dr, du, dd)
+	if dl == nn:
+		return Vector2(floor(v.x) - 1, floor(v.y))
+	if dr == nn:
+		return Vector2(floor(v.x) + 1, floor(v.y))
+	if du == nn:
+		return Vector2(floor(v.x), floor(v.y) - 1)
+	if dd == nn:
+		return Vector2(floor(v.x), floor(v.y) + 1)
 
 ## Jump if the direction is not zero. Technically works without the != zero condition but just keep it
 func jump(direction: Vector2):
@@ -253,10 +269,14 @@ func tick_jump_stack():
 
 ## Animation called once when the ragdoll dies, will remove all pinjoints and stop physics
 func dying_animation():
+	if is_alive:
+		for child in self.get_children():
+			if child is PinJoint2D:
+				child.free()
+		for child in self.get_children():
+			if child is RigidBody2D:
+				child.apply_central_impulse(Vector2.from_angle(randf() * TAU).normalized() * 500)
 	is_alive = false
-	for child in self.get_children():
-		if child is PinJoint2D:
-			child.free()
 
 ## Function to add walk animation if the direction is not in the jumping direction
 #func walking(force: Vector2) -> bool:

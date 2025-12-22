@@ -4,8 +4,9 @@ class_name Ability4
 var timer : int = 0
 var player : Player
 
-func _init() -> void:
-	GameState.game_tick.connect(_game_tick)
+func _init(player: Player) -> void:
+	self.player = player
+	GameState.game_tick.connect(_on_game_tick)
 
 func release_ability(player: Player, direction: Vector2):
 	self.player = player
@@ -14,7 +15,7 @@ func release_ability(player: Player, direction: Vector2):
 	timer = 30
 	return WeaponGlobals.ability4_cooldown
 
-func _game_tick():
+func _on_game_tick():
 	timer -= 1
 	if timer == 0:
 		player.weapon.hitbox.scale = Vector2(1.0, 1.0)

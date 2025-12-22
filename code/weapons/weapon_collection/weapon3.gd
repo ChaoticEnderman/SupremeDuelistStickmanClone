@@ -7,7 +7,7 @@ var hitbox_area : Area2D
 func init(player: Player, id: String) -> void:
 	super.init(player, "3")
 	
-	var ability = Ability4.new()
+	var ability = Ability4.new(player)
 	ability.owner = self
 	abilities.append(ability)
 	

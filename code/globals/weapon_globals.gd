@@ -1,9 +1,9 @@
 # Global class that store the list of weapons and also weapon choices for the players
 extends Node
 
-## Weapon for the first player
-var weapon1 : Weapon
-var weapon2 : Weapon
+## Weapon ids for the first player
+var weapon1 : int
+var weapon2 : int
 
 var weapon_list : Array[WeaponData] = []
 
@@ -27,22 +27,22 @@ func load_weapons() -> void:
 		weapon_list.append(load("res://resources/weapon" + str(i) + ".tres"))
 
 func set_weapon(weapon: int, index: int):
-	var w : Weapon
 	# TODO: Some way to make this more compact, so like map class name by strings
+	if weapon == 1:
+		weapon1 = index
+	elif weapon == 2:
+		weapon2 = index
+
+func get_weapon(index: int) -> Weapon:
 	match index:
 		1:
-			w = Weapon1.new()
+			return Weapon1.new()
 		2:
-			w = Weapon2.new()
+			return Weapon2.new()
 		3:
-			w = Weapon3.new()
-			
-			
+			return Weapon3.new()
+		
+		
+		
 		_:
-			w = WeaponRandom.new()
-	
-	if weapon == 1:
-		weapon1 = w
-	elif weapon == 2:
-		weapon2 = w
-	
+			return null

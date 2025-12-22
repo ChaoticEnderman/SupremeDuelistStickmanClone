@@ -5,7 +5,7 @@ class_name Weapon
 
 ## The mandatory hitbox for the weapon for melee attacks
 @export var hitbox : CharacterBody2D = CharacterBody2D.new()
-@export var collision_shape = CollisionShape2D.new()
+@export var collision_shape : CollisionShape2D
 ## Sprite for the weapon, also required like the melee weapon
 @export var sprite : Sprite2D
 
@@ -42,9 +42,9 @@ func add_sprite(id: String):
 
 ## Set the hitbox area
 func set_hitbox(id: String):
+	collision_shape = CollisionShape2D.new()
 	collision_shape.shape = weapon_data.hitbox
 	hitbox.add_child(collision_shape)
-	
 	add_child(hitbox)
 	hitbox.owner = self
 
@@ -92,3 +92,14 @@ func tick_release_ability(direction: Vector2) -> bool:
 		return true
 	else:
 		return false
+
+## Free the weapon itself and the dependency classes
+func _queue_free():
+	print("weapon/qfree")
+	for ability in abilities:
+		ability.queue_free()
+	hitbox.queue_free()
+	collision_shape.queue_free()
+	#collision_shape = null
+	sprite.queue_free()
+	queue_free()

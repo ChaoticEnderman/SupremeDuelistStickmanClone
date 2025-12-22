@@ -11,6 +11,9 @@ var main_menu : Control = load("res://scenes/main_menu.tscn").instantiate()
 ## The ready menu, settings before the game
 var ready_menu : Control = load("res://scenes/ready_menu.tscn").instantiate()
 
+## Map of the world
+var game_map : TileMapLayer
+
 ## Player1 dynamic position for the camera follow
 var p1_position : Vector2
 ## Player2 dynamic position for the camera follow
@@ -39,6 +42,7 @@ func start_game() -> void:
 	remove_child(ready_menu)
 	world = load("res://world.tscn").instantiate()
 	add_child(world)
+	game_map = world.get_node("CameraGame/TileMapLayer")
 	GameState.change_game_state(GameState.GAME_STATE.RUNNING)
 
 ## Function to go back to the main menu, it will not be deleted each time
@@ -48,6 +52,7 @@ func back_to_main_menu():
 	remove_child(ready_menu)
 	if world != null:
 		world.queue_free()
+		game_map.queue_free()
 	add_child(main_menu)
 
 ## Function to go to the ready menu before starting the game
@@ -56,6 +61,6 @@ func to_ready_menu():
 	remove_child(ready_menu)	
 	if world != null:
 		world.queue_free()
-	
+		game_map.queue_free()
 	add_child(ready_menu)
 	ready_menu.show_or_hide(true)

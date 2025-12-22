@@ -39,6 +39,7 @@ texture = SubResource("GradientTexture2D_ogw40")
 expand_mode = 2
 
 [node name="BackButton" type="TextureButton" parent="Sprite2D"]
+layout_mode = 0
 offset_left = -128.0
 offset_bottom = 128.0
 texture_normal = ExtResource("2_vproo")

@@ -40,6 +40,8 @@ var is_dead : bool = false
 var player_side : PlayerSpriteGlobals.PLAYER
 
 func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITION, weapon: Weapon, player_side: PlayerSpriteGlobals.PLAYER):
+	# Not connecting now since like the world need to dictate the order of these, see world for info
+	#GameState.game_tick.connect(_on_game_tick)
 	self.weapon = weapon
 	player_hp = 100.0
 	is_dead = false
@@ -67,7 +69,7 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	ragdoll.p_forearm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_FOREARM, player_side)
 
 # Master tick function to tick the player and its dependencies
-func tick_player():
+func _on_game_tick():
 	# Get input for this tick from input manager and store, first step
 	player_direction = input_manager.tick_input()
 	
@@ -91,6 +93,8 @@ func tick_player():
 		SystemManager.p1_position = self.ragdoll.torso.global_position
 	elif self.player_side == PlayerSpriteGlobals.PLAYER.RIGHT:
 		SystemManager.p2_position = self.ragdoll.torso.global_position
+	
+	tick_weapon_hud()
 
 func _process(delta: float) -> void:
 	tick_hud()
@@ -102,7 +106,6 @@ func tick_hud():
 	update_health_bar()
 	update_score_label()
 	hand_position = ragdoll.p_forearm.global_position
-	tick_weapon_hud()
 
 ## Update the value and the visibility status of the jump bar according to the jump time
 func update_jump_bar():
@@ -142,8 +145,9 @@ func update_score_label():
 
 ## Call the tick function from the weapon
 func tick_weapon_hud():
-	weapon.position = hand_position
-	weapon.tick_rotation(player_direction)
+	if ragdoll.is_alive:
+		weapon.position = hand_position
+		weapon.tick_rotation(player_direction)
 
 ## Check for player collision with anything that can do damage
 func check_collision():
@@ -151,3 +155,13 @@ func check_collision():
 	if not (damages == null or damages == []):
 		for damage in damages:
 			player_hp -= damage * Globals.DAMAGE_MULTIPLIER
+
+func _queue_free():
+	weapon._queue_free()
+	input_manager.queue_free()
+	for child in get_children(true):
+		child.queue_free()
+	queue_free()
+
+func is_dead_check() -> bool:
+	return is_dead

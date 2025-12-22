@@ -14,6 +14,3 @@ func collision_exception(projectile: Projectile):
 
 func get_damage() -> int:
 	return super.get_damage()
-
-func tick():
-	super.tick()

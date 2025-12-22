@@ -8,6 +8,8 @@ signal game_state_changed(state)
 signal system_state_changed(state)
 ## Signal every physics tick only when the state is in the game
 signal game_tick
+## Signal to clear all game objects when the current round end
+signal clear_round
 
 ## Enum for all system states
 enum SYSTEM_STATE {MENU, GAME, READY}
@@ -19,6 +21,8 @@ var game_state = GAME_STATE.RUNNING
 ## Store the current system state, not supposed to be modified directly
 var system_state = SYSTEM_STATE.GAME
 
+var queue_game : bool = false
+
 func _ready() -> void:
 	return
 
@@ -26,13 +30,24 @@ func _ready() -> void:
 ## Not through broken or random game tick many places
 # TODO: Make all components using the game tick use this instead
 func _physics_process(delta: float) -> void:
+	if queue_game:
+		queue_game = false
+		print("state/run game")
+		change_game_state(GAME_STATE.RUNNING)
+		return
 	if game_state == GAME_STATE.RUNNING:
 		game_tick.emit()
 
 ## This should be used to change the game state, will automatically emit the signal
 func change_game_state(state: GAME_STATE):
 	game_state = state
+	print("GS/ ", get_beautiful_game_state(state))
 	game_state_changed.emit(state)
+
+## Queue to run the game in the next tick after freeing last round's objects
+func queue_run_game():
+	print("state/qrun")
+	self.queue_game = true
 
 ## This should be used to change the system state, will automatically emit the signal
 ## Also automatically change the game state to none

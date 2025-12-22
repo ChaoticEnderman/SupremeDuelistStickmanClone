@@ -14,6 +14,7 @@ var hitbox : RigidBody2D
 var direction : Vector2
 
 func _init() -> void:
+	GameState.game_tick.connect(_on_game_tick)
 	hitbox = RigidBody2D.new()
 	add_child(hitbox)
 
@@ -57,7 +58,7 @@ func get_damage() -> int:
 	return damageable.damage_tick
 
 ## Runs each physics tick to check collision and other stuff
-func tick():
+func _on_game_tick():
 	self.check_collision()
 
 ## Internal method that is not supposed to be called from children, just call tick() instead
