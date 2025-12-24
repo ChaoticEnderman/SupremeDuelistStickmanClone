@@ -42,7 +42,7 @@ func start_game() -> void:
 	remove_child(ready_menu)
 	world = load("res://world.tscn").instantiate()
 	add_child(world)
-	game_map = world.get_node("CameraGame/TileMapLayer")
+	game_map = world.get_node("CameraGame/Map/TileMapLayer")
 	GameState.change_game_state(GameState.GAME_STATE.RUNNING)
 
 ## Function to go back to the main menu, it will not be deleted each time

@@ -221,9 +221,9 @@ func tick_check_damage_collisions() -> Array[float]:
 				if has_damageable(body.get_owner()):
 					if not body.get_owner().damageable.owner_stickman == self.get_owner():
 						colliding_bodies.append(body.get_owner().get_damage())
-			tile_data = SystemManager.game_map.get_cell_tile_data(nn_vector(child.global_position/64))
-			if tile_data != null:
-				colliding_bodies.append(tile_data.get_custom_data("damage"))
+			#tile_data = SystemManager.game_map.get_cell_tile_data(nn_vector(child.global_position/64))
+			#if tile_data != null:
+				#colliding_bodies.append(tile_data.get_custom_data("damage"))
 	return colliding_bodies
 
 func has_damageable(parent: Node) -> bool:

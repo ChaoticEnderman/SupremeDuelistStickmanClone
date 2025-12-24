@@ -2,6 +2,7 @@
 extends Node
 
 func _ready() -> void:
+	print(ProjectSettings.globalize_path("user://"))
 	WeaponGlobals.load_weapons()
 	GameState.change_system_state(GameState.SYSTEM_STATE.MENU)
 

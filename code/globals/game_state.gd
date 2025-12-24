@@ -32,7 +32,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if queue_game:
 		queue_game = false
-		print("state/run game")
 		change_game_state(GAME_STATE.RUNNING)
 		return
 	if game_state == GAME_STATE.RUNNING:
@@ -41,19 +40,17 @@ func _physics_process(delta: float) -> void:
 ## This should be used to change the game state, will automatically emit the signal
 func change_game_state(state: GAME_STATE):
 	game_state = state
-	print("GS/ ", get_beautiful_game_state(state))
 	game_state_changed.emit(state)
 
 ## Queue to run the game in the next tick after freeing last round's objects
 func queue_run_game():
-	print("state/qrun")
 	self.queue_game = true
 
 ## This should be used to change the system state, will automatically emit the signal
 ## Also automatically change the game state to none
 func change_system_state(state: SYSTEM_STATE):
 	system_state = state
-	print("System State is ", get_beautiful_system_state(state))
+	print("GS/System State is ", get_beautiful_system_state(state))
 	# Automatically change game state to none or n/a or similiar when the system is not running the game
 	if system_state != SYSTEM_STATE.GAME:
 		change_game_state(GAME_STATE.NONE)

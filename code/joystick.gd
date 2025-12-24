@@ -41,20 +41,23 @@ var current_input_events : Array[InputEvent]
 
 func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	self.joystick_position = joystick_position
+	print("joystick/screen size ", get_window().size)
 	# Not really any way to make this simpler, but it works for now
-	if joystick_position == Globals.JOYSTICK_POSITION.TOP_LEFT:
-		base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_LEFT)
-		base_joystick.position = Vector2(0.0, 0.0) + Vector2(64.0, 64.0) * Globals.JOYSTICK_SCALE
-	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
-		base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_LEFT)
-		base_joystick.position = Vector2(0.0, 720.0) + Vector2(64.0, -64.0) * Globals.JOYSTICK_SCALE
-	elif joystick_position == Globals.JOYSTICK_POSITION.TOP_RIGHT:
-		base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_RIGHT)
-		base_joystick.position = Vector2(1280.0, 0.0) + Vector2(-64.0, 64.0) * Globals.JOYSTICK_SCALE
+	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
+		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_LEFT)
+		base_joystick.position = Vector2(0.0, get_window().size.y) + Vector2(64.0, -64.0) * Globals.JOYSTICK_SCALE
 	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_RIGHT:
-		base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_RIGHT)
-		base_joystick.position = Vector2(1280.0, 720.0) + Vector2(-64.0, -64.0) * Globals.JOYSTICK_SCALE
+		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_RIGHT)
+		base_joystick.position = Vector2(get_window().size.x, get_window().size.y) + Vector2(-64.0, -64.0) * Globals.JOYSTICK_SCALE
+	# HACK: Disable top stuff because now only support 2 players
+	#elif joystick_position == Globals.JOYSTICK_POSITION.TOP_LEFT:
+		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_LEFT)
+		#base_joystick.position = Vector2(0.0, 0.0) + Vector2(64.0, 64.0) * Globals.JOYSTICK_SCALE
+	#elif joystick_position == Globals.JOYSTICK_POSITION.TOP_RIGHT:
+		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_RIGHT)
+		##base_joystick.position = Vector2(get_window().size.x, 0.0) + Vector2(-64.0, 64.0) * Globals.JOYSTICK_SCALE
 	
+	print("joy/pos ", base_joystick.position)
 	# Set the knob position to the default value
 	knob_position = knob_joystick.position
 	# Scale and rotation

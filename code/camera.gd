@@ -17,9 +17,10 @@ func _process(delta: float) -> void:
 	# 800 is just a constant to make this rather natural
 	camera_zoom = 800 / player_distance
 	
-	self.position = camera_position
+	self.position = Vector2(0.0, 0.0)
+	#self.position = camera_position
 	# This to make the camera not zoom too close to the players
-	if camera_zoom < 1:
-		self.zoom = Vector2(camera_zoom, camera_zoom)
-	else:
-		self.zoom = Vector2(1.0, 1.0)
+	#if camera_zoom < 1:
+		#self.zoom = Vector2(camera_zoom, camera_zoom)
+	#else:
+		#self.zoom = Vector2(1.0, 1.0)

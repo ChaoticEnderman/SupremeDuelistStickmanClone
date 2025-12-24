@@ -49,8 +49,8 @@ func start_round() -> void:
 	# Make new players each time
 	player1 = load("res://scenes/player.tscn").instantiate()
 	player2 = load("res://scenes/player.tscn").instantiate()
-	player1.position = Vector2(200.0, 200.0)
-	player2.position = Vector2(1080.0, 100.0)
+	player1.position = Vector2(-500, 0)
+	player2.position = Vector2(500, 0)
 	player_list.append(player1)
 	player_list.append(player2)
 	
