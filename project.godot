@@ -22,6 +22,7 @@ WeaponGlobals="*res://code/globals/weapon_globals.gd"
 GameState="*res://code/globals/game_state.gd"
 SystemManager="*res://code/system_manager.gd"
 PlayerSpriteGlobals="*res://code/globals/player_sprite_globals.gd"
+MapController="*res://code/map/map_controller.gd"
 
 [display]
 
@@ -29,6 +30,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
+window/vsync/vsync_mode=0
 
 [input]
 

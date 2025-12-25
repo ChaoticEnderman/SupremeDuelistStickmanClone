@@ -11,6 +11,9 @@ var main_menu : Control = load("res://scenes/main_menu.tscn").instantiate()
 ## The ready menu, settings before the game
 var ready_menu : Control = load("res://scenes/ready_menu.tscn").instantiate()
 
+## Map editor menu
+var map_editor : Control = load("res://scenes/map_editor.tscn").instantiate()
+
 ## Map of the world
 var game_map : TileMapLayer
 
@@ -23,6 +26,9 @@ func _ready():
 	PlayerSpriteGlobals.set_default_color()
 	GameState.game_state_changed.connect(_on_game_state_changed)
 	GameState.system_state_changed.connect(_on_system_state_changed)
+	add_child(main_menu)
+	add_child(ready_menu)
+	add_child(map_editor)
 
 func _on_game_state_changed(state):
 	return
@@ -35,11 +41,21 @@ func _on_system_state_changed(state):
 		to_ready_menu()
 	elif state == GameState.SYSTEM_STATE.GAME:
 		start_game()
+	elif state == GameState.SYSTEM_STATE.MAP_EDIT:
+		open_map_editor()
+
+func clear_everything():
+	remove_child(main_menu)
+	remove_child(ready_menu)
+	remove_child(map_editor)
+	remove_child(world)
+	if world != null:
+		world.queue_free()
+		game_map.queue_free()
 
 ## Start command to start the game world. Will create a new game world each time
 func start_game() -> void:
-	remove_child(main_menu)
-	remove_child(ready_menu)
+	clear_everything()
 	world = load("res://world.tscn").instantiate()
 	add_child(world)
 	game_map = world.get_node("CameraGame/Map/TileMapLayer")
@@ -47,20 +63,16 @@ func start_game() -> void:
 
 ## Function to go back to the main menu, it will not be deleted each time
 func back_to_main_menu():
-	# Will check to add only if the current node doesnt have menu yet
-	remove_child(main_menu)
-	remove_child(ready_menu)
-	if world != null:
-		world.queue_free()
-		game_map.queue_free()
+	clear_everything()
 	add_child(main_menu)
 
 ## Function to go to the ready menu before starting the game
 func to_ready_menu():
-	remove_child(main_menu)
-	remove_child(ready_menu)	
-	if world != null:
-		world.queue_free()
-		game_map.queue_free()
+	clear_everything()
 	add_child(ready_menu)
 	ready_menu.show_or_hide(true)
+
+## Function to open the map editor
+func open_map_editor():
+	clear_everything()
+	add_child(map_editor)

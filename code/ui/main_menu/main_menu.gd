@@ -7,3 +7,6 @@ func _ready():
 
 func _on_system_state_changed(state):
 	self.visible = (state == GameState.SYSTEM_STATE.MENU)
+
+func _on_map_edit_pressed() -> void:
+	GameState.change_system_state(GameState.SYSTEM_STATE.MAP_EDIT)

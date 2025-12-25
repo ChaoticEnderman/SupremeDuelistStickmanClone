@@ -41,7 +41,6 @@ var current_input_events : Array[InputEvent]
 
 func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	self.joystick_position = joystick_position
-	print("joystick/screen size ", get_window().size)
 	# Not really any way to make this simpler, but it works for now
 	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
 		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_LEFT)
@@ -57,7 +56,6 @@ func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_RIGHT)
 		##base_joystick.position = Vector2(get_window().size.x, 0.0) + Vector2(-64.0, 64.0) * Globals.JOYSTICK_SCALE
 	
-	print("joy/pos ", base_joystick.position)
 	# Set the knob position to the default value
 	knob_position = knob_joystick.position
 	# Scale and rotation

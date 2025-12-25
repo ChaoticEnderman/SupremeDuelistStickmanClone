@@ -20,7 +20,6 @@ func add_projectile(projectile: Projectile):
 	add_child(projectile)
 
 func _ready() -> void:
-	get_node("UI/GameUI").process_mode = Node.PROCESS_MODE_ALWAYS
 	GameState.game_state_changed.connect(_on_game_state_changed)
 	GameState.system_state_changed.connect(_on_system_state_changed)
 	GameState.game_tick.connect(_on_game_tick)

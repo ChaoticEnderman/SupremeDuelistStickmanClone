@@ -12,7 +12,7 @@ signal game_tick
 signal clear_round
 
 ## Enum for all system states
-enum SYSTEM_STATE {MENU, GAME, READY}
+enum SYSTEM_STATE {MENU, GAME, READY, MAP_EDIT}
 ## Enum for the game states, only works when the system state is game
 enum GAME_STATE {NONE, RUNNING, PAUSING, PAUSING_SETTING, LAZY_RUNNING}
 
