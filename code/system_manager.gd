@@ -70,7 +70,6 @@ func back_to_main_menu():
 func to_ready_menu():
 	clear_everything()
 	add_child(ready_menu)
-	ready_menu.show_or_hide(true)
 
 ## Function to open the map editor
 func open_map_editor():
