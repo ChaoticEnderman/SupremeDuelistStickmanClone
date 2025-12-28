@@ -6,10 +6,8 @@ func _ready() -> void:
 	tile_map_layer = get_node("TileMapLayer")
 	tile_map_layer.set_tile_set(load("res://resources/default_tile_set.tres"))
 	
-	MapController.edit_map(0)
-	MapController.draw_single_tile(Vector2i(0, 0), MapController.TILE.IK_WATER)
+	MapController.load_map(tile_map_layer)
 	
-	#map_controller.load_map(0, tile_map_layer)
 	print("map/after loading tiles ", tile_map_layer.get_used_cells().size())
 	
 	

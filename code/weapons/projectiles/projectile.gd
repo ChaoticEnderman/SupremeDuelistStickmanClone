@@ -1,6 +1,7 @@
 ## Base class for all projectiles that can be summoned by abilities
 ## This is intended to be summoned by the abilities and its subclass
 ## Not for using directly, only make a subclass of this class
+## Projectile are objects that are trigger to move once in one direction and with a 
 extends Node2D
 class_name Projectile
 
@@ -22,12 +23,20 @@ func _init() -> void:
 func summon(owner: Player, data: ProjectileData, direction: Vector2, position: Vector2) -> void:
 	projectile_data = data
 	# Construct the hitbox node
-	hitbox.add_child(projectile_data.hitbox_path.instantiate())
-	hitbox.add_child(projectile_data.sprite_path.instantiate())
+	var sprite : Sprite2D = Sprite2D.new()
+	var collision : CollisionShape2D = CollisionShape2D.new()
+	sprite.texture = projectile_data.sprite
+	# HACK: Hardcoded the scale value for the sprite because it cannot be scaled down normally
+	sprite.scale = Vector2(0.25, 0.25)
+	collision.shape = projectile_data.hitbox
+	hitbox.add_child(sprite)
+	hitbox.add_child(collision)
 	damageable = Damageable.new(projectile_data.damage)
 	add_child(damageable)
 	
 	# Set the hitbox and damagable to self, this is used for like checking if the owner of the hitbox has a node damageable
+	sprite.owner = self
+	collision.owner = self
 	hitbox.owner = self
 	damageable.owner = self
 	

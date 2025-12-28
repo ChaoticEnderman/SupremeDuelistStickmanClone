@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpaf5kbu8hnh0"]
+[gd_scene load_steps=13 format=3 uid="uid://dpaf5kbu8hnh0"]
 
 [ext_resource type="Script" uid="uid://ccdro2y1tgmm3" path="res://code/ui/ready_menu/ready_menu.gd" id="1_aru3y"]
 [ext_resource type="Texture2D" uid="uid://cmpblwuk8xqmr" path="res://assets/thumbnail.png" id="2_ldg7d"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c4pxnu34mwsn4" path="res://assets/main_menu_color.png" id="4_aru3y"]
 [ext_resource type="Texture2D" uid="uid://dji7np2tg2n5h" path="res://assets/main_menu_weapon.png" id="4_ldg7d"]
 [ext_resource type="Texture2D" uid="uid://sbj7me7l8pgc" path="res://assets/main_menu_hat.png" id="5_0b27c"]
+[ext_resource type="Texture2D" uid="uid://bla2ykqe6q5f4" path="res://assets/EmptyPlayerLimbTexture30x30.png" id="7_kgd7w"]
+[ext_resource type="Texture2D" uid="uid://t47uht2dqgsg" path="res://assets/arrow_left.png" id="8_b76aw"]
+[ext_resource type="Texture2D" uid="uid://ql6pxuhqjao1" path="res://assets/arrow_right.png" id="9_0gi3o"]
 
 [sub_resource type="Gradient" id="Gradient_nhbo6"]
 colors = PackedColorArray(0.176471, 0.756908, 0.823248, 1, 0.185806, 0.631779, 0.326784, 1)
@@ -13,6 +16,9 @@ colors = PackedColorArray(0.176471, 0.756908, 0.823248, 1, 0.185806, 0.631779, 0
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_kwq7a"]
 gradient = SubResource("Gradient_nhbo6")
 width = 384
+
+[sub_resource type="LabelSettings" id="LabelSettings_li3np"]
+font_size = 24
 
 [node name="ReadyMenu" type="Control"]
 process_mode = 3
@@ -234,8 +240,63 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(186.5, 109)
 texture_normal = ExtResource("3_mw6r2")
 
+[node name="MapChooser" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 160.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="MapChooser"]
+modulate = Color(0.16, 0.16, 0.16, 0.501961)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 128.0
+texture = ExtResource("7_kgd7w")
+
+[node name="Label" type="Label" parent="MapChooser"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+label_settings = SubResource("LabelSettings_li3np")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftButton" type="TextureButton" parent="MapChooser"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_right = 128.0
+grow_vertical = 0
+texture_normal = ExtResource("8_b76aw")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="RightButton" type="TextureButton" parent="MapChooser"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("9_0gi3o")
+ignore_texture_size = true
+stretch_mode = 6
+
 [connection signal="pressed" from="LeftPanel/LeftPanelContainer/LWeaponButton" to="." method="_on_l_weapon_button_pressed"]
 [connection signal="color_changed" from="LeftPanel/LeftPanelContainer/LColorPickerButton" to="." method="_on_l_color_picker_button_color_changed"]
 [connection signal="pressed" from="RightPanel/RightPanelContainer/LWeaponButton" to="." method="_on_r_weapon_button_pressed"]
 [connection signal="color_changed" from="RightPanel/RightPanelContainer/RColorPickerButton" to="." method="_on_r_color_picker_button_color_changed"]
 [connection signal="pressed" from="Play/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MapChooser/LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="MapChooser/RightButton" to="." method="_on_right_button_pressed"]

@@ -81,5 +81,7 @@ func get_beautiful_system_state(state: SYSTEM_STATE) -> String:
 			return "GAME"
 		SYSTEM_STATE.READY:
 			return "READY"
+		SYSTEM_STATE.MAP_EDIT:
+			return "MAP_EDIT"
 		_:
 			return str(state)

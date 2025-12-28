@@ -10,12 +10,17 @@ extends Control
 @onready var left_panel_popup : Control = get_node("LeftPanelPopup")
 @onready var right_panel_popup : Control = get_node("RightPanelPopup")
 
+# The panel for choosing the map
+@onready var map_chooser : Control = get_node("MapChooser")
+
 func _ready():
 	GameState.system_state_changed.connect(_on_system_state_changed)
 	initialize_weapons(left_panel_popup)
 	initialize_weapons(right_panel_popup)
 	create_sprite_stickmen(get_node("LeftPanel/LPlayer"), PlayerSpriteGlobal.PLAYER.LEFT)
 	create_sprite_stickmen(get_node("RightPanel/RPlayer"), PlayerSpriteGlobal.PLAYER.RIGHT)
+	MapController.clear_and_read_all_maps_from_file()
+	map_chooser.get_node("Label").text = MapController.default_map()
 	self.visible = false
 
 func create_sprite_stickmen(root_node: Control, player_side: PlayerSpriteGlobals.PLAYER):
@@ -152,3 +157,11 @@ func _on_weapon_button_pressed(side: String, id: int):
 	if side == "r":
 		WeaponGlobals.set_weapon(2, id)
 		right_panel_popup.visible = false
+
+## Move to the next map
+func _on_left_button_pressed() -> void:
+	map_chooser.get_node("Label").text = MapController.next_map()
+
+## Move to the previous map
+func _on_right_button_pressed() -> void:
+	map_chooser.get_node("Label").text = MapController.prev_map()

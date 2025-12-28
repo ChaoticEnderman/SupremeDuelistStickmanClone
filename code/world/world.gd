@@ -72,6 +72,7 @@ func start_round() -> void:
 	for body in player2.ragdoll.get_children():
 		if body is RigidBody2D:
 			player1.ragdoll.ragdoll_collision_exception(body)
+	
 	GameState.queue_run_game()
 
 ## Pause the game when the state is not running

@@ -1,11 +1,17 @@
+## The menu to edit the maps. Have features like a tile map layer to show the map tiles
+## Just like how normal game map works. Also contain operations to edit the map
+## Features like saving and loading only exist at the code level for the moment
 extends Control
 
 ## Tilemap layer used to show the current working map
 @onready var tile_map_layer : TileMapLayer = get_node("TileMapLayer")
 
+## Camera used for the tilemap to let user move around and edit
 @onready var camera : Camera2D = get_node("Camera2D")
+## Zoom of the camera, will be the same for the x and y axis
 var camera_zoom : float = 1.0
 
+## Test object, unused
 @onready var map_dragger : Button = get_node("MapDragger")
 ## The state of whether the user is dragging
 var map_dragging : bool = false
@@ -14,8 +20,11 @@ var is_mouse_inside_map_dragging_area : bool = false
 ## The start of when user start dragging
 var dragging_start : Vector2
 
+## Bottom panel responsible for the normal operations like brush, move, erase, ...
 @onready var bottom_panel_ui : HBoxContainer = get_node("CanvasLayer/BottomPanel/HBoxContainer")
+## Left pannel responsible for displaying the tiles in the atlas
 @onready var left_panel_ui : GridContainer = get_node("CanvasLayer/LeftPanel/ScrollContainer/VBoxContainer")
+## Buttons in the bottom panel
 var bottom_panel_buttons : Array[TextureButton]
 
 ## Current tool that is selected in the editor
@@ -44,6 +53,7 @@ func _ready() -> void:
 func _on_system_state_changed(state):
 	self.visible = (state == GameState.SYSTEM_STATE.MAP_EDIT)
 
+## Looping to set the tiles on the left panel based on the atlas, each atlas tile is a button
 func set_left_panel_tile_buttons():
 	var texture_button : TextureButton
 	var atlas_texture : AtlasTexture
@@ -68,14 +78,13 @@ func _on_tile_button_pressed(tile: Vector2i):
 	brush_tile = tile
 	bottom_panel_ui.get_node("ButtonPaint").button_pressed = true
 
+## Load a map from MapController by the id
 func load_map(id: int):
-	MapController.edit_map(0)
+	MapController.edit_map(id)
 	MapController.load_map(tile_map_layer)
 	print("ME/after loading ", tile_map_layer.get_used_cells().size())
 
-#func _process(delta: float) -> void:
-	#print("ME/cam pos ", camera.position)
-
+## Take the input event and split it to the respective functions based on EDITING_TOOL enum
 func _input(event: InputEvent) -> void:
 	if editing_tool == EDITING_TOOL.MOVE:
 		map_dragging_input(event)
@@ -102,6 +111,7 @@ func map_dragging_input(event: InputEvent) -> void:
 			# Change the position when the map is dragging
 			camera.position = -(event.position - dragging_start)
 
+## Similiar to map dragging input, this will do paint but only for like one by one block
 func paint_input(event: InputEvent, tile_type: Vector2i):
 	if event is InputEventMouse or event is InputEventScreenTouch:
 		if event.is_pressed():
@@ -169,5 +179,10 @@ func _on_button_center_pressed() -> void:
 ## Only for testing purposes
 # TODO: Delete after finishing
 func _on_test_pressed() -> void:
-	#MapController.save_map_to_file(0)
-	MapController.read_map_from_file(tile_map_layer)
+	MapController.save_map_to_file("desolation")
+	#MapController.read_map_from_file("desolation", tile_map_layer)
+
+## Button to go back to the main menu
+# TODO: Add some confirmation stuff
+func _on_back_button_pressed() -> void:
+	GameState.change_system_state(GameState.SYSTEM_STATE.MENU)

@@ -44,6 +44,7 @@ func _on_system_state_changed(state):
 	elif state == GameState.SYSTEM_STATE.MAP_EDIT:
 		open_map_editor()
 
+## Clear all the menus and stuff to only put back the menus that is needed, to go to other menus
 func clear_everything():
 	remove_child(main_menu)
 	remove_child(ready_menu)

@@ -218,14 +218,20 @@ func tick_check_damage_collisions() -> Array[float]:
 	for child in self.get_children():
 		if child is RigidBody2D:
 			for body in child.get_colliding_bodies():
+				# Check if the body has any of the damageable composition
 				if has_damageable(body.get_owner()):
+					print("rag/body touch ", body.get_owner())
+					# Do not damage if the owner is self
 					if not body.get_owner().damageable.owner_stickman == self.get_owner():
+						print("rag/body touch dmg ", body.get_owner().get_damage())
 						colliding_bodies.append(body.get_owner().get_damage())
+			# TODO: Implement the tilemap damage system
 			#tile_data = SystemManager.game_map.get_cell_tile_data(nn_vector(child.global_position/64))
 			#if tile_data != null:
 				#colliding_bodies.append(tile_data.get_custom_data("damage"))
 	return colliding_bodies
 
+## Internal helper function to recursively check if a node has the damageable composition
 func has_damageable(parent: Node) -> bool:
 	for child in parent.get_children():
 		if child is Damageable:

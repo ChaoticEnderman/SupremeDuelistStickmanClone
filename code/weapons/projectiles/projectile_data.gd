@@ -8,5 +8,5 @@ class_name ProjectileData
 @export var is_affected_by_gravity: bool
 @export var can_go_through_wall: bool
 
-@export var sprite_path : PackedScene
-@export var hitbox_path : PackedScene
+@export var sprite : Texture
+@export var hitbox : Shape2D

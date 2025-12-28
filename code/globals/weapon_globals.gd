@@ -21,6 +21,9 @@ const ability6_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 const ability7_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 const ability8_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 
+func _init() -> void:
+	load_weapons()
+
 ## Load all weapons at the very start of the app, only the data for ready menu to use before actual game weapon
 func load_weapons() -> void:
 	for i in range(1,4):
