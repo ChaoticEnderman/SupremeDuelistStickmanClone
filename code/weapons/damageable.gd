@@ -9,5 +9,6 @@ var damage_tick : float
 ## The owner of the damage, to ignore the damage on that entity. Can be a stickman or null (not recommended)
 var owner_stickman : Node2D
 
-func _init(damage: float) -> void:
+func _init(damage: float, owner: Node2D) -> void:
 	damage_tick = damage
+	owner_stickman = owner

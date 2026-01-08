@@ -177,7 +177,7 @@ func tick_move_arms(direction: Vector2):
 	
 	var arm_angle_displacement = rad_to_deg(p_arm.global_rotation) - angle
 	var forearm_angle_displacement = rad_to_deg(p_forearm.global_rotation) - angle
-	# To anybody going to maintaince this code, good luck hehehe prepare to die
+	# To anybody going to maintaince this code, good luck
 	
 	# Ok but still need comments, so this will always make the angle smaller than 180
 	if abs(arm_angle_displacement) > 180:
@@ -219,12 +219,12 @@ func tick_check_damage_collisions() -> Array[float]:
 		if child is RigidBody2D:
 			for body in child.get_colliding_bodies():
 				# Check if the body has any of the damageable composition
-				if has_damageable(body.get_owner()):
-					print("rag/body touch ", body.get_owner())
-					# Do not damage if the owner is self
-					if not body.get_owner().damageable.owner_stickman == self.get_owner():
-						print("rag/body touch dmg ", body.get_owner().get_damage())
-						colliding_bodies.append(body.get_owner().get_damage())
+				if has_damageable(body):
+					print("rag/body touch ", body)
+					# Do not damage if the owner is itself
+					if not body.damageable.owner_stickman == self:
+						print("rag/body touch dmg ", body.get_damage())
+						colliding_bodies.append(body.get_damage())
 			# TODO: Implement the tilemap damage system
 			#tile_data = SystemManager.game_map.get_cell_tile_data(nn_vector(child.global_position/64))
 			#if tile_data != null:
@@ -233,6 +233,9 @@ func tick_check_damage_collisions() -> Array[float]:
 
 ## Internal helper function to recursively check if a node has the damageable composition
 func has_damageable(parent: Node) -> bool:
+	# HACK: unknown case but sometimes parent is null
+	if parent == null:
+		return false
 	for child in parent.get_children():
 		if child is Damageable:
 			return true

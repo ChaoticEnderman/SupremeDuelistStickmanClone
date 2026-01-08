@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://b0ihq0lmiwb65" path="res://assets/coin_blank.png" id="2_441sv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1sol7"]
-radius = 16.0
+radius = 12.0
 
 [resource]
 script = ExtResource("1_jhe64")
 speed = 1000.0
-damage = 1.0
+damage = 10.0
 is_affected_by_gravity = false
 can_go_through_wall = false
 sprite = ExtResource("2_441sv")

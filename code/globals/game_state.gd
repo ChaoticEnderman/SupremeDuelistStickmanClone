@@ -7,7 +7,7 @@ signal game_state_changed(state)
 ## Signal when the system state changed by the function
 signal system_state_changed(state)
 ## Signal every physics tick only when the state is in the game
-signal game_tick
+signal game_tick(delta: float)
 ## Signal to clear all game objects when the current round end
 signal clear_round
 
@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 		change_game_state(GAME_STATE.RUNNING)
 		return
 	if game_state == GAME_STATE.RUNNING:
-		game_tick.emit()
+		game_tick.emit(delta)
 
 ## This should be used to change the game state, will automatically emit the signal
 func change_game_state(state: GAME_STATE):

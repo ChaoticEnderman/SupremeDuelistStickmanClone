@@ -7,9 +7,9 @@ var hitbox_area : Area2D
 func init(player: Player, id: String) -> void:
 	super.init(player, "1")
 	
-	abilities.append(Ability1.new(Projectile1.new(), "1"))
+	abilities.append(Ability1.new())
 	
-	super.set_damage(Damageable.new(0.1))
+	super.set_damage(Damageable.new(0.1, player))
 	
 func tick_rotation(rotation: Vector2):
 	super.tick_rotation(rotation)

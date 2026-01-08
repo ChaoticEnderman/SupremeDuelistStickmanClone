@@ -2,15 +2,16 @@
 extends Projectile
 class_name Projectile1
 
-func _init():
-	super._init()
+func _physics_process(delta: float) -> void:
+	#print("Pro1/test pos ", self.position)
+	pass
 
-func summon(owner: Player, data: ProjectileData, direction: Vector2, position: Vector2) -> void:
-	super.summon(owner, data, direction, position)
+func _init(player: Player, projectile_data: ProjectileData):
+	super._init(player, projectile_data)
 
 ## Since each time the ability is shot it will shoot 3 bullets, this is to make the bullets not touch eachother
 func collision_exception(projectile: Projectile):
-	hitbox.add_collision_exception_with(projectile.hitbox)
+	self.add_collision_exception_with(projectile)
 
 func get_damage() -> int:
 	return super.get_damage()

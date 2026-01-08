@@ -10,7 +10,7 @@ func init(player: Player, id: String) -> void:
 	abilities.append(Ability2.new(1000.0))
 	abilities.append(Ability3.new(2000.0))
 	
-	super.set_damage(Damageable.new(0.1))
+	super.set_damage(Damageable.new(0.1, player))
 	
 func tick_rotation(rotation: Vector2):
 	super.tick_rotation(rotation)

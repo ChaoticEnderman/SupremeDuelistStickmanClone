@@ -11,7 +11,7 @@ func init(player: Player, id: String) -> void:
 	ability.owner = self
 	abilities.append(ability)
 	
-	super.set_damage(Damageable.new(0.1))
+	super.set_damage(Damageable.new(0.1, player))
 	
 func tick_rotation(rotation: Vector2):
 	super.tick_rotation(rotation)

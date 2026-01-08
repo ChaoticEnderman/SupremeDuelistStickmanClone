@@ -14,7 +14,10 @@ var weapon2 : Weapon
 
 var rng = RandomNumberGenerator.new()
 
+## Queue for the next round to continue
 var queue_game : bool = false
+
+var delta : int
 
 func add_projectile(projectile: Projectile):
 	add_child(projectile)
@@ -103,12 +106,12 @@ func choose_weapon():
 
 ## Randomize weapon in case the weapon is random aka null
 func randomize_weapon() -> Weapon:
-	var weapons = [Weapon1.new(), Weapon2.new(), Weapon3.new()]
+	var weapons = [Weapon1.new(), Weapon2.new(), Weapon3.new(), Weapon4.new()]
 	return weapons[rng.randi_range(0, weapons.size() - 1)]
 
 ## Main function to run every tick to control whether other tick function can run easily
 # TODO: Make these tick stuff runs from the SystemManager class tick signal and not through this 
-func _on_game_tick() -> void:
+func _on_game_tick(delta: float) -> void:
 	tick_players()
 
 ## Call the tick function in each players to do their stuff

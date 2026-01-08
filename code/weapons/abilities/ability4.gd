@@ -1,3 +1,4 @@
+## First ability for the shield weapon3, zoom up and down after a while
 extends Ability
 class_name Ability4
 
@@ -12,10 +13,11 @@ func release_ability(player: Player, direction: Vector2):
 	self.player = player
 	player.weapon.hitbox.scale = Vector2(2.0, 2.0)
 	player.weapon.sprite.scale = Vector2(0.4, 0.4)
+	# HACK: Hardcoce this value, maybe escape this to somewhere like WeaponGlobals
 	timer = 30
 	return WeaponGlobals.ability4_cooldown
 
-func _on_game_tick():
+func _on_game_tick(delta: float):
 	timer -= 1
 	if timer == 0:
 		player.weapon.hitbox.scale = Vector2(1.0, 1.0)

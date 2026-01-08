@@ -1,3 +1,4 @@
+## First ability for the dagger weapon, dash shorter
 extends AbilityDash
 class_name Ability2
 
