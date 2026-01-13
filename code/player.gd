@@ -152,6 +152,7 @@ func tick_weapon_hud():
 ## Check for player collision with anything that can do damage
 func check_collision():
 	var damages : Array[float] = ragdoll.tick_check_damage_collisions()
+	damages.append_array(ragdoll.tick_check_area_collisions())
 	if not (damages == null or damages == []):
 		for damage in damages:
 			player_hp -= damage * Globals.DAMAGE_MULTIPLIER

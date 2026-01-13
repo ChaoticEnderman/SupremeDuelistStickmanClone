@@ -8,11 +8,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 size = Vector2(10, 50)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(10, 50)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(10, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(30, 30)
 
 [sub_resource type="GDScript" id="GDScript_qhqgy"]
 script/source = "extends ProgressBar
@@ -37,6 +37,11 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Torso"]
 texture = ExtResource("3_dqkch")
 
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Torso"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Torso/Area2D"]
+shape = SubResource("RectangleShape2D_dqkch")
+
 [node name="Stomach" type="RigidBody2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, 25)
 collision_layer = 15
@@ -51,15 +56,26 @@ position = Vector2(-4.76837e-07, -3.8147e-06)
 rotation = -6.28318
 texture = ExtResource("3_dqkch")
 
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Stomach"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Stomach/Area2D"]
+shape = SubResource("RectangleShape2D_dqkch")
+
 [node name="R Thigh" type="RigidBody2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, 79)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Thigh"]
-shape = SubResource("RectangleShape2D_g2els")
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/R Thigh"]
 position = Vector2(2.38419e-07, 0)
 texture = ExtResource("3_dqkch")
+
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/R Thigh"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Thigh/Area2D"]
+shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="L Thigh" type="RigidBody2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, 79)
@@ -70,6 +86,11 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/L Thigh"]
 position = Vector2(2.38419e-07, 0)
 texture = ExtResource("3_dqkch")
+
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/L Thigh"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Thigh/Area2D"]
+shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="Hip Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, -1)
@@ -118,6 +139,11 @@ position = Vector2(-4.76837e-07, -3.8147e-06)
 rotation = -6.28318
 texture = ExtResource("3_dqkch")
 
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/L Shin"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Shin/Area2D"]
+shape = SubResource("RectangleShape2D_dqkch")
+
 [node name="L Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, 109)
 rotation = 1.57079
@@ -142,6 +168,11 @@ shape = SubResource("RectangleShape2D_dqkch")
 rotation = -6.28318
 texture = ExtResource("3_dqkch")
 
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/R Shin"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Shin/Area2D"]
+shape = SubResource("RectangleShape2D_dqkch")
+
 [node name="R Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, 109)
 rotation = 1.57079
@@ -165,6 +196,11 @@ shape = SubResource("RectangleShape2D_qhqgy")
 position = Vector2(9.53674e-07, 4.76837e-07)
 scale = Vector2(0.234375, 0.234375)
 texture = ExtResource("2_qhqgy")
+
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Head"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Head/Area2D"]
+shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="Neck Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, -51)
@@ -194,6 +230,11 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Forearm"]
 texture = ExtResource("3_dqkch")
 
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/P Forearm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Forearm/Area2D"]
+shape = SubResource("RectangleShape2D_dqkch")
+
 [node name="P Arm" type="RigidBody2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, -26)
 
@@ -203,6 +244,11 @@ shape = SubResource("RectangleShape2D_dqkch")
 [node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Arm"]
 texture = ExtResource("3_dqkch")
 offset = Vector2(9.53674e-07, 0)
+
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/P Arm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm/Area2D"]
+shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="Shoulder Pivot" type="Node2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, -51)

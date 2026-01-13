@@ -41,6 +41,9 @@ var locked_jumping_direction : Vector2
 @onready var l_shin : RigidBody2D = a_shin
 @onready var r_shin : RigidBody2D = b_shin
 
+# Special custom variable for the slow down effect
+var slow_down_time : int = 0
+
 func _ready() -> void:
 	for child in self.get_children():
 		if child is RigidBody2D:
@@ -49,6 +52,13 @@ func _ready() -> void:
 			child.contact_monitor = true
 			child.max_contacts_reported = 100 # Upper bound, can be changed later
 			child.freeze = false
+			
+			# Adding area2d to detect collisions with other area2ds
+			#var area2d : Area2D = Area2D.new()
+			#var collision_shape : CollisionShape2D = CollisionShape2D.new()
+			## Copy the RigidBody2D collision shape to the Area2D collision shape
+			#collision_shape.shape = child.get_node("CollisionShape2D").shape
+			#child.add_child(area2d)
 		if child is PinJoint2D:
 			child.softness = 0.0
 	
@@ -88,7 +98,7 @@ func ragdoll_collision_exception(hitbox: PhysicsBody2D):
 func tick_ragdoll(force: Vector2):
 	if is_alive:
 		#Flipping the normals since the game normal is always like this
-		apply_ragdoll_central_force(Vector2(force.x, force.y), Globals.RAGDOLL_MOVE_FORCE * airborne_multiplier)
+		apply_ragdoll_central_force(Vector2(force.x, force.y * airborne_multiplier), Globals.RAGDOLL_MOVE_FORCE)
 		tick_check_legs()
 		tick_check_airborne()
 		tick_move_arms(force)
@@ -98,6 +108,12 @@ func tick_ragdoll(force: Vector2):
 		#walking(force)
 		tick_jump_stack()
 		
+		# For special effects
+		tick_slow_down_ragdoll()
+		
+		
+
+
 ## A base function to move the ragdoll entirely by just the central parts, the torso and stomach
 ## Other functions can assume this is a full ragdoll movement force
 func apply_ragdoll_central_force(direction: Vector2, strength: float):
@@ -124,6 +140,25 @@ func move_entire_ragdoll_impulse(direction: Vector2, strength: float):
 	r_shin.apply_central_impulse(direction * strength)
 	r_thigh.apply_central_impulse(direction * strength)
 
+## Slow down basically the entire ragdoll for some time
+func slow_down_ragdoll(ticks: int):
+	slow_down_time = ticks
+	for body in self.get_children():
+		if body is RigidBody2D and body.linear_damp == Globals.LINEAR_DAMP:
+			# This is to resolve the stacking behavior of multiple slow at the same time
+			# Only make the damp add up
+			body.linear_damp += 200
+			print("rag/before slow ", body.linear_damp)
+
+func tick_slow_down_ragdoll():
+	if slow_down_time > 0:
+		slow_down_time -= 1
+	if slow_down_time == 1:
+		for body in self.get_children():
+			if body is RigidBody2D:
+				body.linear_damp = Globals.LINEAR_DAMP
+		print("rag/removing slow ", torso.linear_damp)
+
 ## Simple function to determine which of the two identical legs are left and right, based on their rotation
 func tick_check_legs():
 	if a_thigh.rotation > b_thigh.rotation:
@@ -142,7 +177,7 @@ func tick_check_legs():
 func tick_check_airborne():
 	is_airborne = true
 	# When airborne (falling) the movement is slower and limited
-	airborne_multiplier = 0.2
+	airborne_multiplier = 0.1
 	# Checking both the legs touch the map
 	tick_check_airborne_one_shin(l_shin)
 	tick_check_airborne_one_shin(r_shin)
@@ -219,17 +254,42 @@ func tick_check_damage_collisions() -> Array[float]:
 		if child is RigidBody2D:
 			for body in child.get_colliding_bodies():
 				# Check if the body has any of the damageable composition
+				# Need to check both the body and owner of that because different objects will have different way of resolving the Damageable
+				# Some collision objects will have Damageable as child and some will have Damageable as siblings
 				if has_damageable(body):
-					print("rag/body touch ", body)
+					#print("rag/body touch body ", body)
 					# Do not damage if the owner is itself
 					if not body.damageable.owner_stickman == self:
-						print("rag/body touch dmg ", body.get_damage())
 						colliding_bodies.append(body.get_damage())
+				if has_damageable(body.owner):
+					# Do not damage if the owner is itself
+					if not body.owner.damageable.owner_stickman == self:
+						#print("rag/body touch owner ", body.owner.get_damage())
+						colliding_bodies.append(body.owner.get_damage())
 			# TODO: Implement the tilemap damage system
 			#tile_data = SystemManager.game_map.get_cell_tile_data(nn_vector(child.global_position/64))
 			#if tile_data != null:
 				#colliding_bodies.append(tile_data.get_custom_data("damage"))
 	return colliding_bodies
+
+## Check overlapping areas to the stickman for damage
+func tick_check_area_collisions() -> Array[float]:
+	var area : Area2D
+	var colliding_areas : Array[float]
+	for child in self.get_children():
+		if child is RigidBody2D:
+			area = child.get_node("Area2D")
+			if area != null:
+				for a in area.get_overlapping_areas():
+					if has_damageable(a):
+						print("rag/has dmg ", a.damageable.owner_stickman, self, (a.damageable.owner_stickman == self))
+						if not a.damageable.owner_stickman == self:
+							#print("rag/colliding areas dmg ", a.get_damage())
+							# Do some check to find collision to different types of projectiles
+							if a is Projectile2:
+								slow_down_ragdoll(Globals.TPS * 2)
+							colliding_areas.append(a.get_damage())
+	return colliding_areas
 
 ## Internal helper function to recursively check if a node has the damageable composition
 func has_damageable(parent: Node) -> bool:
@@ -243,22 +303,22 @@ func has_damageable(parent: Node) -> bool:
 
 ## Test to find the nearest neighbor of the current limb touching position, to see the contacting tiles
 ## Still mostly in the test state
-func nn_vector(v: Vector2):
-	# TODO: refactor this to be better (easier to understand) and drop some math explaination
-	var fract = v - v.floor()
-	var dl = abs(fract.x)
-	var dr = 1 - dl
-	var du = abs(fract.y)
-	var dd = 1 - du
-	var nn = min(dl, dr, du, dd)
-	if dl == nn:
-		return Vector2(floor(v.x) - 1, floor(v.y))
-	if dr == nn:
-		return Vector2(floor(v.x) + 1, floor(v.y))
-	if du == nn:
-		return Vector2(floor(v.x), floor(v.y) - 1)
-	if dd == nn:
-		return Vector2(floor(v.x), floor(v.y) + 1)
+func nearest_neighbor_vector(vector: Vector2):
+	# TODO: Write explaination math wise
+	var fract = vector - vector.floor()
+	var dist_left = abs(fract.x)
+	var dist_right = 1 - dist_left
+	var dist_up = abs(fract.y)
+	var dist_down = 1 - dist_up
+	var nearest_neighbor = min(dist_left, dist_right, dist_up, dist_down)
+	if dist_left == nearest_neighbor:
+		return Vector2(floor(vector.x) - 1, floor(vector.y))
+	if dist_right == nearest_neighbor:
+		return Vector2(floor(vector.x) + 1, floor(vector.y))
+	if dist_up == nearest_neighbor:
+		return Vector2(floor(vector.x), floor(vector.y) - 1)
+	if dist_down == nearest_neighbor:
+		return Vector2(floor(vector.x), floor(vector.y) + 1)
 
 ## Jump if the direction is not zero. Technically works without the != zero condition but just keep it
 func jump(direction: Vector2):

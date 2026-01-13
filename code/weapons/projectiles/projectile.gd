@@ -22,11 +22,9 @@ func _on_game_tick(delta: float):
 
 ## Internal method that is not supposed to be called from children, just call tick() instead
 func check_collision():
-	print("pro/colliding ", self.get_colliding_bodies().size())
 	for body in self.get_colliding_bodies():
 		if body is TileMapLayer and not projectile_data.can_go_through_wall:
 			queue_free()
 		if body is RigidBody2D and body.get_owner() is Player:
-			print("projectile/touching player")
 			if not (body.get_owner() == damageable.owner_stickman):
 				queue_free()

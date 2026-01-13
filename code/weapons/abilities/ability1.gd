@@ -17,10 +17,6 @@ func release_ability(player, direction: Vector2) -> int:
 	projectile_c.collision_exception(projectile_b)
 	
 	# HACK: Hardcode this value of weapon position, may consider escaping to a new class to get weapon pos
-	print("ab1/position ", player.weapon.position)
-	print("ab1/dir1 ", rad_to_deg(direction.angle()))
-	print("ab1/dir1 ", rad_to_deg(Vector2.from_angle(direction.angle() + PI/6).normalized().angle()))
-	print("ab1/dir1 ", rad_to_deg(Vector2.from_angle(direction.angle() - PI/6).normalized().angle()))
 	projectile_a.summon_as_projectile(direction, player.weapon.position)
 	projectile_b.summon_as_projectile(Vector2.from_angle(direction.angle() + deg_to_rad(30)).normalized(), player.weapon.position)
 	projectile_c.summon_as_projectile(Vector2.from_angle(direction.angle() - deg_to_rad(30)).normalized(), player.weapon.position)

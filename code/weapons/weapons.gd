@@ -50,9 +50,10 @@ func set_hitbox(id: String):
 
 ## Set the melee damage
 func set_damage(damageable: Damageable):
+	print("weapon/set dmg ", damageable.damage_tick)
 	self.damageable = damageable
-	damageable.owner_stickman = player
 	add_child(damageable)
+	print("weapon/children ", get_children())
 	damageable.owner = self
 
 ## Set the cooldown
@@ -65,15 +66,17 @@ func tick_rotation(rotation: Vector2):
 		sprite.global_position = self.position
 		sprite.rotation = Vector2.UP.angle_to(rotation)
 		collision_shape.rotation = Vector2.UP.angle_to(rotation)
+	#print("weapon/tick ", hitbox.get_colliding_bodies())
 
 func get_damage():
+	print("weapon/get dmg ", damageable.damage_tick)
 	return damageable.damage_tick
 
 ## Runs each physics tick to reduce cooldown, and change the sprite based on the state
 func tick_cooldown():
 	cooldown -= 1
 	
-	# Prototype dynamic thingy for like the responsive sprite, will be implemented as a full sprite soon
+	# TEST: Prototype dynamic thingy for like the responsive sprite, will be implemented as a full sprite soon
 	if cooldown > 0:
 		sprite.modulate = Color(0.1, 0.5, 0.1)
 	else:

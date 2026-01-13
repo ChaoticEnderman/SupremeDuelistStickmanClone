@@ -4,8 +4,8 @@ extends Node
 signal joystick_scale_changed
 
 ## Values for Godot's built-in damping value for the ragdolls
-const LINEAR_DAMP := 4.0
-const ANGULAR_DAMP := 4.0
+const LINEAR_DAMP : int = 6
+const ANGULAR_DAMP : int = 100
 
 ## The movement force of the ragdoll, including several types of movement
 const RAGDOLL_MOVE_FORCE : float = 10000.0 
@@ -37,7 +37,7 @@ var DAMAGE_MULTIPLIER : float = 1.0
 ## Weapon cooldown multiplier in multiplier, not percentage
 var WEAPON_COOLDOWN_MULTIPLIER : float = 1.0
 ## The number of repeating succession that the ragdoll will jump
-var JUMP_HEIGHT : int = 6
+var JUMP_HEIGHT : int = 12
 ## Measured in ticks, so this is equivalent to one second
 var JUMP_TIME : int = 60
 

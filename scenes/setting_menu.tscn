@@ -98,7 +98,7 @@ layout_mode = 2
 [node name="JumpHeight" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 min_value = 1.0
-max_value = 20.0
+max_value = 50.0
 value = 6.0
 rounded = true
 
