@@ -28,6 +28,9 @@ const TILE := {
 	"IK_WATER" : Vector2i(7, 0)
 }
 
+## To store the status after saving the file
+enum SAVE_MAP_ERROR {SUCCESS, FILE_EXIST, FAILED}
+
 func _init() -> void:
 	pass
 
@@ -49,9 +52,13 @@ func edit_map(id: int):
 func clear_current_map():
 	maps[current_map].clear()
 
+
 ## Save the current map to file in a custom .dat format
-func save_map_to_file(map_name: String):
+func save_map_to_file(map_name: String, overriding_map: bool) -> SAVE_MAP_ERROR:
 	var path : String = "res://maps/" + map_name + ".dat"
+	# If player tried to save a map, it will return a warning. If player bypass that and override then it will do
+	if FileAccess.file_exists(path) and overriding_map == false:
+		return SAVE_MAP_ERROR.FILE_EXIST
 	var string : String = ""
 	for coords in maps[current_map].get_used_cells():
 		# Method used to store file: Each coordinate is stored in blocks of 4 ints
@@ -61,6 +68,7 @@ func save_map_to_file(map_name: String):
 		string = string + str(maps[current_map].get_cell_atlas_coords(coords).x) + "," + str(maps[current_map].get_cell_atlas_coords(coords).y) + ","
 	var file : FileAccess = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string(string)
+	return SAVE_MAP_ERROR.SUCCESS
 
 ## Read, decrypt (the custom data type), and load up map data from file
 func read_map_from_file(map_name: String) -> bool:
@@ -103,8 +111,8 @@ func clear_and_read_all_maps_from_file() -> bool:
 	var i : int = 0
 	while file_name != "":
 		file_name = dir.get_next()
-		# Basic check if the extension is .dat file
 		extension = file_name.substr(file_name.length() - 4, 4)
+		# Basic check if the extension is .dat file
 		if extension == ".dat":
 			map_name = file_name.substr(0, file_name.length() - 4)
 			maps.append(TileMapLayer.new())

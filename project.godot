@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="RagdollTest"
+config/name="StickmanDuelOnline"
 run/main_scene="uid://dofavbhcjskno"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://assets/icon.svg"
+boot_splash/minimum_display_time=500
 
 [autoload]
 
@@ -23,6 +24,11 @@ GameState="*res://code/globals/game_state.gd"
 SystemManager="*res://code/system_manager.gd"
 PlayerSpriteGlobals="*res://code/globals/player_sprite_globals.gd"
 MapController="*res://code/map/map_controller.gd"
+FileGlobals="*res://code/globals/file_globals.gd"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 

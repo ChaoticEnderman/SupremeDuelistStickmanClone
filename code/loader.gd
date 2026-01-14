@@ -2,6 +2,7 @@
 extends Node
 
 func _ready() -> void:
+	FileGlobals.copy_maps_to_user_maps_directory()
 	GameState.change_system_state(GameState.SYSTEM_STATE.MENU)
 
 func _process(delta: float) -> void:

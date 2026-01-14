@@ -22,8 +22,10 @@ var dragging_start : Vector2
 
 ## Bottom panel responsible for the normal operations like brush, move, erase, ...
 @onready var bottom_panel_ui : HBoxContainer = get_node("CanvasLayer/BottomPanel/HBoxContainer")
+## Left panel for side buttons and the tiles
+@onready var left_panel : Control = get_node("CanvasLayer/LeftPanel")
 ## Left pannel responsible for displaying the tiles in the atlas
-@onready var left_panel_ui : GridContainer = get_node("CanvasLayer/LeftPanel/ScrollContainer/VBoxContainer")
+@onready var left_panel_atlas : GridContainer = left_panel.get_node("ScrollContainer/VBoxContainer")
 ## Buttons in the bottom panel
 var bottom_panel_buttons : Array[TextureButton]
 
@@ -46,6 +48,7 @@ func _ready() -> void:
 	bottom_panel_buttons.append(bottom_panel_ui.get_node("ButtonMove"))
 	bottom_panel_buttons.append(bottom_panel_ui.get_node("ButtonPaint"))
 	bottom_panel_buttons.append(bottom_panel_ui.get_node("ButtonErase"))
+	left_panel_atlas.get_node("OpenMapButton")
 	set_left_panel_tile_buttons()
 	load_map(0)
 	#print("ME/cam pos ", camera.position)
@@ -69,7 +72,7 @@ func set_left_panel_tile_buttons():
 		atlas_texture.set_region(atlas.get_tile_texture_region(MapController.TILE[atlas_coords], 0))
 	
 		texture_button.texture_normal = atlas_texture
-		left_panel_ui.add_child(texture_button)
+		left_panel_atlas.add_child(texture_button)
 		
 		texture_button.pressed.connect(_on_tile_button_pressed.bind(MapController.TILE[atlas_coords]))
 
@@ -179,10 +182,16 @@ func _on_button_center_pressed() -> void:
 ## Only for testing purposes
 # TODO: Delete after finishing
 func _on_test_pressed() -> void:
-	MapController.save_map_to_file("desolation")
+	MapController.save_map_to_file("desolation", false)
 	#MapController.read_map_from_file("desolation", tile_map_layer)
 
 ## Button to go back to the main menu
 # TODO: Add some confirmation stuff
 func _on_back_button_pressed() -> void:
 	GameState.change_system_state(GameState.SYSTEM_STATE.MENU)
+
+func _on_open_map_button_pressed():
+	DisplayServer.file_dialog_show("", FileGlobals.maps_path , "", false, DisplayServer.FILE_DIALOG_MODE_OPEN_FILE, ["*.dat"], _on_file_loaded)
+
+func _on_file_loaded():
+	print("ME/file loaded")
