@@ -52,13 +52,14 @@ func edit_map(id: int):
 func clear_current_map():
 	maps[current_map].clear()
 
-
 ## Save the current map to file in a custom .dat format
-func save_map_to_file(map_name: String, overriding_map: bool) -> SAVE_MAP_ERROR:
-	var path : String = "res://maps/" + map_name + ".dat"
+func save_map_to_file(map_name: String = map_names[current_map], overriding_map: bool = false) -> SAVE_MAP_ERROR:
+	var path : String = FileGlobals.maps_path + "/" + map_name + ".dat"
+	path = ProjectSettings.globalize_path(path)
 	# If player tried to save a map, it will return a warning. If player bypass that and override then it will do
 	if FileAccess.file_exists(path) and overriding_map == false:
-		return SAVE_MAP_ERROR.FILE_EXIST
+		print("MC/map save error - map existed ", map_names[current_map])
+		#return SAVE_MAP_ERROR.FILE_EXIST
 	var string : String = ""
 	for coords in maps[current_map].get_used_cells():
 		# Method used to store file: Each coordinate is stored in blocks of 4 ints
@@ -70,16 +71,27 @@ func save_map_to_file(map_name: String, overriding_map: bool) -> SAVE_MAP_ERROR:
 	file.store_string(string)
 	return SAVE_MAP_ERROR.SUCCESS
 
-## Read, decrypt (the custom data type), and load up map data from file
-func read_map_from_file(map_name: String) -> bool:
-	var path : String = "res://maps/" + map_name + ".dat"
-	var file : FileAccess = FileAccess.open(path, FileAccess.READ)
-	if !FileAccess.file_exists(path):
-		return false
-	
+## Read, decrypt (the custom data type), and load up map data from file. Will search for any maps with the same name for normal loading
+## It will also automatically replace current map 
+func read_map_from_file(map_name: String, path: String) -> bool:
+	var file = FileAccess.open(path, FileAccess.READ)
 	var tile_coords : Vector2i
 	var atlas_coords : Vector2i
-	maps[current_map].clear()
+	
+	# Several checks to see where does the newly loaded map belongs to inside the map array
+	if maps[current_map] == null:
+		print("MC/RMFF/map is clear, overriding")
+		map_names[current_map] = map_name
+	else:
+		var is_map_valid : bool = false
+		for i in range(map_names.size()):
+			if map_names[i] == map_name:
+				print("MC/RMFF/opening same map, loading")
+				is_map_valid = true
+				current_map = i
+		if not is_map_valid:
+			print("MC/RMFF/opening wrong map, crashing", map_name, " from the array is ", map_names)
+			return false
 	var i : int = 0
 	var parsed_array : PackedStringArray = file.get_csv_line()
 	# Since the size is always in the form of 3n+1, minus 4 so that the last iteration wont be out of bounds
@@ -95,9 +107,10 @@ func read_map_from_file(map_name: String) -> bool:
 		i += 4
 	return true
 
-## Read all maps in the folder and put into the maps array after clearing all
-func clear_and_read_all_maps_from_file() -> bool:
-	var dir = DirAccess.open("res://maps/")
+## Read all maps in the folder and put into the maps array after clearing all maps. Basically clear and reread the maps
+## Should be called every time a map is saved or loaded inside the ReadyMenu state
+func reload_all_maps() -> bool:
+	var dir = DirAccess.open(FileGlobals.maps_path)
 	if not dir:
 		return false
 	# When loading all maps for the game everything should be cleared
@@ -109,21 +122,58 @@ func clear_and_read_all_maps_from_file() -> bool:
 	var map_name : String = ""
 	var extension : String = ""
 	var i : int = 0
+	var path : String
+	var file : FileAccess
+	# Loop for all files
 	while file_name != "":
 		file_name = dir.get_next()
+
+		if file_name == "":
+			continue
+		print("MC/reload/filename is ", file_name, " check ", (file_name == ""))
 		extension = file_name.substr(file_name.length() - 4, 4)
 		# Basic check if the extension is .dat file
 		if extension == ".dat":
 			map_name = file_name.substr(0, file_name.length() - 4)
+			# Append new entries in the map arrays
 			maps.append(TileMapLayer.new())
 			map_names.append("")
 			map_names[i] = map_name
 			# Use the other functions to read from file one by one
 			edit_map(i)
-			read_map_from_file(map_name)
-			# Only incremental if the map is valid, so the maps array will have no wasted space
-			i += 1
+			path = FileGlobals.maps_path + "/" + map_name + ".dat"
+			path = ProjectSettings.globalize_path(path)
+			print("MC/reload/editing map ", path)
+			if FileAccess.file_exists(path):
+				print("MC/reload/reading map id ", i, " with name ", map_name)
+				read_map_from_file(map_name, path)
+				# Only incremental if the map is valid, so the maps array will have no wasted space
+				i += 1
+			else:
+				print("MC/reload/file doesnt exist")
+	dir.list_dir_end()
+	print("MC/reload/final ", maps, " and ", map_names)
 	return true
+
+## Append an empty map to the end of the map arrays, with empty name so it will not be read and will be ignore when loading maps
+## The empty map will be discarded unless the player save it
+func create_untitled_map():
+	maps.append(TileMapLayer.new())
+	map_names.append("")
+	current_map = maps.size() - 1
+	# Should be nothing
+	print("MC/Created untitled map is", map_names[current_map])
+
+## IMPORTANT: This function will attempt to load a file from the maps directory. Will search for by the name,
+## and if a map have the exact name then it will replace that map
+## In the special case of a map that isnt loaded into the game (not possible becausej it will always reload maps after each save)
+## Then it will fallback to like making a new entry in the map array and load the map in
+func load_map_from_file_to_map_list(selected_paths: String):
+	print("MC/loading map from file")
+	var map_name : String = selected_paths.get_file()
+	map_name = map_name.substr(0, map_name.length() - 4)
+	print("MC/map path is ", selected_paths)
+	read_map_from_file(map_name, selected_paths)
 
 ## Set the default map when loading the maps
 func default_map() -> String:
@@ -136,13 +186,16 @@ func next_map() -> String:
 		current_map = 0
 	else:
 		current_map += 1
+	print("MC/next map ", map_names[current_map], " with id ", current_map, " entire array ", map_names)
 	return map_names[current_map]
 
 ## Change the current map pointer to prev and reset to head in circle if needed
 func prev_map() -> String:
 	if current_map == 0:
 		current_map = maps.size() - 1
-	else: current_map -= 1
+	else:
+		current_map -= 1
+	print("MC/prev map ", map_names[current_map], " with id ", current_map, " entire array ", map_names)
 	return map_names[current_map]
 
 ## Draw a single tile, set tile to Vector2(-1, -1) to erase the tile instead

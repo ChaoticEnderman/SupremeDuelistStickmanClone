@@ -85,7 +85,6 @@ func _on_tile_button_pressed(tile: Vector2i):
 func load_map(id: int):
 	MapController.edit_map(id)
 	MapController.load_map(tile_map_layer)
-	print("ME/after loading ", tile_map_layer.get_used_cells().size())
 
 ## Take the input event and split it to the respective functions based on EDITING_TOOL enum
 func _input(event: InputEvent) -> void:
@@ -108,15 +107,15 @@ func map_dragging_input(event: InputEvent) -> void:
 			# Only when it is just toggled on, set the start of dragging
 			if map_dragging:
 				# Start at the displacement when the camera move
-				dragging_start = event.position + camera.position
+				dragging_start = (event.position + camera.position * camera_zoom)
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		if map_dragging:
 			# Change the position when the map is dragging
-			camera.position = -(event.position - dragging_start)
+			camera.position = -(event.position - dragging_start) / camera_zoom
 
 ## Similiar to map dragging input, this will do paint but only for like one by one block
 func paint_input(event: InputEvent, tile_type: Vector2i):
-	if event is InputEventMouse or event is InputEventScreenTouch:
+	if event is InputEventMouse or event is InputEventScreenTouch or event is InputEventMouseMotion:
 		if event.is_pressed():
 			if input_is_invalid(event):
 				return
@@ -189,9 +188,38 @@ func _on_test_pressed() -> void:
 # TODO: Add some confirmation stuff
 func _on_back_button_pressed() -> void:
 	GameState.change_system_state(GameState.SYSTEM_STATE.MENU)
+	# Also reload all maps when exiting map editor to finialize reloading stuff
+	MapController.reload_all_maps()
 
-func _on_open_map_button_pressed():
-	DisplayServer.file_dialog_show("", FileGlobals.maps_path , "", false, DisplayServer.FILE_DIALOG_MODE_OPEN_FILE, ["*.dat"], _on_file_loaded)
+## Button to physically load up the saved files in the maps folder
+func _on_load_map_button_pressed() -> void:
+	DisplayServer.file_dialog_show("", FileGlobals.maps_path , "", false, DisplayServer.FILE_DIALOG_MODE_OPEN_FILE,
+	["*.dat"], _on_file_loaded)
 
-func _on_file_loaded():
-	print("ME/file loaded")
+## Button to create a new file for saving a new map
+func _on_new_map_button_pressed() -> void:
+	MapController.create_untitled_map()
+	MapController.load_map(tile_map_layer)
+
+## Function to save the current edited file, to the old location or to override it
+func _on_save_map_button_pressed() -> void:
+	DisplayServer.file_dialog_show("", FileGlobals.maps_path , "", false, DisplayServer.FILE_DIALOG_MODE_SAVE_FILE,
+	["*.dat"], _on_file_saved)
+
+## When the file is loaded it will load up the map contents to the current map
+func _on_file_loaded(status: bool, selected_paths: PackedStringArray, selected_filter_index: int):
+	if selected_paths == null or selected_paths.size() == 0:
+		return
+	print("ME/file loaded ", selected_paths[0])
+	MapController.load_map_from_file_to_map_list(selected_paths[0])
+	MapController.load_map(tile_map_layer)
+
+func _on_file_saved(status: bool, selected_paths: PackedStringArray, selected_filter_index: int):
+	if selected_paths == null or selected_paths.size() == 0:
+		return
+	print("ME/file saved ", selected_paths[0])
+	var file_name : String = selected_paths[0].get_file()
+	#file_name = file_name.substr(0, file_name.length() - 4)
+	print("ME/file saved name is ", file_name)
+	MapController.save_map_to_file(file_name)
+	MapController.reload_all_maps()

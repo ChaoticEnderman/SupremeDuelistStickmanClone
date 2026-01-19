@@ -59,6 +59,7 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	ragdoll.ragdoll_collision_exception(weapon.hitbox)
 	
 	# Add the color to the player
+	ragdoll.head.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.HEAD, player_side)
 	ragdoll.torso.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.TORSO, player_side)
 	ragdoll.stomach.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.STOMACH, player_side)
 	ragdoll.a_thigh.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_THIGH, player_side)
@@ -67,6 +68,8 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	ragdoll.b_shin.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_SHIN, player_side)
 	ragdoll.p_arm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_ARM, player_side)
 	ragdoll.p_forearm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_FOREARM, player_side)
+	
+	ragdoll.set_hat(PlayerSpriteGlobals.get_hat(player_side))
 
 # Master tick function to tick the player and its dependencies
 func _on_game_tick():

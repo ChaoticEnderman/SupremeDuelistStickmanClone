@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Hats" load_steps=2 format=3 uid="uid://lwu1yp3r7325"]
+
+[ext_resource type="Script" uid="uid://boou6facn8ajj" path="res://code/hats.gd" id="1_y1qaj"]
+
+[resource]
+script = ExtResource("1_y1qaj")
+metadata/_custom_type_script = "uid://boou6facn8ajj"

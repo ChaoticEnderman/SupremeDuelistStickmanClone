@@ -41,6 +41,9 @@ var locked_jumping_direction : Vector2
 @onready var l_shin : RigidBody2D = a_shin
 @onready var r_shin : RigidBody2D = b_shin
 
+## Hat skin for the player
+@onready var hat : Sprite2D = head.get_node("Hat")
+
 # Special custom variable for the slow down effect
 var slow_down_time : int = 0
 
@@ -93,6 +96,10 @@ func ragdoll_collision_exception(hitbox: PhysicsBody2D):
 	for child in self.get_children():
 		if child is RigidBody2D:
 			child.add_collision_exception_with(hitbox)
+
+## Set the hat for the ragdoll at starting time
+func set_hat(texture: Texture2D):
+	hat.texture = texture
 
 ## Master tick function to runs all other tick functions per physics tick
 func tick_ragdoll(force: Vector2):

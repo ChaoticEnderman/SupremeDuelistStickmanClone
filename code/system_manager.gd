@@ -24,6 +24,7 @@ var p2_position : Vector2
 
 func _ready():
 	PlayerSpriteGlobals.set_default_color()
+	PlayerSpriteGlobals.load_hats()
 	GameState.game_state_changed.connect(_on_game_state_changed)
 	GameState.system_state_changed.connect(_on_system_state_changed)
 	add_child(main_menu)

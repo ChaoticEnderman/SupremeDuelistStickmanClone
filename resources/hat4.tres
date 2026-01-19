@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Hats" load_steps=3 format=3 uid="uid://cplcnbjwe12r6"]
+
+[ext_resource type="Script" uid="uid://boou6facn8ajj" path="res://code/hats.gd" id="1_n2ylt"]
+[ext_resource type="Texture2D" uid="uid://bxne2j46xyo8p" path="res://assets/hats/hat_4.png" id="2_qf07k"]
+
+[resource]
+script = ExtResource("1_n2ylt")
+sprite = ExtResource("2_qf07k")
+metadata/_custom_type_script = "uid://boou6facn8ajj"

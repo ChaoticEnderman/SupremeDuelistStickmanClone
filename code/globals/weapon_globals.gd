@@ -44,8 +44,12 @@ func _init() -> void:
 
 ## Load all weapons at the very start of the app, only the data for ready menu to use before actual game weapon
 func load_weapons() -> void:
-	for i in range(1,5):
-		weapon_list.append(load("res://resources/weapon" + str(i) + ".tres"))
+	var i : int = 1
+	var path = "res://resources/weapon" + str(i) + ".tres"
+	while ResourceLoader.exists(path):
+		weapon_list.append(load(path))
+		i += 1
+		path = "res://resources/weapon" + str(i) + ".tres"
 
 func set_weapon(weapon: int, index: int):
 	# TODO: Make an enum of this
