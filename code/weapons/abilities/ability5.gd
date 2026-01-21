@@ -6,9 +6,6 @@ class_name Ability5
 ## Timer to release several scythe orbs in one succession
 var timer : int = 1000
 
-## Reference to the player that summon this
-var player : Player
-
 ## Reference to the initial direction of the weapon to shoot several objects in succession
 var direction : Vector2
 

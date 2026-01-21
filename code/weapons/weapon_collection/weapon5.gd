@@ -6,6 +6,7 @@ func init(player: Player, id: String) -> void:
 	super.init(player, "5")
 	
 	abilities.append(Ability6.new())
+	abilities.append(Ability7.new())
 	
 	super.set_damage(Damageable.new(0.1, player))
 	

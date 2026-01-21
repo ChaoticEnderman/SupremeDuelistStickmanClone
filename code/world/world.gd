@@ -30,6 +30,7 @@ func _ready() -> void:
 	player_scores[0] = 0
 	player_scores[1] = 0
 	
+	
 	clear_round()
 
 ## Reset the previous round object and values, for any round other than the first one
@@ -44,10 +45,13 @@ func clear_round():
 		weapon1._queue_free()
 	if is_instance_valid(weapon2):
 		weapon2._queue_free()
+	# Set the round to start in the next frame, after one frame so the game objects can queue free
+	queue_game = true
 	start_round()
 
 ## Start each individual round of the game, reset some values and process
 func start_round() -> void:
+	queue_game = false
 	# Make new players each time
 	player1 = load("res://scenes/player.tscn").instantiate()
 	player2 = load("res://scenes/player.tscn").instantiate()
@@ -87,6 +91,8 @@ func _on_game_state_changed(state):
 	elif state == GameState.GAME_STATE.LAZY_RUNNING:
 		for i in range(player_list.size()):
 			player_scores[i] += 1
+		#for player in player_list:
+			#player._queue_free()
 
 func _on_system_state_changed(state):
 	if state == GameState.SYSTEM_STATE.MENU:
@@ -106,12 +112,25 @@ func choose_weapon():
 
 ## Randomize weapon in case the weapon is random aka null
 func randomize_weapon() -> Weapon:
-	var weapons = [Weapon1.new(), Weapon2.new(), Weapon3.new(), Weapon4.new()]
+	var weapons = [
+		Weapon1.new(),
+		Weapon2.new(),
+		Weapon3.new(),
+		Weapon4.new(),
+		Weapon5.new()
+		# Weapon6.new(),
+		# Weapon7.new(),
+		# Weapon8.new(),
+		# Weapon9.new(),
+		# Weapon10.new(),
+		]
 	return weapons[rng.randi_range(0, weapons.size() - 1)]
 
 ## Main function to run every tick to control whether other tick function can run easily
 # TODO: Make these tick stuff runs from the SystemManager class tick signal and not through this 
 func _on_game_tick(delta: float) -> void:
+	if queue_game == true:
+		start_round()
 	tick_players()
 
 ## Call the tick function in each players to do their stuff

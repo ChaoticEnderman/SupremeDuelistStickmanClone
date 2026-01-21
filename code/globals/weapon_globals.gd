@@ -23,7 +23,7 @@ var ability1_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 
 # Weapon2 dagger
 # Ability to dash short
-var ability2_cooldown : int = 15
+var ability2_cooldown : int = Globals.TPS / 4
 # Ability to dash long
 var ability3_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 
@@ -35,6 +35,8 @@ var ability4_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 # Ability to shoot the wisp
 var ability5_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 
+# Weapon 5 Gauntlet
+# Ability to summon big thing
 var ability6_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 var ability7_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 var ability8_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
@@ -68,7 +70,8 @@ func get_weapon(index: int) -> Weapon:
 			return Weapon3.new()
 		4:
 			return Weapon4.new()
-		
+		5:
+			return Weapon5.new()
 		
 		_:
 			return null

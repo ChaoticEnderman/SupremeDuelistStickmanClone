@@ -44,8 +44,11 @@ var locked_jumping_direction : Vector2
 ## Hat skin for the player
 @onready var hat : Sprite2D = head.get_node("Hat")
 
-# Special custom variable for the slow down effect
+## Special custom variable for the slow down effect
 var slow_down_time : int = 0
+
+## Special custom variable for the slow down effect
+var freeze_time : int = 0
 
 func _ready() -> void:
 	for child in self.get_children():
@@ -104,6 +107,8 @@ func set_hat(texture: Texture2D):
 ## Master tick function to runs all other tick functions per physics tick
 func tick_ragdoll(force: Vector2):
 	if is_alive:
+		if tick_freeze_ragdoll():
+			return
 		#Flipping the normals since the game normal is always like this
 		apply_ragdoll_central_force(Vector2(force.x, force.y * airborne_multiplier), Globals.RAGDOLL_MOVE_FORCE)
 		tick_check_legs()
@@ -118,8 +123,6 @@ func tick_ragdoll(force: Vector2):
 		# For special effects
 		tick_slow_down_ragdoll()
 		
-		
-
 
 ## A base function to move the ragdoll entirely by just the central parts, the torso and stomach
 ## Other functions can assume this is a full ragdoll movement force
@@ -157,6 +160,14 @@ func slow_down_ragdoll(ticks: int):
 			body.linear_damp += 200
 			print("rag/before slow ", body.linear_damp)
 
+## Completely freeze the ragdoll for a number of ticks
+func freeze_ragdoll(ticks: int):
+	print("rag/freezing ragdoll ", ticks)
+	freeze_time = ticks
+	for body in self.get_children():
+		if body is RigidBody2D:
+			body.freeze = true
+
 func tick_slow_down_ragdoll():
 	if slow_down_time > 0:
 		slow_down_time -= 1
@@ -165,6 +176,18 @@ func tick_slow_down_ragdoll():
 			if body is RigidBody2D:
 				body.linear_damp = Globals.LINEAR_DAMP
 		print("rag/removing slow ", torso.linear_damp)
+
+## Checking for freezing state timer depletion, will return true if its still freezing
+func tick_freeze_ragdoll():
+	print("rag/tick freeze ", freeze_time)
+	if freeze_time > 0:
+		freeze_time -= 1
+		return true
+	elif freeze_time == 0:
+		for body in self.get_children():
+			if body is RigidBody2D:
+				body.freeze = false
+	return false
 
 ## Simple function to determine which of the two identical legs are left and right, based on their rotation
 func tick_check_legs():
@@ -209,6 +232,7 @@ func tick_check_airborne_one_shin(shin: RigidBody2D):
 			is_airborne = false
 			return
 
+## Move the primary arm every tick to follow the player direction
 func tick_move_arms(direction: Vector2):
 	if direction == Vector2.ZERO:
 		return
@@ -289,12 +313,15 @@ func tick_check_area_collisions() -> Array[float]:
 			if area != null:
 				for a in area.get_overlapping_areas():
 					if has_damageable(a):
-						print("rag/has dmg ", a.damageable.owner_stickman, self, (a.damageable.owner_stickman == self))
+						#print("rag/has dmg ", a.damageable.owner_stickman, self, (a.damageable.owner_stickman == self))
 						if not a.damageable.owner_stickman == self:
 							#print("rag/colliding areas dmg ", a.get_damage())
 							# Do some check to find collision to different types of projectiles
+							# FIXME: Refactor this monstrosity to a new function
 							if a is Projectile2:
 								slow_down_ragdoll(Globals.TPS * 2)
+							if a is Projectile4:
+								freeze_ragdoll(Globals.TPS / 2)
 							colliding_areas.append(a.get_damage())
 	return colliding_areas
 

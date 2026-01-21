@@ -205,7 +205,14 @@ func draw_single_tile(pos: Vector2i, tile: Vector2i):
 		return
 	maps[current_map].set_cell(pos, 1, tile, 0)
 
-## Draw the entire rectangle of the same tile, not implemented yet
-# TODO: Implement this
+## Draw the entire rectangle of the same tile. This will require the rectangle to be kinda normalized
+## Which mean the position paremeter must be top left and end must be top right
 func draw_rect(rect: Rect2i, tile: Vector2i):
-	pass
+	
+	print("MC/draw rect/rect is ", rect.position, rect.end)
+	print("MC/draw rect/range ", range(rect.position.y, rect.end.y), " range x ", range(rect.position.x, rect.end.x))
+	for y in range(rect.position.y, rect.end.y + 1):
+		print("MC/draw rect/looping ", y)
+		for x in range(rect.position.x, rect.end.x + 1):
+			maps[current_map].set_cell(Vector2i(x, y), 1, TILE.PLATFORM_GREEN, 0)
+			print("MC/draw rect/drawing cell ", Vector2i(x, y))

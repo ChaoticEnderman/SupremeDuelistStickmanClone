@@ -41,6 +41,10 @@ func _init(player: Player, direction: Vector2, position: Vector2) -> void:
 ## Inject ProjectileData class if this class is considered a projectile
 func add_projectile_data(data: ProjectileData):
 	self.projectile_data = data
+	# Seperate the projectile from the wall if it can pass
+	if projectile_data.can_go_through_wall:
+		self.add_collision_exception_with(SystemManager.game_map)
+		self.set_collision_mask_value(3, false)
 	# Take the damage value from the projectile data
 	self.damageable = Damageable.new(data.damage, player.ragdoll)
 	# Adding the hitbox to the class

@@ -15,8 +15,11 @@ var camera_zoom : float = 1.0
 @onready var map_dragger : Button = get_node("MapDragger")
 ## The state of whether the user is dragging
 var map_dragging : bool = false
+## The state of dragging the paint head
+var paint_dragging : bool = false
 ## Variable to make sure that when the user drag the map inside the map area
 var is_mouse_inside_map_dragging_area : bool = false
+
 ## The start of when user start dragging
 var dragging_start : Vector2
 
@@ -26,8 +29,19 @@ var dragging_start : Vector2
 @onready var left_panel : Control = get_node("CanvasLayer/LeftPanel")
 ## Left pannel responsible for displaying the tiles in the atlas
 @onready var left_panel_atlas : GridContainer = left_panel.get_node("ScrollContainer/VBoxContainer")
-## Buttons in the bottom panel
-var bottom_panel_buttons : Array[TextureButton]
+## Buttons in the bottom panel for the tools, aka Move/Paint/Erase
+var bottom_panel_tool_buttons : Array[TextureButton]
+## Buttons in the bottom panel for brush, aka Brush/Rect/Bucket
+var bottom_panel_brush_buttons : Array[TextureButton]
+
+## Store the temporary rectangle when using the rectangle tool to draw
+var rectangle_drawn : Rect2i = Rect2i()
+
+# True top left of the rectangle in one of four corners.
+# This will help in making the loop travel range always positive and possible to finish the loop
+var true_top_left : Vector2i# = Vector2i(min(start_vector.x, end_vector.x), min(start_vector.y, end_vector.y))
+var true_bottom_right : Vector2i# = Vector2i(max(start_vector.x, end_vector.x), max(start_vector.y, end_vector.y))
+
 
 ## Current tool that is selected in the editor
 var editing_tool : EDITING_TOOL = EDITING_TOOL.MOVE
@@ -35,6 +49,15 @@ enum EDITING_TOOL {
 	MOVE,
 	PAINT,
 	ERASE
+}
+
+## Current selected brush tool
+var brush_tool : BRUSH_TOOL = BRUSH_TOOL.BRUSH
+## Brush tools like how the player will draw the things on the editor. Brush is block by block, Rectangle is a rectangle, Bucket is the bucket tool
+enum BRUSH_TOOL {
+	BRUSH,
+	RECTANGLE,
+	BUCKET
 }
 
 ## Atlas coords from the enum MapController.TILE to choose the tile that is currently selected
@@ -45,9 +68,12 @@ var default_tile_set : TileSet = preload("res://resources/default_tile_set.tres"
 
 func _ready() -> void:
 	GameState.system_state_changed.connect(_on_system_state_changed)
-	bottom_panel_buttons.append(bottom_panel_ui.get_node("ButtonMove"))
-	bottom_panel_buttons.append(bottom_panel_ui.get_node("ButtonPaint"))
-	bottom_panel_buttons.append(bottom_panel_ui.get_node("ButtonErase"))
+	bottom_panel_tool_buttons.append(bottom_panel_ui.get_node("ButtonMove"))
+	bottom_panel_tool_buttons.append(bottom_panel_ui.get_node("ButtonPaint"))
+	bottom_panel_tool_buttons.append(bottom_panel_ui.get_node("ButtonErase"))
+	bottom_panel_brush_buttons.append(bottom_panel_ui.get_node("ButtonBrush"))
+	bottom_panel_brush_buttons.append(bottom_panel_ui.get_node("ButtonRectangle"))
+	bottom_panel_brush_buttons.append(bottom_panel_ui.get_node("ButtonBucket"))
 	left_panel_atlas.get_node("OpenMapButton")
 	set_left_panel_tile_buttons()
 	load_map(0)
@@ -90,33 +116,48 @@ func load_map(id: int):
 func _input(event: InputEvent) -> void:
 	if editing_tool == EDITING_TOOL.MOVE:
 		map_dragging_input(event)
-	elif editing_tool == EDITING_TOOL.PAINT:
-		paint_input(event, brush_tile)
-	elif editing_tool == EDITING_TOOL.ERASE:
-		paint_input(event, MapController.TILE.ERASE_TILE)
+	else:
+		if brush_tool == BRUSH_TOOL.BRUSH:
+			if editing_tool == EDITING_TOOL.PAINT:
+				brush_input(event, brush_tile)
+			elif editing_tool == EDITING_TOOL.ERASE:
+				brush_input(event, MapController.TILE.ERASE_TILE)
+		if brush_tool == BRUSH_TOOL.RECTANGLE:
+			if editing_tool == EDITING_TOOL.PAINT:
+				rectangle_input(event, brush_tile)
+			elif editing_tool == EDITING_TOOL.ERASE:
+				rectangle_input(event, MapController.TILE.ERASE_TILE)
 
 ## Listen, I dont understand why this works but it works and let user drag the map around
 ## Refactor at your own risk hehe
 func map_dragging_input(event: InputEvent) -> void:
-	if event is InputEventMouse or event is InputEventScreenTouch:
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		# Toggle dragging every action of pressing the stuff
 		if event.is_pressed():
 			if input_is_invalid(event):
 				return
-			map_dragging = not map_dragging
+			map_dragging = true
 			# Only when it is just toggled on, set the start of dragging
 			if map_dragging:
 				# Start at the displacement when the camera move
-				dragging_start = (event.position + camera.position * camera_zoom)
+				dragging_start = event.position + camera.position * camera_zoom
+		else:
+			map_dragging = false
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		if map_dragging:
 			# Change the position when the map is dragging
-			camera.position = -(event.position - dragging_start) / camera_zoom
+			camera.position = (dragging_start - event.position) / camera_zoom
 
 ## Similiar to map dragging input, this will do paint but only for like one by one block
-func paint_input(event: InputEvent, tile_type: Vector2i):
-	if event is InputEventMouse or event is InputEventScreenTouch or event is InputEventMouseMotion:
+func brush_input(event: InputEvent, tile_type: Vector2i):
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		# Can be shortened in the future but just leave it here for now since the code is kinda hard to understand at the moment
 		if event.is_pressed():
+			paint_dragging = true
+		else:
+			paint_dragging = false
+	if event is InputEventMouseMotion or event is InputEventScreenDrag:
+		if paint_dragging:
 			if input_is_invalid(event):
 				return
 			# Minus the vector to drive this to the screen center
@@ -126,6 +167,44 @@ func paint_input(event: InputEvent, tile_type: Vector2i):
 			tile_position = Vector2(tile_position.x / 64, tile_position.y / 64).floor()
 			MapController.draw_single_tile(tile_position, tile_type)
 			MapController.load_map(tile_map_layer)
+
+## Similiar to map dragging input, this will do paint but only for like one by one block
+func rectangle_input(event: InputEvent, tile_type: Vector2i):
+	var screen_center = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
+	var tile_position : Vector2 = (event.position - screen_center) + camera.position * camera_zoom
+	tile_position = tile_position / camera_zoom
+	tile_position = Vector2(tile_position.x / 64, tile_position.y / 64).floor()
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		if input_is_invalid(event):
+			return
+		# Can be shortened in the future but just leave it here for now since the code is kinda hard to understand at the moment
+		if event.is_pressed():
+			paint_dragging = true
+			rectangle_drawn.position = Vector2i(tile_position.floor())
+			print("ME/rect/first is ", rectangle_drawn.position)
+		else:
+			paint_dragging = false
+			rectangle_drawn.end = Vector2i(tile_position.floor())
+			print("ME/rect/end is ", rectangle_drawn.end)
+			
+			# Shortened name for first and second points of rectangle to convert to normal points (top left then bottom right)
+			# TODO: Seperate this out to normal and make it clearer
+			var ra = rectangle_drawn.position
+			var rb = tile_position
+			true_top_left = Vector2i(min(ra.x, rb.x), min(ra.y, rb.y))
+			true_bottom_right = Vector2i(max(ra.x, rb.x), max(ra.y, rb.y))
+			
+			rectangle_drawn.position = true_top_left
+			rectangle_drawn.end = true_bottom_right
+			print("ME/rect/true tl ", true_top_left, " true br ", true_bottom_right)
+			
+			MapController.draw_rect(rectangle_drawn, brush_tile)
+			MapController.load_map(tile_map_layer)
+	if event is InputEventMouseMotion or event is InputEventScreenDrag:
+		if paint_dragging:
+			print("ME/rect/dragging ", tile_position)
+			
+			
 
 ## A rather hack to check if the event is outside the editing area. Will have other checks too
 func input_is_invalid(event: InputEvent) -> bool:
@@ -137,15 +216,47 @@ func input_is_invalid(event: InputEvent) -> bool:
 ## Change the tool, and disable other tool buttons
 func change_tool(tool: int, exclude_button : TextureButton):
 	editing_tool = tool
-	for button in bottom_panel_buttons:
+	for button in bottom_panel_tool_buttons:
 		if button != exclude_button:
 			button.set_pressed_no_signal(false)
+
+## Change brush type and choose to current brush type
+func change_brush(brush: int, exclude_button : TextureButton):
+	brush_tool = brush
+	for button in bottom_panel_brush_buttons:
+		if button != exclude_button:
+			button.set_pressed_no_signal(false)
+
+func _on_button_brush_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		change_brush(BRUSH_TOOL.BRUSH, bottom_panel_ui.get_node("ButtonBrush"))
+	elif brush_tool == BRUSH_TOOL.BRUSH:
+		# Solving edge case if the button is on but pressed again, then all button is off
+		# This will ignore the press and will make the button on again
+		bottom_panel_ui.get_node("ButtonBrush").set_pressed_no_signal(true)
+
+func _on_button_rectangle_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		change_brush(BRUSH_TOOL.RECTANGLE, bottom_panel_ui.get_node("ButtonRectangle"))
+	elif brush_tool == BRUSH_TOOL.RECTANGLE:
+		# Solving edge case if the button is on but pressed again, then all button is off
+		# This will ignore the press and will make the button on again
+		bottom_panel_ui.get_node("ButtonRectangle").set_pressed_no_signal(true)
+
+func _on_button_bucket_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		change_brush(BRUSH_TOOL.BUCKET, bottom_panel_ui.get_node("ButtonBucket"))
+	elif brush_tool == BRUSH_TOOL.BUCKET:
+		# Solving edge case if the button is on but pressed again, then all button is off
+		# This will ignore the press and will make the button on again
+		bottom_panel_ui.get_node("ButtonBucket").set_pressed_no_signal(true)
 
 func _on_button_move_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		change_tool(EDITING_TOOL.MOVE, bottom_panel_ui.get_node("ButtonMove"))
 	elif editing_tool == EDITING_TOOL.MOVE:
 		# Solving edge case if the button is on but pressed again, then all button is off
+		# This will ignore the press and will make the button on again
 		bottom_panel_ui.get_node("ButtonMove").set_pressed_no_signal(true)
 
 func _on_button_paint_toggled(toggled_on: bool) -> void:
@@ -153,6 +264,7 @@ func _on_button_paint_toggled(toggled_on: bool) -> void:
 		change_tool(EDITING_TOOL.PAINT, bottom_panel_ui.get_node("ButtonPaint"))
 	elif editing_tool == EDITING_TOOL.PAINT:
 		# Solving edge case if the button is on but pressed again, then all button is off
+		# This will ignore the press and will make the button on again
 		bottom_panel_ui.get_node("ButtonPaint").set_pressed_no_signal(true)
 
 func _on_button_erase_toggled(toggled_on: bool) -> void:
@@ -160,6 +272,7 @@ func _on_button_erase_toggled(toggled_on: bool) -> void:
 		change_tool(EDITING_TOOL.ERASE, bottom_panel_ui.get_node("ButtonErase"))
 	elif editing_tool == EDITING_TOOL.ERASE:
 		# Solving edge case if the button is on but pressed again, then all button is off
+		# This will ignore the press and will make the button on again
 		bottom_panel_ui.get_node("ButtonErase").set_pressed_no_signal(true)
 
 func _on_button_zoom_up_pressed() -> void:
@@ -178,10 +291,13 @@ func _on_button_center_pressed() -> void:
 	camera_zoom = 1.0
 	camera.zoom = Vector2(camera_zoom, camera_zoom)
 
-## Only for testing purposes
-# TODO: Delete after finishing
+## Only for testing purposes, remember to hide the test node if not used
 func _on_test_pressed() -> void:
-	MapController.save_map_to_file("desolation", false)
+	pass
+		
+	#MapController.draw_rect(Rect2i(Vector2i(1,1), Vector2i(-2,-4)), brush_tile)
+	#MapController.load_map(tile_map_layer)
+	#MapController.save_map_to_file("desolation", false)
 	#MapController.read_map_from_file("desolation", tile_map_layer)
 
 ## Button to go back to the main menu

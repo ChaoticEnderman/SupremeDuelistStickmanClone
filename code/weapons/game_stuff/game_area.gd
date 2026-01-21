@@ -35,7 +35,6 @@ func _init(player: Player, direction: Vector2, position: Vector2) -> void:
 	self.player = player
 	collision_shape = CollisionShape2D.new()
 	sprite = Sprite2D.new()
-	add_child(collision_shape)
 	add_child(sprite)
 	
 	self.direction = direction
@@ -61,21 +60,23 @@ func add_projectile_data(data: ProjectileData):
 ## Call to summon if this is a projectile and apply one time impulse to move it forward
 func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 	# Construct the node
-	var collision : CollisionShape2D = CollisionShape2D.new()
-	collision.shape = self.shape
 	sprite.texture = projectile_data.sprite
 	# HACK: Hardcoded the scale value for the sprite because it cannot be scaled down normally
 	sprite.scale = Vector2(0.25, 0.25)
 	# Adding projectile
-	add_child(collision)
 	
 	# Set the hitbox and damagable to self, this is used for like checking if the owner of the hitbox has a node damageable
 	sprite.owner = self
-	collision.owner = self
+	collision_shape.owner = self
 	damageable.owner = self
 	
 	self.direction = direction
 	self.position = position
+	sprite.rotation = direction.angle()
+	collision_shape.rotation = direction.angle()
+	print("GA/direction ", self.direction)
+
+
 
 ## (Copied from GameObject class)
 ## Function to test if player exist and return the weapon, particularly useful for objects that reference the player weapon
