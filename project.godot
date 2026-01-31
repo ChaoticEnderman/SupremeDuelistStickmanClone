@@ -95,6 +95,7 @@ pointing/emulate_mouse_from_touch=false
 2d_physics/layer_1="Rigid map (block everything)"
 2d_physics/layer_2="Soft map wall (all bullets go through but not players)"
 2d_physics/layer_3="Normal map (Allow some bullets to pass)"
+2d_physics/layer_4="Instant kill zone"
 
 [physics]
 

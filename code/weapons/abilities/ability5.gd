@@ -1,5 +1,4 @@
 ## Ability of the scythe weapon to summon the wisp
-# TODO: About to need to be refactored
 extends Ability
 class_name Ability5
 

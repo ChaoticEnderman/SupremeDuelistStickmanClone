@@ -1,7 +1,6 @@
 ## Class for the sprites of the player, controlling each limbs colors of the player and also the brush color
 extends Node
 class_name PlayerSpriteGlobal
-# TODO: I feel like this is missing something
 
 ## List to contain left and right side limb colors, is indexed by only the LIMB_INDEX enum
 static var l_limbs : Array[Color]

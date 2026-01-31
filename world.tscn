@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bevnv2gjagmks" path="res://code/world/world.gd" id="1_036b0"]
 [ext_resource type="PackedScene" uid="uid://djdlikfugdgp0" path="res://scenes/setting_menu.tscn" id="2_dwbse"]
 [ext_resource type="PackedScene" uid="uid://oj84mtpo6xhu" path="res://scenes/game_ui.tscn" id="4_gbfbk"]
-[ext_resource type="PackedScene" uid="uid://r2q6k4yx3oiu" path="res://scenes/map.tscn" id="5_dwbse"]
+[ext_resource type="Script" uid="uid://db7np6u36qf7q" path="res://code/map/map.gd" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://beewqyv27qw3h" path="res://scenes/pause_menu.tscn" id="5_ioo17"]
 [ext_resource type="Script" uid="uid://wqcrlljgi7bo" path="res://code/camera.gd" id="6_dwbse"]
 
@@ -24,7 +24,8 @@ z_index = -1
 
 [node name="CameraGame" type="Node2D" parent="."]
 
-[node name="Map" parent="CameraGame" instance=ExtResource("5_dwbse")]
+[node name="Map" type="Node2D" parent="CameraGame"]
+script = ExtResource("5_dwbse")
 
 [node name="Camera" type="Camera2D" parent="CameraGame"]
 script = ExtResource("6_dwbse")

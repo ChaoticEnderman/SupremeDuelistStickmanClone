@@ -1,5 +1,4 @@
 extends TextureButton
-# TODO: Make this independent by receiving global signals instead
 
 func _ready() -> void:
 	self.visible = false

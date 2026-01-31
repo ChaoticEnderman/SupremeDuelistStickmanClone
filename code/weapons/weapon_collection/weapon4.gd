@@ -1,7 +1,6 @@
 ## Scythe weapon to shoot wisps
 extends Weapon
 class_name Weapon4
-# TODO: Continue making this weapon
 
 func init(player: Player, id: String) -> void:
 	super.init(player, "4")

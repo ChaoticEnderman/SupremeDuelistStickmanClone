@@ -85,6 +85,6 @@ func _on_game_tick(delta: float):
 		self.position = self.position + (position_difference * projectile_data.speed)
 		# Slowly incrementing speed to ensure it will touch the owner weapon
 		# Still go for normal speed for 2 seconds first
-		# HACK: Hardcode this instead of checking for collision since its not consistent, but this works enough
+		# HACK: Hardcode this instead of checking for collision since its not consistent, but this works good enough
 		if position.distance_to(get_dependent_player().weapon.position) < 20:
 			_on_destroy()

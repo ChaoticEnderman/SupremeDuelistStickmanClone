@@ -15,7 +15,9 @@ var ready_menu : Control = load("res://scenes/ready_menu.tscn").instantiate()
 var map_editor : Control = load("res://scenes/map_editor.tscn").instantiate()
 
 ## Map of the world
-var game_map : TileMapLayer
+var game_map : Map
+## Tile map of the world, retrieved from the map object
+var game_map_tile_map : TileMapLayer
 
 ## Player1 dynamic position for the camera follow
 var p1_position : Vector2
@@ -60,7 +62,8 @@ func start_game() -> void:
 	clear_everything()
 	world = load("res://world.tscn").instantiate()
 	add_child(world)
-	game_map = world.get_node("CameraGame/Map/TileMapLayer")
+	game_map = world.get_node("CameraGame/Map")
+	game_map_tile_map = game_map.tile_map_layer
 	GameState.change_game_state(GameState.GAME_STATE.RUNNING)
 
 ## Function to go back to the main menu, it will not be deleted each time

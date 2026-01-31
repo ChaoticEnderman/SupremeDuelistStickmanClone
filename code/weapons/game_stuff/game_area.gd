@@ -109,7 +109,6 @@ func get_damage():
 	return damageable.damage_tick
 
 ## Automatically delete this object when the round end, unless otherwise configured
-# TODO: Add this configuration as optional, maybe as a bool variable
 func _on_game_state_clear_round():
 	_on_destroy()
 

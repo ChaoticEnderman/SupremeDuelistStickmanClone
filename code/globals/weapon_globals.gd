@@ -1,9 +1,10 @@
 # Global class that store the list of weapons and also weapon choices for the players
 extends Node
 
-## Weapon ids for the first player
-var weapon1 : int
-var weapon2 : int
+## Weapon for the left player
+var weapon_left : int
+## Weapon for the right player
+var weapon_right : int
 
 var weapon_list : Array[WeaponData] = []
 
@@ -44,6 +45,9 @@ var ability8_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 func _init() -> void:
 	load_weapons()
 
+## Enum for the two sides of the player
+enum PLAYER_SIDE {LEFT,	RIGHT}
+
 ## Load all weapons at the very start of the app, only the data for ready menu to use before actual game weapon
 func load_weapons() -> void:
 	var i : int = 1
@@ -53,12 +57,11 @@ func load_weapons() -> void:
 		i += 1
 		path = "res://resources/weapon" + str(i) + ".tres"
 
-func set_weapon(weapon: int, index: int):
-	# TODO: Make an enum of this
-	if weapon == 1:
-		weapon1 = index
-	elif weapon == 2:
-		weapon2 = index
+func set_weapon(weapon: PLAYER_SIDE, index: int):
+	if weapon == PLAYER_SIDE.LEFT:
+		weapon_left = index
+	elif weapon == PLAYER_SIDE.RIGHT:
+		weapon_right = index
 
 func get_weapon(index: int) -> Weapon:
 	match index:

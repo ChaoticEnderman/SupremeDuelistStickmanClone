@@ -64,8 +64,6 @@ func create_sprite_stickmen(root_node: Control, player_side: PlayerSpriteGlobals
 	torso.position = Vector2(root_node.size.x / 2, root_node.size.y / 2)
 	torso.position = torso.position + Vector2(0.0, -100.0)
 	# Change the position of the limbs based on the base position of the torso
-	# TODO: Refactor and make this more natural stick men like, by changing the numbers
-	# Also make it more independent on like the sceen size, not hardcoded
 	var reference_point = torso.position
 	torso.position = reference_point
 	stomach.position = reference_point + Vector2(0.0, 100.0)
@@ -107,12 +105,10 @@ func create_sprite_stickmen(root_node: Control, player_side: PlayerSpriteGlobals
 	# Making the hat for the stickmen, this will only store the sprite and not be clicked on directly by the player
 	if player_side == PlayerSpriteGlobals.PLAYER.LEFT:
 		l_hat.position = reference_point + Vector2(0.0, -80.0)
-		print("RM/lhp ", l_hat.global_position)
 		root_node.add_child(l_hat)
 	elif player_side == PlayerSpriteGlobals.PLAYER.RIGHT:
 		r_hat.position = reference_point + Vector2(0.0, -80.0)
 		root_node.add_child(r_hat)
-		print("RM/rhp ", r_hat.global_position)
 	
 
 ## Signals runs when any limb is pressed, will change the color and update color of that limb
@@ -174,9 +170,9 @@ func initialize_weapons(popup_panel: Control):
 		popup_panel.get_node("Control/GridContainer").add_child(control)
 		# Connect the pressed signal automatically
 		if popup_panel == left_panel_weapon_popup:
-			button.pressed.connect(_on_weapon_button_pressed.bind("l", id))
+			button.pressed.connect(_on_weapon_button_pressed.bind(WeaponGlobals.PLAYER_SIDE.LEFT, id))
 		elif popup_panel == right_panel_weapon_popup:
-			button.pressed.connect(_on_weapon_button_pressed.bind("r", id))
+			button.pressed.connect(_on_weapon_button_pressed.bind(WeaponGlobals.PLAYER_SIDE.RIGHT, id))
 		id += 1
 
 ## Initialize all the weapons to be displayed in the popup panel, but not shown yet until the user chose
@@ -210,22 +206,20 @@ func initialize_hats(popup_panel: Control):
 	print("RM/loading hats number ", id)
 
 ## Trigged every time any weapon is pressed, to hide the weapon popup and save the weapon choice
-func _on_weapon_button_pressed(side: String, id: int):
-	# TODO: Make this an enum
-	if side == "l":
-		WeaponGlobals.set_weapon(1, id)
+func _on_weapon_button_pressed(side: WeaponGlobals.PLAYER_SIDE, id: int):
+	if side == WeaponGlobals.PLAYER_SIDE.LEFT:
+		WeaponGlobals.set_weapon(WeaponGlobals.PLAYER_SIDE.LEFT, id)
 		left_panel_weapon_popup.visible = false
-	if side == "r":
-		WeaponGlobals.set_weapon(2, id)
+	if side == WeaponGlobals.PLAYER_SIDE.RIGHT:
+		WeaponGlobals.set_weapon(WeaponGlobals.PLAYER_SIDE.RIGHT, id)
 		right_panel_weapon_popup.visible = false
 
-func _on_hat_button_pressed(side: String, id: int):
-	if side == "l":
+func _on_hat_button_pressed(side: WeaponGlobals.PLAYER_SIDE, id: int):
+	if side == WeaponGlobals.PLAYER_SIDE.LEFT:
 		var texture : Texture2D = PlayerSpriteGlobals.set_and_get_hat(id, PlayerSpriteGlobals.PLAYER.LEFT)
-		print("RM/chosen hat texture ", texture, " from id ", id)
 		l_hat.texture = texture
 		left_panel_hat_popup.visible = false
-	if side == "r":
+	if side == WeaponGlobals.PLAYER_SIDE.RIGHT:
 		var texture : Texture2D = PlayerSpriteGlobals.set_and_get_hat(id, PlayerSpriteGlobals.PLAYER.RIGHT)
 		r_hat.texture = texture
 		right_panel_hat_popup.visible = false

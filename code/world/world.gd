@@ -100,8 +100,8 @@ func _on_system_state_changed(state):
 
 ## Retrieve the weapon data from WeaponGlobals
 func choose_weapon():
-	weapon1 = WeaponGlobals.get_weapon(WeaponGlobals.weapon1)
-	weapon2 = WeaponGlobals.get_weapon(WeaponGlobals.weapon2)
+	weapon1 = WeaponGlobals.get_weapon(WeaponGlobals.weapon_left)
+	weapon2 = WeaponGlobals.get_weapon(WeaponGlobals.weapon_right)
 	if weapon1 == null:
 		weapon1 = randomize_weapon()
 	if weapon2 == null:
@@ -127,7 +127,6 @@ func randomize_weapon() -> Weapon:
 	return weapons[rng.randi_range(0, weapons.size() - 1)]
 
 ## Main function to run every tick to control whether other tick function can run easily
-# TODO: Make these tick stuff runs from the SystemManager class tick signal and not through this 
 func _on_game_tick(delta: float) -> void:
 	if queue_game == true:
 		start_round()

@@ -3,8 +3,10 @@
 ## Features like saving and loading only exist at the code level for the moment
 extends Control
 
+## Map node for the map data, including the tile map and other metadata
+@onready var map : Map = get_node("Map")
 ## Tilemap layer used to show the current working map
-@onready var tile_map_layer : TileMapLayer = get_node("TileMapLayer")
+@onready var tile_map_layer : TileMapLayer = map.get_tile_map_layer()
 
 ## Camera used for the tilemap to let user move around and edit
 @onready var camera : Camera2D = get_node("Camera2D")
@@ -33,15 +35,18 @@ var dragging_start : Vector2
 var bottom_panel_tool_buttons : Array[TextureButton]
 ## Buttons in the bottom panel for brush, aka Brush/Rect/Bucket
 var bottom_panel_brush_buttons : Array[TextureButton]
+## Popup panel for the setting, to show the settings, this is the main area of focus and is different from the background panel
+@onready var popup_setting_panel : CanvasLayer = get_node("PopupSetting")
+
+## A panel that will dim out everything in the map editor when shown, and will stop all input from going through it
+## Use for when showing the popup for map settings, so only the popup will receive input 
+@onready var popup_background_panel : CanvasLayer = get_node("PopupBackground")
+
+## Status of whether the setting popup is shown, if true then it will ignore other components
+var setting_popup_shown : bool = false
 
 ## Store the temporary rectangle when using the rectangle tool to draw
 var rectangle_drawn : Rect2i = Rect2i()
-
-# True top left of the rectangle in one of four corners.
-# This will help in making the loop travel range always positive and possible to finish the loop
-var true_top_left : Vector2i# = Vector2i(min(start_vector.x, end_vector.x), min(start_vector.y, end_vector.y))
-var true_bottom_right : Vector2i# = Vector2i(max(start_vector.x, end_vector.x), max(start_vector.y, end_vector.y))
-
 
 ## Current tool that is selected in the editor
 var editing_tool : EDITING_TOOL = EDITING_TOOL.MOVE
@@ -58,6 +63,16 @@ enum BRUSH_TOOL {
 	BRUSH,
 	RECTANGLE,
 	BUCKET
+}
+
+## Setting for the instant kill area of none or not
+var instant_kill_type : INSTANT_KILL_TYPE = INSTANT_KILL_TYPE.NONE
+## All possible instant kill types. Values other than NONE is just for aesthetic and all will kill the same for now
+enum INSTANT_KILL_TYPE {
+	NONE,
+	WATER,
+	LAVA,
+	ACID
 }
 
 ## Atlas coords from the enum MapController.TILE to choose the tile that is currently selected
@@ -110,10 +125,14 @@ func _on_tile_button_pressed(tile: Vector2i):
 ## Load a map from MapController by the id
 func load_map(id: int):
 	MapController.edit_map(id)
-	MapController.load_map(tile_map_layer)
+	MapController.load_map(map)
 
 ## Take the input event and split it to the respective functions based on EDITING_TOOL enum
 func _input(event: InputEvent) -> void:
+	# Ignoring input for this if the settings panel is turned on
+	if setting_popup_shown:
+		return
+	
 	if editing_tool == EDITING_TOOL.MOVE:
 		map_dragging_input(event)
 	else:
@@ -127,6 +146,11 @@ func _input(event: InputEvent) -> void:
 				rectangle_input(event, brush_tile)
 			elif editing_tool == EDITING_TOOL.ERASE:
 				rectangle_input(event, MapController.TILE.ERASE_TILE)
+		if brush_tool == BRUSH_TOOL.BUCKET:
+			if editing_tool == EDITING_TOOL.PAINT:
+				bucket_input(event, brush_tile)
+			elif editing_tool == EDITING_TOOL.ERASE:
+				bucket_input(event, MapController.TILE.ERASE_TILE)
 
 ## Listen, I dont understand why this works but it works and let user drag the map around
 ## Refactor at your own risk hehe
@@ -166,7 +190,7 @@ func brush_input(event: InputEvent, tile_type: Vector2i):
 			tile_position = tile_position / camera_zoom
 			tile_position = Vector2(tile_position.x / 64, tile_position.y / 64).floor()
 			MapController.draw_single_tile(tile_position, tile_type)
-			MapController.load_map(tile_map_layer)
+			MapController.load_map(map)
 
 ## Similiar to map dragging input, this will do paint but only for like one by one block
 func rectangle_input(event: InputEvent, tile_type: Vector2i):
@@ -179,32 +203,50 @@ func rectangle_input(event: InputEvent, tile_type: Vector2i):
 			return
 		# Can be shortened in the future but just leave it here for now since the code is kinda hard to understand at the moment
 		if event.is_pressed():
+			# When input is pressed, will store the starting position 
 			paint_dragging = true
 			rectangle_drawn.position = Vector2i(tile_position.floor())
 			print("ME/rect/first is ", rectangle_drawn.position)
 		else:
 			paint_dragging = false
 			rectangle_drawn.end = Vector2i(tile_position.floor())
-			print("ME/rect/end is ", rectangle_drawn.end)
 			
-			# Shortened name for first and second points of rectangle to convert to normal points (top left then bottom right)
-			# TODO: Seperate this out to normal and make it clearer
-			var ra = rectangle_drawn.position
-			var rb = tile_position
-			true_top_left = Vector2i(min(ra.x, rb.x), min(ra.y, rb.y))
-			true_bottom_right = Vector2i(max(ra.x, rb.x), max(ra.y, rb.y))
+			normalize_rectangle(tile_position)
 			
-			rectangle_drawn.position = true_top_left
-			rectangle_drawn.end = true_bottom_right
-			print("ME/rect/true tl ", true_top_left, " true br ", true_bottom_right)
-			
-			MapController.draw_rect(rectangle_drawn, brush_tile)
-			MapController.load_map(tile_map_layer)
+			MapController.draw_rect(rectangle_drawn, tile_type)
+			MapController.load_map(map)
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		if paint_dragging:
+			# TODO: Implement the visual box to make the player see the rectangle drawn easier
 			print("ME/rect/dragging ", tile_position)
-			
-			
+
+## Private helper class to normalize the rectangle from the draw rect function
+func normalize_rectangle(ending_tile_position: Vector2i):
+	# Two abitrary opposite corners of the rectangle to be normalized
+	var rect_corner_a = rectangle_drawn.position
+	var rect_corner_b = ending_tile_position
+	var true_top_left : Vector2i
+	var true_bottom_right : Vector2i
+	# True top left will need to have the lesser x value and lesser y value from both the corners
+	true_top_left = Vector2i(min(rect_corner_a.x, rect_corner_b.x), min(rect_corner_a.y, rect_corner_b.y))
+	# True bottom right will have higher x and y value from both corners. 
+	# Keep in mind that the y coordinates is inverse in Godot in general so we still work with that
+	true_bottom_right = Vector2i(max(rect_corner_a.x, rect_corner_b.x), max(rect_corner_a.y, rect_corner_b.y))
+	
+	rectangle_drawn.position = true_top_left
+	rectangle_drawn.end = true_bottom_right
+
+func bucket_input(event: InputEvent, tile_type: Vector2i):
+	var screen_center = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
+	var tile_position : Vector2 = (event.position - screen_center) + camera.position * camera_zoom
+	tile_position = tile_position / camera_zoom
+	tile_position = Vector2(tile_position.x / 64, tile_position.y / 64).floor()
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		if input_is_invalid(event):
+			return
+		if event.is_pressed():
+			MapController.fill_bucket(tile_position, MapController.get_atlas_coords_by_position(tile_position), tile_type)
+			MapController.load_map(map)
 
 ## A rather hack to check if the event is outside the editing area. Will have other checks too
 func input_is_invalid(event: InputEvent) -> bool:
@@ -294,9 +336,14 @@ func _on_button_center_pressed() -> void:
 ## Only for testing purposes, remember to hide the test node if not used
 func _on_test_pressed() -> void:
 	pass
-		
+	
+	MapController.change_map_instant_kill_type(MapController.INSTANT_KILL_TYPE.ACID, map)
+	
+	#MapController.test_save_map_to_json("desolation")
+	#MapController.test_load_map_to_json()
+	
 	#MapController.draw_rect(Rect2i(Vector2i(1,1), Vector2i(-2,-4)), brush_tile)
-	#MapController.load_map(tile_map_layer)
+	#MapController.load_map(map)
 	#MapController.save_map_to_file("desolation", false)
 	#MapController.read_map_from_file("desolation", tile_map_layer)
 
@@ -310,17 +357,17 @@ func _on_back_button_pressed() -> void:
 ## Button to physically load up the saved files in the maps folder
 func _on_load_map_button_pressed() -> void:
 	DisplayServer.file_dialog_show("", FileGlobals.maps_path , "", false, DisplayServer.FILE_DIALOG_MODE_OPEN_FILE,
-	["*.dat"], _on_file_loaded)
+	["*.json"], _on_file_loaded)
 
 ## Button to create a new file for saving a new map
 func _on_new_map_button_pressed() -> void:
 	MapController.create_untitled_map()
-	MapController.load_map(tile_map_layer)
+	MapController.load_map(map)
 
 ## Function to save the current edited file, to the old location or to override it
 func _on_save_map_button_pressed() -> void:
 	DisplayServer.file_dialog_show("", FileGlobals.maps_path , "", false, DisplayServer.FILE_DIALOG_MODE_SAVE_FILE,
-	["*.dat"], _on_file_saved)
+	["*.json"], _on_file_saved)
 
 ## When the file is loaded it will load up the map contents to the current map
 func _on_file_loaded(status: bool, selected_paths: PackedStringArray, selected_filter_index: int):
@@ -328,7 +375,7 @@ func _on_file_loaded(status: bool, selected_paths: PackedStringArray, selected_f
 		return
 	print("ME/file loaded ", selected_paths[0])
 	MapController.load_map_from_file_to_map_list(selected_paths[0])
-	MapController.load_map(tile_map_layer)
+	MapController.load_map(map)
 
 func _on_file_saved(status: bool, selected_paths: PackedStringArray, selected_filter_index: int):
 	if selected_paths == null or selected_paths.size() == 0:
@@ -339,3 +386,29 @@ func _on_file_saved(status: bool, selected_paths: PackedStringArray, selected_fi
 	print("ME/file saved name is ", file_name)
 	MapController.save_map_to_file(file_name)
 	MapController.reload_all_maps()
+
+## Show the popup panel for the map setting menu
+func _on_setting_button_pressed() -> void:
+	setting_popup_shown = true
+	popup_background_panel.visible = true
+	popup_setting_panel.visible = true
+
+## Hide the popup panel for the map setting menu
+func _on_close_setting_button_pressed() -> void:
+	setting_popup_shown = false
+	popup_background_panel.visible = false
+	popup_setting_panel.visible = false
+
+func _on_setting_instant_kill_type_item_selected(index: int) -> void:
+	var instant_kill : int
+	# Cant trust the enum index obviously, so I do this 
+	match index:
+		0:
+			instant_kill = MapController.INSTANT_KILL_TYPE.NONE
+		1:
+			instant_kill = MapController.INSTANT_KILL_TYPE.WATER
+		2:
+			instant_kill = MapController.INSTANT_KILL_TYPE.LAVA
+		3:
+			instant_kill = MapController.INSTANT_KILL_TYPE.ACID
+	MapController.change_map_instant_kill_type(instant_kill, map)

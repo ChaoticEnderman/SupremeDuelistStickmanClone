@@ -3,7 +3,6 @@
 ## Projectile objects are objects that work and move independently other than players and weapons
 ## Will runs on its own tick but still based on the the world tick event
 
-# TODO: Make projectile objects also a simple subclass of this class instead of like a seperate class
 # Because they use both rigid body2d as base
 extends RigidBody2D
 class_name GameObject
@@ -22,6 +21,9 @@ var hitbox_shape : Shape2D
 var direction : Vector2
 ## Optional sprite
 var sprite : Sprite2D
+
+## Dumb setting to set if the projectile is cleared when the round clear or not. Default to true now
+var clear_object_on_round_clear : bool = true
 
 ## Initializing the object with basic data like player, direction and position
 ## Player is for calculating the optional Damageable object so it can be nulled if not needed
@@ -124,9 +126,9 @@ func _on_game_tick(delta: float):
 	pass
 
 ## Automatically delete this object when the round end, unless otherwise configured
-# TODO: Add this configuration as optional, maybe as a bool variable
 func _on_game_state_clear_round():
-	_on_destroy()
+	if clear_object_on_round_clear:
+		_on_destroy()
 
 ## Call to destroy the object
 func _on_destroy():

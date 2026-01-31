@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://djdlikfugdgp0"]
 
 [ext_resource type="Script" uid="uid://biwmeg0vnecp2" path="res://code/ui/setting_menu/setting_menu.gd" id="1_pgfik"]
-[ext_resource type="Texture2D" uid="uid://thu4medbs8i" path="res://assets/coin_logo.png" id="2_vproo"]
+[ext_resource type="Texture2D" uid="uid://du7wnt157wk30" path="res://assets/close_button.png" id="2_pgfik"]
 
-[sub_resource type="Gradient" id="Gradient_qc8n3"]
+[sub_resource type="Gradient" id="Gradient_pgfik"]
 colors = PackedColorArray(0, 1, 1, 1, 0, 0, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ogw40"]
-gradient = SubResource("Gradient_qc8n3")
+gradient = SubResource("Gradient_pgfik")
 width = 720
 height = 512
 fill_to = Vector2(0, 1)
@@ -42,7 +42,9 @@ expand_mode = 2
 layout_mode = 0
 offset_left = -128.0
 offset_bottom = 128.0
-texture_normal = ExtResource("2_vproo")
+texture_normal = ExtResource("2_pgfik")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1

@@ -18,6 +18,9 @@ var jump_stacking : int = 0
 ## This will lock the jumping angle even if the joystick move during the jump stacking period
 var locked_jumping_direction : Vector2
 
+## Reference to the player that control this ragdoll physic manager
+var player : Player
+
 @onready var head : RigidBody2D = get_node("Head")
 @onready var torso : RigidBody2D = get_node("Torso")
 @onready var stomach : RigidBody2D = get_node("Stomach")
@@ -40,6 +43,9 @@ var locked_jumping_direction : Vector2
 @onready var r_thigh : RigidBody2D = b_thigh
 @onready var l_shin : RigidBody2D = a_shin
 @onready var r_shin : RigidBody2D = b_shin
+
+## Store the damage to be applied for this tick, will be subtracted from player's hp and clear every tick
+var damages : Array[float] = []
 
 ## Hat skin for the player
 @onready var hat : Sprite2D = head.get_node("Hat")
@@ -93,6 +99,8 @@ func _ready() -> void:
 	p_forearm.add_collision_exception_with(r_thigh)
 	
 	p_arm.add_collision_exception_with(p_forearm)
+	
+	player = self.get_owner()
 
 ## Make the entire ragdoll not collide with a physics body
 func ragdoll_collision_exception(hitbox: PhysicsBody2D):
@@ -140,15 +148,9 @@ func move_entire_ragdoll_impulse(direction: Vector2, strength: float):
 		return
 	
 	# TODO: Make a loop for this
-	head.apply_central_impulse(direction * strength)
-	torso.apply_central_impulse(direction * strength)
-	stomach.apply_central_impulse(direction * strength)
-	p_arm.apply_central_impulse(direction * strength)
-	p_forearm.apply_central_impulse(direction * strength)
-	l_shin.apply_central_impulse(direction * strength)
-	l_thigh.apply_central_impulse(direction * strength)
-	r_shin.apply_central_impulse(direction * strength)
-	r_thigh.apply_central_impulse(direction * strength)
+	for limb in self.get_children():
+		if limb is RigidBody2D:
+			limb.apply_central_impulse(direction * strength)
 
 ## Slow down basically the entire ragdoll for some time
 func slow_down_ragdoll(ticks: int):
@@ -179,7 +181,6 @@ func tick_slow_down_ragdoll():
 
 ## Checking for freezing state timer depletion, will return true if its still freezing
 func tick_freeze_ragdoll():
-	print("rag/tick freeze ", freeze_time)
 	if freeze_time > 0:
 		freeze_time -= 1
 		return true
@@ -203,7 +204,6 @@ func tick_check_legs():
 		r_shin = a_shin
 
 ## Function to check if the ragdoll shins is airborne, since these limbs are what dictate the air state of the ragdoll
-# TODO: Refactor for better naming
 func tick_check_airborne():
 	is_airborne = true
 	# When airborne (falling) the movement is slower and limited
@@ -272,13 +272,19 @@ func tick_move_arms(direction: Vector2):
 	#print(rad_to_deg(p_arm.global_rotation))
 	#apply_angular_limit_torque(p_forearm, Globals.angle_to_360(rad_to_deg(p_arm.global_rotation)), Globals.RAGDOLL_TORQUE_FORCE/500, 0.0)
 
+func tick_check_collisions():
+	damages = []
+	tick_check_damage_collisions()
+	tick_check_area_collisions()
+	tick_check_tile_map_layer_collisions()
+
 ## Checking every single limbs for collision to any damagable objects
 ## No need for like removing duplicates since it will deal damage multiple times if hit multiple limbs
 ## Can be laggy since it's yet to implement broadphase collision checking
 ## Also a lot laggy because the nested function is in higher degree polynomial time
 # TODO: optimize this idk
-func tick_check_damage_collisions() -> Array[float]:
-	var colliding_bodies : Array[float]
+func tick_check_damage_collisions():
+	var rounded_vector : Vector2i
 	# Nested nightmare
 	var tile_data : TileData
 	for child in self.get_children():
@@ -291,22 +297,29 @@ func tick_check_damage_collisions() -> Array[float]:
 					#print("rag/body touch body ", body)
 					# Do not damage if the owner is itself
 					if not body.damageable.owner_stickman == self:
-						colliding_bodies.append(body.get_damage())
+						damages.append(body.get_damage())
 				if has_damageable(body.owner):
 					# Do not damage if the owner is itself
 					if not body.owner.damageable.owner_stickman == self:
 						#print("rag/body touch owner ", body.owner.get_damage())
-						colliding_bodies.append(body.owner.get_damage())
+						damages.append(body.owner.get_damage())
 			# TODO: Implement the tilemap damage system
-			#tile_data = SystemManager.game_map.get_cell_tile_data(nn_vector(child.global_position/64))
+			
+			# Test to see the touching tile
+			#rounded_vector = Vector2i(round(child.global_position.x / 64), round(child.global_position.y / 64))
+			# TEST: Get the state of the children node from the physics server
+			
+			# HACK: This old approach is based on position of the limb when contacting the map, not the collision point
+			#rounded_vector = nearest_neighbor_vector(child.global_position/64)
+			#tile_data = SystemManager.game_map_tile_map.get_cell_tile_data(rounded_vector)
+			#tile_data = SystemManager.game_map_tile_map.get_cell_tile_data(nearest_neighbor_vector(child.global_position/64))
 			#if tile_data != null:
-				#colliding_bodies.append(tile_data.get_custom_data("damage"))
-	return colliding_bodies
+				#print("rag/touching map/tile ", tile_data, " dmg ", tile_data.get_custom_data("damage"))
+				#damages.append(tile_data.get_custom_data("damage"))
 
 ## Check overlapping areas to the stickman for damage
-func tick_check_area_collisions() -> Array[float]:
+func tick_check_area_collisions():
 	var area : Area2D
-	var colliding_areas : Array[float]
 	for child in self.get_children():
 		if child is RigidBody2D:
 			area = child.get_node("Area2D")
@@ -322,8 +335,34 @@ func tick_check_area_collisions() -> Array[float]:
 								slow_down_ragdoll(Globals.TPS * 2)
 							if a is Projectile4:
 								freeze_ragdoll(Globals.TPS / 2)
-							colliding_areas.append(a.get_damage())
-	return colliding_areas
+							damages.append(a.get_damage())
+					# Kill immediately if the player touch the instant kill zone
+					if a.get_collision_layer_value(4) == true:
+						player.player_hp = 0
+
+## Check collision with tiles in the tilemap, work once each tick for each limb
+func tick_check_tile_map_layer_collisions():
+	for child in self.get_children():
+		if child is RigidBody2D:
+			var state : PhysicsDirectBodyState2D = PhysicsServer2D.body_get_direct_state(child.get_rid())
+			for i in state.get_contact_count():
+				var collider_rid : RID = state.get_contact_collider(i)
+				var colliding_position = state.get_contact_collider_position(i)
+				
+				var collider_object_id := PhysicsServer2D.body_get_object_instance_id(collider_rid)
+				var collider = instance_from_id(collider_object_id)
+				if collider == SystemManager.game_map_tile_map:
+					var local_pos: Vector2 = SystemManager.game_map_tile_map.to_local(colliding_position)
+					var potential_collision_vectors = nearest_neighbor_vector(local_pos)
+					for vector in potential_collision_vectors:
+						var tile_coords: Vector2i = SystemManager.game_map_tile_map.local_to_map(vector)
+						var tile_data = SystemManager.game_map_tile_map.get_cell_tile_data(tile_coords)
+						if tile_data != null:
+							#print("rag/touching map/tile ", tile_data, " dmg ", tile_data.get_custom_data("damage"))
+							damages.append(tile_data.get_custom_data("damage"))
+							if tile_data.get_custom_data("damage") != 0.0:
+								print("rag/touching map ", colliding_position)
+
 
 ## Internal helper function to recursively check if a node has the damageable composition
 func has_damageable(parent: Node) -> bool:
@@ -337,22 +376,31 @@ func has_damageable(parent: Node) -> bool:
 
 ## Test to find the nearest neighbor of the current limb touching position, to see the contacting tiles
 ## Still mostly in the test state
-func nearest_neighbor_vector(vector: Vector2):
+func nearest_neighbor_vector(vector: Vector2) -> Array[Vector2i]:
 	# TODO: Write explaination math wise
+	# Will need some diagrams to explain this so will do later (procastinating max level)
+	var results : Array[Vector2i] = []
 	var fract = vector - vector.floor()
 	var dist_left = abs(fract.x)
 	var dist_right = 1 - dist_left
 	var dist_up = abs(fract.y)
 	var dist_down = 1 - dist_up
+	# If its in between a vertical line then only two 
+	if dist_left == 0:
+		print("rag/nnv/horizontal exact touch")
+	if dist_up == 0:
+		print("rag/nnv/vertical exact touch")
 	var nearest_neighbor = min(dist_left, dist_right, dist_up, dist_down)
 	if dist_left == nearest_neighbor:
-		return Vector2(floor(vector.x) - 1, floor(vector.y))
-	if dist_right == nearest_neighbor:
-		return Vector2(floor(vector.x) + 1, floor(vector.y))
-	if dist_up == nearest_neighbor:
-		return Vector2(floor(vector.x), floor(vector.y) - 1)
-	if dist_down == nearest_neighbor:
-		return Vector2(floor(vector.x), floor(vector.y) + 1)
+		return Vector2i(floor(vector.x) - 1, floor(vector.y))
+	elif dist_right == nearest_neighbor:
+		return Vector2i(floor(vector.x) + 1, floor(vector.y))
+	elif dist_up == nearest_neighbor:
+		return Vector2i(floor(vector.x), floor(vector.y) - 1)
+	elif dist_down == nearest_neighbor:
+		return Vector2i(floor(vector.x), floor(vector.y) + 1)
+	# This is impossible to happen
+	return Vector2i.ZERO
 
 ## Jump if the direction is not zero. Technically works without the != zero condition but just keep it
 func jump(direction: Vector2):

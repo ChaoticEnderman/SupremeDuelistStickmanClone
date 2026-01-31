@@ -1,5 +1,4 @@
 extends Control
-# TODO: Combine all seperate main menu scripts into this script
 
 func _ready():
 	GameState.system_state_changed.connect(_on_system_state_changed)
@@ -10,3 +9,9 @@ func _on_system_state_changed(state):
 
 func _on_map_edit_pressed() -> void:
 	GameState.change_system_state(GameState.SYSTEM_STATE.MAP_EDIT)
+
+func _on_1p_button_pressed() -> void:
+	GameState.change_system_state(GameState.SYSTEM_STATE.READY)
+
+func _on_2p_button_pressed() -> void:
+	GameState.change_system_state(GameState.SYSTEM_STATE.READY)

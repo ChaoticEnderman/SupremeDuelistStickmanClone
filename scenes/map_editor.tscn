@@ -1,17 +1,18 @@
-[gd_scene load_steps=24 format=3 uid="uid://cn4gn6y85lv6e"]
+[gd_scene load_steps=29 format=3 uid="uid://cn4gn6y85lv6e"]
 
 [ext_resource type="Script" uid="uid://d3l12vxug8rmx" path="res://code/map/map_editor.gd" id="1_ikn3w"]
-[ext_resource type="TileSet" uid="uid://byyduefph6wqn" path="res://resources/default_tile_set.tres" id="2_rdfmk"]
 [ext_resource type="Texture2D" uid="uid://b4o57j25b3cu8" path="res://assets/weapon2.png" id="3_o22ft"]
 [ext_resource type="Texture2D" uid="uid://b0ihq0lmiwb65" path="res://assets/coin_blank.png" id="4_8qdu6"]
 [ext_resource type="Texture2D" uid="uid://t47uht2dqgsg" path="res://assets/arrow_left.png" id="4_oio3n"]
 [ext_resource type="Texture2D" uid="uid://bw0fn45r15nn5" path="res://assets/map_editor_move.png" id="4_u4ibt"]
-[ext_resource type="Texture2D" uid="uid://c2c7qntm73r31" path="res://assets/main_menu_play_button.png" id="5_xvx8q"]
+[ext_resource type="Texture2D" uid="uid://dyiejny8mm4ff" path="res://assets/map_load.png" id="5_v1g2c"]
 [ext_resource type="Texture2D" uid="uid://5m1gu2li2a7s" path="res://assets/map_editor_pen.png" id="6_24rlk"]
-[ext_resource type="Texture2D" uid="uid://djm7qkqoqmtgb" path="res://assets/next_round_button.png" id="6_fqaxq"]
 [ext_resource type="Texture2D" uid="uid://d38yiag10t01u" path="res://assets/map_editor_box.png" id="6_gxr6b"]
+[ext_resource type="Texture2D" uid="uid://danbk1u1ngr8c" path="res://assets/map_add.png" id="6_hti3q"]
 [ext_resource type="Texture2D" uid="uid://dpr6x8b7mrhvq" path="res://assets/map_editor_eraser.png" id="7_gxr6b"]
+[ext_resource type="Texture2D" uid="uid://cn75x7t6b4q45" path="res://assets/map_save.png" id="7_q44i6"]
 [ext_resource type="Texture2D" uid="uid://cvvcsbyr3rnog" path="res://assets/map_editor_zoomup.png" id="8_78cw8"]
+[ext_resource type="Texture2D" uid="uid://c2c7qntm73r31" path="res://assets/main_menu_play_button.png" id="8_q44i6"]
 [ext_resource type="Texture2D" uid="uid://d2r14o03pu5rv" path="res://assets/map_editor_zoom_down.png" id="9_oio3n"]
 [ext_resource type="Texture2D" uid="uid://ppwkjeqojsv6" path="res://assets/map_editor_bucket.png" id="10_u78w4"]
 [ext_resource type="Texture2D" uid="uid://bt7fafwpjk5q1" path="res://assets/map_editor_move_choose.png" id="11_3bkrf"]
@@ -19,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://thu4medbs8i" path="res://assets/coin_logo.png" id="12_78cw8"]
 [ext_resource type="Texture2D" uid="uid://cow7pfigxd81u" path="res://assets/map_editor_pen_choose.png" id="12_u78w4"]
 [ext_resource type="Texture2D" uid="uid://jcr152cxfpyc" path="res://assets/map_editor_eraser_choose.png" id="14_v1g2c"]
+[ext_resource type="Texture2D" uid="uid://du7wnt157wk30" path="res://assets/close_button.png" id="21_hti3q"]
+[ext_resource type="Script" uid="uid://db7np6u36qf7q" path="res://code/map/map.gd" id="23_j5c7f"]
 
 [sub_resource type="Gradient" id="Gradient_8qdu6"]
 offsets = PackedFloat32Array(0)
@@ -34,19 +37,31 @@ colors = PackedColorArray(0.2058, 0.528383, 0.98, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_rdfmk"]
 gradient = SubResource("Gradient_ikn3w")
 
+[sub_resource type="Gradient" id="Gradient_qc8n3"]
+colors = PackedColorArray(0, 1, 1, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q44i6"]
+gradient = SubResource("Gradient_qc8n3")
+width = 720
+height = 512
+fill_to = Vector2(0, 1)
+
 [node name="MapEditor" type="Control"]
 process_mode = 3
 z_index = 1000
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ikn3w")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-process_mode = 1
-z_index = -100
-tile_set = ExtResource("2_rdfmk")
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource("23_j5c7f")
+metadata/_custom_type_script = "uid://db7np6u36qf7q"
 
 [node name="P1" type="Sprite2D" parent="."]
 position = Vector2(-500, 0)
@@ -95,39 +110,59 @@ texture_normal = ExtResource("4_oio3n")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="LoadMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LeftPanel"]
+custom_minimum_size = Vector2(192, 64)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -96.0
-offset_top = 112.0
-offset_right = 96.0
-offset_bottom = 152.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -184.0
+offset_right = 100.0
+offset_bottom = -120.0
 grow_horizontal = 2
-texture_normal = ExtResource("5_xvx8q")
+grow_vertical = 2
+
+[node name="LoadMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("5_v1g2c")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NewMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 152.0
-offset_right = 224.0
-offset_bottom = 192.0
-texture_normal = ExtResource("6_fqaxq")
+[node name="NewMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("6_hti3q")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SaveMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel"]
+[node name="SaveMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("7_q44i6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SettingButton" type="TextureButton" parent="CanvasLayer/LeftPanel"]
+custom_minimum_size = Vector2(192, 64)
 layout_mode = 0
 offset_left = 32.0
 offset_top = 192.0
 offset_right = 224.0
-offset_bottom = 232.0
-texture_normal = ExtResource("5_xvx8q")
+offset_bottom = 256.0
+texture_normal = ExtResource("8_q44i6")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/LeftPanel"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 264.0
+offset_right = 224.0
+offset_bottom = 592.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/LeftPanel"]
 custom_minimum_size = Vector2(192, 0)
@@ -275,10 +310,108 @@ texture_normal = ExtResource("12_78cw8")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="PopupBackground" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="PopupBackgroundPanel" type="Panel" parent="PopupBackground"]
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+
+[node name="PopupSetting" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="PopupSettingControl" type="Control" parent="PopupSetting"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="TextureRect" parent="PopupSetting/PopupSettingControl"]
+custom_minimum_size = Vector2(720, 512)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_q44i6")
+expand_mode = 2
+
+[node name="CloseSettingButton" type="TextureButton" parent="PopupSetting/PopupSettingControl/Sprite2D"]
+layout_mode = 0
+offset_left = -128.0
+offset_bottom = 128.0
+texture_normal = ExtResource("21_hti3q")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Control" type="Control" parent="PopupSetting/PopupSettingControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupSetting/PopupSettingControl/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.0
+offset_top = -164.0
+offset_right = 236.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer"]
+custom_minimum_size = Vector2(512, 288)
+layout_mode = 2
+
+[node name="InstantKillTypeLabel" type="Label" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Instant kill type"
+
+[node name="InstantKillType" type="OptionButton" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Water"
+popup/item_1/id = 1
+popup/item_2/text = "Lava"
+popup/item_2/id = 2
+popup/item_3/text = "Acid"
+popup/item_3/id = 3
+
 [connection signal="pressed" from="CanvasLayer/LeftPanel/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/LeftPanel/LoadMapButton" to="." method="_on_load_map_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/LeftPanel/NewMapButton" to="." method="_on_new_map_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/LeftPanel/SaveMapButton" to="." method="_on_save_map_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LeftPanel/HBoxContainer/LoadMapButton" to="." method="_on_load_map_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LeftPanel/HBoxContainer/NewMapButton" to="." method="_on_new_map_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LeftPanel/HBoxContainer/SaveMapButton" to="." method="_on_save_map_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LeftPanel/SettingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="toggled" from="CanvasLayer/BottomPanel/HBoxContainer/ButtonBrush" to="." method="_on_button_brush_toggled"]
 [connection signal="toggled" from="CanvasLayer/BottomPanel/HBoxContainer/ButtonRectangle" to="." method="_on_button_rectangle_toggled"]
 [connection signal="toggled" from="CanvasLayer/BottomPanel/HBoxContainer/ButtonBucket" to="." method="_on_button_bucket_toggled"]
@@ -289,3 +422,5 @@ stretch_mode = 0
 [connection signal="pressed" from="CanvasLayer/BottomPanel/HBoxContainer/ButtonZoomDown" to="." method="_on_button_zoom_down_pressed"]
 [connection signal="pressed" from="CanvasLayer/BottomPanel/HBoxContainer/ButtonCenter" to="." method="_on_button_center_pressed"]
 [connection signal="pressed" from="CanvasLayer/BottomPanel/HBoxContainer/TEST" to="." method="_on_test_pressed"]
+[connection signal="pressed" from="PopupSetting/PopupSettingControl/Sprite2D/CloseSettingButton" to="." method="_on_close_setting_button_pressed"]
+[connection signal="item_selected" from="PopupSetting/PopupSettingControl/Control/ScrollContainer/VBoxContainer/InstantKillType" to="." method="_on_setting_instant_kill_type_item_selected"]

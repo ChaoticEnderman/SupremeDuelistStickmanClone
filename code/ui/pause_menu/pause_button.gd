@@ -1,6 +1,5 @@
 ## Button to pause and continue the game when it is in the main stage
 extends TextureButton
-# TODO: Combine all seperate pause menu scripts into one main script
 
 func _ready():
 	GameState.game_state_changed.connect(_on_game_state_changed)

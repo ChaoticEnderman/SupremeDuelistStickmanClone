@@ -1,10 +1,39 @@
-[gd_scene load_steps=3 format=4 uid="uid://r2q6k4yx3oiu"]
+[gd_scene load_steps=5 format=4 uid="uid://r2q6k4yx3oiu"]
 
 [ext_resource type="Script" uid="uid://db7np6u36qf7q" path="res://code/map/map.gd" id="1_paxxb"]
+[ext_resource type="Texture2D" uid="uid://o047byv7gyoq" path="res://assets/instant_kill_water.png" id="2_gldc4"]
 [ext_resource type="TileSet" uid="uid://byyduefph6wqn" path="res://resources/default_tile_set.tres" id="2_paxxb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_paxxb"]
+size = Vector2(65536, 10000)
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_paxxb")
+
+[node name="InstantKillZone" type="Area2D" parent="."]
+z_index = -5
+position = Vector2(0, 500)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstantKillZone"]
+shape = SubResource("RectangleShape2D_paxxb")
+
+[node name="TextureRect" type="TextureRect" parent="InstantKillZone"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32768.0
+offset_right = 32768.0
+offset_bottom = 10000.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gldc4")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 process_mode = 1
