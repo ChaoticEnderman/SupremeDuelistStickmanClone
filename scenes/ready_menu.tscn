@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpaf5kbu8hnh0"]
+[gd_scene load_steps=12 format=3 uid="uid://dpaf5kbu8hnh0"]
 
 [ext_resource type="Script" uid="uid://ccdro2y1tgmm3" path="res://code/ui/ready_menu/ready_menu.gd" id="1_aru3y"]
 [ext_resource type="Texture2D" uid="uid://cmpblwuk8xqmr" path="res://assets/thumbnail.png" id="2_ldg7d"]
 [ext_resource type="Texture2D" uid="uid://c2c7qntm73r31" path="res://assets/main_menu_play_button.png" id="3_mw6r2"]
-[ext_resource type="Texture2D" uid="uid://c4pxnu34mwsn4" path="res://assets/main_menu_color.png" id="4_aru3y"]
 [ext_resource type="Texture2D" uid="uid://dji7np2tg2n5h" path="res://assets/main_menu_weapon.png" id="4_ldg7d"]
 [ext_resource type="Texture2D" uid="uid://sbj7me7l8pgc" path="res://assets/main_menu_hat.png" id="5_0b27c"]
 [ext_resource type="Texture2D" uid="uid://bla2ykqe6q5f4" path="res://assets/EmptyPlayerLimbTexture30x30.png" id="7_kgd7w"]
@@ -84,11 +83,6 @@ custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 texture_normal = ExtResource("4_ldg7d")
 
-[node name="LColorButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer"]
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
-texture_normal = ExtResource("4_aru3y")
-
 [node name="LHatButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
@@ -137,11 +131,6 @@ alignment = 1
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 texture_normal = ExtResource("4_ldg7d")
-
-[node name="RColorButton" type="TextureButton" parent="RightPanel/RightPanelContainer"]
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
-texture_normal = ExtResource("4_aru3y")
 
 [node name="RHatButton" type="TextureButton" parent="RightPanel/RightPanelContainer"]
 custom_minimum_size = Vector2(256, 256)

@@ -36,9 +36,6 @@ var jumping_time : int = 0
 ## Center of the screen, for partitioning to four quadrants
 var screen_center : Vector2 = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
 
-## All the accumulated inputs that is recorded in the _input function, will be resolved and cleared every tick
-var current_input_events : Array[InputEvent]
-
 func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	self.joystick_position = joystick_position
 	# Not really any way to make this simpler, but it works for now
@@ -48,7 +45,7 @@ func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_RIGHT:
 		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_RIGHT)
 		base_joystick.position = Vector2(get_window().size.x, get_window().size.y) + Vector2(-64.0, -64.0) * Globals.JOYSTICK_SCALE
-	# HACK: Disable top stuff because now only support 2 players
+	# Disable top stuff because now only support 2 players
 	#elif joystick_position == Globals.JOYSTICK_POSITION.TOP_LEFT:
 		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_LEFT)
 		#base_joystick.position = Vector2(0.0, 0.0) + Vector2(64.0, 64.0) * Globals.JOYSTICK_SCALE
@@ -67,14 +64,18 @@ func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	knob_joystick.position = Vector2(knob_joystick.position.x, knob_joystick.position.y + 32)
 
 func _input(event: InputEvent) -> void:
-	current_input_events.append(event)
+	if Globals.KEYBOARD_INPUT_ENABLED:
+		keyboard_input()
+	else:
+		touch_input(event)
 
+## Check if the input is in the correct partition. Only count mouse or touch input
 func touch_input_validation(event: InputEvent) -> bool:
 	# Check the type
 	if (not event is InputEventMouse) and (not event is InputEventScreenTouch):
 		return false
 	
-	
+	# Partition the screen into four quarters and only check input for the respective quarter
 	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
 		if not (event.position.x < screen_center.x and event.position.y > screen_center.y):
 			return false
@@ -89,47 +90,48 @@ func touch_input_validation(event: InputEvent) -> bool:
 			return false
 	return true
 
-func touch_input_dragging(event: InputEvent) -> bool:
-	if event == null:
-		return false
-	if not touch_input_validation(event):
-		return false
-	
-	if event is InputEventMouseButton or event is InputEventScreenTouch:
-		joystick_direction = (event.position - knob_joystick.global_position).normalized()
-		if event.is_pressed():
-			change_joystick_direction(true)
-		else:
-			change_joystick_direction(false)
-		return true
-	return false
-	
+## Joystick touch input. Support both touch and mouse input on the screen. Will also partition the screen to quarters for less buggy multi-touch support
 func touch_input(event: InputEvent) -> bool:
 	if event == null:
-		return true
-	if joystick_direction != Vector2.ZERO:
-		return true
-	if not touch_input_validation(event):
-		return true
-	
+		return false
+		
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		if not touch_input_validation(event):
+			return false
+		joystick_direction = (event.position - knob_joystick.global_position).normalized()
+		if event.is_pressed():
+			change_dragging(true)
+		else:
+			change_dragging(false)
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
-		if event.position == null:
-			return true
+		if not touch_input_validation(event):
+			change_dragging(false)
 		if dragging:
 			joystick_direction = (event.position - knob_joystick.global_position).normalized()
-			return false
+			change_dragging(dragging)
 	
 	return true
+
+## Keyboard input, harcoded WASD for left and Arrow keys for right joystick, I dont see the need in making this custom
+## Players will just learn to deal with this and use this as default joystick config anyways
 func keyboard_input():
-	if joystick_direction != Vector2.ZERO:
-		return
 	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
 		joystick_direction = Input.get_vector("JoystickBottomLeftMoveLeft", "JoystickBottomLeftMoveRight", "JoystickBottomLeftMoveUp", "JoystickBottomLeftMoveDown")
 	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_RIGHT:
 		joystick_direction = Input.get_vector("JoystickBottomRightMoveLeft", "JoystickBottomRightMoveRight", "JoystickBottomRightMoveUp", "JoystickBottomRightMoveDown")
 
-func change_joystick_direction(dragging: bool):
+## Helper function to automatically set the knob of joystick to center if the direction is zero and its not being dragged actively
+## Also change drection of joystick based on the direction
+func change_dragging(dragging: bool):
+	previous_dragging = self.dragging
 	self.dragging = dragging
+	# This to ensure that the action of releasing the joystick must be resolved in the tick input function
+	# So it wont have things like ghosting of input where when it release the game doesnt receive the input
+	if is_releasing == false:
+		is_releasing = previous_dragging and not dragging
+		if is_releasing:
+			print("joy/releasing")
+	
 	if dragging:
 		knob_joystick.position = knob_position
 		joystick_angle = Vector2.UP.angle_to(joystick_direction)
@@ -137,39 +139,13 @@ func change_joystick_direction(dragging: bool):
 	else:
 		knob_joystick.position = knob_position + Vector2(0.0, 32.0)
 		knob_joystick.rotation = 0.0
+		joystick_direction = Vector2.ZERO
 
 ## Function called every tick to check the direction of the joystick movement
 func tick_input() -> Vector2:
-	# Store the dragging value of the very previous tick, to compare with the current
-	previous_dragging = dragging
-	joystick_direction = Vector2.ZERO
-	
-	if Globals.KEYBOARD_INPUT_ENABLED:
-		keyboard_input()
-	else:
-		for i in range(current_input_events.size() - 1, 1, -1):
-			# Return to delete the event or not
-			if touch_input_dragging(current_input_events[i]):
-				current_input_events.remove_at(i)
-		for i in range(current_input_events.size() - 1, 1, -1):
-			# Return to delete the event or not
-			if touch_input(current_input_events[i]):
-				current_input_events.remove_at(i)
-	if Globals.KEYBOARD_INPUT_ENABLED:
-		if joystick_direction == Vector2.ZERO:
-			change_joystick_direction(false)
-		else:
-			change_joystick_direction(true)
-	else:
-		change_joystick_direction(self.dragging)
 	
 	if joystick_direction != Vector2.ZERO:
 		previous_joystick_direction = joystick_direction
-		
-	# This to ensure that the action of releasing the joystick must be resolved in the tick input function
-	# So it wont have things like ghosting of input where when it release the game doesnt receive the input
-	if is_releasing == false:
-		is_releasing = previous_dragging and not dragging
 	
 	return joystick_direction
 
@@ -190,8 +166,7 @@ func tick_input_is_jumping() -> Vector2:
 		jumping_time = 0
 	
 	if jumping_time >= Globals.JUMP_TIME:
-		print(jumping_time)
-		jumping_time = -1
+		jumping_time = 0
 		return joystick_direction
 	
 	return Vector2.ZERO

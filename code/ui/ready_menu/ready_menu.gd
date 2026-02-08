@@ -199,9 +199,9 @@ func initialize_hats(popup_panel: Control):
 		popup_panel.get_node("Control/GridContainer").add_child(control)
 		# Connect the pressed signal automatically
 		if popup_panel == left_panel_hat_popup:
-			button.pressed.connect(_on_hat_button_pressed.bind("l", id))
+			button.pressed.connect(_on_hat_button_pressed.bind(WeaponGlobals.PLAYER_SIDE.LEFT, id))
 		elif popup_panel == right_panel_hat_popup:
-			button.pressed.connect(_on_hat_button_pressed.bind("r", id))
+			button.pressed.connect(_on_hat_button_pressed.bind(WeaponGlobals.PLAYER_SIDE.RIGHT, id))
 		id += 1
 	print("RM/loading hats number ", id)
 

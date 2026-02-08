@@ -13,7 +13,8 @@ func _init(player: Player, projectile_data: ProjectileData) -> void:
 	SystemManager.world.add_child(self)
 
 ## Helper function to shorten the length of the code to getting the damage value
-func get_damage() -> int:
+func get_damage() -> float:
+	print("pro/damage ", super.get_damage())
 	return super.get_damage()
 
 ## Runs each physics tick to check collision and other stuff

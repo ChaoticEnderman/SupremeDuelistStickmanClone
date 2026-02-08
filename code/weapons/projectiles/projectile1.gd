@@ -9,5 +9,5 @@ func _init(player: Player, projectile_data: ProjectileData):
 func collision_exception(projectile: Projectile):
 	self.add_collision_exception_with(projectile)
 
-func get_damage() -> int:
+func get_damage() -> float:
 	return super.get_damage()

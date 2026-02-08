@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cqj3jblf4fr0w"]
 
-[ext_resource type="Script" uid="uid://cxwla5qduiw3p" path="res://code/ragdoll_physics.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://b70piq6y3ibwn" path="res://code/player.gd" id="1_qhqgy"]
+[ext_resource type="Script" uid="uid://cgvanqsoxhcvc" path="res://code/ragdoll_physics2.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cq2krgfuwgall" path="res://assets/EmptyPlayerLimbTexture10x50.png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://dm0bvxw6lbylx" path="res://assets/EmptyPlayerCircleTexture.png" id="4_dqkch"]
 
@@ -24,10 +24,10 @@ process_mode = 1
 script = ExtResource("1_qhqgy")
 
 [node name="RagdollPhysicsManager" type="Node2D" parent="."]
-script = ExtResource("1_g2els")
+script = ExtResource("2_dqkch")
 
 [node name="Torso" type="RigidBody2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, -25)
+position = Vector2(0, -26)
 collision_layer = 15
 collision_mask = 15
 
@@ -87,8 +87,8 @@ position = Vector2(0, 80)
 shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/L Thigh"]
-position = Vector2(2.38419e-07, 0)
 texture = ExtResource("3_dqkch")
+offset = Vector2(2.38419e-07, 0)
 
 [node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/L Thigh"]
 collision_mask = 9
@@ -101,36 +101,28 @@ position = Vector2(0, -1)
 rotation = 1.57079
 node_a = NodePath("../Torso")
 node_b = NodePath("../Stomach")
-bias = 0.9
 disable_collision = false
-softness = 16.0
-angular_limit_lower = -0.261799
-angular_limit_upper = 0.261799
 
 [node name="L Pelvis Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, 51.0002)
+position = Vector2(0, 50.0002)
 rotation = 3.14158
 node_a = NodePath("../Stomach")
 node_b = NodePath("../L Thigh")
-bias = 0.9
 disable_collision = false
-softness = 16.0
 angular_limit_lower = -0.261799
 angular_limit_upper = 0.261799
 
 [node name="R Pelvis Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
-position = Vector2(-0.00098002, 51)
+position = Vector2(-0.00098002, 50)
 rotation = -2.50975e-05
 node_a = NodePath("../Stomach")
 node_b = NodePath("../R Thigh")
-bias = 0.9
 disable_collision = false
-softness = 16.0
 angular_limit_lower = -0.261799
 angular_limit_upper = 0.261799
 
 [node name="L Shin" type="RigidBody2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, 136)
+position = Vector2(0, 135)
 collision_layer = 15
 collision_mask = 15
 
@@ -150,18 +142,16 @@ collision_mask = 9
 shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="L Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, 111)
+position = Vector2(0, 105)
 rotation = 1.57079
 node_a = NodePath("../L Thigh")
 node_b = NodePath("../L Shin")
-bias = 0.9
 disable_collision = false
-softness = 16.0
 angular_limit_lower = -0.261799
 angular_limit_upper = 0.261799
 
 [node name="R Shin" type="RigidBody2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, 136)
+position = Vector2(0, 135)
 collision_layer = 15
 collision_mask = 15
 
@@ -180,13 +170,11 @@ collision_mask = 9
 shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="R Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, 111)
+position = Vector2(0, 105)
 rotation = 1.57079
 node_a = NodePath("../R Thigh")
 node_b = NodePath("../R Shin")
-bias = 0.9
 disable_collision = false
-softness = 16.0
 angular_limit_lower = -0.261799
 angular_limit_upper = 0.261799
 
@@ -217,22 +205,24 @@ position = Vector2(0, -51)
 node_a = NodePath("../Torso")
 node_b = NodePath("../Head")
 disable_collision = false
+angular_limit_lower = 0.261799
+angular_limit_upper = -0.261799
+motor_target_velocity = 3.14159
 
 [node name="P Shoulder Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, -51)
 node_a = NodePath("../Torso")
 node_b = NodePath("../P Arm")
-disable_collision = false
 
 [node name="P Elbow Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, -1)
 node_a = NodePath("../P Arm")
 node_b = NodePath("../P Forearm")
-disable_collision = false
 
 [node name="P Forearm" type="RigidBody2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, 25)
 mass = 0.1
+sleeping = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Forearm"]
 shape = SubResource("RectangleShape2D_dqkch")
@@ -248,6 +238,7 @@ shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="P Arm" type="RigidBody2D" parent="RagdollPhysicsManager"]
 position = Vector2(0, -26)
+sleeping = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm"]
 shape = SubResource("RectangleShape2D_dqkch")
@@ -261,9 +252,6 @@ collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm/Area2D"]
 shape = SubResource("RectangleShape2D_dqkch")
-
-[node name="Shoulder Pivot" type="Node2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, -51)
 
 [node name="JumpBar" type="ProgressBar" parent="."]
 offset_left = -30.0

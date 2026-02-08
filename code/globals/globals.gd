@@ -1,18 +1,20 @@
 ## Contain global constants and utility methods
 extends Node
 
-signal joystick_scale_changed
+signal setting_reloaded
 
 ## Values for Godot's built-in damping value for the ragdolls
 const LINEAR_DAMP : int = 6
-const ANGULAR_DAMP : int = 100
+const ANGULAR_DAMP : int = 15
 
 ## The movement force of the ragdoll, including several types of movement
-const RAGDOLL_MOVE_FORCE : float = 10000.0 
+const RAGDOLL_MOVE_FORCE : float = 2000.0 
 ## Jump force of the ragdoll
-const RAGDOLL_JUMP_FORCE : float = 80000.0 
+const RAGDOLL_JUMP_FORCE : float = 300.0 
 ## Torque force for a custom angular limit system
-const RAGDOLL_TORQUE_FORCE : float = 500.0
+const RAGDOLL_TORQUE_FORCE : float = 100.0
+## Angle for the legs to aim to seperate toward during the walking animation
+const RAGDOLL_WALK_ANGLE : float = 30.0
 
 ## Baseline tps for the game, that is the number of physics tick per second
 var TPS : int = Engine.physics_ticks_per_second
@@ -55,6 +57,6 @@ func angle_to_180(angle_degree: float) -> float:
 		angle_degree -= 360.0
 	return angle_degree
 
-# TODO: Maybe consider removing this
+## Receiving signal from the setting controller and use this global class to propagate through all game components that change when the settings change
 func reload_settings():
-	joystick_scale_changed.emit()
+	setting_reloaded.emit()

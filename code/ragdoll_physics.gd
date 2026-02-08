@@ -13,7 +13,7 @@ var jump_cache : int = 60
 var recently_jumped : bool = false
 ## When the player is killed, the physics functions will stop
 var is_alive : bool = true
-## The jump action will apply the force 6 times in 6 frames
+## The jump action will apply the force 6 times in 6 frames, or a different constant in Globals for jump time
 var jump_stacking : int = 0
 ## This will lock the jumping angle even if the joystick move during the jump stacking period
 var locked_jumping_direction : Vector2
@@ -44,6 +44,16 @@ var player : Player
 @onready var l_shin : RigidBody2D = a_shin
 @onready var r_shin : RigidBody2D = b_shin
 
+@onready var hip_joint : PinJoint2D = get_node("Hip Joint")
+@onready var l_pelvis_joint : PinJoint2D = get_node("L Pelvis Joint")
+@onready var r_pelvis_joint : PinJoint2D = get_node("R Pelvis Joint")
+@onready var l_knee_joint : PinJoint2D = get_node("L Knee Joint")
+@onready var r_knee_joint : PinJoint2D = get_node("R Knee Joint")
+@onready var neck_joint : PinJoint2D = get_node("Neck Joint")
+@onready var p_shoulder_joint : PinJoint2D = get_node("P Shoulder Joint")
+@onready var p_elbow_joint : PinJoint2D = get_node("P Elbow Joint")
+#@onready var _joint : PinJoint2D = get_node("")
+
 ## Store the damage to be applied for this tick, will be subtracted from player's hp and clear every tick
 var damages : Array[float] = []
 
@@ -55,6 +65,9 @@ var slow_down_time : int = 0
 
 ## Special custom variable for the slow down effect
 var freeze_time : int = 0
+
+# TEST: Make a cycle for walking
+var walking_cycle : int = 0
 
 func _ready() -> void:
 	for child in self.get_children():
@@ -73,18 +86,20 @@ func _ready() -> void:
 			#child.add_child(area2d)
 		if child is PinJoint2D:
 			child.softness = 0.0
+			child.motor_enabled = true
+			
 	
 	# This monstrosity need to be refactored but Im procastinating
-	# TODO: try to refactor these code
 	# Making the legs dont touch eachother
 	l_thigh.add_collision_exception_with(r_thigh)
-	r_thigh.add_collision_exception_with(l_thigh)
-	l_shin.add_collision_exception_with(r_shin)
 	r_shin.add_collision_exception_with(l_shin)
+	
 	l_thigh.add_collision_exception_with(r_shin)
 	r_thigh.add_collision_exception_with(l_shin)
-	l_shin.add_collision_exception_with(r_thigh)
-	r_shin.add_collision_exception_with(l_thigh)
+	
+	# TEST: Making thigh and skin dont touchh eachother also
+	#l_shin.add_collision_exception_with(l_thigh)
+	#l_thigh.add_collision_exception_with(r_thigh)
 	
 	# Making the arms dont collide with the body and become independent
 	p_arm.add_collision_exception_with(head)
@@ -113,24 +128,29 @@ func set_hat(texture: Texture2D):
 	hat.texture = texture
 
 ## Master tick function to runs all other tick functions per physics tick
+## Force should be a normalized vector sent from the player movement input
 func tick_ragdoll(force: Vector2):
 	if is_alive:
 		if tick_freeze_ragdoll():
 			return
 		#Flipping the normals since the game normal is always like this
-		apply_ragdoll_central_force(Vector2(force.x, force.y * airborne_multiplier), Globals.RAGDOLL_MOVE_FORCE)
-		tick_check_legs()
+		apply_ragdoll_central_force(Vector2(force.x, force.y * airborne_multiplier), Globals.RAGDOLL_MOVE_FORCE / 1000)
+		#tick_check_legs()
 		tick_check_airborne()
-		tick_move_arms(force)
-		apply_central_torque(200.0, Globals.ANGULAR_DAMP)
-		apply_leg_torque(200.0, Globals.ANGULAR_DAMP)
-		apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, Globals.ANGULAR_DAMP)
-		#walking(force)
+		#tick_move_arms(force)
+		apply_central_torque(Globals.RAGDOLL_TORQUE_FORCE * 2, Globals.ANGULAR_DAMP)
+		#apply_leg_torque(Globals.RAGDOLL_TORQUE_FORCE, Globals.ANGULAR_DAMP)
+		#apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, Globals.ANGULAR_DAMP)
+		
+		walking(force,Globals.RAGDOLL_TORQUE_FORCE)
+		
 		tick_jump_stack()
 		
 		# For special effects
 		tick_slow_down_ragdoll()
 		
+		#print("rag/walking/l_disp ", l_thigh.rotation_degrees)
+		#print("rag/walking/r_disp ", r_thigh.rotation_degrees)
 
 ## A base function to move the ragdoll entirely by just the central parts, the torso and stomach
 ## Other functions can assume this is a full ragdoll movement force
@@ -139,6 +159,7 @@ func apply_ragdoll_central_force(direction: Vector2, strength: float):
 	if direction == Vector2.ZERO:
 		return
 	
+	print("rag/central direction ", direction * strength)
 	torso.apply_central_force(direction * strength)
 	stomach.apply_central_force(direction * strength)
 
@@ -342,19 +363,30 @@ func tick_check_area_collisions():
 
 ## Check collision with tiles in the tilemap, work once each tick for each limb
 func tick_check_tile_map_layer_collisions():
+	# Another nested nightmare, cant really refactor other than split to multiple functions so I will leave it like this
 	for child in self.get_children():
 		if child is RigidBody2D:
+			# Getting state of the limbs from the Physics Server, for reading the collision data
 			var state : PhysicsDirectBodyState2D = PhysicsServer2D.body_get_direct_state(child.get_rid())
+			# The limbs can collide with several objects, this loop is for looping for each individual one
 			for i in state.get_contact_count():
+				# Get the rid and object id of the colliding object
 				var collider_rid : RID = state.get_contact_collider(i)
-				var colliding_position = state.get_contact_collider_position(i)
-				
 				var collider_object_id := PhysicsServer2D.body_get_object_instance_id(collider_rid)
+				
+				# After getting the ID, we will generate a similiar instance of the collision object
 				var collider = instance_from_id(collider_object_id)
+				# If it turns out to be the exact instance as the game map, it imply that the colliding object is the map tile
 				if collider == SystemManager.game_map_tile_map:
+					# Get contact position to the map tile
+					var colliding_position = state.get_contact_collider_position(i)
 					var local_pos: Vector2 = SystemManager.game_map_tile_map.to_local(colliding_position)
+					# Nearest neighbor vector return a list of all possible tiles that might be colliding
+					# Read the function for more info, but basically this is for solving an edge case
+					# So if it happens to be not exact we will still be able to list all possibilities and try all 
 					var potential_collision_vectors = nearest_neighbor_vector(local_pos)
 					for vector in potential_collision_vectors:
+						# Getting tile coords and custom damage data for the tiles
 						var tile_coords: Vector2i = SystemManager.game_map_tile_map.local_to_map(vector)
 						var tile_data = SystemManager.game_map_tile_map.get_cell_tile_data(tile_coords)
 						if tile_data != null:
@@ -362,7 +394,6 @@ func tick_check_tile_map_layer_collisions():
 							damages.append(tile_data.get_custom_data("damage"))
 							if tile_data.get_custom_data("damage") != 0.0:
 								print("rag/touching map ", colliding_position)
-
 
 ## Internal helper function to recursively check if a node has the damageable composition
 func has_damageable(parent: Node) -> bool:
@@ -385,22 +416,23 @@ func nearest_neighbor_vector(vector: Vector2) -> Array[Vector2i]:
 	var dist_right = 1 - dist_left
 	var dist_up = abs(fract.y)
 	var dist_down = 1 - dist_up
-	# If its in between a vertical line then only two 
+	# If its in between a vertical or horizontal line then only two surrounding tiles are possible 
 	if dist_left == 0:
-		print("rag/nnv/horizontal exact touch")
+		return [Vector2i(floor(vector.x) - 1, floor(vector.y)), Vector2i(floor(vector.x), floor(vector.y))]
 	if dist_up == 0:
-		print("rag/nnv/vertical exact touch")
+		return [Vector2i(floor(vector.x), floor(vector.y) - 1), Vector2i(floor(vector.x), floor(vector.y))]
+	
 	var nearest_neighbor = min(dist_left, dist_right, dist_up, dist_down)
 	if dist_left == nearest_neighbor:
-		return Vector2i(floor(vector.x) - 1, floor(vector.y))
+		return [Vector2i(floor(vector.x) - 1, floor(vector.y))]
 	elif dist_right == nearest_neighbor:
-		return Vector2i(floor(vector.x) + 1, floor(vector.y))
+		return [Vector2i(floor(vector.x) + 1, floor(vector.y))]
 	elif dist_up == nearest_neighbor:
-		return Vector2i(floor(vector.x), floor(vector.y) - 1)
+		return [Vector2i(floor(vector.x), floor(vector.y) - 1)]
 	elif dist_down == nearest_neighbor:
-		return Vector2i(floor(vector.x), floor(vector.y) + 1)
-	# This is impossible to happen
-	return Vector2i.ZERO
+		return [Vector2i(floor(vector.x), floor(vector.y) + 1)]
+	# This is impossible to happen but Godot will complain lol
+	return [Vector2i.ZERO]
 
 ## Jump if the direction is not zero. Technically works without the != zero condition but just keep it
 func jump(direction: Vector2):
@@ -430,49 +462,115 @@ func dying_animation():
 	is_alive = false
 
 ## Function to add walk animation if the direction is not in the jumping direction
-#func walking(force: Vector2) -> bool:
-	## This is kinda redundant so just ignore this probably, the walk effect that the leg create is enough
-	#if force == Vector2.ZERO:
-		#return false
-	#var temp_angle : float = rad_to_deg(force.angle()) - 90
-	#if not (temp_angle < Globals.JUMPING_ANGLE_DEGREES and temp_angle > -Globals.JUMPING_ANGLE_DEGREES):
-		##l_thigh.apply_torque(100000.0)
-		##r_thigh.apply_torque(-100000.0)
-		#return true
-	#return false
+## Also if direction is in the range for 90 degrees arc under, it will skip and not walk also
+## If not walking then it will do leg torque function instead 
+func walking(direction: Vector2, force: float) -> bool:
+	if direction == Vector2.ZERO:
+		print("rag/walk/ ", stomach.global_rotation_degrees)
+		apply_angular_limit_torque(l_thigh, stomach.global_rotation_degrees + 30, 1500, 0)
+		apply_angular_limit_torque(r_thigh, stomach.global_rotation_degrees - 30, 1500, 0)
+		#apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, Globals.ANGULAR_DAMP)
+		return false
+	if abs(rad_to_deg(Vector2.UP.angle_to(direction))) > 135:
+		#apply_constant_leg_spacing(Globals.RAGDOLL_TORQUE_FORCE, Globals.ANGULAR_DAMP)
+		return false
+	
+	
+	walking_cycle += 1
+	var walk_power : float = 1.0
+	
+	# Use sine function to oscilate walking stuff
+	walk_power = cos(PI * (walking_cycle % 60) / 30)
+	print("rag/walk power left ", +(30 * -walk_power), " right ", -(30 * -walk_power))
+	print("rag/walk power true ", walk_power)
+	#apply_angular_limit_torque(l_thigh, stomach.global_rotation_degrees + (45 * -walk_power), 2000, 0.0)
+	#apply_angular_limit_torque(r_thigh, stomach.global_rotation_degrees - (45 * -walk_power), 2000, 0.0)
+	
+	var l_shin_target_angle = l_thigh.global_rotation_degrees + (-30 if l_thigh.global_rotation_degrees > 0 else 30)
+	var r_shin_target_angle = r_thigh.global_rotation_degrees + (30 if r_thigh.global_rotation_degrees < 0 else -30)
+	apply_angular_limit_torque(l_shin, l_shin_target_angle, 5000, 0)
+	apply_angular_limit_torque(r_shin, r_shin_target_angle, 5000, 0)
+	
+	#apply_angular_limit_torque(l_shin, 0, 500, 0)
+	#apply_angular_limit_torque(r_shin, 0, 500, 0)
+	
+	return true
 
 ## Custom angular limit system that apply the torque that scale quadratically by the angle difference
 ## To make the quadratic function keep the sign, one of the variable is the absolute value
-func apply_angular_limit_torque(body: RigidBody2D, target_angle : float, force : float, damp : float):
-	var angle_displacement = rad_to_deg(body.global_rotation) - target_angle
-	angle_displacement = fmod(angle_displacement, 360.0)
+func apply_angular_limit_torque(body: RigidBody2D, target_angle: float, force: float, damp: float, angle_limit: float = 5.0):
+	var angle_displacement = body.global_rotation_degrees - target_angle
+	angle_displacement = wrapf(angle_displacement, -180, 180)
+	if abs(angle_displacement) < angle_limit:
+		print("rag/aalt/ignoring small disp")
+		return
+	
 	# Torque calculated by quadratic interpolation. This was used primarily before to create smooth torque
 	# However, the quadratic function grow really fast and might make the ragdoll unstable
-	var torque = (-force * angle_displacement * abs(angle_displacement)) - (damp * body.angular_velocity)
+	#var torque = (-force * angle_displacement * abs(angle_displacement)) - (damp * body.angular_velocity)
 	# So now we are testing this with linear interpolation, as shown here
-	#var torque = (-force * angle_displacement * 10) - (damp * body.angular_velocity)
-
-	#var torque_limit = 64000
-	#if torque > torque_limit:
+	var torque = (force * -angle_displacement)# - (damp * body.angular_velocity)
+	
+	var torque_limit = 64000
+	if torque > torque_limit:
+		pass
+		#print("rag/alq/excess limit ", torque)
 		#torque = torque_limit
-	#if torque < -torque_limit:
+	if torque < -torque_limit:
+		pass
+		#print("rag/alq/excess limit ", torque)
 		#torque = -torque_limit
-	body.apply_torque(torque)
+	body.apply_torque_impulse(torque)
 
 ## Make the ragdoll stand rather upright
 func apply_central_torque(force : float, damp : float):
-	apply_angular_limit_torque(torso, 0.0, force, damp)
-	apply_angular_limit_torque(stomach, 0.0, force * 4, damp)
+	apply_angular_limit_torque(torso, 0, force, damp)
+	apply_angular_limit_torque(stomach, 0, force, damp)
 
-## Make the shins standing in a stable manner
+## Make the shins standing in a stable manner, relatively to the thighs
 func apply_leg_torque(force : float, damp : float):
-	apply_angular_limit_torque(l_shin, l_thigh.rotation, force, damp)
-	apply_angular_limit_torque(r_shin, r_thigh.rotation, force, damp)
+	var l_shin_target_angle = l_thigh.global_rotation_degrees + (-45 if l_thigh.global_rotation_degrees > 0 else 45)
+	var r_shin_target_angle = r_thigh.global_rotation_degrees + (45 if r_thigh.global_rotation_degrees < 0 else -45)
+	apply_angular_limit_torque(l_shin, l_shin_target_angle, force, 0)
+	apply_angular_limit_torque(r_shin, r_shin_target_angle, force, 0)
+	
 
+## FIXME: This is about to be removed
 ## Spread the legs out from eachother, make it stand and not topple over one side
 func apply_constant_leg_spacing(force: float, damp: float):
+	pass
 	#var leg_distance = l_thigh.rotation - r_thigh.rotation
-	apply_angular_limit_torque(l_thigh, 20.0, force / 2, damp)
-	apply_angular_limit_torque(r_thigh, -20.0, force / 2, damp)
-	apply_angular_limit_torque(l_shin, 0.0, force / 4, damp)
-	apply_angular_limit_torque(r_shin, 0.0, force / 4, damp)
+	#apply_angular_limit_torque(l_thigh, 20.0, force / 2, damp)
+	#apply_angular_limit_torque(r_thigh, -20.0, force / 2, damp)
+	#apply_angular_limit_torque(l_shin, 0.0, force / 4, damp)
+	#apply_angular_limit_torque(r_shin, 0.0, force / 4, damp)
+	
+	#var target_angle : int = 30# + stomach.global_rotation_degrees
+	#var motor_velocity_thigh : float = 15000 / Globals.TPS
+	#var l_thigh_displacement : float = (target_angle - l_thigh.rotation_degrees)
+	#var r_thigh_displacement : float = -(target_angle + r_thigh.rotation_degrees)
+	#var motor_velocity_shin : float = 10000 / Globals.TPS
+	#var l_shin_displacement : float = (l_thigh.rotation_degrees - l_shin.rotation_degrees)
+	#var r_shin_displacement : float = (r_thigh.rotation_degrees - r_shin.rotation_degrees)
+	#if abs(l_shin_displacement) > 180 or abs(r_shin_displacement) > 180:
+	#	print("rag/abnormal shin angle l ", l_shin_displacement, " r ", r_shin_displacement)
+	#	print("rag/abnormal fixed angle l ", wrapf(l_shin_displacement, -180.0, 180.0), " r ", wrapf(r_shin_displacement, -180.0, 180.0))
+	#l_shin_displacement = wrapf(l_shin_displacement, -180.0, 180.0)
+	#r_shin_displacement = wrapf(r_shin_displacement, -180.0, 180.0)
+	#l_shin_displacement = -l_shin.rotation_degrees
+	#r_shin_displacement = -r_shin.rotation_degrees
+	
+	#l_displacement = l_displacement * abs(l_displacement) / 20
+	#r_displacement = r_displacement * abs(r_displacement) / 20
+	
+	#print("rag/leg spacing/stomach angle ", stomach.global_rotation_degrees)
+	
+	#l_thigh_displacement = deg_to_rad(l_thigh_displacement)
+	#r_thigh_displacement = deg_to_rad(r_thigh_displacement)
+	#l_shin_displacement = deg_to_rad(l_shin_displacement)
+	#r_shin_displacement = deg_to_rad(r_shin_displacement)
+	#l_pelvis_joint.motor_target_velocity = motor_velocity_thigh * l_thigh_displacement
+	#r_pelvis_joint.motor_target_velocity = motor_velocity_thigh * r_thigh_displacement
+	#l_knee_joint.motor_target_velocity = motor_velocity_shin * l_shin_displacement
+	#r_knee_joint.motor_target_velocity = motor_velocity_shin * r_shin_displacement
+	

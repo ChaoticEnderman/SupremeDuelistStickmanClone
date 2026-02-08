@@ -16,7 +16,7 @@ class_name Player
 @onready var health_bar_color : StyleBoxFlat = health_bar.get_theme_stylebox("fill").duplicate()
 
 ## Input manager scene that handle all types of input
-var input_manager = CanvasLayer
+var input_manager = Joystick
 
 ## The single weapon that this stickman hold, since each stickman have exactly one weapon holding
 var weapon = Weapon
@@ -62,14 +62,22 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	ragdoll.head.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.HEAD, player_side)
 	ragdoll.torso.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.TORSO, player_side)
 	ragdoll.stomach.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.STOMACH, player_side)
-	ragdoll.a_thigh.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_THIGH, player_side)
-	ragdoll.a_shin.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_SHIN, player_side)
-	ragdoll.b_thigh.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_THIGH, player_side)
-	ragdoll.b_shin.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_SHIN, player_side)
+	ragdoll.l_thigh.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_THIGH, player_side)
+	ragdoll.l_shin.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_SHIN, player_side)
+	ragdoll.r_thigh.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_THIGH, player_side)
+	ragdoll.r_shin.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.R_SHIN, player_side)
 	ragdoll.p_arm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_ARM, player_side)
 	ragdoll.p_forearm.get_node("Sprite2D").modulate = PlayerSpriteGlobals.get_limb(PlayerSpriteGlobals.LIMB_INDEX.L_FOREARM, player_side)
 	
 	ragdoll.set_hat(PlayerSpriteGlobals.get_hat(player_side))
+	
+	Globals.setting_reloaded.connect(func():
+		print("player/change setting")
+		if Globals.KEYBOARD_INPUT_ENABLED:
+			input_manager.visible = false
+		else:
+			input_manager.visible = true
+	)
 
 # Master tick function to tick the player and its dependencies
 func _on_game_tick():
@@ -108,12 +116,12 @@ func tick_hud():
 	update_jump_bar()
 	update_health_bar()
 	update_score_label()
-	hand_position = ragdoll.p_forearm.global_position
+	hand_position = ragdoll.get_arm_position()
 
 ## Update the value and the visibility status of the jump bar according to the jump time
 func update_jump_bar():
 	# Reset jump when the radgoll just jumped and is airborne
-	if ragdoll.jump_cache == 0:
+	if ragdoll.recently_touched_ground == 0:
 		jump_bar.value = 0
 		input_manager.jumping_time = 0 
 	# Otherwise, update the jump bar by the jumping percentage
@@ -157,7 +165,6 @@ func check_collision():
 	ragdoll.tick_check_collisions()
 	if not (ragdoll.damages == null or ragdoll.damages == []):
 		for damage in ragdoll.damages:
-			print("Player/resolving ", ragdoll.damages.size(), " different damage events")
 			player_hp -= damage * Globals.DAMAGE_MULTIPLIER
 
 func _queue_free():

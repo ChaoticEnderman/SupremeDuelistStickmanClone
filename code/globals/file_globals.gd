@@ -16,7 +16,7 @@ func save_map_file_from_user_directory():
 
 ## Runs every time the project start to copy default maps from res:// folder to user:// folder
 func copy_maps_to_user_maps_directory():
-	print("FG/copying maps to user maps")
+	print("FG/copying maps to user maps ", ProjectSettings.globalize_path(maps_path))
 	# Creating the maps folder if not exist already
 	if not DirAccess.dir_exists_absolute(maps_path):
 		DirAccess.make_dir_absolute(maps_path)

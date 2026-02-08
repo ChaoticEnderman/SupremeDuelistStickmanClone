@@ -25,8 +25,8 @@ func _on_game_tick(delta: float):
 		var test = (timer % 10) / 3
 		player.weapon.sprite.modulate = Color(test, test, test)
 		if timer == 1:
-			print("A6/summoning projectile direction ", direction)
 			var projectile = Projectile3.new(player, super.get_projectile_data_by_id(3))
+			print("A6/summoning projectile data ", super.get_projectile_data_by_id(3).damage)
 			
 			projectile.summon_as_projectile(direction, player.weapon.position)
 			# Harcoding the value to make this projectile 3x bigger than normal

@@ -45,7 +45,7 @@ func add_projectile_data(data: ProjectileData):
 	self.projectile_data = data
 	# Seperate the projectile from the wall if it can pass
 	if projectile_data.can_go_through_wall:
-		self.add_collision_exception_with(SystemManager.game_map)
+		self.add_collision_exception_with(SystemManager.game_map_tile_map)
 		self.set_collision_mask_value(3, false)
 	# Take the damage value from the projectile data
 	self.damageable = Damageable.new(data.damage, player.ragdoll)
@@ -61,7 +61,6 @@ func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 	# Construct the node
 	var collision : CollisionShape2D = CollisionShape2D.new()
 	collision.shape = self.hitbox_shape
-	print("GO/set sprite ", projectile_data, " texture ", projectile_data.sprite)
 	sprite.texture = projectile_data.sprite
 	# HACK: Hardcoded the scale value for the sprite because it cannot be scaled down normally
 	sprite.scale = Vector2(0.25, 0.25)
@@ -99,7 +98,8 @@ func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 func _ready() -> void:
 	GameState.game_tick.connect(_on_game_tick)
 
-func get_damage() -> int:
+func get_damage() -> float:
+	print("GO/damage is ", damageable.damage_tick)
 	return damageable.damage_tick
 
 ## Function to test if player exist and return the weapon, particularly useful for objects that reference the player weapon

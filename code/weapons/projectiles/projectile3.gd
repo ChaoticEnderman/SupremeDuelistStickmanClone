@@ -7,7 +7,8 @@ var game_tick : int = 0
 func _init(player: Player, projectile_data: ProjectileData):
 	super._init(player, projectile_data)
 
-func get_damage() -> int:
+func get_damage() -> float:
+	print("P3/damage is ", super.get_damage())
 	return super.get_damage()
 
 ## Runs each physics tick to check collision and other stuff
@@ -22,6 +23,8 @@ func _on_game_tick(delta: float):
 	if game_tick > Globals.TPS * 2:
 		self.queue_free()
 	self.check_collision()
+	
+	print("P3/damage is ", super.get_damage())
 
 func check_collision():
 	pass
