@@ -46,7 +46,7 @@ var bottom_panel_brush_buttons : Array[TextureButton]
 var setting_popup_shown : bool = false
 
 ## Store the temporary rectangle when using the rectangle tool to draw
-var rectangle_drawn : Rect2i = Rect2i()
+var rectangle_drawn : Rect2
 
 ## Current tool that is selected in the editor
 var editing_tool : EDITING_TOOL = EDITING_TOOL.MOVE
@@ -81,7 +81,11 @@ var brush_tile : Vector2i
 ## Default game tileset resource
 var default_tile_set : TileSet = preload("res://resources/default_tile_set.tres")
 
+## Store the screen center position independent of screen scaling for various use
+var screen_center : Vector2
+
 func _ready() -> void:
+	print("ME/ready")
 	GameState.system_state_changed.connect(_on_system_state_changed)
 	bottom_panel_tool_buttons.append(bottom_panel_ui.get_node("ButtonMove"))
 	bottom_panel_tool_buttons.append(bottom_panel_ui.get_node("ButtonPaint"))
@@ -93,6 +97,10 @@ func _ready() -> void:
 	set_left_panel_tile_buttons()
 	load_map(0)
 	#print("ME/cam pos ", camera.position)
+	
+	#var edit_zone = get_node("CanvasLayer/EditingZone")
+	#screen_center = Vector2(edit_zone.position + edit_zone.size / 2) 
+	#screen_center = Vector2(640, 360)
 
 func _on_system_state_changed(state):
 	self.visible = (state == GameState.SYSTEM_STATE.MAP_EDIT)
@@ -132,7 +140,8 @@ func _input(event: InputEvent) -> void:
 	# Ignoring input for this if the settings panel is turned on
 	if setting_popup_shown:
 		return
-	
+	screen_center = Vector2((get_viewport().get_visible_rect().size.x / 2), (get_viewport().get_visible_rect().size.y / 2))
+	print("me/input pos ", event.position, " center ", screen_center)
 	if editing_tool == EDITING_TOOL.MOVE:
 		map_dragging_input(event)
 	else:
@@ -185,7 +194,6 @@ func brush_input(event: InputEvent, tile_type: Vector2i):
 			if input_is_invalid(event):
 				return
 			# Minus the vector to drive this to the screen center
-			var screen_center = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
 			var tile_position : Vector2 = (event.position - screen_center) + camera.position * camera_zoom
 			tile_position = tile_position / camera_zoom
 			tile_position = Vector2(tile_position.x / 64, tile_position.y / 64).floor()
@@ -194,10 +202,9 @@ func brush_input(event: InputEvent, tile_type: Vector2i):
 
 ## Similiar to map dragging input, this will do paint but only for like one by one block
 func rectangle_input(event: InputEvent, tile_type: Vector2i):
-	var screen_center = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
 	var tile_position : Vector2 = (event.position - screen_center) + camera.position * camera_zoom
 	tile_position = tile_position / camera_zoom
-	tile_position = Vector2(tile_position.x / 64, tile_position.y / 64).floor()
+	#tile_position = Vector2(tile_position.x / 64, tile_position.y / 64).round()
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		if input_is_invalid(event):
 			return
@@ -205,20 +212,26 @@ func rectangle_input(event: InputEvent, tile_type: Vector2i):
 		if event.is_pressed():
 			# When input is pressed, will store the starting position 
 			paint_dragging = true
-			rectangle_drawn.position = Vector2i(tile_position.floor())
+			rectangle_drawn.position = tile_position
 			print("ME/rect/first is ", rectangle_drawn.position)
 		else:
 			paint_dragging = false
-			rectangle_drawn.end = Vector2i(tile_position.floor())
 			
 			normalize_rectangle(tile_position)
 			
-			MapController.draw_rect(rectangle_drawn, tile_type)
+			var rect : Rect2i
+			rect.position = Vector2i((rectangle_drawn.position / 64).floor())
+			rect.end = Vector2i((rectangle_drawn.end / 64).floor())
+			MapController.draw_rect(rect, tile_type)
 			MapController.load_map(map)
+			
+			rectangle_drawn = Rect2(0,0,0,0)
+			queue_redraw()
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		if paint_dragging:
-			# TODO: Implement the visual box to make the player see the rectangle drawn easier
+			rectangle_drawn.end = tile_position
 			print("ME/rect/dragging ", tile_position)
+			queue_redraw()
 
 ## Private helper class to normalize the rectangle from the draw rect function
 func normalize_rectangle(ending_tile_position: Vector2i):
@@ -233,11 +246,10 @@ func normalize_rectangle(ending_tile_position: Vector2i):
 	# Keep in mind that the y coordinates is inverse in Godot in general so we still work with that
 	true_bottom_right = Vector2i(max(rect_corner_a.x, rect_corner_b.x), max(rect_corner_a.y, rect_corner_b.y))
 	
-	rectangle_drawn.position = true_top_left
-	rectangle_drawn.end = true_bottom_right
+	rectangle_drawn.position = Vector2(true_top_left)
+	rectangle_drawn.end = Vector2(true_bottom_right)
 
 func bucket_input(event: InputEvent, tile_type: Vector2i):
-	var screen_center = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
 	var tile_position : Vector2 = (event.position - screen_center) + camera.position * camera_zoom
 	tile_position = tile_position / camera_zoom
 	tile_position = Vector2(tile_position.x / 64, tile_position.y / 64).floor()
@@ -247,6 +259,14 @@ func bucket_input(event: InputEvent, tile_type: Vector2i):
 		if event.is_pressed():
 			MapController.fill_bucket(tile_position, MapController.get_atlas_coords_by_position(tile_position), tile_type)
 			MapController.load_map(map)
+
+## Draw a custom rectangle box to draw the visual boxes for the draw_rect function 
+func _draw() -> void:
+	print("me/rect drawn is ", rectangle_drawn.position, " to ", rectangle_drawn.end)
+	var rect : Rect2
+	rect.position = rectangle_drawn.position
+	rect.end = rectangle_drawn.end
+	draw_rect(rect, Color.GREEN)
 
 ## A rather hack to check if the event is outside the editing area. Will have other checks too
 func input_is_invalid(event: InputEvent) -> bool:

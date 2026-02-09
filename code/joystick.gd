@@ -33,18 +33,25 @@ var is_releasing : bool
 ## However if the player just stop this will be resetted
 var jumping_time : int = 0
 
+## Store the jump cooldown in a short succesion after jumping, to prevent double jump bugs
+var jump_cooldown : int
+
 ## Center of the screen, for partitioning to four quadrants
-var screen_center : Vector2 = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
+var screen_center : Vector2# = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
 
 func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	self.joystick_position = joystick_position
+	
+	# This is independent to viewport scaling and these stuff
+	var window_size = get_viewport().get_visible_rect().size
+	screen_center = Vector2((get_viewport().get_visible_rect().size.x / 2), (get_viewport().get_visible_rect().size.y / 2))
 	# Not really any way to make this simpler, but it works for now
 	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
 		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_LEFT)
-		base_joystick.position = Vector2(0.0, get_window().size.y) + Vector2(64.0, -64.0) * Globals.JOYSTICK_SCALE
+		base_joystick.global_position = Vector2(0.0, window_size.y) + Vector2(64.0, -64.0) * Globals.JOYSTICK_SCALE
 	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_RIGHT:
 		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_BOTTOM_RIGHT)
-		base_joystick.position = Vector2(get_window().size.x, get_window().size.y) + Vector2(-64.0, -64.0) * Globals.JOYSTICK_SCALE
+		base_joystick.global_position = Vector2(window_size.x, window_size.y) + Vector2(-64.0, -64.0) * Globals.JOYSTICK_SCALE
 	# Disable top stuff because now only support 2 players
 	#elif joystick_position == Globals.JOYSTICK_POSITION.TOP_LEFT:
 		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_LEFT)
@@ -52,6 +59,8 @@ func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	#elif joystick_position == Globals.JOYSTICK_POSITION.TOP_RIGHT:
 		#base_joystick.set_anchors_preset(Control.LayoutPreset.PRESET_TOP_RIGHT)
 		##base_joystick.position = Vector2(get_window().size.x, 0.0) + Vector2(-64.0, 64.0) * Globals.JOYSTICK_SCALE
+	
+	print("joy/center ", screen_center)
 	
 	# Set the knob position to the default value
 	knob_position = knob_joystick.position
@@ -71,43 +80,55 @@ func _input(event: InputEvent) -> void:
 
 ## Check if the input is in the correct partition. Only count mouse or touch input
 func touch_input_validation(event: InputEvent) -> bool:
-	# Check the type
-	if (not event is InputEventMouse) and (not event is InputEventScreenTouch):
-		return false
 	
 	# Partition the screen into four quarters and only check input for the respective quarter
 	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
-		if not (event.position.x < screen_center.x and event.position.y > screen_center.y):
-			return false
+		if get_pos(event).x < screen_center.x and get_pos(event).y > screen_center.y:
+			return true
 	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_RIGHT:
-		if not (event.position.x > screen_center.x and event.position.y > screen_center.y):
-			return false
-	if joystick_position == Globals.JOYSTICK_POSITION.TOP_LEFT:
-		if not (event.position.x < screen_center.x and event.position.y < screen_center.y):
-			return false
-	if joystick_position == Globals.JOYSTICK_POSITION.TOP_RIGHT:
-		if not (event.position.x > screen_center.x and event.position.y < screen_center.y):
-			return false
-	return true
+		if get_pos(event).x > screen_center.x and get_pos(event).y > screen_center.y:
+			return true
+	#if joystick_position == Globals.JOYSTICK_POSITION.TOP_LEFT:
+		#if not (event.global_position.x < screen_center.x and event.global_position.y < screen_center.y):
+			#return false
+	#if joystick_position == Globals.JOYSTICK_POSITION.TOP_RIGHT:
+		#if not (event.global_position.x > screen_center.x and event.global_position.y < screen_center.y):
+			#return false
+	return false
+
+## Get the position of the mouse/touch event independent on the scaling of the game viewport
+func get_pos(event: InputEvent) -> Vector2:
+	#var vp_size = get_viewport().get_visible_rect().size
+	#var mouse_pos = get_viewport().get_mouse_position()
+	#var normalized_pos = mouse_pos / vp_size
+	return event.position
+	return base_joystick.get_global_mouse_position()
+	return get_viewport().get_mouse_position()
 
 ## Joystick touch input. Support both touch and mouse input on the screen. Will also partition the screen to quarters for less buggy multi-touch support
 func touch_input(event: InputEvent) -> bool:
 	if event == null:
 		return false
-		
+	#if not touch_input_validation(event):
+		#return false
+	
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		if not touch_input_validation(event):
 			return false
-		joystick_direction = (event.position - knob_joystick.global_position).normalized()
+		joystick_direction = (get_pos(event) - knob_joystick.global_position).normalized()
 		if event.is_pressed():
 			change_dragging(true)
 		else:
 			change_dragging(false)
+		print("joy/touch press ", dragging)
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		if not touch_input_validation(event):
-			change_dragging(false)
+			#change_dragging(false)
+			return false
+		#else:
+		print("joy/drag inside region ", dragging, " ", get_pos(event))
 		if dragging:
-			joystick_direction = (event.position - knob_joystick.global_position).normalized()
+			joystick_direction = (get_pos(event) - knob_joystick.global_position).normalized()
 			change_dragging(dragging)
 	
 	return true
@@ -160,13 +181,20 @@ func tick_input_is_releasing() -> Vector2:
 ## Function called every tick to check if the player is jumping at the current tick
 ## Return the jump direction if the player is jumping, otherwise return zero
 func tick_input_is_jumping() -> Vector2:
+	if jump_cooldown > 0:
+		jump_cooldown -= 1
+	
 	if rad_to_deg(joystick_angle) < Globals.JUMPING_ANGLE_DEGREES and rad_to_deg(joystick_angle) > -Globals.JUMPING_ANGLE_DEGREES and dragging:
-		jumping_time += 1
+		if jump_cooldown == 0:
+			jumping_time += 1
+		else:
+			jumping_time == 0
 	else:
 		jumping_time = 0
 	
 	if jumping_time >= Globals.JUMP_TIME:
 		jumping_time = 0
+		jump_cooldown = Globals.TPS / 4
 		return joystick_direction
 	
 	return Vector2.ZERO

@@ -39,7 +39,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ldg7d")
-expand_mode = 1
+expand_mode = 4
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1

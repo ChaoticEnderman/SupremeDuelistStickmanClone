@@ -47,8 +47,6 @@ var locked_jumping_direction : Vector2
 ## The number of succesion the jump apply jump impulse. Will apply a small impulse every tick until the stack deplete
 ## This is for making a more stable jump animation that can still go high if needed 
 var jump_stacking : int
-## Store the jump cooldown in a short succesion after jumping, to prevent double jump bugs
-var jump_cooldown : int
 
 ## Store temporary damages for the player class to clear out and reduce hp for damage on each tick
 var damages : Array[float] = []
@@ -148,7 +146,7 @@ func tick_ragdoll(direction: Vector2) -> void:
 	rotate_arm(direction)
 	
 	make_ragdoll_stand_upright()
-	make_ragdoll_shin_upright()
+	#make_ragdoll_shin_upright()
 	
 	check_thigh_options(ragdoll_direction)
 	
@@ -194,15 +192,15 @@ func make_ragdoll_stand_upright():
 ## Make the shin upright and relatively parallel to the stomach limb. Torque is calculated directly from thighs so indirectly from shins
 ## Through the intermediate thigh, it will be a 45-45 angle flick in most cases. 
 func make_ragdoll_shin_upright():
-	var l_shin_target_angle = l_thigh.global_rotation_degrees + (-45 if l_thigh.global_rotation_degrees > 0 else 45)
-	var r_shin_target_angle = r_thigh.global_rotation_degrees + (45 if r_thigh.global_rotation_degrees < 0 else -45)
-	angular_limit_torque(l_shin, l_shin_target_angle, Globals.RAGDOLL_TORQUE_FORCE * 2)
-	angular_limit_torque(r_shin, r_shin_target_angle, Globals.RAGDOLL_TORQUE_FORCE * 2)
+	var l_shin_target_angle = l_thigh.global_rotation_degrees + (-Globals.RAGDOLL_WALK_ANGLE if l_thigh.global_rotation_degrees > 0 else Globals.RAGDOLL_WALK_ANGLE)
+	var r_shin_target_angle = r_thigh.global_rotation_degrees + (Globals.RAGDOLL_WALK_ANGLE if r_thigh.global_rotation_degrees < 0 else -Globals.RAGDOLL_WALK_ANGLE)
+	angular_limit_torque(l_shin, l_shin_target_angle, Globals.RAGDOLL_TORQUE_FORCE * 4)
+	angular_limit_torque(r_shin, r_shin_target_angle, Globals.RAGDOLL_TORQUE_FORCE * 4)
 
 ## Making the ragdoll thigh roughly in 45 degrees angle left and right of the stomach, useful for standing states
 func make_ragdoll_thigh_seperated():
-	angular_limit_torque(l_thigh, stomach.global_rotation_degrees + Globals.RAGDOLL_WALK_ANGLE, Globals.RAGDOLL_TORQUE_FORCE)
-	angular_limit_torque(r_thigh, stomach.global_rotation_degrees - Globals.RAGDOLL_WALK_ANGLE, Globals.RAGDOLL_TORQUE_FORCE)
+	angular_limit_torque(l_thigh, stomach.global_rotation_degrees + Globals.RAGDOLL_WALK_ANGLE, Globals.RAGDOLL_TORQUE_FORCE * 6)
+	angular_limit_torque(r_thigh, stomach.global_rotation_degrees - Globals.RAGDOLL_WALK_ANGLE, Globals.RAGDOLL_TORQUE_FORCE * 6)
 
 ## Check to see what should be done with the thigh, the important parts for moving the ragdolls
 ## If the angle is none then make the thigh seperated, basic and will work for stances
@@ -212,10 +210,26 @@ func make_ragdoll_thigh_seperated():
 func check_thigh_options(direction: Vector2):
 	if direction == Vector2.ZERO:
 		make_ragdoll_thigh_seperated()
+		make_ragdoll_shin_upright()
 		return
 	if abs(rad_to_deg(Vector2.UP.angle_to(direction))) > 135:
+		# When crouching, reducing shin torque by a third to let the legs stay horizontal in some cases
+		# TODO: Put all of this back to the shin torque function with parameters
+		var walk_angle = Globals.RAGDOLL_WALK_ANGLE / 3
+		var l_shin_target_angle = l_thigh.global_rotation_degrees + (-walk_angle if l_thigh.global_rotation_degrees > 0 else walk_angle)
+		var r_shin_target_angle = r_thigh.global_rotation_degrees + (walk_angle if r_thigh.global_rotation_degrees < 0 else -walk_angle)
+		angular_limit_torque(l_shin, l_shin_target_angle, Globals.RAGDOLL_TORQUE_FORCE * 4)
+		angular_limit_torque(r_shin, r_shin_target_angle, Globals.RAGDOLL_TORQUE_FORCE * 4)
+		#make_ragdoll_shin_upright()
 		return
+	
 	walk(direction)
+	# When walking, reduce shin torque by one third to be more flexible following the thigh that is moving quickly
+	var walk_angle = Globals.RAGDOLL_WALK_ANGLE / 3
+	var l_shin_target_angle = l_thigh.global_rotation_degrees + (-walk_angle if l_thigh.global_rotation_degrees > 0 else walk_angle)
+	var r_shin_target_angle = r_thigh.global_rotation_degrees + (walk_angle if r_thigh.global_rotation_degrees < 0 else -walk_angle)
+	angular_limit_torque(l_shin, l_shin_target_angle, Globals.RAGDOLL_TORQUE_FORCE * 2)
+	angular_limit_torque(r_shin, r_shin_target_angle, Globals.RAGDOLL_TORQUE_FORCE * 2)
 
 ## Walk animation by swinging the legs back and forth based on a sine function oscillation
 ## Direction can be scaled based on the on_air_multiplier multiplier which limit how it can walk while being on air??
@@ -226,10 +240,12 @@ func walk(direction: Vector2):
 	if walking_tick % 30 == 0:
 		pass
 	# Use sine function to oscilate walking stuff
-	walk_power = sin(PI * (walking_tick % 60) / 30)
+	walk_power = sin(3 * PI * walking_tick / Globals.TPS)
 	
-	angular_limit_torque(l_thigh, stomach.global_rotation_degrees + (Globals.RAGDOLL_WALK_ANGLE * -walk_power), Globals.RAGDOLL_TORQUE_FORCE * 15)
-	angular_limit_torque(r_thigh, stomach.global_rotation_degrees - (Globals.RAGDOLL_WALK_ANGLE * -walk_power), Globals.RAGDOLL_TORQUE_FORCE * 15)
+	# Default multiplier for force is 10 on ground but decreased on air to remove leg shaking on air where its free
+	var multiplier : int = (10 * on_air_multiplier) if (on_air_multiplier < 1) else 10
+	angular_limit_torque(l_thigh, stomach.global_rotation_degrees + (Globals.RAGDOLL_WALK_ANGLE * -walk_power), Globals.RAGDOLL_TORQUE_FORCE * multiplier)
+	angular_limit_torque(r_thigh, stomach.global_rotation_degrees - (Globals.RAGDOLL_WALK_ANGLE * -walk_power), Globals.RAGDOLL_TORQUE_FORCE * multiplier)
 
 ## Function to check if the ragdoll shins is airborne, since these limbs are what dictate the air state of the ragdoll
 func tick_check_on_air():
@@ -268,8 +284,6 @@ func tick_jump_stack():
 		jump_stacking -= 1
 		jump_entire_ragdoll_impulse(locked_jumping_direction, Globals.RAGDOLL_JUMP_FORCE)
 		#recently_jumped = true
-	if jump_cooldown > 0 and is_alive:
-		jump_cooldown -= 1
 
 func tick_check_collisions():
 	damages = []
@@ -414,7 +428,7 @@ func nearest_neighbor_vector(vector: Vector2) -> Array[Vector2i]:
 
 ## Jump if the direction is not zero.
 func jump(direction: Vector2):
-	if recently_touched_ground > 0 and direction != Vector2.ZERO and jump_cooldown == 0 and is_alive:
+	if recently_touched_ground > 0 and direction != Vector2.ZERO and is_alive:
 		print("rag/jump! ")
 		# Lock the jump direction to the same thing so the tick_jump_stack function will jump same
 		locked_jumping_direction = direction

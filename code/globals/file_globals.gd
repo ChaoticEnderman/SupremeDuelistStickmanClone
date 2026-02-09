@@ -20,7 +20,7 @@ func copy_maps_to_user_maps_directory():
 	# Creating the maps folder if not exist already
 	if not DirAccess.dir_exists_absolute(maps_path):
 		DirAccess.make_dir_absolute(maps_path)
-	
+
 	# Copy the default map data files inside the res folder outside to the user folder
 	# This is to put both the default maps and custom maps in one place
 	var res_maps = DirAccess.open(res_maps_path)
@@ -35,10 +35,19 @@ func copy_maps_to_user_maps_directory():
 			extension = file_name.substr(file_name.length() - 5, 5)
 			# Basic check if the extension is .dat file
 			if extension == ".json":
-				DirAccess.copy_absolute((res_maps_path + "/" + file_name), (maps_path + "/" + file_name))
+				#DirAccess.copy_absolute((res_maps_path + "/" + file_name), (maps_path + "/" + file_name))
+
+				# Read file data indirectly from res folder and copy to user folder, for cross platform support
+				var res_path = res_maps_path + "/" + file_name
+				var maps_path = maps_path + "/" + file_name
+
+				var json := FileAccess.get_file_as_string(res_path)
+
+				var destination := FileAccess.open(maps_path, FileAccess.WRITE)
+				destination.store_string(json)
+				destination.close()
+
 			file_name = res_maps.get_next()
-		print("FG/done reading files")
+		print("FG/done writing files")
 	else:
 		print("FG/Some error while loading default maps")
-
-	

@@ -49,6 +49,7 @@ func _on_system_state_changed(state):
 
 ## Clear all the menus and stuff to only put back the menus that is needed, to go to other menus
 func clear_everything():
+	
 	remove_child(main_menu)
 	remove_child(ready_menu)
 	remove_child(map_editor)
@@ -77,6 +78,6 @@ func to_ready_menu():
 	add_child(ready_menu)
 
 ## Function to open the map editor
-func open_map_editor():
+func open_map_editor(): 
 	clear_everything()
 	add_child(map_editor)

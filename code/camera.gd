@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	player_distance = pos1.distance_to(pos2)
 	
 	# 800 is just a constant to make this rather natural
-	camera_zoom = 800 / player_distance
+	camera_zoom = 600 / player_distance
 	
 	#self.position = Vector2(0.0, 0.0)
 	self.position = camera_position
