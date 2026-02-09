@@ -33,7 +33,7 @@ func update_labels():
 	jump_height_label.text = "Jump height: " + str(int(jump_height.value))
 	jump_time_label.text = "Jump time in tick: " + str(int(jump_time.value))
 	joystick_scale_label.text = "Joystick scale multiplier(require restart): " + str(joystick_scale.value)
-	engine_tps_label.text = "TPS (Physics tick per second): " + str(engine_tps.value)
+	engine_tps_label.text = "TPS/Physics tick per second(WARNING: VERY BUGGY): " + str(engine_tps.value)
 
 ## Hide when the setting menu disappear
 func _on_game_state_changed(state):

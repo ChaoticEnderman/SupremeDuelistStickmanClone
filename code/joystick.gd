@@ -138,8 +138,28 @@ func touch_input(event: InputEvent) -> bool:
 func keyboard_input():
 	if joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_LEFT:
 		joystick_direction = Input.get_vector("JoystickBottomLeftMoveLeft", "JoystickBottomLeftMoveRight", "JoystickBottomLeftMoveUp", "JoystickBottomLeftMoveDown")
+		if Input.is_action_pressed("JoystickBottomLeftMoveLeft"):
+			change_dragging(true)
+		elif Input.is_action_pressed("JoystickBottomLeftMoveRight"):
+			change_dragging(true)
+		elif Input.is_action_pressed("JoystickBottomLeftMoveUp"):
+			change_dragging(true)
+		elif Input.is_action_pressed("JoystickBottomLeftMoveDown"):
+			change_dragging(true)
+		else:
+			change_dragging(false)
 	elif joystick_position == Globals.JOYSTICK_POSITION.BOTTOM_RIGHT:
 		joystick_direction = Input.get_vector("JoystickBottomRightMoveLeft", "JoystickBottomRightMoveRight", "JoystickBottomRightMoveUp", "JoystickBottomRightMoveDown")
+		if Input.is_action_pressed("JoystickBottomRightMoveLeft"):
+			change_dragging(true)
+		elif Input.is_action_pressed("JoystickBottomRightMoveRight"):
+			change_dragging(true)
+		elif Input.is_action_pressed("JoystickBottomRightMoveUp"):
+			change_dragging(true)
+		elif Input.is_action_pressed("JoystickBottomRightMoveDown"):
+			change_dragging(true)
+		else:
+			change_dragging(false)
 
 ## Helper function to automatically set the knob of joystick to center if the direction is zero and its not being dragged actively
 ## Also change drection of joystick based on the direction
