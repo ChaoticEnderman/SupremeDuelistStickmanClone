@@ -168,7 +168,6 @@ func move_entire_ragdoll_impulse(direction: Vector2, strength: float):
 	if direction == Vector2.ZERO:
 		return
 	
-	# TODO: Make a loop for this
 	for limb in self.get_children():
 		if limb is RigidBody2D:
 			limb.apply_central_impulse(direction * strength)
@@ -395,7 +394,7 @@ func tick_check_tile_map_layer_collisions():
 							if tile_data.get_custom_data("damage") != 0.0:
 								print("rag/touching map ", colliding_position)
 
-## Internal helper function to recursively check if a node has the damageable composition
+## Internal helper function to check if a node has the damageable composition
 func has_damageable(parent: Node) -> bool:
 	# HACK: unknown case but sometimes parent is null
 	if parent == null:

@@ -11,6 +11,7 @@ size = Vector2(65536, 10000)
 script = ExtResource("1_paxxb")
 
 [node name="InstantKillZone" type="Area2D" parent="."]
+visible = false
 z_index = -5
 position = Vector2(0, 500)
 collision_layer = 8

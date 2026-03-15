@@ -2,6 +2,7 @@
 ## This is intended to be summoned by the abilities and its subclass
 ## Not for using directly, only make a subclass of this class
 ## Projectile are simple GameObject that are trigger to move once in one direction and disappear in one hit
+## This is dependent on the player and will be freed when the player is freed
 extends GameObject
 class_name Projectile
 
@@ -17,6 +18,9 @@ func get_damage() -> float:
 	print("pro/damage ", super.get_damage())
 	return super.get_damage()
 
+func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
+	super.summon_as_projectile(direction, position)
+	
 ## Runs each physics tick to check collision and other stuff
 func _on_game_tick(delta: float):
 	self.check_collision()
@@ -29,3 +33,6 @@ func check_collision():
 		if body is RigidBody2D and body.get_owner() is Player:
 			if not (body.get_owner() == damageable.owner_stickman):
 				queue_free()
+
+func qfree():
+	self.queue_free()

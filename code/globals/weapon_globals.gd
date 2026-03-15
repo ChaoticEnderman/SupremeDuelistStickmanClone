@@ -37,10 +37,24 @@ var ability4_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 var ability5_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 
 # Weapon 5 Gauntlet
-# Ability to summon big thing
+# Ability to summon big orb
 var ability6_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+
+# Weapon 6 Crossbow
+# Ability to shoot the primary projectile
 var ability7_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
-var ability8_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+# Spread for the secondary projectile, unused and just keep for the consistency of ability to the cooldown
+var ability8_cooldown : int = -1
+
+var ability9_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+var ability10_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+var ability11_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+var ability12_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+var ability13_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+var ability14_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+var ability15_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+var ability16_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+var ability17_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 
 func _init() -> void:
 	load_weapons()
@@ -75,6 +89,9 @@ func get_weapon(index: int) -> Weapon:
 			return Weapon4.new()
 		5:
 			return Weapon5.new()
-		
+		6:
+			return Weapon6.new()
+		7:
+			return Weapon7.new()
 		_:
 			return null

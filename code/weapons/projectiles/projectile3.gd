@@ -15,7 +15,6 @@ func get_damage() -> float:
 func _on_game_tick(delta: float):
 	# Rough speed estimation, to bounce again many times in the directed direction at the start
 	var estimated_speed : float = self.linear_velocity.distance_to(Vector2.ZERO)
-	print("P3/speed ", estimated_speed)
 	if estimated_speed < 1000:
 		self.apply_central_impulse(direction * projectile_data.speed)
 	
@@ -24,7 +23,10 @@ func _on_game_tick(delta: float):
 		self.queue_free()
 	self.check_collision()
 	
-	print("P3/damage is ", super.get_damage())
 
 func check_collision():
 	pass
+
+func qfree():
+	super.qfree()
+	self.queue_free()

@@ -38,15 +38,18 @@ func clear_round():
 	player_list = []
 	# TODO: Recursive function for players to queue free
 	if player1 != null:
-		player1._queue_free()
+		player1.qfree()
 	if player2 != null:
-		player2._queue_free()
-	if is_instance_valid(weapon1):
-		weapon1._queue_free()
-	if is_instance_valid(weapon2):
-		weapon2._queue_free()
+		player2.qfree()
 	# Set the round to start in the next frame, after one frame so the game objects can queue free
 	queue_game = true
+	
+	for child in get_children():
+		if child is GameArea:
+			child.qfree()
+		if child is GameObject:
+			child.qfree()
+	
 	start_round()
 
 ## Start each individual round of the game, reset some values and process
@@ -117,12 +120,12 @@ func randomize_weapon() -> Weapon:
 		Weapon2.new(),
 		Weapon3.new(),
 		Weapon4.new(),
-		Weapon5.new()
-		# Weapon6.new(),
-		# Weapon7.new(),
-		# Weapon8.new(),
-		# Weapon9.new(),
-		# Weapon10.new(),
+		Weapon5.new(),
+		Weapon6.new()
+		# Weapon7.new()
+		# Weapon8.new()
+		# Weapon9.new()
+		# Weapon10.new()
 		]
 	return weapons[rng.randi_range(0, weapons.size() - 1)]
 

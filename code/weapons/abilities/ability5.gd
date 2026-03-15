@@ -1,4 +1,4 @@
-## Ability of the scythe weapon to summon the wisp
+## Ability of the scythe weapon to summon the wisps
 extends Ability
 class_name Ability5
 
@@ -31,3 +31,6 @@ func _on_game_tick(delta: float):
 	if timer == 10:
 		projectile = Projectile2.new(player, direction, player.weapon.position)
 		super.release_ability(player, direction)
+
+func qfree():
+	self.queue_free()

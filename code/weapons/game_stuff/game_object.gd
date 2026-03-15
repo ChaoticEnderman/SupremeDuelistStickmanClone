@@ -22,9 +22,6 @@ var direction : Vector2
 ## Optional sprite
 var sprite : Sprite2D
 
-## Dumb setting to set if the projectile is cleared when the round clear or not. Default to true now
-var clear_object_on_round_clear : bool = true
-
 ## Initializing the object with basic data like player, direction and position
 ## Player is for calculating the optional Damageable object so it can be nulled if not needed
 ## Direction and position can be empty vectors
@@ -45,8 +42,8 @@ func add_projectile_data(data: ProjectileData):
 	self.projectile_data = data
 	# Seperate the projectile from the wall if it can pass
 	if projectile_data.can_go_through_wall:
-		self.add_collision_exception_with(SystemManager.game_map_tile_map)
-		self.set_collision_mask_value(3, false)
+		print("GO/mask is ", Globals.collision_layer["MAP"])
+		self.set_collision_mask_value(Globals.collision_layer["MAP"], false)
 	# Take the damage value from the projectile data
 	self.damageable = Damageable.new(data.damage, player.ragdoll)
 	# Adding the hitbox to the class
@@ -62,7 +59,7 @@ func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 	var collision : CollisionShape2D = CollisionShape2D.new()
 	collision.shape = self.hitbox_shape
 	sprite.texture = projectile_data.sprite
-	# HACK: Hardcoded the scale value for the sprite because it cannot be scaled down normally
+	# HACK: Hardcoded the scale value for the sprite because it cannot be scaled down by scene tree
 	sprite.scale = Vector2(0.25, 0.25)
 	# Adding projectile
 	add_child(collision)
@@ -77,11 +74,8 @@ func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 	self.direction = direction
 	self.position = position
 	
-	# Nullify the gravity if like its not affected
-	if projectile_data.is_affected_by_gravity:
-		self.gravity_scale = 0.5
-	else:
-		self.gravity_scale = 0.0
+	# Scale up gravity
+	self.gravity_scale = projectile_data.gravity_scale
 	
 	# Enable collision detection
 	self.contact_monitor = true
@@ -94,6 +88,7 @@ func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 	
 	# Shooting the projectile
 	self.apply_central_impulse(direction * projectile_data.speed)
+	print("P2/direction ", direction)
 
 func _ready() -> void:
 	GameState.game_tick.connect(_on_game_tick)
@@ -113,11 +108,11 @@ func get_dependent_player() -> Player:
 	# If player is dead then remove self
 	if player.is_dead_check():
 		return null
-		_on_destroy()
+		qfree()
 	# Same thing but the previous is_dead_check is like not reliable somehow
 	if (not is_instance_valid(player)):
 		return null
-		_on_destroy()
+		qfree()
 	return player
 
 ## Runs when the global physics tick is ticking
@@ -127,9 +122,8 @@ func _on_game_tick(delta: float):
 
 ## Automatically delete this object when the round end, unless otherwise configured
 func _on_game_state_clear_round():
-	if clear_object_on_round_clear:
-		_on_destroy()
+	qfree()
 
 ## Call to destroy the object
-func _on_destroy():
+func qfree():
 	self.queue_free()

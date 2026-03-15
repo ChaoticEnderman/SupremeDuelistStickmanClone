@@ -5,7 +5,7 @@ class_name ProjectileData
 @export var speed: float
 @export var damage: float
 
-@export var is_affected_by_gravity: bool
+@export var gravity_scale: float
 @export var can_go_through_wall: bool
 
 @export var sprite : Texture

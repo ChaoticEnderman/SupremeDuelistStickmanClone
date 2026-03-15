@@ -27,6 +27,7 @@ var damageable : Damageable
 ## Because it can contain more data than damageable default
 var player : Player
 
+## Initialize and load the respective weapon data and the hitbox/sprites from the id
 func init(player: Player, id: String) -> void:
 	self.player = player
 	weapon_data = load("res://resources/weapon" + id + ".tres")
@@ -50,10 +51,8 @@ func set_hitbox(id: String):
 
 ## Set the melee damage
 func set_damage(damageable: Damageable):
-	print("weapon/set dmg ", damageable.damage_tick)
 	self.damageable = damageable
 	add_child(damageable)
-	print("weapon/children ", get_children())
 	damageable.owner = self
 
 ## Set the cooldown
@@ -97,12 +96,11 @@ func tick_release_ability(direction: Vector2) -> bool:
 		return false
 
 ## Free the weapon itself and the dependency classes
-func _queue_free():
+func qfree():
 	print("weapon/qfree")
 	for ability in abilities:
-		ability.queue_free()
+		ability.qfree()
 	hitbox.queue_free()
 	collision_shape.queue_free()
-	#collision_shape = null
 	sprite.queue_free()
 	queue_free()

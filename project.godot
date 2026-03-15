@@ -88,10 +88,14 @@ TouchDrag={
 
 [layer_names]
 
-2d_physics/layer_1="Rigid map (block everything)"
-2d_physics/layer_2="Soft map wall (all bullets go through but not players)"
-2d_physics/layer_3="Normal map (Allow some bullets to pass)"
-2d_physics/layer_4="Instant kill zone"
+2d_physics/layer_1="Tilemap"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Reserved"
+2d_physics/layer_4="InstantKill"
+2d_physics/layer_5="Collision GameStuff"
+2d_physics/layer_6="Non-Collision GameStuff"
+2d_physics/layer_7="Reserved"
+2d_physics/layer_8="Reserved"
 
 [physics]
 

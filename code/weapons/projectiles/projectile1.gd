@@ -11,3 +11,7 @@ func collision_exception(projectile: Projectile):
 
 func get_damage() -> float:
 	return super.get_damage()
+
+func qfree():
+	super.qfree()
+	self.queue_free()

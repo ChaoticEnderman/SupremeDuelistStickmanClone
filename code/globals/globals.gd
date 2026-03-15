@@ -45,6 +45,15 @@ var JUMP_TIME : int = 60
 
 var KEYBOARD_INPUT_ENABLED : bool = false
 
+var collision_layer : Dictionary = {
+	"MAP" : 1,
+	"PLAYER" : 2,
+	"RESERVER" : 3,
+	"INSTANT" : 4,
+	"COLLISION" : 5,
+	"NONCOLLISION" : 6
+}
+
 ## Change the range of angles from -180 <= x <= 180 to 0 <= x <= 360
 func angle_to_360(angle_degree: float) -> float:
 	if angle_degree < 0.0:

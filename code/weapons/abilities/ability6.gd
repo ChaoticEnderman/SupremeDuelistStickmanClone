@@ -20,14 +20,14 @@ func _on_game_tick(delta: float):
 	if timer == 0:
 		return
 	timer -= 1
-	# Still have this check for safety
-	if super.is_player_valid():
-		var test = (timer % 10) / 3
-		player.weapon.sprite.modulate = Color(test, test, test)
-		if timer == 1:
-			var projectile = Projectile3.new(player, super.get_projectile_data_by_id(3))
-			print("A6/summoning projectile data ", super.get_projectile_data_by_id(3).damage)
-			
-			projectile.summon_as_projectile(direction, player.weapon.position)
-			# Harcoding the value to make this projectile 3x bigger than normal
-			projectile.sprite.scale = Vector2(0.75, 0.75)
+	var test = (timer % 10) / 3
+	player.weapon.sprite.modulate = Color(test, test, test)
+	if timer == 1:
+		var projectile = Projectile3.new(player, super.get_projectile_data_by_id(3))
+		
+		projectile.summon_as_projectile(direction, player.weapon.position)
+		# Harcoding the value to make this projectile 3x bigger than normal
+		projectile.sprite.scale = Vector2(0.75, 0.75)
+
+func qfree():
+	self.queue_free()

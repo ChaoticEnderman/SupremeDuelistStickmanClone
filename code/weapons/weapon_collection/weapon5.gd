@@ -1,4 +1,4 @@
-## Fifth weapon, a gauntlet with abilities for either
+## Fifth weapon, a gauntlet with abilities for either zapping or shooting a big ball
 extends Weapon
 class_name Weapon5
 
@@ -18,3 +18,7 @@ func tick_cooldown():
 
 func tick_release_ability(direction: Vector2) -> bool:
 	return super.tick_release_ability(direction)
+
+func qfree():
+	super.qfree()
+	self.queue_free()

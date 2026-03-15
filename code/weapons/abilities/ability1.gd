@@ -20,5 +20,9 @@ func release_ability(player, direction: Vector2) -> int:
 	projectile_a.summon_as_projectile(direction, player.weapon.position)
 	projectile_b.summon_as_projectile(Vector2.from_angle(direction.angle() + deg_to_rad(30)).normalized(), player.weapon.position)
 	projectile_c.summon_as_projectile(Vector2.from_angle(direction.angle() - deg_to_rad(30)).normalized(), player.weapon.position)
-	super.release_ability(player, direction)
+	
 	return WeaponGlobals.ability1_cooldown
+
+func qfree():
+	super.qfree()
+	self.queue_free()

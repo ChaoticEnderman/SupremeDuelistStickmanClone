@@ -30,7 +30,6 @@ var colliding_bodies
 ## Player is for calculating the optional Damageable object that doesnt affect the player. Setting player to null will make this damage everyone
 ## Direction and position can be empty vectors
 func _init(player: Player, direction: Vector2, position: Vector2) -> void:
-	GameState.clear_round.connect(_on_game_state_clear_round)
 	GameState.game_tick.connect(_on_game_tick)
 	self.player = player
 	collision_shape = CollisionShape2D.new()
@@ -76,8 +75,6 @@ func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 	collision_shape.rotation = direction.angle()
 	print("GA/direction ", self.direction)
 
-
-
 ## (Copied from GameObject class)
 ## Function to test if player exist and return the weapon, particularly useful for objects that reference the player weapon
 ## Also useful for other stuff too.
@@ -90,11 +87,11 @@ func get_dependent_player() -> Player:
 	# If player is dead then remove self
 	if player.is_dead_check():
 		return null
-		_on_destroy()
+		qfree()
 	# Same thing but the previous is_dead_check is like not reliable somehow
 	if (not is_instance_valid(player)):
 		return null
-		_on_destroy()
+		qfree()
 	return player
 
 func _on_game_tick(delta: float):
@@ -108,10 +105,5 @@ func get_colliding_bodies():
 func get_damage():
 	return damageable.damage_tick
 
-## Automatically delete this object when the round end, unless otherwise configured
-func _on_game_state_clear_round():
-	_on_destroy()
-
-## Call to destroy the object
-func _on_destroy():
+func qfree():
 	self.queue_free()

@@ -8,3 +8,6 @@ func _init(dash_power: float) -> void:
 func release_ability(player, direction: Vector2) -> int:
 	super.release_ability(player, direction)
 	return WeaponGlobals.ability2_cooldown
+
+func qfree():
+	self.queue_free()

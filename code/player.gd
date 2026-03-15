@@ -71,6 +71,8 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	
 	ragdoll.set_hat(PlayerSpriteGlobals.get_hat(player_side))
 	
+	input_manager.visible = not Globals.KEYBOARD_INPUT_ENABLED
+	
 	Globals.setting_reloaded.connect(func():
 		print("player/change setting")
 		if Globals.KEYBOARD_INPUT_ENABLED:
@@ -167,11 +169,9 @@ func check_collision():
 		for damage in ragdoll.damages:
 			player_hp -= damage * Globals.DAMAGE_MULTIPLIER
 
-func _queue_free():
-	weapon._queue_free()
+func qfree():
+	weapon.qfree()
 	input_manager.queue_free()
-	for child in get_children(true):
-		child.queue_free()
 	queue_free()
 
 func is_dead_check() -> bool:

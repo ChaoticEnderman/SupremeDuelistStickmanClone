@@ -13,7 +13,6 @@ func _init(player: Player, direction: Vector2, position: Vector2):
 	super.summon_as_projectile(direction, position)
 	print("PO2 direction ", direction)
 
-
 func _ready() -> void:
 	GameState.game_tick.connect(_on_game_tick)
 	tick = 30
@@ -26,3 +25,7 @@ func _on_game_tick(delta: float):
 		tick -= 1
 		if tick <= 0:
 			queue_free()
+
+func qfree():
+	super.qfree()
+	self.queue_free()
