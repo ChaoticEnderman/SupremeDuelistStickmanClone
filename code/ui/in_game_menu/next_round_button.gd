@@ -5,4 +5,4 @@ func _ready() -> void:
 
 func _pressed() -> void:
 	self.visible = false
-	SystemManager.world.clear_round()
+	SystemManager.active_world.clear_round()

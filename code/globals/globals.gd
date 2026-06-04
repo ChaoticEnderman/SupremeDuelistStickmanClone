@@ -3,14 +3,21 @@ extends Node
 
 signal setting_reloaded
 
+## Hardcoding the server address temporarily, will change later when it scale to multiple servers
+const SERVER_ADDRESS : String = "192.168.1.111"
+#const SERVER_ADDRESS : String = "127.0.0.1"
+
+## Port for the network connection
+const NETWORK_PORT : int = 55224
+
 ## Values for Godot's built-in damping value for the ragdolls
-const LINEAR_DAMP : int = 6
-const ANGULAR_DAMP : int = 15
+const LINEAR_DAMP : int = 1
+const ANGULAR_DAMP : int = 5
 
 ## The movement force of the ragdoll, including several types of movement
-const RAGDOLL_MOVE_FORCE : float = 2000.0 
+const RAGDOLL_MOVE_FORCE : float = 1000.0 
 ## Jump force of the ragdoll
-const RAGDOLL_JUMP_FORCE : float = 300.0 
+const RAGDOLL_JUMP_FORCE : float = 150.0 
 ## Torque force for a custom angular limit system
 const RAGDOLL_TORQUE_FORCE : float = 100.0
 ## Angle for the legs to aim to seperate toward during the walking animation
@@ -23,7 +30,7 @@ var TPS : int = Engine.physics_ticks_per_second
 var JUMP_COOLDOWN : int = 15
 ## The angle a is the range from a to -a that the joystick direction is considered a jumping range
 ## For example 45.0 jumping angle will call a jump when the joystick direction is between -45.0 and 45.0
-const JUMPING_ANGLE_DEGREES : float = 45.0
+const JUMPING_ANGLE_DEGREES : float = 60.0
 
 ## The hp that players begin with
 const STARTING_HP : float = 100.0
@@ -39,7 +46,7 @@ var DAMAGE_MULTIPLIER : float = 1.0
 ## Weapon cooldown multiplier in multiplier, not percentage
 var WEAPON_COOLDOWN_MULTIPLIER : float = 1.0
 ## The number of repeating succession that the ragdoll will jump
-var JUMP_HEIGHT : int = 12
+var JUMP_HEIGHT : int = 8
 ## Measured in ticks, so this is equivalent to one second
 var JUMP_TIME : int = 60
 
@@ -53,18 +60,6 @@ var collision_layer : Dictionary = {
 	"COLLISION" : 5,
 	"NONCOLLISION" : 6
 }
-
-## Change the range of angles from -180 <= x <= 180 to 0 <= x <= 360
-func angle_to_360(angle_degree: float) -> float:
-	if angle_degree < 0.0:
-		angle_degree += 360.0
-	return angle_degree
-
-## Change the range of angles from 0 <= x <= 360 to -180 <= x <= 180
-func angle_to_180(angle_degree: float) -> float:
-	if angle_degree > 180.0:
-		angle_degree -= 360.0
-	return angle_degree
 
 ## Receiving signal from the setting controller and use this global class to propagate through all game components that change when the settings change
 func reload_settings():

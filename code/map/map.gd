@@ -24,9 +24,9 @@ var instant_kill_type : MapController.INSTANT_KILL_TYPE = MapController.INSTANT_
 
 ## Texture atlas region coordinates for the repeating texture for the instant kill zone
 const INSTANT_KILL_SPRITE : Dictionary = {
-	MapController.INSTANT_KILL_TYPE.ACID: "res://assets/instant_kill_acid.png",
-	MapController.INSTANT_KILL_TYPE.LAVA: "res://assets/instant_kill_lava.png",
-	MapController.INSTANT_KILL_TYPE.WATER: "res://assets/instant_kill_water.png"
+	MapController.INSTANT_KILL_TYPE.ACID: "res://assets/map/instant_kill_acid.png",
+	MapController.INSTANT_KILL_TYPE.LAVA: "res://assets/map/instant_kill_lava.png",
+	MapController.INSTANT_KILL_TYPE.WATER: "res://assets/map/instant_kill_water.png"
 }
 
 func get_map_name() -> String:
@@ -47,7 +47,6 @@ func get_instant_kill_type() -> int:
 func set_instant_kill_type(instant_kill_type: int):
 	self.instant_kill_type = instant_kill_type
 	change_instant_kill_type(instant_kill_type)
-
 
 func _init() -> void:
 	add_child(instant_kill_zone)

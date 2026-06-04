@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://beewqyv27qw3h"]
+[gd_scene format=3 uid="uid://beewqyv27qw3h"]
 
-[ext_resource type="Texture2D" uid="uid://cimesxuof3ush" path="res://assets/pausemenu_background.png" id="1_5d2l8"]
 [ext_resource type="Script" uid="uid://c605obkmgve2c" path="res://code/ui/pause_menu/pause_menu.gd" id="1_v4r4p"]
-[ext_resource type="Texture2D" uid="uid://hy86yl0x6qb3" path="res://assets/pausemenu_title.png" id="2_7l7mv"]
-[ext_resource type="Texture2D" uid="uid://cqhcs4loddc0t" path="res://assets/pausemenu_resume.png" id="3_v4r4p"]
-[ext_resource type="Texture2D" uid="uid://ddt4esh67q2ng" path="res://assets/pausemenu_menu.png" id="4_1s2dm"]
-[ext_resource type="Texture2D" uid="uid://bc4uliqmntm6q" path="res://assets/pausemenu_setting.png" id="8_knqa7"]
+[ext_resource type="Texture2D" uid="uid://jwo8lydro8u3" path="res://assets/ui/pausemenu_background.png" id="2_v4r4p"]
+[ext_resource type="Texture2D" uid="uid://e5oae38qqr4m" path="res://assets/ui/pausemenu_title.png" id="3_1s2dm"]
+[ext_resource type="Texture2D" uid="uid://b2h58ndc58x4o" path="res://assets/ui/pausemenu_resume.png" id="4_88e76"]
+[ext_resource type="Texture2D" uid="uid://rnal257omnd1" path="res://assets/ui/pausemenu_menu.png" id="5_knqa7"]
+[ext_resource type="Texture2D" uid="uid://dd8foisdh0tdh" path="res://assets/ui/pausemenu_setting.png" id="6_71k7c"]
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" unique_id=457589621]
 process_mode = 3
 z_index = 1
 layout_mode = 3
@@ -18,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v4r4p")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1146947266]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,9 +33,9 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(1069, 669)
-texture = ExtResource("1_5d2l8")
+texture = ExtResource("2_v4r4p")
 
-[node name="Title" type="TextureRect" parent="."]
+[node name="Title" type="TextureRect" parent="." unique_id=194942942]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -50,9 +50,9 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(1069, 669)
-texture = ExtResource("2_7l7mv")
+texture = ExtResource("3_1s2dm")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=690165161]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -65,7 +65,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 
-[node name="Resume" type="TextureButton" parent="Control"]
+[node name="Resume" type="TextureButton" parent="Control" unique_id=262343904]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -78,9 +78,9 @@ offset_right = 312.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(312, 232)
-texture_normal = ExtResource("3_v4r4p")
+texture_normal = ExtResource("4_88e76")
 
-[node name="Menu" type="TextureButton" parent="Control"]
+[node name="Menu" type="TextureButton" parent="Control" unique_id=1050721227]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -91,9 +91,9 @@ offset_right = 302.5
 offset_bottom = 279.0
 grow_horizontal = 2
 pivot_offset = Vector2(302, 0)
-texture_normal = ExtResource("4_1s2dm")
+texture_normal = ExtResource("5_knqa7")
 
-[node name="Setting" type="TextureButton" parent="Control"]
+[node name="Setting" type="TextureButton" parent="Control" unique_id=1110743561]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -107,7 +107,7 @@ offset_bottom = 366.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(103, 108)
-texture_normal = ExtResource("8_knqa7")
+texture_normal = ExtResource("6_71k7c")
 
 [connection signal="pressed" from="Control/Resume" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Control/Menu" to="." method="_on_menu_button_pressed"]

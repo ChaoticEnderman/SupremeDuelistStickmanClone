@@ -9,14 +9,18 @@ var particle_texture : Texture2D
 
 var prev_rotation : float
 
-func _init(player: Player, projectile_data: ProjectileData):
+func _init(player: Player, projectile_data: ProjectileData, ability_ref: Ability9):
+	ability_ref.reset_dragon.connect(_on_reset_dragon)
 	super._init(player, projectile_data)
 	var img = Image.create(64, 64, false, Image.FORMAT_RGBA8)
 	img.fill(Color.CYAN)
 	particle_texture = ImageTexture.create_from_image(img)
 	self.rotation = player.weapon.sprite.rotation
-	timer = Globals.TPS * 4
+	timer = Globals.TPS * 500
 	set_collision_layer_value(Globals.collision_layer["NONCOLLISION"], true)
+
+func _on_reset_dragon():
+	qfree()
 
 func _on_game_tick(delta: float):
 	timer -= 1
@@ -43,7 +47,7 @@ func _on_game_tick(delta: float):
 	particle.position = self.position
 	particle.rotation = self.rotation
 	particle.z_index = -100
-	SystemManager.world.add_child(particle)
+	SystemManager.active_world.add_child(particle)
 	particles.append(particle)
 	particle.scale_decay_i(0.4, 0.0, Globals.TPS / 2)
 	particle.alpha_decay(1.0, 0.0, Globals.TPS / 2)

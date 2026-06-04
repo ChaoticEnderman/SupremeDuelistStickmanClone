@@ -21,6 +21,8 @@ func _on_game_tick(delta: float):
 		return
 	timer -= 1
 	var test = (timer % 10) / 3
+	if not is_instance_valid(player) or player == null:
+		return
 	player.weapon.sprite.modulate = Color(test, test, test)
 	if timer == 1:
 		var projectile = Projectile3.new(player, super.get_projectile_data_by_id(3))

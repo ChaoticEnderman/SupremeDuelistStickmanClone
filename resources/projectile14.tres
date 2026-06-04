@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://cwuavfiutgb4w"]
+
+[ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_740v8"]
+[ext_resource type="Texture2D" uid="uid://bvtnskg53i3yu" path="res://assets/projectile/explosion.png" id="2_0ky3d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yshlj"]
+radius = 200.0
+
+[resource]
+script = ExtResource("1_740v8")
+damage = 2.0
+sprite = ExtResource("2_0ky3d")
+hitbox = SubResource("CircleShape2D_yshlj")
+metadata/_custom_type_script = "uid://do2f64yeeylae"

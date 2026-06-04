@@ -41,7 +41,7 @@ func _on_game_state_changed(state):
 
 ## Only need to update values when it go back to the main game state
 func _on_back_button_pressed() -> void:
-	GameState.change_game_state(GameState.GAME_STATE.RUNNING)
+	GameState.change_game_state(SystemManager.active_world, GameState.GAME_STATE.RUNNING)
 	Globals.DAMAGE_MULTIPLIER = damage_multiplier.value
 	Globals.WEAPON_COOLDOWN_MULTIPLIER = cooldown.value / 100
 	Globals.JUMP_HEIGHT = int(jump_height.value)

@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ProjectileData" load_steps=4 format=3 uid="uid://bl0b7shynk8hd"]
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://bl0b7shynk8hd"]
 
 [ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_o1nfn"]
-[ext_resource type="Texture2D" uid="uid://wex2ubkn27au" path="res://assets/projectile7.png" id="2_ml5ml"]
+[ext_resource type="Texture2D" uid="uid://qlq6o8o0fve1" path="res://assets/projectile/projectile7.png" id="2_ml5ml"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_5eobm"]
 points = PackedVector2Array(0, 50, 15, -35, 0, -50, -15, -35)

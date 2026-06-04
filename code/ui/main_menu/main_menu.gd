@@ -14,4 +14,4 @@ func _on_1p_button_pressed() -> void:
 	GameState.change_system_state(GameState.SYSTEM_STATE.READY)
 
 func _on_2p_button_pressed() -> void:
-	GameState.change_system_state(GameState.SYSTEM_STATE.READY)
+	GameState.change_system_state(GameState.SYSTEM_STATE.MATCHMAKING)

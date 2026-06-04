@@ -1,14 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3xncom53edv8"]
+[gd_scene format=3 uid="uid://c3xncom53edv8"]
 
-[ext_resource type="Texture2D" uid="uid://cmpblwuk8xqmr" path="res://assets/thumbnail.png" id="1_8ln24"]
 [ext_resource type="Script" uid="uid://5wxurdynpaq8" path="res://code/ui/main_menu/main_menu.gd" id="1_tbmy8"]
-[ext_resource type="Texture2D" uid="uid://fug8srto30t1" path="res://assets/stickman.png" id="2_oa1go"]
-[ext_resource type="Texture2D" uid="uid://df0dv761xxfp1" path="res://assets/menu_1p.png" id="2_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://bakmuc8mtxa74" path="res://assets/ui/thumbnail.png" id="2_oa1go"]
+[ext_resource type="Texture2D" uid="uid://cgfnjawp431nq" path="res://assets/ui/stickman.png" id="3_jk1qb"]
 [ext_resource type="Texture2D" uid="uid://b20yis20c6bjc" path="res://assets/logo.png" id="3_tbmy8"]
-[ext_resource type="Texture2D" uid="uid://dlr40m38rdydk" path="res://assets/menu_2p.png" id="4_tbmy8"]
-[ext_resource type="Texture2D" uid="uid://dj1gqnk1xnpnq" path="res://assets/map_editor_button_beta.png" id="9_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://c3bn6n8cib7b3" path="res://assets/ui/menu_1p.png" id="5_5dd4i"]
+[ext_resource type="Texture2D" uid="uid://dvl8prq13vexl" path="res://assets/ui/menu_2p.png" id="6_lgwnu"]
+[ext_resource type="Texture2D" uid="uid://2b0sr2odbkbb" path="res://assets/ui/map_editor_button_beta.png" id="7_oa1go"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=44675415]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -18,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tbmy8")
 
-[node name="Thumbnail" type="TextureRect" parent="."]
+[node name="Thumbnail" type="TextureRect" parent="." unique_id=1075556018]
 custom_minimum_size = Vector2(0, 720)
 layout_mode = 1
 anchors_preset = 14
@@ -27,10 +27,10 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_8ln24")
+texture = ExtResource("2_oa1go")
 expand_mode = 4
 
-[node name="Stickmen" type="TextureRect" parent="."]
+[node name="Stickmen" type="TextureRect" parent="." unique_id=1319194202]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -43,10 +43,10 @@ offset_right = 640.0
 offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_oa1go")
+texture = ExtResource("3_jk1qb")
 expand_mode = 5
 
-[node name="Logo" type="TextureRect" parent="."]
+[node name="Logo" type="TextureRect" parent="." unique_id=838040130]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -59,7 +59,7 @@ scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(900, 0)
 texture = ExtResource("3_tbmy8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2074700802]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 1
 anchors_preset = 13
@@ -70,27 +70,27 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="TextureButton2" type="TextureButton" parent="VBoxContainer"]
+[node name="TextureButton2" type="TextureButton" parent="VBoxContainer" unique_id=1383344196]
 process_mode = 3
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-texture_normal = ExtResource("2_rtw2f")
+texture_normal = ExtResource("5_5dd4i")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer" unique_id=715650590]
 process_mode = 3
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("4_tbmy8")
+texture_normal = ExtResource("6_lgwnu")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="MapEdit" type="TextureButton" parent="VBoxContainer"]
+[node name="MapEdit" type="TextureButton" parent="VBoxContainer" unique_id=777860889]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture_normal = ExtResource("9_jk1qb")
+texture_normal = ExtResource("7_oa1go")
 ignore_texture_size = true
 stretch_mode = 5
 

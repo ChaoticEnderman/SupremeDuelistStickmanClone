@@ -20,6 +20,8 @@ func _on_game_tick(delta: float):
 	super._on_game_tick(delta)
 	timer -= 1
 	if timer == 0:
+		if not is_instance_valid(player):
+			return
 		player.weapon.hitbox.scale = Vector2(1.0, 1.0)
 		player.weapon.sprite.scale = Vector2(0.2, 0.2)
 

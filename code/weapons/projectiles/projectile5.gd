@@ -35,6 +35,7 @@ func spread():
 ## This is called when clearing the world tree for making a new match
 func qfree():
 	for p in sub_projectiles:
-		p.qfree()
+		if is_instance_valid(p):
+			p.qfree()
 	super.qfree()
 	self.queue_free()

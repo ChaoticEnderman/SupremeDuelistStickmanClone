@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://c1sbrlrbq3efl"]
+
+[ext_resource type="Script" uid="uid://dl8rof7awxk34" path="res://code/ui/matchmaking_menu.gd" id="1_bgh6v"]
+[ext_resource type="Texture2D" uid="uid://bakmuc8mtxa74" path="res://assets/ui/thumbnail.png" id="2_bgh6v"]
+[ext_resource type="Texture2D" uid="uid://bt4vk2xjdrc7v" path="res://assets/ui/EmptyPlayerLimbTexture30x30.png" id="3_s0qc0"]
+[ext_resource type="Texture2D" uid="uid://cyy83v5ixu8se" path="res://assets/ui/map_editor_reload.png" id="4_r6oeu"]
+[ext_resource type="Texture2D" uid="uid://cp3t5knuhm3na" path="res://assets/ui/arrow_left.png" id="4_s0qc0"]
+
+[sub_resource type="Gradient" id="Gradient_s0qc0"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r6oeu"]
+gradient = SubResource("Gradient_s0qc0")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s0qc0"]
+properties/0/path = NodePath(".:world_ids")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="MatchmakingMenu" type="Control" unique_id=175346394]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bgh6v")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=261507199]
+custom_minimum_size = Vector2(0, 720)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bgh6v")
+expand_mode = 4
+
+[node name="Control" type="Control" parent="." unique_id=1966878491]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SearchBG" type="TextureRect" parent="Control" unique_id=914076962]
+modulate = Color(0.53, 0.53, 0.53, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -220.0
+offset_right = 480.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_s0qc0")
+expand_mode = 1
+
+[node name="OptionBG" type="TextureRect" parent="Control" unique_id=616657611]
+modulate = Color(0.31, 0.31, 0.31, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -280.0
+offset_right = 480.0
+offset_bottom = -220.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_s0qc0")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=69122864]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -475.0
+offset_top = 85.0
+offset_right = 475.0
+offset_bottom = 135.0
+grow_horizontal = 2
+
+[node name="RegionOption" type="OptionButton" parent="Control/HBoxContainer" unique_id=1471628418]
+layout_mode = 2
+selected = 0
+item_count = 7
+popup/item_0/text = "All"
+popup/item_0/id = 0
+popup/item_1/text = "Asia"
+popup/item_1/id = 1
+popup/item_2/text = "Europe"
+popup/item_2/id = 2
+popup/item_3/text = "North America"
+popup/item_3/id = 3
+popup/item_4/text = "South America"
+popup/item_4/id = 4
+popup/item_5/text = "Africa"
+popup/item_5/id = 5
+popup/item_6/text = "Oceania"
+popup/item_6/id = 6
+
+[node name="GamemodeOption" type="OptionButton" parent="Control/HBoxContainer" unique_id=235153565]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Casual"
+popup/item_0/id = 0
+popup/item_1/text = "Competitive"
+popup/item_1/id = 1
+
+[node name="Name" type="LineEdit" parent="Control/HBoxContainer" unique_id=428643328]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+placeholder_text = "Your name"
+max_length = 20
+
+[node name="Reload" type="TextureButton" parent="Control/HBoxContainer" unique_id=258743900]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("4_r6oeu")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Reload2" type="TextureButton" parent="Control/HBoxContainer" unique_id=64733413]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("4_r6oeu")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=1733678889]
+custom_minimum_size = Vector2(960, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -220.0
+offset_right = 480.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer" unique_id=45933679]
+custom_minimum_size = Vector2(900, 560)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/ScrollContainer/VBoxContainer" unique_id=921171804]
+visible = false
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="Control/ScrollContainer/VBoxContainer" unique_id=337728911]
+visible = false
+layout_mode = 2
+texture_normal = SubResource("GradientTexture1D_r6oeu")
+
+[node name="TextEdit" type="TextEdit" parent="Control/ScrollContainer/VBoxContainer" unique_id=5782740]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="." unique_id=998034057]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+icon = ExtResource("4_s0qc0")
+flat = true
+expand_icon = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=799688656]
+replication_config = SubResource("SceneReplicationConfig_s0qc0")
+
+[connection signal="text_changed" from="Control/HBoxContainer/Name" to="." method="_on_name_text_changed"]
+[connection signal="pressed" from="Control/HBoxContainer/Reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/Reload2" to="." method="_on_reload_2_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

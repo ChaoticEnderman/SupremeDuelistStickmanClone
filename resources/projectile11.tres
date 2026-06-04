@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://dfscsdncmkd73"]
+
+[ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_ec8b3"]
+[ext_resource type="Texture2D" uid="uid://bxfisvihkauja" path="res://assets/projectile/portal_orange.png" id="2_n20lj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yvumi"]
+radius = 30.0
+height = 140.0
+
+[resource]
+script = ExtResource("1_ec8b3")
+speed = 20.0
+damage = 0.005
+sprite = ExtResource("2_n20lj")
+hitbox = SubResource("CapsuleShape2D_yvumi")
+metadata/_custom_type_script = "uid://do2f64yeeylae"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://dycfpk4tgmv1h"]
+
+[ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_xf7ph"]
+[ext_resource type="Texture2D" uid="uid://dgs7s2wnskrkf" path="res://assets/projectile/stone.png" id="2_3i25u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3i25u"]
+size = Vector2(64, 64)
+
+[resource]
+script = ExtResource("1_xf7ph")
+sprite = ExtResource("2_3i25u")
+hitbox = SubResource("RectangleShape2D_3i25u")
+metadata/_custom_type_script = "uid://do2f64yeeylae"

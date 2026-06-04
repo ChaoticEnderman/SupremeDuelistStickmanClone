@@ -1,26 +1,25 @@
-[gd_scene load_steps=29 format=3 uid="uid://cn4gn6y85lv6e"]
+[gd_scene format=3 uid="uid://cn4gn6y85lv6e"]
 
 [ext_resource type="Script" uid="uid://d3l12vxug8rmx" path="res://code/map/map_editor.gd" id="1_ikn3w"]
-[ext_resource type="Texture2D" uid="uid://b4o57j25b3cu8" path="res://assets/weapon2.png" id="3_o22ft"]
+[ext_resource type="Texture2D" uid="uid://b4o57j25b3cu8" path="res://archived/assets/weapon2.png" id="3_o22ft"]
 [ext_resource type="Texture2D" uid="uid://b0ihq0lmiwb65" path="res://assets/coin_blank.png" id="4_8qdu6"]
-[ext_resource type="Texture2D" uid="uid://t47uht2dqgsg" path="res://assets/arrow_left.png" id="4_oio3n"]
-[ext_resource type="Texture2D" uid="uid://bw0fn45r15nn5" path="res://assets/map_editor_move.png" id="4_u4ibt"]
-[ext_resource type="Texture2D" uid="uid://dyiejny8mm4ff" path="res://assets/map_load.png" id="5_v1g2c"]
-[ext_resource type="Texture2D" uid="uid://5m1gu2li2a7s" path="res://assets/map_editor_pen.png" id="6_24rlk"]
-[ext_resource type="Texture2D" uid="uid://d38yiag10t01u" path="res://assets/map_editor_box.png" id="6_gxr6b"]
-[ext_resource type="Texture2D" uid="uid://danbk1u1ngr8c" path="res://assets/map_add.png" id="6_hti3q"]
-[ext_resource type="Texture2D" uid="uid://dpr6x8b7mrhvq" path="res://assets/map_editor_eraser.png" id="7_gxr6b"]
-[ext_resource type="Texture2D" uid="uid://cn75x7t6b4q45" path="res://assets/map_save.png" id="7_q44i6"]
-[ext_resource type="Texture2D" uid="uid://cvvcsbyr3rnog" path="res://assets/map_editor_zoomup.png" id="8_78cw8"]
-[ext_resource type="Texture2D" uid="uid://c2c7qntm73r31" path="res://assets/main_menu_play_button.png" id="8_q44i6"]
-[ext_resource type="Texture2D" uid="uid://d2r14o03pu5rv" path="res://assets/map_editor_zoom_down.png" id="9_oio3n"]
-[ext_resource type="Texture2D" uid="uid://ppwkjeqojsv6" path="res://assets/map_editor_bucket.png" id="10_u78w4"]
-[ext_resource type="Texture2D" uid="uid://bt7fafwpjk5q1" path="res://assets/map_editor_move_choose.png" id="11_3bkrf"]
-[ext_resource type="Texture2D" uid="uid://qxqdoctykxuk" path="res://assets/map_editor_reload.png" id="11_gxr6b"]
+[ext_resource type="Texture2D" uid="uid://cp3t5knuhm3na" path="res://assets/ui/arrow_left.png" id="4_hti3q"]
+[ext_resource type="Texture2D" uid="uid://blwpcxbsmepkl" path="res://assets/ui/map_load.png" id="5_q44i6"]
+[ext_resource type="Texture2D" uid="uid://isvn8ri8152m" path="res://assets/ui/map_add.png" id="6_j5c7f"]
+[ext_resource type="Texture2D" uid="uid://wj66lk88vdmr" path="res://assets/ui/map_save.png" id="7_mx7nl"]
+[ext_resource type="Texture2D" uid="uid://yvcfrfkvdnj4" path="res://assets/ui/next_round_button.png" id="8_ru7ak"]
+[ext_resource type="Texture2D" uid="uid://bb1qnjt1ftmoy" path="res://assets/ui/map_editor_pen.png" id="9_ck0dr"]
+[ext_resource type="Texture2D" uid="uid://c3j228bjewylu" path="res://assets/ui/map_editor_box.png" id="11_bjlon"]
 [ext_resource type="Texture2D" uid="uid://thu4medbs8i" path="res://assets/coin_logo.png" id="12_78cw8"]
-[ext_resource type="Texture2D" uid="uid://cow7pfigxd81u" path="res://assets/map_editor_pen_choose.png" id="12_u78w4"]
-[ext_resource type="Texture2D" uid="uid://jcr152cxfpyc" path="res://assets/map_editor_eraser_choose.png" id="14_v1g2c"]
-[ext_resource type="Texture2D" uid="uid://du7wnt157wk30" path="res://assets/close_button.png" id="21_hti3q"]
+[ext_resource type="Texture2D" uid="uid://cgd4un54d8dld" path="res://assets/ui/map_editor_bucket.png" id="12_vit1j"]
+[ext_resource type="Texture2D" uid="uid://b846kvgekfmny" path="res://assets/ui/map_editor_move.png" id="13_u4njm"]
+[ext_resource type="Texture2D" uid="uid://q36a0pdsibuu" path="res://assets/ui/map_editor_move_choose.png" id="14_06glx"]
+[ext_resource type="Texture2D" uid="uid://nycqdiq2uxao" path="res://assets/ui/map_editor_pen_choose.png" id="15_4vem0"]
+[ext_resource type="Texture2D" uid="uid://y6grd7p8o0sk" path="res://assets/ui/map_editor_eraser.png" id="16_yahsq"]
+[ext_resource type="Texture2D" uid="uid://2mx1acn67lvv" path="res://assets/ui/map_editor_eraser_choose.png" id="17_oaxfs"]
+[ext_resource type="Texture2D" uid="uid://gdhvuips6sht" path="res://assets/ui/map_editor_zoomup.png" id="18_yn2ds"]
+[ext_resource type="Texture2D" uid="uid://c7u6uwnr05q2b" path="res://assets/ui/map_editor_zoom_down.png" id="19_kubva"]
+[ext_resource type="Texture2D" uid="uid://cyy83v5ixu8se" path="res://assets/ui/map_editor_reload.png" id="20_h3qhm"]
 [ext_resource type="Script" uid="uid://db7np6u36qf7q" path="res://code/map/map.gd" id="23_j5c7f"]
 
 [sub_resource type="Gradient" id="Gradient_8qdu6"]
@@ -46,7 +45,7 @@ width = 720
 height = 512
 fill_to = Vector2(0, 1)
 
-[node name="MapEditor" type="Control"]
+[node name="MapEditor" type="Control" unique_id=1525223233]
 process_mode = 3
 z_index = 20
 layout_mode = 3
@@ -57,34 +56,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ikn3w")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1383609069]
 z_index = -4096
 
-[node name="Map" type="Node2D" parent="."]
+[node name="Map" type="Node2D" parent="." unique_id=1956517039]
 z_index = -4096
 script = ExtResource("23_j5c7f")
 metadata/_custom_type_script = "uid://db7np6u36qf7q"
 
-[node name="P1" type="Sprite2D" parent="."]
+[node name="P1" type="Sprite2D" parent="." unique_id=1506302890]
 position = Vector2(-500, 0)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_o22ft")
 
-[node name="P2" type="Sprite2D" parent="."]
+[node name="P2" type="Sprite2D" parent="." unique_id=41369303]
 position = Vector2(500, 0)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_o22ft")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=271309141]
 
-[node name="LeftPanel" type="Control" parent="CanvasLayer"]
+[node name="LeftPanel" type="Control" parent="CanvasLayer" unique_id=1434945008]
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 256.0
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LeftPanel"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LeftPanel" unique_id=1457690469]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,7 +93,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_o22ft")
 expand_mode = 1
 
-[node name="BackButton" type="TextureButton" parent="CanvasLayer/LeftPanel"]
+[node name="BackButton" type="TextureButton" parent="CanvasLayer/LeftPanel" unique_id=1436413616]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -104,11 +103,11 @@ offset_top = 16.0
 offset_right = 96.0
 offset_bottom = 96.0
 grow_horizontal = 2
-texture_normal = ExtResource("4_oio3n")
+texture_normal = ExtResource("4_hti3q")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LeftPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LeftPanel" unique_id=331854776]
 custom_minimum_size = Vector2(192, 64)
 layout_mode = 1
 anchors_preset = 8
@@ -123,46 +122,46 @@ offset_bottom = -184.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LoadMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer"]
+[node name="LoadMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer" unique_id=914358511]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture_normal = ExtResource("5_v1g2c")
+texture_normal = ExtResource("5_q44i6")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NewMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer"]
+[node name="NewMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer" unique_id=2053977245]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture_normal = ExtResource("6_hti3q")
+texture_normal = ExtResource("6_j5c7f")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SaveMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer"]
+[node name="SaveMapButton" type="TextureButton" parent="CanvasLayer/LeftPanel/HBoxContainer" unique_id=2112211855]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture_normal = ExtResource("7_q44i6")
+texture_normal = ExtResource("7_mx7nl")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SettingButton" type="TextureButton" parent="CanvasLayer/LeftPanel"]
+[node name="SettingButton" type="TextureButton" parent="CanvasLayer/LeftPanel" unique_id=2118623057]
 custom_minimum_size = Vector2(192, 64)
 layout_mode = 0
 offset_left = 32.0
 offset_top = 192.0
 offset_right = 224.0
 offset_bottom = 256.0
-texture_normal = ExtResource("8_q44i6")
+texture_normal = ExtResource("8_ru7ak")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Panel" type="Panel" parent="CanvasLayer/LeftPanel"]
-layout_mode = 2
+[node name="Panel" type="Panel" parent="CanvasLayer/LeftPanel" unique_id=1835521083]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 264.0
 offset_right = 224.0
 offset_bottom = 592.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/LeftPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/LeftPanel" unique_id=874217366]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 0
 offset_left = 32.0
@@ -171,11 +170,11 @@ offset_right = 224.0
 offset_bottom = 592.0
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="GridContainer" parent="CanvasLayer/LeftPanel/ScrollContainer"]
+[node name="VBoxContainer" type="GridContainer" parent="CanvasLayer/LeftPanel/ScrollContainer" unique_id=1171174303]
 layout_mode = 2
 columns = 3
 
-[node name="BottomPanel" type="Control" parent="CanvasLayer"]
+[node name="BottomPanel" type="Control" parent="CanvasLayer" unique_id=1793070622]
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -185,7 +184,7 @@ offset_top = -96.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BottomPanel"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BottomPanel" unique_id=1749220000]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -194,7 +193,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_rdfmk")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BottomPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BottomPanel" unique_id=778381228]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,96 +202,96 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="ButtonBrush" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonBrush" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=590163294]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
-texture_normal = ExtResource("6_24rlk")
+texture_normal = ExtResource("9_ck0dr")
 texture_pressed = ExtResource("4_8qdu6")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ButtonRectangle" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonRectangle" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=698627436]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("6_gxr6b")
+texture_normal = ExtResource("11_bjlon")
 texture_pressed = ExtResource("4_8qdu6")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ButtonBucket" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonBucket" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=916589853]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("10_u78w4")
+texture_normal = ExtResource("12_vit1j")
 texture_pressed = ExtResource("4_8qdu6")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="VSeparator2" type="VSeparator" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=1063253253]
 custom_minimum_size = Vector2(64, 96)
 layout_mode = 2
 
-[node name="ButtonMove" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonMove" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=1941939050]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
 action_mode = 0
-texture_normal = ExtResource("4_u4ibt")
-texture_pressed = ExtResource("11_3bkrf")
+texture_normal = ExtResource("13_u4njm")
+texture_pressed = ExtResource("14_06glx")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ButtonPaint" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonPaint" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=1954767972]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource("6_24rlk")
-texture_pressed = ExtResource("12_u78w4")
+texture_normal = ExtResource("9_ck0dr")
+texture_pressed = ExtResource("15_4vem0")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ButtonErase" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonErase" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=1706930585]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource("7_gxr6b")
-texture_pressed = ExtResource("14_v1g2c")
+texture_normal = ExtResource("16_yahsq")
+texture_pressed = ExtResource("17_oaxfs")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="VSeparator" type="VSeparator" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=368163769]
 custom_minimum_size = Vector2(64, 96)
 layout_mode = 2
 
-[node name="ButtonZoomUp" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonZoomUp" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=1658237852]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-texture_normal = ExtResource("8_78cw8")
+texture_normal = ExtResource("18_yn2ds")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ButtonZoomDown" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonZoomDown" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=96641165]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-texture_normal = ExtResource("9_oio3n")
+texture_normal = ExtResource("19_kubva")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ButtonCenter" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="ButtonCenter" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=1653508124]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 action_mode = 0
-texture_normal = ExtResource("11_gxr6b")
+texture_normal = ExtResource("20_h3qhm")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="TEST" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer"]
+[node name="TEST" type="TextureButton" parent="CanvasLayer/BottomPanel/HBoxContainer" unique_id=26362139]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 action_mode = 0
@@ -300,11 +299,11 @@ texture_normal = ExtResource("12_78cw8")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="PopupBackground" type="CanvasLayer" parent="."]
+[node name="PopupBackground" type="CanvasLayer" parent="." unique_id=1287448386]
 layer = 2
 visible = false
 
-[node name="PopupBackgroundPanel" type="Panel" parent="PopupBackground"]
+[node name="PopupBackgroundPanel" type="Panel" parent="PopupBackground" unique_id=901641067]
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -313,11 +312,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_force_pass_scroll_events = false
 
-[node name="PopupSetting" type="CanvasLayer" parent="."]
+[node name="PopupSetting" type="CanvasLayer" parent="." unique_id=2135029406]
 layer = 3
 visible = false
 
-[node name="PopupSettingControl" type="Control" parent="PopupSetting"]
+[node name="PopupSettingControl" type="Control" parent="PopupSetting" unique_id=589680532]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -325,7 +324,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="TextureRect" parent="PopupSetting/PopupSettingControl"]
+[node name="Sprite2D" type="TextureRect" parent="PopupSetting/PopupSettingControl" unique_id=757987088]
 custom_minimum_size = Vector2(720, 512)
 layout_mode = 1
 anchors_preset = 8
@@ -340,15 +339,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_q44i6")
 expand_mode = 2
 
-[node name="CloseSettingButton" type="TextureButton" parent="PopupSetting/PopupSettingControl/Sprite2D"]
+[node name="CloseSettingButton" type="TextureButton" parent="PopupSetting/PopupSettingControl/Sprite2D" unique_id=848383016]
 layout_mode = 0
 offset_left = -128.0
 offset_bottom = 128.0
-texture_normal = ExtResource("21_hti3q")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Control" type="Control" parent="PopupSetting/PopupSettingControl"]
+[node name="Control" type="Control" parent="PopupSetting/PopupSettingControl" unique_id=315738805]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -362,7 +360,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupSetting/PopupSettingControl/Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupSetting/PopupSettingControl/Control" unique_id=1624473757]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -376,15 +374,15 @@ offset_bottom = 137.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer" unique_id=1521249104]
 custom_minimum_size = Vector2(512, 288)
 layout_mode = 2
 
-[node name="InstantKillTypeLabel" type="Label" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer/VBoxContainer"]
+[node name="InstantKillTypeLabel" type="Label" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer/VBoxContainer" unique_id=562188188]
 layout_mode = 2
 text = "Instant kill type"
 
-[node name="InstantKillType" type="OptionButton" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer/VBoxContainer"]
+[node name="InstantKillType" type="OptionButton" parent="PopupSetting/PopupSettingControl/Control/ScrollContainer/VBoxContainer" unique_id=836576869]
 layout_mode = 2
 selected = 0
 item_count = 4

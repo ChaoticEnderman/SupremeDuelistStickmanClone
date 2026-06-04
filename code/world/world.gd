@@ -1,4 +1,15 @@
+## Contain all the components of a match and is persistent
+class_name World
 extends Node2D
+
+## Uniquely identify a world for online worlds
+var world_id : String
+
+# ID for online players connecting to this game
+var online_player1_id : String = ""
+var online_player2_id : String = ""
+var online_player1_name : String = ""
+var online_player2_name : String = ""
 
 @onready var player_list : Array[Player]
 @onready var player_scores : Array[int]
@@ -11,6 +22,10 @@ var weapon2 : Weapon
 
 @onready var next_round_button : TextureButton = get_node("UI/GameUI/NextRoundButton")
 @onready var pause_menu : Control = get_node("UI/PauseMenu")
+@onready var camera : Camera2D = get_node("CameraGame/Camera")
+
+## Store the current game state, not supposed to be modified directly
+var game_state : GameState.GAME_STATE
 
 var rng = RandomNumberGenerator.new()
 
@@ -19,19 +34,35 @@ var queue_game : bool = false
 
 var delta : int
 
+var peer : MultiplayerPeer
+
 func add_projectile(projectile: Projectile):
 	add_child(projectile)
 
-func _ready() -> void:
+func _init() -> void:
 	GameState.game_state_changed.connect(_on_game_state_changed)
 	GameState.system_state_changed.connect(_on_system_state_changed)
 	GameState.game_tick.connect(_on_game_tick)
+
+func _ready() -> void:
+	camera.enabled = false
 	player_scores.resize(2)
 	player_scores[0] = 0
 	player_scores[1] = 0
 	
-	
 	clear_round()
+
+func set_type(is_online : bool):
+	if is_online:
+		pass
+	else:
+		pass
+
+func get_map() -> Map:
+	return get_node("CameraGame/Map")
+
+func get_map_tile_map() -> TileMapLayer:
+	return get_node("CameraGame/Map").tile_map_layer
 
 ## Reset the previous round object and values, for any round other than the first one
 func clear_round():
@@ -85,17 +116,50 @@ func start_round() -> void:
 	
 	GameState.queue_run_game()
 
+## Attempt to convert all the stuff in the world to serializable PackedByteArray or something else to send over a network for online game
+func serialize_data():
+	var game_area_count : int = 0
+	var game_object_count : int = 0
+	var player_limb_count : int = 0
+	var p1 : PackedFloat32Array = player1.serialize_data()
+	var p2 : PackedFloat32Array = player2.serialize_data()
+	for child in get_children():
+		if child is GameArea:
+			game_area_count += 1
+		if child is GameObject:
+			game_object_count += 1
+	print("world/serialize/area ", game_area_count, " object ", game_object_count, " p1 ", p1.size(), " p2 ", p2.size())
+
 ## Pause the game when the state is not running
 func _on_game_state_changed(state):
-	if state == GameState.GAME_STATE.RUNNING:
+	print("world/this world ", self, " state to ", GameState.get_beautiful_game_state(game_state))
+	if game_state == GameState.GAME_STATE.RUNNING:
+		process_mode = Node.PROCESS_MODE_PAUSABLE
 		get_tree().paused = false
-	elif state == GameState.GAME_STATE.PAUSING:
+		self.visible = true
+		camera.enabled = true
+		for player in player_list:
+			player.joy_stick_visibility(true)
+			player.freeze(false)
+	elif game_state == GameState.GAME_STATE.PAUSING:
+		process_mode = Node.PROCESS_MODE_PAUSABLE
 		get_tree().paused = true
-	elif state == GameState.GAME_STATE.LAZY_RUNNING:
+		self.visible = true
+		camera.enabled = true
+	elif game_state == GameState.GAME_STATE.LAZY_RUNNING:
+		process_mode = Node.PROCESS_MODE_PAUSABLE
 		for i in range(player_list.size()):
 			player_scores[i] += 1
 		#for player in player_list:
 			#player._queue_free()
+	elif game_state == GameState.GAME_STATE.NONE:
+		pass
+		#process_mode = Node.PROCESS_MODE_DISABLED
+		#self.visible = false
+		#camera.enabled = false
+		#for player in player_list:
+			#player.joy_stick_visibility(false)
+			#player.freeze(true)
 
 func _on_system_state_changed(state):
 	if state == GameState.SYSTEM_STATE.MENU:
@@ -121,19 +185,24 @@ func randomize_weapon() -> Weapon:
 		Weapon3.new(),
 		Weapon4.new(),
 		Weapon5.new(),
-		Weapon6.new()
-		# Weapon7.new()
-		# Weapon8.new()
-		# Weapon9.new()
-		# Weapon10.new()
+		Weapon6.new(),
+		Weapon7.new(),
+		Weapon8.new(),
+		Weapon9.new(),
+		Weapon10.new(),
+		Weapon11.new()
 		]
 	return weapons[rng.randi_range(0, weapons.size() - 1)]
 
 ## Main function to run every tick to control whether other tick function can run easily
 func _on_game_tick(delta: float) -> void:
-	if queue_game == true:
-		start_round()
-	tick_players()
+	if game_state == GameState.GAME_STATE.RUNNING:
+		if queue_game == true:
+			start_round()
+		tick_players()
+		if player1 != null and player2 != null:
+			serialize_data()
+	#print("world/this world ", self, " state to ", GameState.get_beautiful_game_state(game_state))
 
 ## Call the tick function in each players to do their stuff
 func tick_players():
@@ -143,7 +212,7 @@ func tick_players():
 		player_list[i]._on_game_tick()
 		# If one player is dead then add the score to all other players
 		if player_list[i].is_dead_check():
-			GameState.change_game_state(GameState.GAME_STATE.LAZY_RUNNING)
+			GameState.change_game_state(SystemManager.active_world, GameState.GAME_STATE.LAZY_RUNNING)
 			next_round_button.visible = true
 			# Minus one for the players that is dead and add one to everyone
 			player_scores[i] -= 1

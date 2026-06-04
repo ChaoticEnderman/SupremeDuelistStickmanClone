@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://dunv0pn03ua1n"]
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://dunv0pn03ua1n"]
 
 [ext_resource type="Script" uid="uid://42bfyewjaivt" path="res://code/weapons/weapon_data.gd" id="1_u1re6"]
-[ext_resource type="Texture2D" uid="uid://cwp2mjye4bt7y" path="res://assets/weapon4.png" id="2_fup0s"]
+[ext_resource type="Texture2D" uid="uid://dcykw64hmgcb1" path="res://assets/weapon/scythe.png" id="2_u1re6"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_u1re6"]
 points = PackedVector2Array(0, 20, -10, -45, 50, -45, 0, 20)
@@ -10,5 +10,6 @@ points = PackedVector2Array(0, 20, -10, -45, 50, -45, 0, 20)
 script = ExtResource("1_u1re6")
 hitbox = SubResource("ConvexPolygonShape2D_u1re6")
 name = "Scythe"
-sprite = ExtResource("2_fup0s")
+sprite = ExtResource("2_u1re6")
+sprite_cooldown = ExtResource("2_u1re6")
 metadata/_custom_type_script = "uid://42bfyewjaivt"

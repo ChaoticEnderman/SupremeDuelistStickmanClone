@@ -2,7 +2,6 @@
 extends Weapon
 class_name Weapon7
 
-
 func init(player: Player, id: String) -> void:
 	super.init(player, "7")
 	

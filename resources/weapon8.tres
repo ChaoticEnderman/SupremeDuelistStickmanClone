@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://c15hv6bo0agdw"]
+
+[ext_resource type="Script" uid="uid://42bfyewjaivt" path="res://code/weapons/weapon_data.gd" id="1_mal3r"]
+[ext_resource type="Texture2D" uid="uid://bhdmylag5ehma" path="res://assets/weapon/sniper.png" id="2_f8tuq"]
+[ext_resource type="Texture2D" uid="uid://df1howvmrvw6h" path="res://assets/weapon/sniper_cooldown.png" id="3_fnjl4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fnjl4"]
+
+[resource]
+script = ExtResource("1_mal3r")
+hitbox = SubResource("CircleShape2D_fnjl4")
+name = "Sniper"
+sprite = ExtResource("2_f8tuq")
+sprite_cooldown = ExtResource("3_fnjl4")
+metadata/_custom_type_script = "uid://42bfyewjaivt"

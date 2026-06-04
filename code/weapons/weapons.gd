@@ -3,6 +3,9 @@
 extends Node2D
 class_name Weapon
 
+## ID used to serialize the weapon
+var weapon_id : String
+
 ## The mandatory hitbox for the weapon for melee attacks
 @export var hitbox : CharacterBody2D = CharacterBody2D.new()
 @export var collision_shape : CollisionShape2D
@@ -29,10 +32,11 @@ var player : Player
 
 ## Initialize and load the respective weapon data and the hitbox/sprites from the id
 func init(player: Player, id: String) -> void:
+	self.weapon_id = id
 	self.player = player
-	weapon_data = load("res://resources/weapon" + id + ".tres")
-	add_sprite(id)
-	set_hitbox(id)
+	weapon_data = load("res://resources/weapon" + weapon_id + ".tres")
+	add_sprite(weapon_id)
+	set_hitbox(weapon_id)
 
 ## Load and add its sprite
 func add_sprite(id: String):
@@ -77,9 +81,9 @@ func tick_cooldown():
 	
 	# TEST: Prototype dynamic thingy for like the responsive sprite, will be implemented as a full sprite soon
 	if cooldown > 0:
-		sprite.modulate = Color(0.1, 0.5, 0.1)
+		sprite.texture = weapon_data.sprite_cooldown
 	else:
-		sprite.modulate = Color(1, 1, 1)
+		sprite.texture = weapon_data.sprite
 
 ## Release the next ability in the cycle
 func tick_release_ability(direction: Vector2) -> bool:

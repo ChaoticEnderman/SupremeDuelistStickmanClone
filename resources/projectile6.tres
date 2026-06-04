@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ProjectileData" load_steps=4 format=3 uid="uid://b1vha2wsxibwt"]
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://b1vha2wsxibwt"]
 
 [ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_7y47j"]
-[ext_resource type="Texture2D" uid="uid://cdcnunfig1sv2" path="res://assets/projectile6.png" id="2_s2pcw"]
+[ext_resource type="Texture2D" uid="uid://ctexkifbscs7w" path="res://assets/projectile/projectile6.png" id="2_s2pcw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqra4"]
 radius = 20.0
@@ -10,7 +10,6 @@ radius = 20.0
 script = ExtResource("1_7y47j")
 speed = 1000.0
 damage = 4.0
-is_affected_by_gravity = false
 can_go_through_wall = true
 sprite = ExtResource("2_s2pcw")
 hitbox = SubResource("CircleShape2D_mqra4")

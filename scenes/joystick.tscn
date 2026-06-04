@@ -1,27 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://dg60ibjocgcy4"]
+[gd_scene format=3 uid="uid://dg60ibjocgcy4"]
 
 [ext_resource type="Texture2D" uid="uid://b0ihq0lmiwb65" path="res://assets/coin_blank.png" id="1_g36iv"]
 [ext_resource type="Script" uid="uid://cnp5cs268tycu" path="res://code/joystick.gd" id="1_m03u7"]
 [ext_resource type="Texture2D" uid="uid://thu4medbs8i" path="res://assets/coin_logo.png" id="2_qxmy8"]
 
-[node name="Joystick" type="CanvasLayer"]
+[node name="Joystick" type="CanvasLayer" unique_id=1481707138]
 process_mode = 1
 layer = 100
+visible = false
 script = ExtResource("1_m03u7")
 
-[node name="JoystickBase" type="Control" parent="."]
+[node name="JoystickBase" type="Control" parent="." unique_id=1461092650]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="JoystickBase"]
+[node name="Sprite2D" type="Sprite2D" parent="JoystickBase" unique_id=1054125132]
 texture = ExtResource("1_g36iv")
 
-[node name="JoystickButton" type="Node2D" parent="JoystickBase"]
+[node name="JoystickButton" type="Node2D" parent="JoystickBase" unique_id=1086118909]
 
-[node name="Sprite2D" type="Sprite2D" parent="JoystickBase/JoystickButton"]
+[node name="Sprite2D" type="Sprite2D" parent="JoystickBase/JoystickButton" unique_id=1957100574]
 position = Vector2(-0.000162249, -32)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_qxmy8")

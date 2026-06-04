@@ -9,6 +9,18 @@ func _init(player: Player, projectile_data: ProjectileData):
 func collision_exception(projectile: Projectile):
 	self.add_collision_exception_with(projectile)
 
+## Also remove when touching opponent weapon
+func check_collision():
+	for body in self.get_colliding_bodies():
+		if body is TileMapLayer and not projectile_data.can_go_through_wall:
+			qfree()
+		if body is RigidBody2D and body.get_owner() is Player:
+			if not (body.get_owner() == damageable.owner_stickman):
+				qfree()
+		if body is CharacterBody2D and body.get_owner() is Player:
+			qfree()
+	
+
 func get_damage() -> float:
 	return super.get_damage()
 

@@ -9,6 +9,6 @@ func _on_game_state_changed(state):
 	self.visible = (state == GameState.GAME_STATE.RUNNING)
 
 func _pressed() -> void:
-	if GameState.game_state == GameState.GAME_STATE.LAZY_RUNNING:
+	if SystemManager.active_world.game_state == GameState.GAME_STATE.LAZY_RUNNING:
 		return
-	GameState.change_game_state(GameState.GAME_STATE.PAUSING)
+	GameState.change_game_state(SystemManager.active_world, GameState.GAME_STATE.PAUSING)

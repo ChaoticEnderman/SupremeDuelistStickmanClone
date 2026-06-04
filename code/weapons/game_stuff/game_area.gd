@@ -73,7 +73,6 @@ func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 	self.position = position
 	sprite.rotation = direction.angle()
 	collision_shape.rotation = direction.angle()
-	print("GA/direction ", self.direction)
 
 ## (Copied from GameObject class)
 ## Function to test if player exist and return the weapon, particularly useful for objects that reference the player weapon

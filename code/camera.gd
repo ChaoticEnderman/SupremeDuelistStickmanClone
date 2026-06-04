@@ -1,3 +1,5 @@
+## Embedded class to make the dynamic camera based on the two player distance
+
 extends Camera2D
 class_name Camera
 

@@ -12,7 +12,7 @@ func _init(player: Player, direction: Vector2, position: Vector2):
 	super._init(player, direction, position)
 	super.add_projectile_data(load("res://resources/projectile2.tres"))
 	super.add_collision_shape(projectile_data.hitbox)
-	SystemManager.world.add_child(self)
+	SystemManager.active_world.add_child(self)
 	super.summon_as_projectile(direction, position)
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _ready() -> void:
 func _on_game_tick(delta: float):
 	# If the player is deleted then skip frame
 	if get_dependent_player() == null:
-		queue_free()
+		qfree()
 		return
 	timer += 1
 	# For the first 2 seconds, it will fly straight to the direction of the weapon

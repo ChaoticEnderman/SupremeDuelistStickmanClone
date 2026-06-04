@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://ov5lwmihcaku"]
+
+[ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_td0bq"]
+[ext_resource type="Texture2D" uid="uid://bp30rkfwfh0vh" path="res://assets/projectile/bomb.png" id="2_vnf18"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4msry"]
+radius = 30.0
+
+[resource]
+script = ExtResource("1_td0bq")
+speed = 1200.0
+gravity_scale = 0.8
+sprite = ExtResource("2_vnf18")
+hitbox = SubResource("CircleShape2D_4msry")
+metadata/_custom_type_script = "uid://do2f64yeeylae"

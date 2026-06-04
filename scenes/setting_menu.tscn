@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://djdlikfugdgp0"]
+[gd_scene format=3 uid="uid://djdlikfugdgp0"]
 
 [ext_resource type="Script" uid="uid://biwmeg0vnecp2" path="res://code/ui/setting_menu/setting_menu.gd" id="1_pgfik"]
-[ext_resource type="Texture2D" uid="uid://du7wnt157wk30" path="res://assets/close_button.png" id="2_pgfik"]
+[ext_resource type="Texture2D" uid="uid://cp3t5knuhm3na" path="res://assets/ui/arrow_left.png" id="2_pgfik"]
 
 [sub_resource type="Gradient" id="Gradient_pgfik"]
 colors = PackedColorArray(0, 1, 1, 1, 0, 0, 1, 1)
@@ -12,7 +12,7 @@ width = 720
 height = 512
 fill_to = Vector2(0, 1)
 
-[node name="SettingMenu" type="Control"]
+[node name="SettingMenu" type="Control" unique_id=428239088]
 process_mode = 3
 z_index = 5
 layout_mode = 3
@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pgfik")
 
-[node name="Sprite2D" type="TextureRect" parent="."]
+[node name="Sprite2D" type="TextureRect" parent="." unique_id=1088777954]
 custom_minimum_size = Vector2(720, 512)
 layout_mode = 1
 anchors_preset = 8
@@ -38,7 +38,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_ogw40")
 expand_mode = 2
 
-[node name="BackButton" type="TextureButton" parent="Sprite2D"]
+[node name="BackButton" type="TextureButton" parent="Sprite2D" unique_id=465769520]
 layout_mode = 0
 offset_left = -128.0
 offset_bottom = 128.0
@@ -46,7 +46,7 @@ texture_normal = ExtResource("2_pgfik")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=330600893]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -60,7 +60,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=641543457]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,49 +74,49 @@ offset_bottom = 137.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer" unique_id=1443641682]
 custom_minimum_size = Vector2(512, 288)
 layout_mode = 2
 
-[node name="DamageMultiplierLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="DamageMultiplierLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer" unique_id=351577546]
 layout_mode = 2
 
-[node name="DamageMultiplier" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="DamageMultiplier" type="HSlider" parent="Control/ScrollContainer/VBoxContainer" unique_id=1845649062]
 layout_mode = 2
 max_value = 2.0
 step = 0.1
 value = 1.0
 
-[node name="CooldownLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="CooldownLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer" unique_id=1636771897]
 layout_mode = 2
 
-[node name="Cooldown" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="Cooldown" type="HSlider" parent="Control/ScrollContainer/VBoxContainer" unique_id=618138378]
 layout_mode = 2
 value = 100.0
 
-[node name="JumpHeightLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="JumpHeightLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer" unique_id=844642832]
 layout_mode = 2
 
-[node name="JumpHeight" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="JumpHeight" type="HSlider" parent="Control/ScrollContainer/VBoxContainer" unique_id=252981059]
 layout_mode = 2
 min_value = 1.0
 max_value = 50.0
-value = 6.0
+value = 8.0
 rounded = true
 
-[node name="JumpTimeLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="JumpTimeLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer" unique_id=1672110643]
 layout_mode = 2
 
-[node name="JumpTime" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="JumpTime" type="HSlider" parent="Control/ScrollContainer/VBoxContainer" unique_id=2050714663]
 layout_mode = 2
 max_value = 200.0
 value = 60.0
 rounded = true
 
-[node name="JoystickScaleLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="JoystickScaleLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer" unique_id=61185496]
 layout_mode = 2
 
-[node name="JoystickScale" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="JoystickScale" type="HSlider" parent="Control/ScrollContainer/VBoxContainer" unique_id=611884262]
 layout_mode = 2
 min_value = 0.25
 max_value = 5.0
@@ -124,19 +124,19 @@ step = 0.25
 value = 2.0
 rounded = true
 
-[node name="Gravity" type="CheckButton" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="Gravity" type="CheckButton" parent="Control/ScrollContainer/VBoxContainer" unique_id=1795439147]
 layout_mode = 2
 button_pressed = true
 text = "Gravity"
 
-[node name="KeyboardInput" type="CheckButton" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="KeyboardInput" type="CheckButton" parent="Control/ScrollContainer/VBoxContainer" unique_id=457906243]
 layout_mode = 2
 text = "Keyboard Input Toggle"
 
-[node name="EngineTPSLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="EngineTPSLabel" type="Label" parent="Control/ScrollContainer/VBoxContainer" unique_id=484111583]
 layout_mode = 2
 
-[node name="EngineTPS" type="HSlider" parent="Control/ScrollContainer/VBoxContainer"]
+[node name="EngineTPS" type="HSlider" parent="Control/ScrollContainer/VBoxContainer" unique_id=2127041108]
 layout_mode = 2
 min_value = 30.0
 max_value = 500.0

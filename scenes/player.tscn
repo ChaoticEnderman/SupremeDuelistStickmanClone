@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqj3jblf4fr0w"]
+[gd_scene format=3 uid="uid://cqj3jblf4fr0w"]
 
 [ext_resource type="Script" uid="uid://b70piq6y3ibwn" path="res://code/player.gd" id="1_qhqgy"]
 [ext_resource type="Script" uid="uid://cgvanqsoxhcvc" path="res://code/ragdoll_physics2.gd" id="2_dqkch"]
-[ext_resource type="Texture2D" uid="uid://cq2krgfuwgall" path="res://assets/EmptyPlayerLimbTexture10x50.png" id="3_dqkch"]
-[ext_resource type="Texture2D" uid="uid://dm0bvxw6lbylx" path="res://assets/EmptyPlayerCircleTexture.png" id="4_dqkch"]
+[ext_resource type="Texture2D" uid="uid://btwq0231hj3y7" path="res://assets/ui/EmptyPlayerLimbTexture10x50.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://cvep1xamrsv8n" path="res://assets/ui/EmptyPlayerCircleTexture.png" id="4_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 size = Vector2(10, 50)
@@ -19,95 +19,94 @@ script/source = "extends ProgressBar
 class_name JumpBar
 "
 
-[node name="Player" type="Node2D"]
-process_mode = 1
+[node name="Player" type="Node2D" unique_id=1881195472]
 script = ExtResource("1_qhqgy")
 
-[node name="RagdollPhysicsManager" type="Node2D" parent="."]
+[node name="RagdollPhysicsManager" type="Node2D" parent="." unique_id=1717232838]
 script = ExtResource("2_dqkch")
 
-[node name="Torso" type="RigidBody2D" parent="RagdollPhysicsManager"]
+[node name="Torso" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=1535198983]
 position = Vector2(0, -26)
 collision_layer = 2
 collision_mask = 27
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Torso"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Torso" unique_id=1511070490]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Torso"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Torso" unique_id=1687434332]
 texture = ExtResource("3_dqkch")
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Torso"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Torso" unique_id=639820250]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Torso/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Torso/Area2D" unique_id=1832501706]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Stomach" type="RigidBody2D" parent="RagdollPhysicsManager"]
+[node name="Stomach" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=54776905]
 position = Vector2(0, 25)
 collision_layer = 2
 collision_mask = 27
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Stomach"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Stomach" unique_id=322051120]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Stomach"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Stomach" unique_id=476584344]
 position = Vector2(-4.76837e-07, -3.8147e-06)
 rotation = -6.28318
 texture = ExtResource("3_dqkch")
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Stomach"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Stomach" unique_id=493508608]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Stomach/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Stomach/Area2D" unique_id=230763996]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="R Thigh" type="RigidBody2D" parent="RagdollPhysicsManager"]
+[node name="R Thigh" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=880085242]
 position = Vector2(0, 80)
 collision_layer = 2
 collision_mask = 27
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Thigh"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Thigh" unique_id=1804428714]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/R Thigh"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/R Thigh" unique_id=2067354990]
 position = Vector2(2.38419e-07, 0)
 texture = ExtResource("3_dqkch")
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/R Thigh"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/R Thigh" unique_id=159113476]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Thigh/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Thigh/Area2D" unique_id=757063303]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="L Thigh" type="RigidBody2D" parent="RagdollPhysicsManager"]
+[node name="L Thigh" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=1432992725]
 position = Vector2(0, 80)
 collision_layer = 2
 collision_mask = 27
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Thigh"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Thigh" unique_id=1348181280]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/L Thigh"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/L Thigh" unique_id=1180768144]
 texture = ExtResource("3_dqkch")
 offset = Vector2(2.38419e-07, 0)
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/L Thigh"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/L Thigh" unique_id=1972139073]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Thigh/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Thigh/Area2D" unique_id=1411867995]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Hip Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+[node name="Hip Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=254321972]
 position = Vector2(0, -1)
 rotation = 1.57079
 node_a = NodePath("../Torso")
 node_b = NodePath("../Stomach")
 disable_collision = false
 
-[node name="L Pelvis Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+[node name="L Pelvis Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=2117723741]
 position = Vector2(0, 50.0002)
 rotation = 3.14158
 node_a = NodePath("../Stomach")
@@ -116,7 +115,7 @@ disable_collision = false
 angular_limit_lower = -0.261799
 angular_limit_upper = 0.261799
 
-[node name="R Pelvis Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+[node name="R Pelvis Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=1847552530]
 position = Vector2(-0.00098002, 50)
 rotation = -2.50975e-05
 node_a = NodePath("../Stomach")
@@ -125,27 +124,27 @@ disable_collision = false
 angular_limit_lower = -0.261799
 angular_limit_upper = 0.261799
 
-[node name="L Shin" type="RigidBody2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, 135)
+[node name="L Shin" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=1831582888]
+position = Vector2(0, 134)
 collision_layer = 2
 collision_mask = 27
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Shin"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Shin" unique_id=1809881183]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/L Shin"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/L Shin" unique_id=1966983463]
 position = Vector2(-4.76837e-07, -3.8147e-06)
 rotation = -6.28318
 texture = ExtResource("3_dqkch")
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/L Shin"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/L Shin" unique_id=1831207758]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Shin/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/L Shin/Area2D" unique_id=956189244]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="L Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+[node name="L Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=884800]
 position = Vector2(0, 105)
 rotation = 1.57079
 node_a = NodePath("../L Thigh")
@@ -154,26 +153,26 @@ disable_collision = false
 angular_limit_lower = -0.261799
 angular_limit_upper = 0.261799
 
-[node name="R Shin" type="RigidBody2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, 135)
+[node name="R Shin" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=1937996360]
+position = Vector2(0, 134)
 collision_layer = 2
 collision_mask = 27
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Shin"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Shin" unique_id=832552290]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/R Shin"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/R Shin" unique_id=1146144810]
 rotation = -6.28318
 texture = ExtResource("3_dqkch")
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/R Shin"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/R Shin" unique_id=1276420044]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Shin/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/R Shin/Area2D" unique_id=1949929834]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="R Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+[node name="R Knee Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=1279947861]
 position = Vector2(0, 105)
 rotation = 1.57079
 node_a = NodePath("../R Thigh")
@@ -182,29 +181,29 @@ disable_collision = false
 angular_limit_lower = -0.261799
 angular_limit_upper = 0.261799
 
-[node name="Head" type="RigidBody2D" parent="RagdollPhysicsManager"]
+[node name="Head" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=378739846]
 position = Vector2(0, -67)
 collision_layer = 2
 collision_mask = 27
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Head"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Head" unique_id=895612682]
 shape = SubResource("RectangleShape2D_qhqgy")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Head"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/Head" unique_id=274817351]
 position = Vector2(9.53674e-07, 4.76837e-07)
 scale = Vector2(0.059, 0.059)
-texture = ExtResource("4_dqkch")
+texture = ExtResource("4_qlg0r")
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Head"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/Head" unique_id=431983579]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Head/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/Head/Area2D" unique_id=283268106]
 shape = SubResource("RectangleShape2D_qlg0r")
 
-[node name="Hat" type="Sprite2D" parent="RagdollPhysicsManager/Head"]
+[node name="Hat" type="Sprite2D" parent="RagdollPhysicsManager/Head" unique_id=883515842]
 scale = Vector2(0.06, 0.06)
 
-[node name="Neck Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+[node name="Neck Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=1585220467]
 position = Vector2(0, -51)
 node_a = NodePath("../Torso")
 node_b = NodePath("../Head")
@@ -213,55 +212,55 @@ angular_limit_lower = 0.261799
 angular_limit_upper = -0.261799
 motor_target_velocity = 3.14159
 
-[node name="P Shoulder Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+[node name="P Shoulder Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=1338137646]
 position = Vector2(0, -51)
 node_a = NodePath("../Torso")
 node_b = NodePath("../P Arm")
 
-[node name="P Elbow Joint" type="PinJoint2D" parent="RagdollPhysicsManager"]
+[node name="P Elbow Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=1271086103]
 position = Vector2(0, -1)
 node_a = NodePath("../P Arm")
 node_b = NodePath("../P Forearm")
 
-[node name="P Forearm" type="RigidBody2D" parent="RagdollPhysicsManager"]
-position = Vector2(0, 25)
+[node name="P Forearm" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=932813813]
+position = Vector2(0, 24.5)
 collision_layer = 2
 collision_mask = 27
 mass = 0.1
 sleeping = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Forearm"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Forearm" unique_id=1336628143]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Forearm"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Forearm" unique_id=1131337345]
 texture = ExtResource("3_dqkch")
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/P Forearm"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/P Forearm" unique_id=1575060227]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Forearm/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Forearm/Area2D" unique_id=2045455746]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="P Arm" type="RigidBody2D" parent="RagdollPhysicsManager"]
+[node name="P Arm" type="RigidBody2D" parent="RagdollPhysicsManager" unique_id=486237056]
 position = Vector2(0, -26)
 collision_layer = 2
 collision_mask = 27
 sleeping = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm" unique_id=291396035]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Arm"]
+[node name="Sprite2D" type="Sprite2D" parent="RagdollPhysicsManager/P Arm" unique_id=1749100835]
 texture = ExtResource("3_dqkch")
 offset = Vector2(9.53674e-07, 0)
 
-[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/P Arm"]
+[node name="Area2D" type="Area2D" parent="RagdollPhysicsManager/P Arm" unique_id=20162069]
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RagdollPhysicsManager/P Arm/Area2D" unique_id=1244534026]
 shape = SubResource("RectangleShape2D_dqkch")
 
-[node name="JumpBar" type="ProgressBar" parent="."]
+[node name="JumpBar" type="ProgressBar" parent="." unique_id=1681041203]
 offset_left = -30.0
 offset_top = -95.0
 offset_right = 30.0
@@ -271,7 +270,7 @@ value = 43.68
 show_percentage = false
 script = SubResource("GDScript_qhqgy")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=336041794]
 offset_left = -30.0
 offset_top = -90.0
 offset_right = 30.0
@@ -280,7 +279,7 @@ value = 89.86
 show_percentage = false
 script = SubResource("GDScript_qhqgy")
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="." unique_id=28991249]
 offset_left = -20.0
 offset_top = -118.0
 offset_right = 20.0

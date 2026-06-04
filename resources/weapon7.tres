@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://cuu1coq3kfepv"]
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://cuu1coq3kfepv"]
 
 [ext_resource type="Script" uid="uid://42bfyewjaivt" path="res://code/weapons/weapon_data.gd" id="1_yr32e"]
-[ext_resource type="Texture2D" uid="uid://4uba3djiy5o8" path="res://assets/weapon7.png" id="2_ro4mx"]
+[ext_resource type="Texture2D" uid="uid://b07rjbm4qvre4" path="res://assets/weapon/katana.png" id="2_ro4mx"]
+[ext_resource type="Texture2D" uid="uid://cxa7sb0a5wo2g" path="res://assets/weapon/katana_cooldown.png" id="3_6vctn"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ro4mx"]
 points = PackedVector2Array(10, 40, -10, 40, -10, -50, 10, -50)
@@ -11,4 +12,5 @@ script = ExtResource("1_yr32e")
 hitbox = SubResource("ConvexPolygonShape2D_ro4mx")
 name = "Kanata"
 sprite = ExtResource("2_ro4mx")
+sprite_cooldown = ExtResource("3_6vctn")
 metadata/_custom_type_script = "uid://42bfyewjaivt"

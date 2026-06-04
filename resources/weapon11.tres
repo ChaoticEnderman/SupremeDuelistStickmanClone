@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://bvub3jnrekpj"]
+
+[ext_resource type="Script" uid="uid://42bfyewjaivt" path="res://code/weapons/weapon_data.gd" id="1_6m3sg"]
+[ext_resource type="Texture2D" uid="uid://cs17athcl0ok2" path="res://assets/weapon/bomb.png" id="2_vije5"]
+[ext_resource type="Texture2D" uid="uid://cxqrdn5ndylkh" path="res://assets/weapon/bomb_cooldown.png" id="3_jn368"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jn368"]
+radius = 30.0
+
+[resource]
+script = ExtResource("1_6m3sg")
+hitbox = SubResource("CircleShape2D_jn368")
+name = "Bomb"
+sprite = ExtResource("2_vije5")
+sprite_cooldown = ExtResource("3_jn368")
+metadata/_custom_type_script = "uid://42bfyewjaivt"

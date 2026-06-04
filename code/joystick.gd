@@ -32,9 +32,9 @@ var is_releasing : bool
 ## Temporary value of the time the joystick is held in jump angle, when this became 60 (time to jump) it will initialize a jump
 ## However if the player just stop this will be resetted
 var jumping_time : int = 0
-
 ## Store the jump cooldown in a short succesion after jumping, to prevent double jump bugs
 var jump_cooldown : int
+
 
 ## Center of the screen, for partitioning to four quadrants
 var screen_center : Vector2# = Vector2(DisplayServer.window_get_size().x / 2, DisplayServer.window_get_size().y / 2)
@@ -72,11 +72,15 @@ func set_joystick_corner(joystick_position : Globals.JOYSTICK_POSITION):
 	# Probably due to only the parent node is scaled and the local position is the same
 	knob_joystick.position = Vector2(knob_joystick.position.x, knob_joystick.position.y + 32)
 
+## Resolving input by interruption for near instant speed and will not need polling
+## Will store the input data locally on this node, only polled by physics to move the player or sent continously to server through UDP node
 func _input(event: InputEvent) -> void:
 	if Globals.KEYBOARD_INPUT_ENABLED:
 		keyboard_input()
 	else:
 		touch_input(event)
+	if GameState.system_state == GameState.SYSTEM_STATE.ONLINE:
+		prepare_input_packet()
 
 ## Check if the input is in the correct partition. Only count mouse or touch input
 func touch_input_validation(event: InputEvent) -> bool:
@@ -126,7 +130,6 @@ func touch_input(event: InputEvent) -> bool:
 			#change_dragging(false)
 			return false
 		#else:
-		print("joy/drag inside region ", dragging, " ", get_pos(event))
 		if dragging:
 			joystick_direction = (get_pos(event) - knob_joystick.global_position).normalized()
 			change_dragging(dragging)
@@ -184,7 +187,6 @@ func change_dragging(dragging: bool):
 
 ## Function called every tick to check the direction of the joystick movement
 func tick_input() -> Vector2:
-	
 	if joystick_direction != Vector2.ZERO:
 		previous_joystick_direction = joystick_direction
 	
@@ -218,4 +220,26 @@ func tick_input_is_jumping() -> Vector2:
 		return joystick_direction
 	
 	return Vector2.ZERO
+
+## Sending raw input data to the server, including jump time and jumping cooldown which can be hacked at client level
+## However we still have no server heuristic anticheat and raw input can just be cheated, so assume all of client side data is also not cheated for now
+## Since just finding a bot to play this game and win is some kind of achievement the developer decide to let it a bit open
+func prepare_input_packet():
+	var input_state : Dictionary = {
+	"joystick_direction" : "",
+	"previous_joystick_direction" : "",
+	"joystick_position" : "",
+	"dragging" : "=",
+	"previous_dragging" : "=",
+	"is_releasing" : "=",
+	"jumping_time" : "=",
+	"jump_cooldown" : "=",
+	}
 	
+	input_state.joystick_direction = joystick_direction
+	input_state.previous_joystick_direction = previous_joystick_direction
+	input_state.dragging = dragging
+	input_state.previous_dragging = previous_dragging
+	input_state.is_releasing = is_releasing
+	input_state.jumping_time = jumping_time
+	input_state.jump_cooldown = jump_cooldown

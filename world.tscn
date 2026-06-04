@@ -1,32 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpumsdee7ekaq"]
+[gd_scene format=3 uid="uid://cpumsdee7ekaq"]
 
 [ext_resource type="Script" uid="uid://bevnv2gjagmks" path="res://code/world/world.gd" id="1_036b0"]
-[ext_resource type="PackedScene" uid="uid://djdlikfugdgp0" path="res://scenes/setting_menu.tscn" id="2_dwbse"]
 [ext_resource type="PackedScene" uid="uid://oj84mtpo6xhu" path="res://scenes/game_ui.tscn" id="4_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://beewqyv27qw3h" path="res://scenes/pause_menu.tscn" id="5_036b0"]
 [ext_resource type="Script" uid="uid://db7np6u36qf7q" path="res://code/map/map.gd" id="5_dwbse"]
-[ext_resource type="PackedScene" uid="uid://beewqyv27qw3h" path="res://scenes/pause_menu.tscn" id="5_ioo17"]
 [ext_resource type="Script" uid="uid://wqcrlljgi7bo" path="res://code/camera.gd" id="6_dwbse"]
 
-[node name="World" type="Node2D"]
-process_mode = 3
+[node name="World" type="Node2D" unique_id=1758789496]
+process_mode = 1
 script = ExtResource("1_036b0")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="CameraGame" type="Node2D" parent="." unique_id=886745535]
 
-[node name="SettingMenu" parent="UI" instance=ExtResource("2_dwbse")]
-visible = false
-
-[node name="PauseMenu" parent="UI" instance=ExtResource("5_ioo17")]
-visible = false
-
-[node name="GameUI" parent="UI" instance=ExtResource("4_gbfbk")]
-z_index = -1
-
-[node name="CameraGame" type="Node2D" parent="."]
-
-[node name="Map" type="Node2D" parent="CameraGame"]
+[node name="Map" type="Node2D" parent="CameraGame" unique_id=1173774129]
 script = ExtResource("5_dwbse")
 
-[node name="Camera" type="Camera2D" parent="CameraGame"]
+[node name="Camera" type="Camera2D" parent="CameraGame" unique_id=275696177]
 script = ExtResource("6_dwbse")
 metadata/_custom_type_script = "uid://wqcrlljgi7bo"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=369630742]
+
+[node name="GameUI" parent="UI" unique_id=516675566 instance=ExtResource("4_gbfbk")]
+z_index = -1
+
+[node name="PauseMenu" parent="UI" unique_id=457589621 instance=ExtResource("5_036b0")]

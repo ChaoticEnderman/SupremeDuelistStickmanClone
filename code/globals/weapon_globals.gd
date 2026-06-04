@@ -39,18 +39,33 @@ var ability5_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 # Weapon 5 Gauntlet
 # Ability to summon big orb
 var ability6_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+# Ability to shoot big zap
+var ability7_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 
 # Weapon 6 Crossbow
-# Ability to shoot the primary projectile
-var ability7_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
-# Spread for the secondary projectile, unused and just keep for the consistency of ability to the cooldown
-var ability8_cooldown : int = -1
+# Ability to shoot primary bullet
+var ability8_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 
-var ability9_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
-var ability10_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+# Weapon 7 Katana
+# Cooldown for the katana blue dragon
+var ability9_cooldown : int = Globals.TPS * 5
+
+# Weapon 8 Sniper
+# Ability to shoot projectile
+var ability10_cooldown : int = WEAPON_COOLDOWNS.LONG
+
+# Weapon 9 Portal gun
+# Ability for blue portal
 var ability11_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+# Ability for orange portal
 var ability12_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+
+# Weapon 10 Pickaxe
+# Ability for summoning the stone
 var ability13_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
+
+# Weapon 11 Bomb
+# Ability to summon small bomb
 var ability14_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 var ability15_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
 var ability16_cooldown : int = WEAPON_COOLDOWNS.MEDIUM
@@ -64,6 +79,9 @@ enum PLAYER_SIDE {LEFT,	RIGHT}
 
 ## Load all weapons at the very start of the app, only the data for ready menu to use before actual game weapon
 func load_weapons() -> void:
+	# Load the random weapon first
+	weapon_list.append(load("res://resources/weapon_random.tres"))
+	
 	var i : int = 1
 	var path = "res://resources/weapon" + str(i) + ".tres"
 	while ResourceLoader.exists(path):
@@ -79,6 +97,8 @@ func set_weapon(weapon: PLAYER_SIDE, index: int):
 
 func get_weapon(index: int) -> Weapon:
 	match index:
+		0:
+			return null # This is for random weapon, the World class will handle null values here
 		1:
 			return Weapon1.new()
 		2:
@@ -93,5 +113,23 @@ func get_weapon(index: int) -> Weapon:
 			return Weapon6.new()
 		7:
 			return Weapon7.new()
+		8:
+			return Weapon8.new()
+		9:
+			return Weapon9.new()
+		10:
+			return Weapon10.new()
+		11:
+			return Weapon11.new()
+		#12:
+			#return Weapon12.new()
+		#13:
+			#return Weapon13.new()
+		#14:
+			#return Weapon14.new()
+		#15:
+			#return Weapon15.new()
+		#16:
+			#return Weapon16.new()
 		_:
 			return null

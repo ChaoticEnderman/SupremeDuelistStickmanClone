@@ -1,13 +1,11 @@
-[gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3 uid="uid://duvqrr7grbgmy"]
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://duvqrr7grbgmy"]
 
 [ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_0n6p0"]
-[ext_resource type="Texture2D" uid="uid://bw0ftop0rq0o5" path="res://assets/projectile5.png" id="2_da4wx"]
+[ext_resource type="Texture2D" uid="uid://dwme4q8xdpnsw" path="res://assets/projectile/projectile5.png" id="2_da4wx"]
 
 [resource]
 script = ExtResource("1_0n6p0")
 speed = 1000.0
-damage = 0.0
-gravity_scale = 0.0
 can_go_through_wall = true
 sprite = ExtResource("2_da4wx")
 metadata/_custom_type_script = "uid://do2f64yeeylae"

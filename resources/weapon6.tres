@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://cimjuqd3hyf3q"]
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://cimjuqd3hyf3q"]
 
 [ext_resource type="Script" uid="uid://42bfyewjaivt" path="res://code/weapons/weapon_data.gd" id="1_0swnj"]
-[ext_resource type="Texture2D" uid="uid://4snhieg0k32s" path="res://assets/weapon6.png" id="2_f0mic"]
+[ext_resource type="Texture2D" uid="uid://ci64q8a4n4l0v" path="res://assets/weapon/crossbow.png" id="2_f0mic"]
+[ext_resource type="Texture2D" uid="uid://b35c31sxgljep" path="res://assets/weapon/crossbow_cooldown.png" id="3_k2ylo"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_0swnj"]
 points = PackedVector2Array(0, 0, 50, -50, 0, -50)
@@ -11,4 +12,5 @@ script = ExtResource("1_0swnj")
 hitbox = SubResource("ConvexPolygonShape2D_0swnj")
 name = "Crossbow"
 sprite = ExtResource("2_f0mic")
+sprite_cooldown = ExtResource("3_k2ylo")
 metadata/_custom_type_script = "uid://42bfyewjaivt"

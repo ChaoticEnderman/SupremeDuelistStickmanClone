@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://s8qnfeibdkq3"]
+
+[ext_resource type="Script" uid="uid://do2f64yeeylae" path="res://code/weapons/projectiles/projectile_data.gd" id="1_wvkkp"]
+[ext_resource type="Texture2D" uid="uid://b0ihq0lmiwb65" path="res://assets/coin_blank.png" id="2_oojey"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ocayw"]
+
+[resource]
+script = ExtResource("1_wvkkp")
+speed = 2000.0
+damage = 5.0
+sprite = ExtResource("2_oojey")
+hitbox = SubResource("CircleShape2D_ocayw")
+metadata/_custom_type_script = "uid://do2f64yeeylae"

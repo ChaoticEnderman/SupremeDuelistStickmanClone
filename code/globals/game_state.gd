@@ -12,12 +12,11 @@ signal game_tick(delta: float)
 signal clear_round
 
 ## Enum for all system states
-enum SYSTEM_STATE {MENU, GAME, READY, MAP_EDIT}
+enum SYSTEM_STATE {MENU, GAME, ONLINE, MATCHMAKING, READY, MAP_EDIT}
+
 ## Enum for the game states, only works when the system state is game
 enum GAME_STATE {NONE, RUNNING, PAUSING, PAUSING_SETTING, LAZY_RUNNING}
 
-## Store the current game state, not supposed to be modified directly
-var game_state = GAME_STATE.RUNNING
 ## Store the current system state, not supposed to be modified directly
 var system_state = SYSTEM_STATE.GAME
 
@@ -30,16 +29,20 @@ func _ready() -> void:
 ## Not through broken or random game tick many places
 # TODO: Make all components using the game tick use this instead
 func _physics_process(delta: float) -> void:
-	if queue_game:
-		queue_game = false
-		change_game_state(GAME_STATE.RUNNING)
-		return
-	if game_state == GAME_STATE.RUNNING:
-		game_tick.emit(delta)
+	if system_state == SYSTEM_STATE.GAME:
+		if queue_game:
+			queue_game = false
+			if SystemManager.active_world != null:
+				change_game_state(SystemManager.active_world, GameState.GAME_STATE.RUNNING)
+			return
+		if SystemManager.active_world != null:
+			if SystemManager.active_world.game_state == GAME_STATE.RUNNING:
+				game_tick.emit(delta)
 
 ## This should be used to change the game state, will automatically emit the signal
-func change_game_state(state: GAME_STATE):
-	game_state = state
+func change_game_state(world: World, state: GAME_STATE):
+	print("GS/for world ", world, " change state to ", GameState.get_beautiful_game_state(state))
+	world.game_state = state
 	game_state_changed.emit(state)
 
 ## Queue to run the game in the next tick after freeing last round's objects
@@ -52,8 +55,10 @@ func change_system_state(state: SYSTEM_STATE):
 	system_state = state
 	print("GS/System State is ", get_beautiful_system_state(state))
 	# Automatically change game state to none or n/a or similiar when the system is not running the game
+	print("GS/active world ", SystemManager.active_world)
 	if system_state != SYSTEM_STATE.GAME:
-		change_game_state(GAME_STATE.NONE)
+		if SystemManager.active_world != null:
+			change_game_state(SystemManager.active_world, GAME_STATE.NONE)
 	system_state_changed.emit(state)
 
 ## Return a game state string instead of int, for better debugging
@@ -79,6 +84,10 @@ func get_beautiful_system_state(state: SYSTEM_STATE) -> String:
 			return "MENU"
 		SYSTEM_STATE.GAME:
 			return "GAME"
+		SYSTEM_STATE.ONLINE:
+			return "ONLINE"
+		SYSTEM_STATE.MATCHMAKING:
+			return "MATCHMAKING"
 		SYSTEM_STATE.READY:
 			return "READY"
 		SYSTEM_STATE.MAP_EDIT:

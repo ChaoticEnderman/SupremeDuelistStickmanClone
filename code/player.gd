@@ -5,7 +5,7 @@ extends Node2D
 class_name Player
 
 ## The physical body of this player
-@onready var ragdoll : Node2D = get_node("RagdollPhysicsManager")
+@onready var ragdoll : Ragdoll2 = get_node("RagdollPhysicsManager")
 ## HUD jump bar
 @onready var jump_bar : ProgressBar = get_node("JumpBar")
 ## HUD health bar
@@ -19,7 +19,7 @@ class_name Player
 var input_manager = Joystick
 
 ## The single weapon that this stickman hold, since each stickman have exactly one weapon holding
-var weapon = Weapon
+var weapon : Weapon
 
 # Position and direction
 var player_position : Vector2 = Vector2.ZERO
@@ -43,6 +43,7 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	# Not connecting now since like the world need to dictate the order of these, see world for info
 	#GameState.game_tick.connect(_on_game_tick)
 	self.weapon = weapon
+	weapon.owner = self
 	player_hp = 100.0
 	is_dead = false
 	# Real player variable is reserved for bots long ago, but seems like this will probably never be added
@@ -51,6 +52,7 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 		input_manager = load("res://scenes/joystick.tscn").instantiate()
 		add_child(input_manager)
 		input_manager.set_joystick_corner(joystick_position)
+		joy_stick_visibility(false)
 	self.player_side = player_side
 	# Create a custom stylebox for changing the hp bar color and override the fill stylebox
 	health_bar.add_theme_stylebox_override("fill", health_bar_color)
@@ -71,6 +73,7 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	
 	ragdoll.set_hat(PlayerSpriteGlobals.get_hat(player_side))
 	
+	# TODO: change this to account for for active world also
 	input_manager.visible = not Globals.KEYBOARD_INPUT_ENABLED
 	
 	Globals.setting_reloaded.connect(func():
@@ -80,6 +83,40 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 		else:
 			input_manager.visible = true
 	)
+
+## Freeze the player physics
+func freeze(is_freezing: bool):
+	for body in get_node("RagdollPhysicsManager").get_children():
+		if body is RigidBody2D:
+			body.freeze = is_freezing
+
+## Serialize player data for online games to send over a network
+func serialize_data() -> PackedFloat32Array:
+	var data : PackedFloat32Array
+	data.append(self.position.x)
+	data.append(self.position.y)
+	data.append(player_hp)
+	data.append(self.hand_position.x)
+	data.append(self.hand_position.y)
+	data.append(score)
+	data.append(float(weapon.weapon_id))
+	for child in ragdoll.ordered_limbs:
+		if child is RigidBody2D:
+			data.append(child.position.x)
+			data.append(child.position.y)
+			data.append(child.rotation)
+			data.append(child.linear_velocity.x)
+			data.append(child.linear_velocity.y)
+			data.append(child.angular_velocity)
+	return data
+
+func deserialize_data(data: PackedFloat32Array):
+	self.position.x = data.get(0)
+	
+
+## Change visibility of joystick
+func joy_stick_visibility(is_visible: bool):
+	input_manager.visible = is_visible
 
 # Master tick function to tick the player and its dependencies
 func _on_game_tick():
@@ -160,7 +197,9 @@ func update_score_label():
 func tick_weapon_hud():
 	if ragdoll.is_alive:
 		weapon.position = hand_position
-		weapon.tick_rotation(player_direction)
+		#weapon.tick_rotation(player_direction)
+		#TEST: Make the weapon direction on the arm direction instead of the raw joystick direction
+		weapon.tick_rotation(Vector2.from_angle(ragdoll.p_forearm.rotation + PI/2))
 
 ## Check for player collision with anything that can do damage
 func check_collision():

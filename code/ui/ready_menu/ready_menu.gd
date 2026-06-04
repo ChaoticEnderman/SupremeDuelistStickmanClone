@@ -56,10 +56,10 @@ func create_sprite_stickmen(root_node: Control, player_side: PlayerSpriteGlobals
 	for limb in nh_limbs:
 		limb.size = Vector2(10.0, 50.0)
 		limb.pivot_offset = Vector2(5.0, 25.0)
-		limb.texture_normal = load("res://assets/EmptyPlayerLimbTexture10x50.png")
+		limb.texture_normal = load("res://assets/ui/EmptyPlayerLimbTexture10x50.png")
 	head.size = Vector2(30.0, 30.0)
 	head.pivot_offset = Vector2(15.0, 15.0)
-	head.texture_normal = load("res://assets/EmptyPlayerLimbTexture30x30.png")
+	head.texture_normal = load("res://assets/ui/EmptyPlayerLimbTexture30x30.png")
 	# Set the position of the limbs to build a stickman-like object
 	torso.position = Vector2(root_node.size.x / 2, root_node.size.y / 2)
 	torso.position = torso.position + Vector2(0.0, -100.0)
@@ -169,11 +169,21 @@ func initialize_weapons(popup_panel: Control):
 		# Add to the popup panel
 		popup_panel.get_node("Control/GridContainer").add_child(control)
 		# Connect the pressed signal automatically
-		if popup_panel == left_panel_weapon_popup:
-			button.pressed.connect(_on_weapon_button_pressed.bind(WeaponGlobals.PLAYER_SIDE.LEFT, id))
-		elif popup_panel == right_panel_weapon_popup:
-			button.pressed.connect(_on_weapon_button_pressed.bind(WeaponGlobals.PLAYER_SIDE.RIGHT, id))
-		id += 1
+		if weapon_data.name == "Random":
+			if popup_panel == left_panel_weapon_popup:
+				button.pressed.connect(_on_weapon_button_pressed.bind(
+					WeaponGlobals.PLAYER_SIDE.LEFT, 0))
+			elif popup_panel == right_panel_weapon_popup:
+				button.pressed.connect(_on_weapon_button_pressed.bind(
+					WeaponGlobals.PLAYER_SIDE.RIGHT, 0))
+		else:
+			if popup_panel == left_panel_weapon_popup:
+				button.pressed.connect(_on_weapon_button_pressed.bind(
+					WeaponGlobals.PLAYER_SIDE.LEFT, id))
+			elif popup_panel == right_panel_weapon_popup:
+				button.pressed.connect(_on_weapon_button_pressed.bind(
+					WeaponGlobals.PLAYER_SIDE.RIGHT, id))
+			id += 1
 
 ## Initialize all the weapons to be displayed in the popup panel, but not shown yet until the user chose
 func initialize_hats(popup_panel: Control):
@@ -231,3 +241,6 @@ func _on_left_button_pressed() -> void:
 ## Move to the previous map
 func _on_right_button_pressed() -> void:
 	map_chooser.get_node("Label").text = MapController.next_map()
+
+func _on_back_button_pressed() -> void:
+	GameState.change_system_state(GameState.SYSTEM_STATE.MENU)

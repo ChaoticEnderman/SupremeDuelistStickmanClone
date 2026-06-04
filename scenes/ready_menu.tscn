@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpaf5kbu8hnh0"]
+[gd_scene format=3 uid="uid://dpaf5kbu8hnh0"]
 
 [ext_resource type="Script" uid="uid://ccdro2y1tgmm3" path="res://code/ui/ready_menu/ready_menu.gd" id="1_aru3y"]
-[ext_resource type="Texture2D" uid="uid://cmpblwuk8xqmr" path="res://assets/thumbnail.png" id="2_ldg7d"]
-[ext_resource type="Texture2D" uid="uid://c2c7qntm73r31" path="res://assets/main_menu_play_button.png" id="3_mw6r2"]
-[ext_resource type="Texture2D" uid="uid://dji7np2tg2n5h" path="res://assets/main_menu_weapon.png" id="4_ldg7d"]
-[ext_resource type="Texture2D" uid="uid://sbj7me7l8pgc" path="res://assets/main_menu_hat.png" id="5_0b27c"]
-[ext_resource type="Texture2D" uid="uid://bla2ykqe6q5f4" path="res://assets/EmptyPlayerLimbTexture30x30.png" id="7_kgd7w"]
-[ext_resource type="Texture2D" uid="uid://t47uht2dqgsg" path="res://assets/arrow_left.png" id="8_b76aw"]
-[ext_resource type="Texture2D" uid="uid://ql6pxuhqjao1" path="res://assets/arrow_right.png" id="9_0gi3o"]
+[ext_resource type="Texture2D" uid="uid://bakmuc8mtxa74" path="res://assets/ui/thumbnail.png" id="2_s3tea"]
+[ext_resource type="Texture2D" uid="uid://bsci6y63e4jg5" path="res://assets/ui/main_menu_weapon.png" id="3_kgd7w"]
+[ext_resource type="Texture2D" uid="uid://dol0cprull15u" path="res://assets/ui/main_menu_hat.png" id="4_b76aw"]
+[ext_resource type="Texture2D" uid="uid://cp3t5knuhm3na" path="res://assets/ui/arrow_left.png" id="5_0gi3o"]
+[ext_resource type="Texture2D" uid="uid://c2gptmjuso3j2" path="res://assets/ui/main_menu_play_button.png" id="6_li3np"]
+[ext_resource type="Texture2D" uid="uid://bt4vk2xjdrc7v" path="res://assets/ui/EmptyPlayerLimbTexture30x30.png" id="7_mnjpj"]
+[ext_resource type="Texture2D" uid="uid://vgyrs2vf21b4" path="res://assets/ui/arrow_right.png" id="8_qjhvo"]
 
 [sub_resource type="Gradient" id="Gradient_nhbo6"]
 colors = PackedColorArray(0.176471, 0.756908, 0.823248, 1, 0.185806, 0.631779, 0.326784, 1)
@@ -19,7 +19,7 @@ width = 384
 [sub_resource type="LabelSettings" id="LabelSettings_li3np"]
 font_size = 24
 
-[node name="ReadyMenu" type="Control"]
+[node name="ReadyMenu" type="Control" unique_id=204654391]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -29,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aru3y")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1069968133]
 custom_minimum_size = Vector2(0, 720)
 layout_mode = 1
 anchors_preset = 14
@@ -38,10 +38,10 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ldg7d")
+texture = ExtResource("2_s3tea")
 expand_mode = 4
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1295993379]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +49,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LeftPanel" type="Control" parent="."]
+[node name="LeftPanel" type="Control" parent="." unique_id=1345149326]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -59,7 +59,7 @@ offset_right = 128.0
 grow_vertical = 0
 mouse_filter = 1
 
-[node name="LPlayer" type="Control" parent="LeftPanel"]
+[node name="LPlayer" type="Control" parent="LeftPanel" unique_id=2125150883]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -70,7 +70,7 @@ offset_bottom = 360.0
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="LeftPanelContainer" type="VBoxContainer" parent="LeftPanel"]
+[node name="LeftPanelContainer" type="VBoxContainer" parent="LeftPanel" unique_id=212077479]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 1
 offset_right = 512.0
@@ -78,21 +78,22 @@ offset_bottom = 2880.0
 scale = Vector2(0.25, 0.25)
 alignment = 1
 
-[node name="LWeaponButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer"]
+[node name="LWeaponButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer" unique_id=2037606573]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture_normal = ExtResource("4_ldg7d")
+texture_normal = ExtResource("3_kgd7w")
 
-[node name="LHatButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer"]
+[node name="LHatButton" type="TextureButton" parent="LeftPanel/LeftPanelContainer" unique_id=1222188263]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture_normal = ExtResource("5_0b27c")
+texture_normal = ExtResource("4_b76aw")
 
-[node name="LColorPickerButton" type="ColorPickerButton" parent="LeftPanel/LeftPanelContainer"]
+[node name="LColorPickerButton" type="ColorPickerButton" parent="LeftPanel/LeftPanelContainer" unique_id=893878782]
 custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
+color = Color(1, 1, 1, 1)
 
-[node name="RightPanel" type="Control" parent="."]
+[node name="RightPanel" type="Control" parent="." unique_id=491858139]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -105,7 +106,7 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 1
 
-[node name="RPlayer" type="Control" parent="RightPanel"]
+[node name="RPlayer" type="Control" parent="RightPanel" unique_id=1701234241]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -119,7 +120,7 @@ grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="RightPanelContainer" type="VBoxContainer" parent="RightPanel"]
+[node name="RightPanelContainer" type="VBoxContainer" parent="RightPanel" unique_id=1740617015]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 1
 offset_right = 512.0
@@ -127,33 +128,43 @@ offset_bottom = 2880.0
 scale = Vector2(0.25, 0.25)
 alignment = 1
 
-[node name="RWeaponButton" type="TextureButton" parent="RightPanel/RightPanelContainer"]
+[node name="RWeaponButton" type="TextureButton" parent="RightPanel/RightPanelContainer" unique_id=621111360]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture_normal = ExtResource("4_ldg7d")
+texture_normal = ExtResource("3_kgd7w")
 
-[node name="RHatButton" type="TextureButton" parent="RightPanel/RightPanelContainer"]
+[node name="RHatButton" type="TextureButton" parent="RightPanel/RightPanelContainer" unique_id=644988170]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture_normal = ExtResource("5_0b27c")
+texture_normal = ExtResource("4_b76aw")
 
-[node name="RColorPickerButton" type="ColorPickerButton" parent="RightPanel/RightPanelContainer"]
+[node name="RColorPickerButton" type="ColorPickerButton" parent="RightPanel/RightPanelContainer" unique_id=1097472771]
 custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
+color = Color(1, 1, 1, 1)
 
-[node name="LeftPanelWeaponPopup" type="Control" parent="."]
+[node name="BackButton" type="Button" parent="." unique_id=1136726942]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+icon = ExtResource("5_0gi3o")
+flat = true
+expand_icon = true
+
+[node name="LeftPanelWeaponPopup" type="Control" parent="." unique_id=1476087238]
 visible = false
 anchors_preset = 0
 offset_right = 384.0
 offset_bottom = 720.0
 mouse_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="LeftPanelWeaponPopup"]
+[node name="Sprite2D" type="Sprite2D" parent="LeftPanelWeaponPopup" unique_id=989781360]
 position = Vector2(192, 360)
 scale = Vector2(1.003, 720)
 texture = SubResource("GradientTexture1D_kwq7a")
 
-[node name="Control" type="Control" parent="LeftPanelWeaponPopup"]
+[node name="Control" type="Control" parent="LeftPanelWeaponPopup" unique_id=558900509]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -161,14 +172,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="LeftPanelWeaponPopup/Control"]
+[node name="GridContainer" type="GridContainer" parent="LeftPanelWeaponPopup/Control" unique_id=1853276136]
 layout_mode = 0
 offset_right = 384.0
 offset_bottom = 720.0
 mouse_filter = 0
 columns = 3
 
-[node name="RightPanelWeaponPopup" type="Control" parent="."]
+[node name="RightPanelWeaponPopup" type="Control" parent="." unique_id=1250963684]
 visible = false
 layout_mode = 1
 anchors_preset = 1
@@ -179,12 +190,12 @@ offset_bottom = 720.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="RightPanelWeaponPopup"]
+[node name="Sprite2D" type="Sprite2D" parent="RightPanelWeaponPopup" unique_id=307060405]
 position = Vector2(192, 360)
 scale = Vector2(1.003, 720)
 texture = SubResource("GradientTexture1D_kwq7a")
 
-[node name="Control" type="Control" parent="RightPanelWeaponPopup"]
+[node name="Control" type="Control" parent="RightPanelWeaponPopup" unique_id=1291695276]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -192,28 +203,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="RightPanelWeaponPopup/Control"]
+[node name="GridContainer" type="GridContainer" parent="RightPanelWeaponPopup/Control" unique_id=157744733]
 layout_mode = 0
 offset_right = 384.0
 offset_bottom = 720.0
 mouse_filter = 0
 columns = 3
 
-[node name="LeftPanelHatPopup" type="Control" parent="."]
+[node name="LeftPanelHatPopup" type="Control" parent="." unique_id=1435474036]
 visible = false
 z_index = 100
-layout_mode = 3
 anchors_preset = 0
 offset_right = 384.0
 offset_bottom = 720.0
 mouse_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="LeftPanelHatPopup"]
+[node name="Sprite2D" type="Sprite2D" parent="LeftPanelHatPopup" unique_id=1564165221]
 position = Vector2(192, 360)
 scale = Vector2(1.003, 720)
 texture = SubResource("GradientTexture1D_kwq7a")
 
-[node name="Control" type="Control" parent="LeftPanelHatPopup"]
+[node name="Control" type="Control" parent="LeftPanelHatPopup" unique_id=693959224]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,14 +231,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="LeftPanelHatPopup/Control"]
+[node name="GridContainer" type="GridContainer" parent="LeftPanelHatPopup/Control" unique_id=1427358812]
 layout_mode = 0
 offset_right = 384.0
 offset_bottom = 720.0
 mouse_filter = 0
 columns = 3
 
-[node name="RightPanelHatPopup" type="Control" parent="."]
+[node name="RightPanelHatPopup" type="Control" parent="." unique_id=299680083]
 visible = false
 z_index = 100
 layout_mode = 1
@@ -240,12 +250,12 @@ offset_bottom = 720.0
 grow_horizontal = 0
 mouse_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="RightPanelHatPopup"]
+[node name="Sprite2D" type="Sprite2D" parent="RightPanelHatPopup" unique_id=1533083190]
 position = Vector2(192, 360)
 scale = Vector2(1.003, 720)
 texture = SubResource("GradientTexture1D_kwq7a")
 
-[node name="Control" type="Control" parent="RightPanelHatPopup"]
+[node name="Control" type="Control" parent="RightPanelHatPopup" unique_id=602750357]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -253,14 +263,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="RightPanelHatPopup/Control"]
+[node name="GridContainer" type="GridContainer" parent="RightPanelHatPopup/Control" unique_id=1059798761]
 layout_mode = 0
 offset_right = 384.0
 offset_bottom = 720.0
 mouse_filter = 0
 columns = 3
 
-[node name="Play" type="Control" parent="."]
+[node name="Play" type="Control" parent="." unique_id=683493877]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -274,7 +284,7 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.5, 0.5)
 
-[node name="PlayButton" type="TextureButton" parent="Play"]
+[node name="PlayButton" type="TextureButton" parent="Play" unique_id=1974056754]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -288,9 +298,9 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(186.5, 109)
-texture_normal = ExtResource("3_mw6r2")
+texture_normal = ExtResource("6_li3np")
 
-[node name="MapChooser" type="Control" parent="."]
+[node name="MapChooser" type="Control" parent="." unique_id=181940930]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -301,14 +311,14 @@ offset_right = 128.0
 offset_bottom = 160.0
 grow_horizontal = 2
 
-[node name="TextureRect" type="TextureRect" parent="MapChooser"]
+[node name="TextureRect" type="TextureRect" parent="MapChooser" unique_id=896845006]
 modulate = Color(0.16, 0.16, 0.16, 0.501961)
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 128.0
-texture = ExtResource("7_kgd7w")
+texture = ExtResource("7_mnjpj")
 
-[node name="Label" type="Label" parent="MapChooser"]
+[node name="Label" type="Label" parent="MapChooser" unique_id=1189803447]
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 64.0
@@ -316,7 +326,7 @@ label_settings = SubResource("LabelSettings_li3np")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LeftWeaponButton" type="TextureButton" parent="MapChooser"]
+[node name="LeftWeaponButton" type="TextureButton" parent="MapChooser" unique_id=511585274]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -324,11 +334,11 @@ anchor_bottom = 1.0
 offset_top = -64.0
 offset_right = 128.0
 grow_vertical = 0
-texture_normal = ExtResource("8_b76aw")
+texture_normal = ExtResource("5_0gi3o")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="RightWeaponButton" type="TextureButton" parent="MapChooser"]
+[node name="RightWeaponButton" type="TextureButton" parent="MapChooser" unique_id=1422538458]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -339,7 +349,7 @@ offset_left = -128.0
 offset_top = -64.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("9_0gi3o")
+texture_normal = ExtResource("8_qjhvo")
 ignore_texture_size = true
 stretch_mode = 6
 
@@ -349,6 +359,7 @@ stretch_mode = 6
 [connection signal="pressed" from="RightPanel/RightPanelContainer/RWeaponButton" to="." method="_on_r_weapon_button_pressed"]
 [connection signal="pressed" from="RightPanel/RightPanelContainer/RHatButton" to="." method="_on_r_hat_button_pressed"]
 [connection signal="color_changed" from="RightPanel/RightPanelContainer/RColorPickerButton" to="." method="_on_r_color_picker_button_color_changed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="Play/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MapChooser/LeftWeaponButton" to="." method="_on_left_button_pressed"]
 [connection signal="pressed" from="MapChooser/RightWeaponButton" to="." method="_on_right_button_pressed"]
