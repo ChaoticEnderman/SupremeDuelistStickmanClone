@@ -31,6 +31,7 @@ var damageable : Damageable
 var player : Player
 
 ## Initialize and load the respective weapon data and the hitbox/sprites from the id
+## HACK: this is init and not the default _init so still need to be called and not just creating
 func init(player: Player, id: String) -> void:
 	self.weapon_id = id
 	self.player = player
@@ -80,6 +81,7 @@ func tick_cooldown():
 	cooldown -= 1
 	
 	# TEST: Prototype dynamic thingy for like the responsive sprite, will be implemented as a full sprite soon
+	# TODO: already did some sprite-based cooldown for some weapons, should add to every weapon 
 	if cooldown > 0:
 		sprite.texture = weapon_data.sprite_cooldown
 	else:

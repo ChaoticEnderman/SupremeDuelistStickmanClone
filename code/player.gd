@@ -16,14 +16,16 @@ class_name Player
 @onready var health_bar_color : StyleBoxFlat = health_bar.get_theme_stylebox("fill").duplicate()
 
 ## Input manager scene that handle all types of input
-var input_manager = Joystick
+var input_manager : Joystick
 
 ## The single weapon that this stickman hold, since each stickman have exactly one weapon holding
 var weapon : Weapon
 
 # Position and direction
 var player_position : Vector2 = Vector2.ZERO
-var player_direction : Vector2 = Vector2.ZERO
+var player_movement_direction : Vector2 = Vector2.ZERO
+var player_weapon_direction : Vector2 = Vector2.ZERO
+var player_jumping_direction : Vector2 = Vector2.ZERO
 
 ## Position of the hand, the starting point for melee weapons and projectiles
 var hand_position : Vector2 = Vector2.ZERO
@@ -43,7 +45,6 @@ func initialize(is_real_player: bool, joystick_position: Globals.JOYSTICK_POSITI
 	# Not connecting now since like the world need to dictate the order of these, see world for info
 	#GameState.game_tick.connect(_on_game_tick)
 	self.weapon = weapon
-	weapon.owner = self
 	player_hp = 100.0
 	is_dead = false
 	# Real player variable is reserved for bots long ago, but seems like this will probably never be added
@@ -90,29 +91,140 @@ func freeze(is_freezing: bool):
 		if body is RigidBody2D:
 			body.freeze = is_freezing
 
-## Serialize player data for online games to send over a network
-func serialize_data() -> PackedFloat32Array:
+## Serialize player data for online games to send over a network.
+## This will serialize player data from server to client to read
+func serialize_data(is_player1: bool) -> PackedFloat32Array:
 	var data : PackedFloat32Array
+	data.append(SystemManager.PACKET_TYPE.PLAYER_DATA)
+	
+	if player_side == PlayerSpriteGlobal.PLAYER.LEFT:
+		data.append(0.0)
+	elif player_side == PlayerSpriteGlobal.PLAYER.RIGHT:
+		data.append(1.0)
+		
+	# data 2th element next
 	data.append(self.position.x)
 	data.append(self.position.y)
 	data.append(player_hp)
 	data.append(self.hand_position.x)
 	data.append(self.hand_position.y)
 	data.append(score)
-	data.append(float(weapon.weapon_id))
+	data.append(float(self.weapon.weapon_id))
+	# data 9th element next
 	for child in ragdoll.ordered_limbs:
-		if child is RigidBody2D:
+		data.append(child.position.x)
+		data.append(child.position.y)
+		data.append(child.rotation)
+		data.append(child.linear_velocity.x)
+		data.append(child.linear_velocity.y)
+		data.append(child.angular_velocity)
+		# 9 * 6 = 54
+	# data 63th element next
+	for child in ragdoll.ordered_joints:
+		if child != null:
 			data.append(child.position.x)
 			data.append(child.position.y)
-			data.append(child.rotation)
-			data.append(child.linear_velocity.x)
-			data.append(child.linear_velocity.y)
-			data.append(child.angular_velocity)
+		else:
+			data.append(0.0)
+			data.append(0.0)
+		# 5 * 2 = 10
+	# data 73th element next
 	return data
 
-func deserialize_data(data: PackedFloat32Array):
-	self.position.x = data.get(0)
+## Deserialize data from server to match the client data from the server for player data
+## Run once per tick to replace the game tick
+func deserialize_data(data: PackedFloat32Array) -> bool:
+	if int(data.get(0)) != SystemManager.PACKET_TYPE.PLAYER_DATA:
+		return false
+	if data.get(1) == 1.0 and player_side == PlayerSpriteGlobal.PLAYER.LEFT:
+		return false
+	if data.get(1) == 0.0 and player_side == PlayerSpriteGlobal.PLAYER.RIGHT:
+		return false
 	
+	var i : int = 2
+	self.position.x = data.get(i)
+	self.position.y = data.get(i + 1)
+	self.player_hp = data.get(i + 2)
+	self.hand_position.x = data.get(i + 3)
+	self.hand_position.y = data.get(i + 4)
+	self.score = data.get(i + 5)
+	
+	# will change the weapon once if the weapon is different from the one on the server
+	# TODO: will change this to an intermediate layer of lobby when connecting
+	if str(int(data.get(i + 6))) != self.weapon.weapon_id:
+		self.weapon.qfree()
+		var weapon : Weapon = WeaponGlobals.get_weapon(int(data.get(i + 6)))
+		weapon.init(self, "")
+		self.weapon = weapon
+		SystemManager.active_world.add_child(weapon)
+		# Make the player not touch the hitbox
+		ragdoll.ragdoll_collision_exception(weapon.hitbox)
+	
+	i = 9
+	for child in ragdoll.ordered_limbs:
+		child.position.x = data.get(i)
+		child.position.y = data.get(i + 1)
+		child.rotation = data.get(i + 2)
+		child.linear_velocity.x = data.get(i + 3)
+		child.linear_velocity.y = data.get(i + 4)
+		child.angular_velocity = data.get(i + 5)
+		i += 6
+	i = 63
+	for child in ragdoll.ordered_joints:
+		child.position.x = data.get(i)
+		child.position.y = data.get(i + 1)
+		i += 2
+	i = 73
+	return true
+
+## Player side serialize input to send over the network to server
+func serialize_input() -> PackedFloat32Array:
+	var data : PackedFloat32Array
+	var input_result : Vector2 = input_manager.tick_input()
+	player_movement_direction = input_result
+	player_weapon_direction = input_manager.tick_input_is_releasing()
+	player_jumping_direction = input_manager.tick_input_is_jumping()
+	
+	data.append(float(SystemManager.PACKET_TYPE.PLAYER_INPUT))
+	
+	# following convention of serializing data, this is empty and server will use it to store the remote sender id
+	# this is to prevent cheating, as the player can't send the state of whether they are left or right player
+	# but instead the player will read that from the remote sender id
+	data.append(0.0)
+	
+	data.append(player_movement_direction.x)
+	data.append(player_movement_direction.y)
+	data.append(player_weapon_direction.x)
+	data.append(player_weapon_direction.y)
+	data.append(player_jumping_direction.x)
+	data.append(player_jumping_direction.y)
+	
+	return data
+
+## For the player instance in the server, will receive this and use as input
+func deserialize_input(data: PackedFloat32Array) -> bool:
+	if data.get(0) != float(SystemManager.PACKET_TYPE.PLAYER_INPUT):
+		return false
+	print("player sysman/deserializing input from player ", data)
+	
+	# assume this is alread written with data of remote sender id when the packet is received
+	# only allow each packet with the sender to affect one player in the game 
+	var sender_id : String = str(int(data.get(1)))
+	if sender_id == SystemManager.active_world.online_player1_id and self.player_side == PlayerSpriteGlobal.PLAYER.RIGHT:
+		return false
+	if sender_id == SystemManager.active_world.online_player2_id and self.player_side == PlayerSpriteGlobal.PLAYER.LEFT:
+		return false
+	
+	
+	var i : int = 2
+	player_movement_direction.x = data.get(i)
+	player_movement_direction.y = data.get(i + 1)
+	player_weapon_direction.x = data.get(i + 2)
+	player_weapon_direction.y = data.get(i + 3)
+	player_jumping_direction.x = data.get(i + 4)
+	player_jumping_direction.y = data.get(i + 5)
+	i = 8
+	return true
 
 ## Change visibility of joystick
 func joy_stick_visibility(is_visible: bool):
@@ -120,31 +232,46 @@ func joy_stick_visibility(is_visible: bool):
 
 # Master tick function to tick the player and its dependencies
 func _on_game_tick():
-	# Get input for this tick from input manager and store, first step
-	player_direction = input_manager.tick_input()
+	if SystemManager.active_world.world_type == World.WORLD_TYPE.OFFLINE:
+		# Get input for this tick from input manager and store locally
+		player_movement_direction = input_manager.tick_input()
+		player_weapon_direction = input_manager.tick_input_is_releasing()
+		player_jumping_direction = input_manager.tick_input_is_jumping()
+	elif SystemManager.active_world.world_type == World.WORLD_TYPE.CLIENT:
+		SystemManager.buffer_packet_client_sender.append(serialize_input())
+		
+		tick_weapon_hud()
+	elif SystemManager.active_world.world_type == World.WORLD_TYPE.SERVER:
+		# loop through all packets in the buffer and resolve any packet that is input packet
+		if SystemManager.buffer_packet_server_receiver.size() > 0:
+			for i in range(SystemManager.buffer_packet_server_receiver.size() - 1, -1, -1):
+				if deserialize_input(SystemManager.buffer_packet_server_receiver.get(i)):
+					SystemManager.buffer_packet_server_receiver.remove_at(i)
 	
-	# Check for abilities being used
-	weapon.tick_release_ability(input_manager.tick_input_is_releasing())
+	if SystemManager.active_world.world_type == World.WORLD_TYPE.OFFLINE or SystemManager.active_world.world_type == World.WORLD_TYPE.SERVER:
+		# Ticking ragdoll, that function will tick other ragdoll functions
+		ragdoll.tick_ragdoll(player_movement_direction)
+		
+		# Check for abilities being used
+		weapon.tick_release_ability(player_weapon_direction)
+		
+		# Check the last jump input before ticking ragdoll
+		ragdoll.jump(player_jumping_direction)
+		
+		# Check for hitbox collision to damages
+		check_collision()
+		
+		# Change cooldown for the weapon
+		weapon.tick_cooldown()
+		
+		# Update the position
+		if self.player_side == PlayerSpriteGlobals.PLAYER.LEFT:
+			SystemManager.active_world.p1_position = self.ragdoll.torso.global_position
+		elif self.player_side == PlayerSpriteGlobals.PLAYER.RIGHT:
+			SystemManager.active_world.p2_position = self.ragdoll.torso.global_position
+		
+		tick_weapon_hud()
 	
-	# Check the last jump input before ticking ragdoll
-	ragdoll.jump(input_manager.tick_input_is_jumping())
-	
-	# Ticking ragdoll, that function will tick other ragdoll functions
-	ragdoll.tick_ragdoll(player_direction)
-	
-	# Check for hitbox collision to damages
-	check_collision()
-	
-	# Change cooldown for the weapon
-	weapon.tick_cooldown()
-	
-	# Update the position
-	if self.player_side == PlayerSpriteGlobals.PLAYER.LEFT:
-		SystemManager.p1_position = self.ragdoll.torso.global_position
-	elif self.player_side == PlayerSpriteGlobals.PLAYER.RIGHT:
-		SystemManager.p2_position = self.ragdoll.torso.global_position
-	
-	tick_weapon_hud()
 
 func _process(delta: float) -> void:
 	tick_hud()
@@ -197,8 +324,6 @@ func update_score_label():
 func tick_weapon_hud():
 	if ragdoll.is_alive:
 		weapon.position = hand_position
-		#weapon.tick_rotation(player_direction)
-		#TEST: Make the weapon direction on the arm direction instead of the raw joystick direction
 		weapon.tick_rotation(Vector2.from_angle(ragdoll.p_forearm.rotation + PI/2))
 
 ## Check for player collision with anything that can do damage

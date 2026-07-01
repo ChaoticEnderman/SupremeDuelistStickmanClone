@@ -17,12 +17,24 @@ var online_player2_name : String = ""
 var player1 : Player
 var player2 : Player
 
+# Store the position of players for the camera to follow
+var p1_position : Vector2
+var p2_position : Vector2
+
 var weapon1 : Weapon
 var weapon2 : Weapon
 
 @onready var next_round_button : TextureButton = get_node("UI/GameUI/NextRoundButton")
 @onready var pause_menu : Control = get_node("UI/PauseMenu")
 @onready var camera : Camera2D = get_node("CameraGame/Camera")
+
+enum WORLD_TYPE {
+	OFFLINE,
+	CLIENT,
+	SERVER
+}
+
+var world_type : WORLD_TYPE
 
 ## Store the current game state, not supposed to be modified directly
 var game_state : GameState.GAME_STATE
@@ -45,18 +57,12 @@ func _init() -> void:
 	GameState.game_tick.connect(_on_game_tick)
 
 func _ready() -> void:
-	camera.enabled = false
+	camera.enabled = true
 	player_scores.resize(2)
 	player_scores[0] = 0
 	player_scores[1] = 0
 	
 	clear_round()
-
-func set_type(is_online : bool):
-	if is_online:
-		pass
-	else:
-		pass
 
 func get_map() -> Map:
 	return get_node("CameraGame/Map")
@@ -117,18 +123,17 @@ func start_round() -> void:
 	GameState.queue_run_game()
 
 ## Attempt to convert all the stuff in the world to serializable PackedByteArray or something else to send over a network for online game
-func serialize_data():
+func serialize_world_data():
 	var game_area_count : int = 0
 	var game_object_count : int = 0
 	var player_limb_count : int = 0
-	var p1 : PackedFloat32Array = player1.serialize_data()
-	var p2 : PackedFloat32Array = player2.serialize_data()
+
 	for child in get_children():
 		if child is GameArea:
 			game_area_count += 1
 		if child is GameObject:
 			game_object_count += 1
-	print("world/serialize/area ", game_area_count, " object ", game_object_count, " p1 ", p1.size(), " p2 ", p2.size())
+	print("world/serialize/area ", game_area_count, " object ", game_object_count)
 
 ## Pause the game when the state is not running
 func _on_game_state_changed(state):
@@ -137,7 +142,6 @@ func _on_game_state_changed(state):
 		process_mode = Node.PROCESS_MODE_PAUSABLE
 		get_tree().paused = false
 		self.visible = true
-		camera.enabled = true
 		for player in player_list:
 			player.joy_stick_visibility(true)
 			player.freeze(false)
@@ -145,7 +149,6 @@ func _on_game_state_changed(state):
 		process_mode = Node.PROCESS_MODE_PAUSABLE
 		get_tree().paused = true
 		self.visible = true
-		camera.enabled = true
 	elif game_state == GameState.GAME_STATE.LAZY_RUNNING:
 		process_mode = Node.PROCESS_MODE_PAUSABLE
 		for i in range(player_list.size()):
@@ -173,7 +176,8 @@ func choose_weapon():
 		weapon1 = randomize_weapon()
 	if weapon2 == null:
 		weapon2 = randomize_weapon()
-		
+	
+	# FIXME: bad code
 	weapon1.init(player1, "")
 	weapon2.init(player2, "")
 
@@ -201,8 +205,19 @@ func _on_game_tick(delta: float) -> void:
 			start_round()
 		tick_players()
 		if player1 != null and player2 != null:
-			serialize_data()
-	#print("world/this world ", self, " state to ", GameState.get_beautiful_game_state(game_state))
+			if world_type == WORLD_TYPE.SERVER:
+				SystemManager.buffer_packet_server_sender.append(player1.serialize_data(true))
+				SystemManager.buffer_packet_server_sender.append(player2.serialize_data(false))
+			if world_type == WORLD_TYPE.CLIENT:
+				if SystemManager.buffer_packet_client_receiver.size() > 0:
+					for i in range(SystemManager.buffer_packet_client_receiver.size() - 1, -1, -1):
+						var packet = SystemManager.buffer_packet_client_receiver.get(i)
+						if packet.get(1) == 0.0:
+							if player1.deserialize_data(packet):
+								SystemManager.buffer_packet_client_receiver.remove_at(i)
+						elif packet.get(1) == 1.0:
+							if player2.deserialize_data(packet):
+								SystemManager.buffer_packet_client_receiver.remove_at(i)
 
 ## Call the tick function in each players to do their stuff
 func tick_players():

@@ -28,9 +28,23 @@ var main_menu : Control = load("res://scenes/main_menu.tscn").instantiate()
 ## The ready menu, settings before the game
 var ready_menu : Control = load("res://scenes/ready_menu.tscn").instantiate()
 
+## The matchmaking menu, showing the online games to join
 var matchmaking_menu : MatchmakingMenu = load("res://scenes/matchmaking_menu.tscn").instantiate()
 
-var mmm_syncer : MultiplayerSynchronizer
+# Store the arrays that is going to be flushed and sent over the network from client to server
+var buffer_packet_client_sender : Array[PackedFloat32Array]
+var buffer_packet_client_receiver : Array[PackedFloat32Array]
+var buffer_packet_server_sender : Array[PackedFloat32Array]
+var buffer_packet_server_receiver : Array[PackedFloat32Array]
+
+## Note on packet id: For packets in float32 arrays, the first element denote the type.
+enum PACKET_TYPE {
+	PLAYER_INPUT = 1,
+	PLAYER_DATA = 2,
+	CAMERA = 3,
+	GAME_STUFF = 4,
+}
+
 
 ## Map editor menu
 var map_editor : Control = load("res://scenes/map_editor.tscn").instantiate()
@@ -43,17 +57,13 @@ var map_editor : Control = load("res://scenes/map_editor.tscn").instantiate()
 ## Storing the state of the current client whether its a server or not
 var is_server : bool
 
-var dummy_to_sync : String = ""
-
-## Player1 dynamic position for the camera follow
-var p1_position : Vector2
-## Player2 dynamic position for the camera follow
-var p2_position : Vector2
+## Stored on the client to know what server id the client is connecting to
+var server_id : int
 
 func _ready():
 	is_server = Globals.SERVER_ADDRESS in IP.get_local_addresses()
 	
-	print("sysman/CODE VERSION 6") 
+	print("sysman/CODE VERSION 8") 
 	print("sysman/what is ip ", IP.get_local_addresses())
 	
 	PlayerSpriteGlobals.set_default_color()
@@ -64,19 +74,12 @@ func _ready():
 	add_child(ready_menu)
 	add_child(map_editor)
 	add_child(matchmaking_menu)
-	matchmaking_menu.multiplayer.peer_connected.connect(_on_player_connected)
-	matchmaking_menu.multiplayer.peer_disconnected.connect(_on_player_disconnected)
-	matchmaking_menu.multiplayer.connected_to_server.connect(_on_connected_ok)
-	matchmaking_menu.multiplayer.connection_failed.connect(_on_connected_fail)
-	matchmaking_menu.multiplayer.server_disconnected.connect(_on_server_disconnected)
 	
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	mmm_syncer = matchmaking_menu.get_node(("MultiplayerSynchronizer"))
-	#mmm_syncer.add_property(NodePath(".:world_ids"))
 	
 	if is_server:
 		pass
@@ -117,48 +120,22 @@ func clear_everything():
 func start_offline_game() -> void:
 	clear_everything()
 	offline_world = load("res://world.tscn").instantiate()
-	offline_world.set_type(false)
 	active_world = offline_world
+	
+	active_world.world_type = World.WORLD_TYPE.OFFLINE
 	add_child(active_world)
-	#switch_world(active_world)
-
-### Function for the server to start a remote world
-#func create_online_game(id: String) -> void:
-	#clear_everything()
-	#var world : World = load("res://world.tscn").instantiate()
-	#world.set_type(false)
-	##add_child(world)
-	##game_map = world.get_node("CameraGame/Map")
-	##game_map_tile_map = game_map.tile_map_layer
-	#print("SM/creating world ", world)
-	#world.world_id = id
-	#server_worlds.append(world)
-	#GameState.change_game_state(world, GameState.GAME_STATE.NONE)
-	#
-	#var peer : MultiplayerPeer = ENetMultiplayerPeer.new()
-	#if peer.create_server(Globals.NETWORK_PORT, 2):
-		#return
-	##world.multiplayer.multiplayer_peer = peer
-#
-### Start several games for server
-## TODO: Add dynamic creation and deletion of worlds later on
-#func create_online_games() -> void:
-	#clear_everything()
-	#server_worlds.clear()
-	#for i in range(5):
-		#create_online_game(str(i))
 
 func connect_lobby(menu: MatchmakingMenu):
 	multiplayer.multiplayer_peer.close()
 	var peer : MultiplayerPeer = ENetMultiplayerPeer.new()
+	print("sysman/client trying to connect")
 	var error = peer.create_client(Globals.SERVER_ADDRESS, Globals.NETWORK_PORT)
 	if error:
 		print("sysman/client menu error ", error)
 		return
 	multiplayer.multiplayer_peer = peer
-	for i in range(10):
-		player_joined.rpc()
-	print("sysman/client rpc done?")
+	print("sysman/client connected done")
+	player_joined.rpc()
 
 func create_lobby(menu: MatchmakingMenu):
 	var peer : MultiplayerPeer = ENetMultiplayerPeer.new()
@@ -169,16 +146,14 @@ func create_lobby(menu: MatchmakingMenu):
 	multiplayer.multiplayer_peer = peer
 	print("sysman/server status ", peer.get_connection_status())
 
-## For server to create an online match
+## For server to create an online game world at the start
 func create_game(id: String) -> String:
 	online_world = load("res://world.tscn").instantiate()
+	online_world.world_id = str(ResourceUID.create_id())
+	online_world.world_type = World.WORLD_TYPE.SERVER
 	server_worlds.append(online_world)
-	active_world = online_world
 	
-	active_world.world_id = str(ResourceUID.create_id())
-	print("sysman/remote world id ", active_world.world_id)
-	
-	return id + "_" + active_world.world_id
+	return id + "_" + online_world.world_id
 
 @rpc("any_peer", "call_remote", "reliable")
 func player_joined():
@@ -204,15 +179,9 @@ func player_name_changed_rpc(name: String, player_id: int):
 ## Client call this to join a server world
 func join_online_world(id: int):
 	print("sysman/about to join world")
+	server_id = id
 	active_world = null
 	join_online_world_rpc.rpc(id)
-	await join_online_world_ack_rpc
-	if active_world != null:
-		# Connection success, start firing input data
-		pass
-	else:
-		# Connection failed
-		pass
 
 @rpc("any_peer", "call_remote", "reliable")
 func join_online_world_rpc(id: int):
@@ -223,15 +192,50 @@ func join_online_world_rpc(id: int):
 			server_worlds[id].online_player2_id = str(multiplayer.get_remote_sender_id())
 		else:
 			join_online_world_ack_rpc.rpc(JOIN_ONLINE_WORLD_ERROR.FULL)
+			return
 		print("sysman/server with players ", server_worlds[id].online_player1_id, " - ", server_worlds[id].online_player2_id)
-		server_worlds[id].game_state = GameState.GAME_STATE.RUNNING
+		if server_worlds[id].online_player1_id != "" and server_worlds[id].online_player2_id != "":
+			active_world = server_worlds[id]
+			active_world.world_type = World.WORLD_TYPE.SERVER
+			active_world.game_state = GameState.GAME_STATE.RUNNING
+			GameState.change_system_state(GameState.SYSTEM_STATE.ONLINE)
+			add_child(active_world)
+		
+			join_online_world_ack_rpc.rpc(JOIN_ONLINE_WORLD_ERROR.OK)
 
 ## To send back acknowledge if the player can join the world or not
 @rpc("authority", "call_remote", "reliable")
 func join_online_world_ack_rpc(error: JOIN_ONLINE_WORLD_ERROR):
+	if error == JOIN_ONLINE_WORLD_ERROR.OK:
+		active_world = load("res://world.tscn").instantiate()
+		active_world.world_type = World.WORLD_TYPE.CLIENT
+		active_world.game_state = GameState.GAME_STATE.RUNNING
+		GameState.change_system_state(GameState.SYSTEM_STATE.ONLINE)
+		add_child(active_world)
+		print("sysman/world ok, creating local world ", active_world, " ", active_world.game_state == GameState.GAME_STATE.RUNNING)
+
+@rpc("any_peer", "call_remote", "unreliable_ordered")
+func send_client_packet_rpc(id: int, packet: PackedFloat32Array):
+	if multiplayer.is_server():
+		if packet.get(0) == PACKET_TYPE.PLAYER_INPUT:
+			var new_packet : PackedFloat32Array = packet.duplicate()
+			if str(multiplayer.get_remote_sender_id()) == active_world.online_player1_id:
+				new_packet.set(1, multiplayer.get_remote_sender_id())
+				if packet.get(2) != 0.0:
+					print("sysman/receiving incoming input packet from player 1 ", new_packet)
+			elif str(multiplayer.get_remote_sender_id()) == active_world.online_player2_id:
+				new_packet.set(1, multiplayer.get_remote_sender_id())
+				if packet.get(2) != 0.0:
+					print("sysman/receiving incoming input packet from player 2 ", new_packet)
+			buffer_packet_server_receiver.append(new_packet)
+		else:
+			buffer_packet_server_receiver.append(packet)
+
+@rpc("authority", "call_remote", "unreliable_ordered")
+func send_server_packet_rpc(id: int, packet: PackedFloat32Array):
 	if not multiplayer.is_server():
-		if error != JOIN_ONLINE_WORLD_ERROR.OK:
-			active_world = load("res://world.tscn").instantiate()
+		buffer_packet_client_receiver.append(packet)
+		return
 
 ## Disconnect the client from the current match
 func disconnect_client():
@@ -239,9 +243,9 @@ func disconnect_client():
 
 func _on_player_connected(id):
 	if is_server:
-		print("sysman/server signal connected ", id)
+		print("sysman/server player connected ", id)
 	else:
-		print("sysman/client player connected", id)
+		print("sysman/client player connected ", id)
 
 func _on_player_disconnected(id):
 	if is_server:
@@ -288,11 +292,19 @@ func open_map_editor():
 	add_child(map_editor)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Test"):
-		pass
-
-func _physics_process(delta: float) -> void:
-	pass
+	if not multiplayer.is_server():
+		if GameState.system_state == GameState.SYSTEM_STATE.ONLINE and active_world != null:
+			while buffer_packet_client_sender.size() != 0:
+				var packet : PackedFloat32Array = buffer_packet_client_sender.pop_back()
+				#print("sysman/sending packets client ", packet.slice(0, 6))
+				send_client_packet_rpc.rpc(server_id, packet)
+	elif multiplayer.is_server():
+		if GameState.system_state == GameState.SYSTEM_STATE.ONLINE and active_world != null:
+			while buffer_packet_server_sender.size() != 0:
+				var packet : PackedFloat32Array = buffer_packet_server_sender.pop_back()
+				print("sysman/sending packets server ", packet.slice(0, 6))
+				send_server_packet_rpc.rpc(server_id, packet)
+		
 
 func switch_world(world: World):
 	active_world = world

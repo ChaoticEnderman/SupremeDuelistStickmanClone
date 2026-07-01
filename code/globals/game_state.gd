@@ -38,6 +38,15 @@ func _physics_process(delta: float) -> void:
 		if SystemManager.active_world != null:
 			if SystemManager.active_world.game_state == GAME_STATE.RUNNING:
 				game_tick.emit(delta)
+	if system_state == SYSTEM_STATE.ONLINE:
+		if queue_game:
+			queue_game = false
+			if SystemManager.active_world != null:
+				change_game_state(SystemManager.active_world, GameState.GAME_STATE.RUNNING)
+			return
+		if SystemManager.active_world != null:
+			if SystemManager.active_world.game_state == GAME_STATE.RUNNING:
+				game_tick.emit(delta)
 
 ## This should be used to change the game state, will automatically emit the signal
 func change_game_state(world: World, state: GAME_STATE):

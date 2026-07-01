@@ -14,7 +14,7 @@ extends Control
 var camera_zoom : float = 1.0
 
 ## Test object, unused
-@onready var map_dragger : Button = get_node("MapDragger")
+#@onready var map_dragger : Button = get_node("MapDragger")
 ## The state of whether the user is dragging
 var map_dragging : bool = false
 ## The state of dragging the paint head
@@ -93,7 +93,7 @@ func _ready() -> void:
 	bottom_panel_brush_buttons.append(bottom_panel_ui.get_node("ButtonBrush"))
 	bottom_panel_brush_buttons.append(bottom_panel_ui.get_node("ButtonRectangle"))
 	bottom_panel_brush_buttons.append(bottom_panel_ui.get_node("ButtonBucket"))
-	left_panel_atlas.get_node("OpenMapButton")
+	#left_panel_atlas.get_node("OpenMapButton")
 	set_left_panel_tile_buttons()
 	load_map(0)
 	#print("ME/cam pos ", camera.position)

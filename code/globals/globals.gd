@@ -5,7 +5,6 @@ signal setting_reloaded
 
 ## Hardcoding the server address temporarily, will change later when it scale to multiple servers
 const SERVER_ADDRESS : String = "192.168.1.111"
-#const SERVER_ADDRESS : String = "127.0.0.1"
 
 ## Port for the network connection
 const NETWORK_PORT : int = 55224

@@ -208,9 +208,6 @@ position = Vector2(0, -51)
 node_a = NodePath("../Torso")
 node_b = NodePath("../Head")
 disable_collision = false
-angular_limit_lower = 0.261799
-angular_limit_upper = -0.261799
-motor_target_velocity = 3.14159
 
 [node name="P Shoulder Joint" type="PinJoint2D" parent="RagdollPhysicsManager" unique_id=1338137646]
 position = Vector2(0, -51)
