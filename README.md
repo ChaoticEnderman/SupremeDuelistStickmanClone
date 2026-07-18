@@ -9,4 +9,5 @@ How to download and play?
 
 -Currently it is still in development, but you can download the demo playable builds in the playable folder
 -Just the APK files for android
--You guys will need to download the .pck file for the windows .exe file or linux file
+-You guys will need to download the .pck file for the windows .exe file or linux .sh file
+-Please note that playable builds are not compiled every time, and maybe a few weeks or even months delayed from the source code
