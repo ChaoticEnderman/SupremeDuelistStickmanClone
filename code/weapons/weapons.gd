@@ -80,6 +80,9 @@ func get_damage():
 func tick_cooldown():
 	cooldown -= 1
 	
+	change_cooldown_sprite()
+
+func change_cooldown_sprite():
 	# TEST: Prototype dynamic thingy for like the responsive sprite, will be implemented as a full sprite soon
 	# TODO: already did some sprite-based cooldown for some weapons, should add to every weapon 
 	if cooldown > 0:

@@ -9,6 +9,9 @@ class_name Projectile
 ## Automatically delete the projectile after a relatively long time after its being summoned
 var timeout : int = Globals.TPS * 5
 
+func _ready() -> void:
+	super._ready()
+
 ## Initialize the parent class and also some important data
 func _init(player: Player, projectile_data: ProjectileData) -> void:
 	GameState.game_tick.connect(_on_game_tick)
@@ -45,5 +48,19 @@ func check_collision():
 			if not (body.get_owner() == damageable.owner_stickman):
 				qfree()
 
+func serialize_object_data(id: int) -> PackedFloat32Array:
+	var data : PackedFloat32Array = super.serialize_object_data(id)
+	# 10th position
+	data.append(float(timeout))
+	return data
+
+func deserialize_object_data(data: PackedFloat32Array):
+	if super.deserialize_object_data(data):
+		var i : int = 10
+		self.timeout = int(data.get(i))
+		return true
+	return false
+
 func qfree():
+	super.qfree()
 	self.queue_free()

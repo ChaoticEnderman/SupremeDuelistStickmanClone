@@ -6,10 +6,6 @@ class_name AbilityProjectile
 
 var projectiles : Array[Projectile]
 
-## Utility function to get projectile data by id, used globally also instead of just this class and its subclasses
-static func get_projectile_data_by_id(id: int) -> ProjectileData:
-	return load("res://resources/projectile" + str(id) + ".tres")
-
 ## Add a projectile to the list
 func add_projectile(projectile: Projectile):
 	self.projectiles.append(projectile)

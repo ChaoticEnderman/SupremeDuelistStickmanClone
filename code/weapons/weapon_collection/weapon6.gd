@@ -1,4 +1,4 @@
-## Fifth weapon, a gauntlet with abilities for either
+## Crossbow weapon
 extends Weapon
 class_name Weapon6
 
@@ -21,7 +21,7 @@ func tick_rotation(rotation: Vector2):
 func tick_cooldown():
 	super.tick_cooldown()
 	if passive_cooldown == 0:
-		var projectile : Projectile = Projectile7.new(player, AbilityProjectile.get_projectile_data_by_id(7))
+		var projectile : Projectile = Projectile7.new(player, null)
 		projectile.rotation = sprite.rotation
 		projectile.summon_as_projectile(
 			Vector2.from_angle(sprite.rotation - PI/2), position)

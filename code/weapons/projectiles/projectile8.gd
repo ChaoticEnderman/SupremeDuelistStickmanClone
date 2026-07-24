@@ -11,7 +11,7 @@ var prev_rotation : float
 
 func _init(player: Player, projectile_data: ProjectileData, ability_ref: Ability9):
 	ability_ref.reset_dragon.connect(_on_reset_dragon)
-	super._init(player, projectile_data)
+	super._init(player, load("res://resources/projectile8.tres"))
 	var img = Image.create(64, 64, false, Image.FORMAT_RGBA8)
 	img.fill(Color.CYAN)
 	particle_texture = ImageTexture.create_from_image(img)
@@ -54,6 +54,20 @@ func _on_game_tick(delta: float):
 
 func get_damage() -> float:
 	return super.get_damage()
+
+func serialize_object_data(id: int) -> PackedFloat32Array:
+	var data : PackedFloat32Array = super.serialize_object_data(8)
+	# 11th position
+	data.append(prev_rotation)
+	
+	return data
+
+func deserialize_object_data(data: PackedFloat32Array):
+	if super.deserialize_object_data(data):
+		var i : int = 11
+		self.prev_rotation = data.get(i)
+		return true
+	return false
 
 func qfree():
 	super.qfree()

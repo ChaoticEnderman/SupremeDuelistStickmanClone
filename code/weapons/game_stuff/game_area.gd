@@ -18,6 +18,9 @@ var direction : Vector2
 ## Optional sprite
 var sprite : Sprite2D
 
+## Only for online mode to update the object data instead of creating new object each time
+var multiplayer_id : int
+
 ## Core collision shape of this area to contain a Shape2D. By design this will only have one CollisionShape unlike how Area2D node is designed
 var collision_shape : CollisionShape2D
 ## Shape of the collision shape
@@ -34,6 +37,7 @@ func _init(player: Player, direction: Vector2, position: Vector2) -> void:
 	self.player = player
 	collision_shape = CollisionShape2D.new()
 	sprite = Sprite2D.new()
+	add_child(collision_shape)
 	add_child(sprite)
 	
 	self.direction = direction
@@ -43,7 +47,6 @@ func _init(player: Player, direction: Vector2, position: Vector2) -> void:
 ## for the collision shape children, will be limited to one for each game area
 func add_collision_shape(shape: Shape2D):
 	collision_shape.shape = shape
-	add_child(collision_shape)
 	
 	self.collision_shape.owner = self
 
@@ -55,20 +58,19 @@ func add_projectile_data(data: ProjectileData):
 	self.damageable = Damageable.new(data.damage, player.ragdoll)
 	add_child(damageable)
 	self.damageable.owner = self
-
-## Call to summon if this is a projectile and apply one time impulse to move it forward
-func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
+	
 	# Construct the node
 	sprite.texture = projectile_data.sprite
 	# HACK: Hardcoded the scale value for the sprite because it cannot be scaled down normally
 	sprite.scale = Vector2(0.25, 0.25)
-	# Adding projectile
 	
 	# Set the hitbox and damagable to self, this is used for like checking if the owner of the hitbox has a node damageable
 	sprite.owner = self
 	collision_shape.owner = self
 	damageable.owner = self
-	
+
+## Call to summon if this is a projectile and apply one time impulse to move it forward
+func summon_as_projectile(direction: Vector2, position: Vector2) -> void:
 	self.direction = direction
 	self.position = position
 	sprite.rotation = direction.angle()
@@ -95,6 +97,44 @@ func get_dependent_player() -> Player:
 
 func _on_game_tick(delta: float):
 	self.colliding_bodies = get_overlapping_bodies()
+
+func serialize_object_data(id: int) -> PackedFloat32Array:
+	var data : PackedFloat32Array = PackedFloat32Array()
+	data.append(SystemManager.PACKET_TYPE.GAME_AREA)
+	data.append(float(multiplayer_id))
+	# this is id to identify the class name of the projectile, will need to be set by the child classes
+	data.append(float(id))
+	
+	data.append(self.position.x)
+	data.append(self.position.y)
+	data.append(self.rotation)
+	data.append(direction.x)
+	data.append(direction.y)
+	
+	# TODO: 9th value for player, will finish later on
+	data.append(0.0)
+	return data
+
+func deserialize_object_data(data: PackedFloat32Array) -> bool:
+	if data.get(0) != SystemManager.PACKET_TYPE.GAME_AREA:
+		return false
+	if int(data.get(1)) != self.multiplayer_id:
+		return false
+	
+	var id : int = int(data.get(2))
+	#if projectile_data != null:
+	#	add_projectile_data(load("res://resources/projectile" + str(id) + ".tres"))
+	
+	var i : int = 3
+	self.position.x = data.get(i)
+	self.position.y = data.get(i + 1)
+	self.rotation = data.get(i + 2)
+	self.direction.x = data.get(i + 3)
+	self.direction.y = data.get(i + 4)
+	i = 8
+	#data.get(i) then do something for player
+	
+	return true
 
 ## Get the colliding bodies of this area instead of accessing the value directly
 func get_colliding_bodies():

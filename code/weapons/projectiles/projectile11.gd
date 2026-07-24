@@ -36,6 +36,19 @@ func _on_game_tick(delta: float):
 		pass
 		# Stay in place and wait until signal to remove
 
+func serialize_object_data(id: int) -> PackedFloat32Array:
+	var data : PackedFloat32Array = super.serialize_object_data(2)
+	# 10th value from here
+	data.append(float(flying_time))
+	return data
+
+func deserialize_object_data(data: PackedFloat32Array) -> bool:
+	if super.deserialize_object_data(data):
+		var i : int = 9
+		flying_time = int(data.get(i))
+		return true
+	return false
+
 func _on_weapon_next_blue():
 	self.qfree()
 

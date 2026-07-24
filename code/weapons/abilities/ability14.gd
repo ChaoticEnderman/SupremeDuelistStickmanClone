@@ -3,7 +3,9 @@ extends AbilityProjectile
 class_name Ability14
 
 func release_ability(player, direction: Vector2) -> int:
-	var projectile = Projectile13.new(player, super.get_projectile_data_by_id(13), false)
+	var projectile = Projectile13.new(player, null, false)
+	SystemManager.add_child(projectile)
+	print("A14/after adding ", projectile.sprite)
 	projectile.summon_as_projectile(direction, player.weapon.position)
 
 	return WeaponGlobals.ability14_cooldown

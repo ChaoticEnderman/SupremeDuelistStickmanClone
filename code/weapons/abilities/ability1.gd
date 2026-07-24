@@ -5,9 +5,9 @@ class_name Ability1
 func release_ability(player, direction: Vector2) -> int:
 	# The first ever weapon will release 3 bullets in a rather shotgun pattern, like sds gun
 	
-	var projectile_a = Projectile1.new(player, super.get_projectile_data_by_id(1))
-	var projectile_b = Projectile1.new(player, super.get_projectile_data_by_id(1))
-	var projectile_c = Projectile1.new(player, super.get_projectile_data_by_id(1))
+	var projectile_a = Projectile1.new(player, null)
+	var projectile_b = Projectile1.new(player, null)
+	var projectile_c = Projectile1.new(player, null)
 	
 	projectile_a.collision_exception(projectile_b)
 	projectile_a.collision_exception(projectile_c)

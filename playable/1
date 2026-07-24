@@ -1,0 +1,17 @@
+SCRIPT ERROR: Invalid assignment of property or key 'server_port' with value of type 'String' on a base object of type 'Nil'.
+          at: _init (res://code/globals/system_manager.gd:81)
+          GDScript backtrace (most recent call first):
+              [0] _init (res://code/globals/system_manager.gd:81)
+ERROR: Couldn't create an ENet host.
+   at: _create (modules/enet/enet_connection.cpp:318)
+   GDScript backtrace (most recent call first):
+       [0] create_lobby (res://code/globals/system_manager.gd:198)
+       [1] _ready (res://code/globals/system_manager.gd:107)
+ERROR: Required object "rp_child" is null.
+   at: remove_child (scene/main/node.cpp:1737)
+   GDScript backtrace (most recent call first):
+       [0] clear_everything (res://code/globals/system_manager.gd:171)
+       [1] back_to_main_menu (res://code/globals/system_manager.gd:336)
+       [2] _on_system_state_changed (res://code/globals/system_manager.gd:150)
+       [3] change_system_state (res://code/globals/game_state.gd:71)
+       [4] _ready (res://code/loader.gd:8)

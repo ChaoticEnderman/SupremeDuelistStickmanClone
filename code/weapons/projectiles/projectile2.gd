@@ -38,6 +38,19 @@ func _on_game_tick(delta: float):
 		if position.distance_to(get_dependent_player().weapon.position) < 20:
 			qfree()
 
+func serialize_object_data(id: int) -> PackedFloat32Array:
+	var data : PackedFloat32Array = super.serialize_object_data(2)
+	# 10th value from here
+	data.append(float(timer))
+	return data
+
+func deserialize_object_data(data: PackedFloat32Array) -> bool:
+	if super.deserialize_object_data(data):
+		var i : int = 9
+		timer = int(data.get(i))
+		return true
+	return false
+
 func qfree():
 	super.qfree()
 	self.queue_free()

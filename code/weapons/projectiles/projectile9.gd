@@ -7,7 +7,7 @@ signal reduce_cooldown
 var emit_signal : bool = false
 
 func _init(player: Player, projectile_data: ProjectileData):
-	super._init(player, projectile_data)
+	super._init(player, load("res://resources/projectile9.tres"))
 	
 	# On the RigidBody2D
 	var material = PhysicsMaterial.new()
@@ -29,6 +29,18 @@ func check_collision():
 					emit_signal = true
 					qfree()
 
+func serialize_object_data(id: int) -> PackedFloat32Array:
+	var data : PackedFloat32Array = super.serialize_object_data(9)
+	# 11th position
+	# note: dont need to serialize the cooldown since it will be serialized on the player side
+	
+	return data
+
+func deserialize_object_data(data: PackedFloat32Array):
+	if super.deserialize_object_data(data):
+		var i : int = 11
+		return true
+	return false
 
 func get_damage() -> float:
 	return super.get_damage()

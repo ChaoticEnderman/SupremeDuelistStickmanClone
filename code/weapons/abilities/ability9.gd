@@ -6,7 +6,7 @@ signal reset_dragon
 
 func release_ability(player : Player, direction: Vector2) -> int:
 	reset_dragon.emit()
-	var projectile = Projectile8.new(player, super.get_projectile_data_by_id(8), self)
+	var projectile = Projectile8.new(player, null, self)
 	SystemManager.active_world.add_child(projectile)
 	
 	projectile.summon_as_projectile(direction, player.weapon.position)

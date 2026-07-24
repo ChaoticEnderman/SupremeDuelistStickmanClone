@@ -38,11 +38,15 @@ var buffer_packet_server_sender : Array[PackedFloat32Array]
 var buffer_packet_server_receiver : Array[PackedFloat32Array]
 
 ## Note on packet id: For packets in float32 arrays, the first element denote the type.
+## Null will be used for the packets that is discarded
 enum PACKET_TYPE {
+	NULL = -1,
 	PLAYER_INPUT = 1,
 	PLAYER_DATA = 2,
 	CAMERA = 3,
-	GAME_STUFF = 4,
+	GAME_OBJECT = 4,
+	GAME_AREA = 5,
+	GAME_BULK= 6,
 }
 
 
@@ -220,14 +224,13 @@ func send_client_packet_rpc(id: int, packet: PackedFloat32Array):
 		if packet.get(0) == PACKET_TYPE.PLAYER_INPUT:
 			var new_packet : PackedFloat32Array = packet.duplicate()
 			if str(multiplayer.get_remote_sender_id()) == active_world.online_player1_id:
-				new_packet.set(1, multiplayer.get_remote_sender_id())
-				if packet.get(2) != 0.0:
-					print("sysman/receiving incoming input packet from player 1 ", new_packet)
+				new_packet.set(1, 1.0)
+				buffer_packet_server_receiver.append(new_packet)
 			elif str(multiplayer.get_remote_sender_id()) == active_world.online_player2_id:
-				new_packet.set(1, multiplayer.get_remote_sender_id())
-				if packet.get(2) != 0.0:
-					print("sysman/receiving incoming input packet from player 2 ", new_packet)
-			buffer_packet_server_receiver.append(new_packet)
+				new_packet.set(1, 2.0)
+				buffer_packet_server_receiver.append(new_packet)
+			else:
+				print("sysman/receiving invalid input packet")
 		else:
 			buffer_packet_server_receiver.append(packet)
 
@@ -291,20 +294,23 @@ func open_map_editor():
 	clear_everything()
 	add_child(map_editor)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	print("sysman/buffer size ", buffer_packet_client_receiver.size(), " ", buffer_packet_server_receiver.size())
 	if not multiplayer.is_server():
 		if GameState.system_state == GameState.SYSTEM_STATE.ONLINE and active_world != null:
 			while buffer_packet_client_sender.size() != 0:
 				var packet : PackedFloat32Array = buffer_packet_client_sender.pop_back()
-				#print("sysman/sending packets client ", packet.slice(0, 6))
-				send_client_packet_rpc.rpc(server_id, packet)
+				if int(packet.get(0)) != PACKET_TYPE.NULL and packet.size() > 1:
+					send_client_packet_rpc.rpc(server_id, packet)
 	elif multiplayer.is_server():
 		if GameState.system_state == GameState.SYSTEM_STATE.ONLINE and active_world != null:
 			while buffer_packet_server_sender.size() != 0:
 				var packet : PackedFloat32Array = buffer_packet_server_sender.pop_back()
-				print("sysman/sending packets server ", packet.slice(0, 6))
-				send_server_packet_rpc.rpc(server_id, packet)
-		
+				#print("sysman/sending packets server ", packet.slice(0, 6))
+				if int(packet.get(0)) != PACKET_TYPE.NULL:
+					send_server_packet_rpc.rpc(server_id, packet)
+	
+	
 
 func switch_world(world: World):
 	active_world = world

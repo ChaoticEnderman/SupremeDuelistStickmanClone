@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://beewqyv27qw3h" path="res://scenes/pause_menu.tscn" id="5_036b0"]
 [ext_resource type="Script" uid="uid://db7np6u36qf7q" path="res://code/map/map.gd" id="5_dwbse"]
 [ext_resource type="Script" uid="uid://wqcrlljgi7bo" path="res://code/camera.gd" id="6_dwbse"]
+[ext_resource type="Script" uid="uid://bxtvhlomxdrw4" path="res://code/debug.gd" id="6_pkg7o"]
 
 [node name="World" type="Node2D" unique_id=1758789496]
 process_mode = 1
@@ -25,3 +26,10 @@ metadata/_custom_type_script = "uid://wqcrlljgi7bo"
 z_index = -1
 
 [node name="PauseMenu" parent="UI" unique_id=457589621 instance=ExtResource("5_036b0")]
+
+[node name="Debug" type="Label" parent="." unique_id=1820866298]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "aofivjlkandoijcklsdcxva"
+script = ExtResource("6_pkg7o")

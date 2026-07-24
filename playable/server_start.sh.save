@@ -1,0 +1,16 @@
+#!/bin/bash
+
+redirect="/dev/null"
+
+for arg in "$@"; do
+	if [[ "$arg" == "--verbose" ]]; then
+		redirect="/dev/tty"
+	fi
+done
+
+./RagdollTest.x86_64 -s -p=56000 -r=AS 2>&1 > "$redirect" &
+./RagdollTest.x86_64 -s -p=56001 -r=AS 2>&1 > "$redirect" &
+./RagdollTest.x86_64 -s -p=56002 -r=AS 2>&1 > "$redirect" &
+./RagdollTest.x86_64 -s -p=56003 -r=AS 2>&1 > "$redirect" &
+./RagdollTest.x86_64 -s -p=56004 -r=AS 2>&1 > "$redirect" &
+

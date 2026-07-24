@@ -129,6 +129,11 @@ func serialize_data(is_player1: bool) -> PackedFloat32Array:
 			data.append(0.0)
 		# 5 * 2 = 10
 	# data 73th element next
+	data.append(float(weapon.cooldown))
+	data.append(weapon.hitbox.scale.x)
+	data.append(weapon.hitbox.scale.y)
+	data.append(weapon.sprite.scale.x)
+	data.append(weapon.sprite.scale.y)
 	return data
 
 ## Deserialize data from server to match the client data from the server for player data
@@ -175,6 +180,11 @@ func deserialize_data(data: PackedFloat32Array) -> bool:
 		child.position.y = data.get(i + 1)
 		i += 2
 	i = 73
+	weapon.cooldown = int(data.get(i))
+	weapon.hitbox.scale.x = data.get(i + 1)
+	weapon.hitbox.scale.y = data.get(i + 2)
+	weapon.sprite.scale.x = data.get(i + 3)
+	weapon.sprite.scale.y = data.get(i + 4)
 	return true
 
 ## Player side serialize input to send over the network to server
@@ -185,6 +195,10 @@ func serialize_input() -> PackedFloat32Array:
 	player_weapon_direction = input_manager.tick_input_is_releasing()
 	player_jumping_direction = input_manager.tick_input_is_jumping()
 	
+	if player_side == PlayerSpriteGlobal.PLAYER.RIGHT and SystemManager.active_world.is_player1():
+		data.append(SystemManager.PACKET_TYPE.NULL)
+	if player_side == PlayerSpriteGlobal.PLAYER.LEFT and not SystemManager.active_world.is_player1():
+		data.append(SystemManager.PACKET_TYPE.NULL)
 	data.append(float(SystemManager.PACKET_TYPE.PLAYER_INPUT))
 	
 	# following convention of serializing data, this is empty and server will use it to store the remote sender id
@@ -205,15 +219,15 @@ func serialize_input() -> PackedFloat32Array:
 func deserialize_input(data: PackedFloat32Array) -> bool:
 	if data.get(0) != float(SystemManager.PACKET_TYPE.PLAYER_INPUT):
 		return false
-	print("player sysman/deserializing input from player ", data)
 	
-	# assume this is alread written with data of remote sender id when the packet is received
-	# only allow each packet with the sender to affect one player in the game 
-	var sender_id : String = str(int(data.get(1)))
-	if sender_id == SystemManager.active_world.online_player1_id and self.player_side == PlayerSpriteGlobal.PLAYER.RIGHT:
-		return false
-	if sender_id == SystemManager.active_world.online_player2_id and self.player_side == PlayerSpriteGlobal.PLAYER.LEFT:
-		return false
+	# assume this is already written with data of remote sender id when the packet is received
+	# only allow each packet with the sender to affect one player in the game
+	if data.get(1) == 1.0:
+		if self.player_side == PlayerSpriteGlobal.PLAYER.RIGHT:
+			return false
+	if data.get(1) == 2.0:
+		if self.player_side == PlayerSpriteGlobal.PLAYER.LEFT:
+			return false
 	
 	
 	var i : int = 2
@@ -283,6 +297,11 @@ func tick_hud():
 	update_health_bar()
 	update_score_label()
 	hand_position = ragdoll.get_arm_position()
+	if SystemManager.active_world.world_type == SystemManager.active_world.WORLD_TYPE.CLIENT:
+		if player_side == PlayerSpriteGlobal.PLAYER.RIGHT and SystemManager.active_world.is_player1():
+			joy_stick_visibility(false)
+		if player_side == PlayerSpriteGlobal.PLAYER.LEFT and not SystemManager.active_world.is_player1():
+			joy_stick_visibility(false)
 
 ## Update the value and the visibility status of the jump bar according to the jump time
 func update_jump_bar():
@@ -325,6 +344,7 @@ func tick_weapon_hud():
 	if ragdoll.is_alive:
 		weapon.position = hand_position
 		weapon.tick_rotation(Vector2.from_angle(ragdoll.p_forearm.rotation + PI/2))
+		weapon.change_cooldown_sprite()
 
 ## Check for player collision with anything that can do damage
 func check_collision():

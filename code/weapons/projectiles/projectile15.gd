@@ -5,9 +5,8 @@ extends Projectile
 # How long it wait until it explode
 var fuse : int
 
-
 func _init(player: Player, projectile_data: ProjectileData):
-	super._init(player, projectile_data)
+	super._init(player, load("res://resources/projectile15.tres"))
 	var material = PhysicsMaterial.new()
 	material.bounce = 0.5
 	material.friction = 1.0
@@ -16,6 +15,7 @@ func _init(player: Player, projectile_data: ProjectileData):
 	fuse = Globals.TPS * 2
 
 func _ready() -> void:
+	super._ready()
 	GameState.game_tick.connect(_on_game_tick)
 
 func _on_game_tick(delta: float):
@@ -42,6 +42,20 @@ func check_collision():
 		if body is RigidBody2D and body.get_owner() is Player:
 			if not (body.get_owner() == damageable.owner_stickman):
 				fuse = 0
+
+func serialize_object_data(id: int) -> PackedFloat32Array:
+	var data : PackedFloat32Array = super.serialize_object_data(15)
+	# 11th position
+	data.append(float(fuse))
+	
+	return data
+
+func deserialize_object_data(data: PackedFloat32Array):
+	if super.deserialize_object_data(data):
+		var i : int = 11
+		self.fuse = int(data.get(i))
+		return true
+	return false
 
 func qfree():
 	super.qfree()
