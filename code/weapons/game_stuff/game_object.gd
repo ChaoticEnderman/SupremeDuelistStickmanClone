@@ -30,10 +30,12 @@ var multiplayer_id : int
 ## Direction and position can be empty vectors
 func _init(player: Player, direction: Vector2, position: Vector2) -> void:
 	GameState.clear_round.connect(_on_game_state_clear_round)
-	multiplayer_id = MultiplayerGlobal.get_id()
+	if SystemManager.active_world.world_type == World.WORLD_TYPE.SERVER:
+		multiplayer_id = MultiplayerGlobal.get_id()
+	else:
+		multiplayer_id = -1
 	
 	self.player = player
-	
 	
 	self.direction = direction
 	self.position = position

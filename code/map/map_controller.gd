@@ -60,6 +60,14 @@ func edit_map(id: int):
 func clear_current_map():
 	maps[current_map].get_tile_map_layer().clear()
 
+## Loading a map for the server from the pool of default map
+func set_single_map_for_server(map_name: String, map: Map):
+	maps.clear()
+	maps.append(Map.new())
+	current_map = 0
+	read_map_from_file("", FileGlobals.maps_path + "/" + map_name + ".json")
+	load_map(map)
+
 ## Save the current map to file in a .json format
 func save_map_to_file(map_name: String) -> SAVE_MAP_ERROR:
 	var path : String = FileGlobals.maps_path + "/" + map_name + ".json"
@@ -197,7 +205,7 @@ func create_untitled_map():
 
 ## IMPORTANT: This function will attempt to load a file from the maps directory. Will search for by the name,
 ## and if a map have the exact name then it will replace that map
-## In the special case of a map that isnt loaded into the game (not possible becausej it will always reload maps after each save)
+## In the special case of a map that isnt loaded into the game (not really possible because it will always reload maps after each save)
 ## Then it will fallback to like making a new entry in the map array and load the map in
 func load_map_from_file_to_map_list(selected_paths: String):
 	print("MC/loading map from file")

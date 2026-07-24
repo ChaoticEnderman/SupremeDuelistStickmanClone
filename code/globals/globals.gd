@@ -3,12 +3,6 @@ extends Node
 
 signal setting_reloaded
 
-## Hardcoding the server address temporarily, will change later when it scale to multiple servers
-const SERVER_ADDRESS : String = "192.168.1.111"
-
-## Port for the network connection
-const NETWORK_PORT : int = 55224
-
 ## Values for Godot's built-in damping value for the ragdolls
 const LINEAR_DAMP : int = 1
 const ANGULAR_DAMP : int = 5

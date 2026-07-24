@@ -46,8 +46,6 @@ var queue_game : bool = false
 
 var delta : int
 
-var peer : MultiplayerPeer
-
 func add_projectile(projectile: Projectile):
 	add_child(projectile)
 
@@ -62,6 +60,8 @@ func _ready() -> void:
 	player_scores[0] = 0
 	player_scores[1] = 0
 	
+	load_single_map("rebirth", get_map())
+	
 	clear_round()
 
 func get_map() -> Map:
@@ -69,6 +69,9 @@ func get_map() -> Map:
 
 func get_map_tile_map() -> TileMapLayer:
 	return get_node("CameraGame/Map").tile_map_layer
+
+func load_single_map(path: String, map: Map):
+	MapController.set_single_map_for_server(path, map)
 
 ## Reset the previous round object and values, for any round other than the first one
 func clear_round():

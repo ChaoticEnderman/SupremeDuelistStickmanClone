@@ -109,6 +109,14 @@ grow_vertical = 2
 pivot_offset = Vector2(103, 108)
 texture_normal = ExtResource("6_71k7c")
 
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1385809940]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(800, 150)
+dialog_text = "Are you sure you want to disconnect the game? Currently there are just casual mode so disconnection anytime is fine, but it won't be like this in the future with competitive."
+dialog_autowrap = true
+
 [connection signal="pressed" from="Control/Resume" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Control/Menu" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="Control/Setting" to="." method="_on_setting_button_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

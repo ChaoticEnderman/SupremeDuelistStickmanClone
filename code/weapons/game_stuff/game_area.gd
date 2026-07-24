@@ -34,6 +34,11 @@ var colliding_bodies
 ## Direction and position can be empty vectors
 func _init(player: Player, direction: Vector2, position: Vector2) -> void:
 	GameState.game_tick.connect(_on_game_tick)
+	if SystemManager.active_world.world_type == World.WORLD_TYPE.SERVER:
+		multiplayer_id = MultiplayerGlobal.get_id()
+	else:
+		multiplayer_id = -1
+	
 	self.player = player
 	collision_shape = CollisionShape2D.new()
 	sprite = Sprite2D.new()
