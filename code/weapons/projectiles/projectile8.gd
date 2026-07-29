@@ -10,7 +10,8 @@ var particle_texture : Texture2D
 var prev_rotation : float
 
 func _init(player: Player, projectile_data: ProjectileData, ability_ref: Ability9):
-	ability_ref.reset_dragon.connect(_on_reset_dragon)
+	if ability_ref != null:
+		ability_ref.reset_dragon.connect(_on_reset_dragon)
 	super._init(player, load("res://resources/projectile8.tres"))
 	var img = Image.create(64, 64, false, Image.FORMAT_RGBA8)
 	img.fill(Color.CYAN)
@@ -59,6 +60,10 @@ func serialize_object_data(id: int) -> PackedFloat32Array:
 	var data : PackedFloat32Array = super.serialize_object_data(8)
 	# 11th position
 	data.append(prev_rotation)
+	if player.player_side == PlayerSpriteGlobal.PLAYER.LEFT:
+		data.append(0.0)
+	else:
+		data.append(1.0)
 	
 	return data
 
@@ -66,6 +71,12 @@ func deserialize_object_data(data: PackedFloat32Array):
 	if super.deserialize_object_data(data):
 		var i : int = 11
 		self.prev_rotation = data.get(i)
+		if data.get(i + 1) == 0.0:
+			var ability : Ability9 = SystemManager.active_world.player1.weapon.abilities[0]
+			ability.reset_dragon.connect(_on_reset_dragon)
+		else:
+			var ability : Ability9 = SystemManager.active_world.player1.weapon.abilities[0]
+			ability.reset_dragon.connect(_on_reset_dragon)
 		return true
 	return false
 

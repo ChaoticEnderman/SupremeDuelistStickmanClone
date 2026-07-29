@@ -14,6 +14,8 @@ var online_player2_name : String = ""
 @onready var player_list : Array[Player]
 @onready var player_scores : Array[int]
 
+@onready var map : Map = get_node("CameraGame/Map")
+
 var player1 : Player
 var player2 : Player
 
@@ -26,7 +28,8 @@ var weapon2 : Weapon
 
 @onready var next_round_button : TextureButton = get_node("UI/GameUI/NextRoundButton")
 @onready var pause_menu : Control = get_node("UI/PauseMenu")
-@onready var camera : Camera2D = get_node("CameraGame/Camera")
+@onready var camera : Camera = get_node("CameraGame/Camera")
+@onready var chat : Chat = get_node("UI/Chat")
 
 enum WORLD_TYPE {
 	OFFLINE,
@@ -60,15 +63,7 @@ func _ready() -> void:
 	player_scores[0] = 0
 	player_scores[1] = 0
 	
-	load_single_map("rebirth", get_map())
-	
 	clear_round()
-
-func get_map() -> Map:
-	return get_node("CameraGame/Map")
-
-func get_map_tile_map() -> TileMapLayer:
-	return get_node("CameraGame/Map").tile_map_layer
 
 func load_single_map(path: String, map: Map):
 	MapController.set_single_map_for_server(path, map)
@@ -125,6 +120,7 @@ func start_round() -> void:
 	
 	GameState.queue_run_game()
 
+## Check for player, only work on client
 func is_player1():
 	return str(multiplayer.get_unique_id()) == online_player1_id
 
@@ -189,7 +185,11 @@ func deserialize_world_data(data: PackedFloat32Array) -> bool:
 			var id : int = int(dynamic_data.get(2))
 			var object : GameObject
 			var area : GameArea
-			var player = SystemManager.active_world.player1
+			var player : Player
+			if data.get(9) == 0.0:
+				player = SystemManager.active_world.player1
+			elif data.get(9) == 1.0:
+				player = SystemManager.active_world.player2
 			
 			# TODO: move this to another global class
 			match id:
@@ -208,7 +208,7 @@ func deserialize_world_data(data: PackedFloat32Array) -> bool:
 				7:
 					object = Projectile7.new(player, null)
 				8:
-					object = Projectile8.new(player, null, player.weapon.abilities[0])
+					object = Projectile8.new(player, null, null)
 				9:
 					object = Projectile9.new(player, null)
 				10:
@@ -237,6 +237,22 @@ func deserialize_world_data(data: PackedFloat32Array) -> bool:
 				dynamic_data.remove_at(0)
 			dynamic_data.remove_at(0)
 			#print("world sysman/creating new object after create ", dynamic_data.size())
+	return true
+
+func serialize_camera_data() -> PackedFloat32Array:
+	var data : PackedFloat32Array
+	data.append(SystemManager.PACKET_TYPE.CAMERA)
+	data.append(camera.position.x)
+	data.append(camera.position.y)
+	data.append(camera.camera_zoom)
+	return data
+
+func deserialize_camera_data(data: PackedFloat32Array) -> bool:
+	if data.get(0) != SystemManager.PACKET_TYPE.CAMERA:
+		return false
+	camera.position.x = data.get(1)
+	camera.position.y = data.get(2)
+	camera.camera_zoom = data.get(3)
 	return true
 
 ## Pause the game when the state is not running
@@ -314,17 +330,21 @@ func _on_game_tick(delta: float) -> void:
 				SystemManager.buffer_packet_server_sender.append(player1.serialize_data(true))
 				SystemManager.buffer_packet_server_sender.append(player2.serialize_data(false))
 				SystemManager.buffer_packet_server_sender.append(serialize_world_data())
+				SystemManager.buffer_packet_server_sender.append(serialize_camera_data())
 			if world_type == WORLD_TYPE.CLIENT:
 				if SystemManager.buffer_packet_client_receiver.size() > 0:
 					for i in range(SystemManager.buffer_packet_client_receiver.size() - 1, -1, -1):
 						var packet = SystemManager.buffer_packet_client_receiver.get(i)
-						if packet.get(1) == 0.0:
-							if player1.deserialize_data(packet):
-								SystemManager.buffer_packet_client_receiver.remove_at(i)
-						elif packet.get(1) == 1.0:
-							if player2.deserialize_data(packet):
-								SystemManager.buffer_packet_client_receiver.remove_at(i)
+						if packet.size() >= 2:
+							if packet.get(1) == 0.0:
+								if player1.deserialize_data(packet):
+									SystemManager.buffer_packet_client_receiver.remove_at(i)
+							elif packet.get(1) == 1.0:
+								if player2.deserialize_data(packet):
+									SystemManager.buffer_packet_client_receiver.remove_at(i)
 						if self.deserialize_world_data(packet):
+							SystemManager.buffer_packet_client_receiver.remove_at(i)
+						if deserialize_camera_data(packet):
 							SystemManager.buffer_packet_client_receiver.remove_at(i)
 
 ## Call the tick function in each players to do their stuff

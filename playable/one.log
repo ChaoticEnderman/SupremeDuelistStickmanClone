@@ -1,0 +1,1380 @@
+Godot Engine v4.6.2.stable.official.71f334935 - https://godotengine.org
+
+map/ikill none 
+map/tree ():<RectangleShape2D#-9223371957414656194>
+FG/copying maps to user maps /home/.local/share/godot/app_userdata/StickmanDuelOnline/maps
+FG/res saved maps <DirAccess#-9223371954294093879>
+FG/first file name is
+FG/Loading from res://maps/desolation.json to user://maps/desolation.json
+FG/Loading from res://maps/inferno.json to user://maps/inferno.json
+FG/Loading from res://maps/rebirth.json to user://maps/rebirth.json
+FG/done writing files
+sysman/CODE VERSION 9
+sysman/what is ip ["192.168.1.111", "fe80:0:0:0:a812:f207:6aa7:f020", "127.0.0.1", "0:0:0:0:0:0:0:1"]
+RM/loading hats number 7
+RM/loading hats number 7
+MC/reload/filename is desolation.json
+map/ikill none 
+map/tree ():<RectangleShape2D#-9223371947549652828>
+MC/reload/editing map /home/.local/share/godot/app_userdata/StickmanDuelOnline/maps/desolation.json
+MC/reload/reading map id 0 with name desolation
+MC/RMFF/opening same map, loading
+MC/json/head is { "instant_kill": 0.0, "name": "desolation" }
+MC/json/head is desolation
+map/ikill none 
+MC/json ikill false
+MC/reload/filename is rebirth.json
+map/ikill none 
+map/tree ():<RectangleShape2D#-9223371947381880661>
+MC/reload/editing map /home/.local/share/godot/app_userdata/StickmanDuelOnline/maps/rebirth.json
+MC/reload/reading map id 1 with name rebirth
+MC/RMFF/opening same map, loading
+MC/json/head is { "instant_kill": 0.0, "name": "rebirth" }
+MC/json/head is rebirth
+map/ikill none 
+MC/json ikill false
+MC/reload/filename is inferno.json
+map/ikill none 
+map/tree ():<RectangleShape2D#-9223371947214108494>
+MC/reload/editing map /home/.local/share/godot/app_userdata/StickmanDuelOnline/maps/inferno.json
+MC/reload/reading map id 2 with name inferno
+MC/RMFF/opening same map, loading
+MC/json/head is { "instant_kill": 2.0, "name": "inferno" }
+MC/json/head is inferno
+map/ikill texture region 2 path res://assets/map/instant_kill_lava.png
+MC/json ikill true
+map/ikill none 
+map/after loading tiles 232
+ME/ready
+map/ikill none 
+MMM/ready
+sysman/cmdline args ["-s", "-p=56000", "-r=AS", "-m=desolation"]
+sysman/http polling 1 status 5
+map/ikill none 
+map/tree ():<RectangleShape2D#-9223371939194599090>
+map/ikill none 
+map/tree ():<RectangleShape2D#-9223371938120857252>
+MC/RMFF/opening same map, loading
+MC/json/head is { "instant_kill": 0.0, "name": "desolation" }
+MC/json/head is desolation
+map/ikill none 
+MC/json ikill false
+SCRIPT ERROR: Invalid call. Nonexistent function 'get_tile_map_layer' in base 'Nil'.
+          at: load_map (res://code/map/map_controller.gd:49)
+          GDScript backtrace (most recent call first):
+              [0] load_map (res://code/map/map_controller.gd:49)
+              [1] set_single_map_for_server (res://code/map/map_controller.gd:69)
+              [2] load_single_map (res://code/world/world.gd:69)
+              [3] create_game (res://code/globals/system_manager.gd:271)
+              [4] _ready (res://code/globals/system_manager.gd:108)
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+GS/System State is MENU
+GS/active world <null>
+MMM/visible false
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/server player connected 1514576305
+sysman/server received rpc true
+sysman/count/ server received join 1514576305
+sysman/server with players 1514576305 - 
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and  count is 1
+sysman/http server post sending port=56000&region=AS&map=desolation&count=1
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 1 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and  count is 1
+sysman/http server post sending port=56000&region=AS&map=desolation&count=1
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 1 }
+sysman/server player connected 336335250
+sysman/server received rpc true
+sysman/count/ server received join 336335250
+sysman/server with players 1514576305 - 336335250
+GS/System State is ONLINE
+GS/active world World:<Node2D#97509181771>
+GS/for world World:<Node2D#97509181771> change state to NONE
+world/this world World:<Node2D#97509181771> state to NONE
+MMM/visible false
+map/ikill none 
+map/after loading tiles 232
+joy/center (640.0, 640.0)
+joy/center (640.0, 640.0)
+GS/for world World:<Node2D#97509181771> change state to RUNNING
+world/this world World:<Node2D#97509181771> state to RUNNING
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/http polling 1 status 5
+sysman/count check 1514576305 and 336335250 count is 2
+sysman/http server post sending port=56000&region=AS&map=desolation&count=2
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 2 }
+sysman/server player disconnected
+map/ikill none 
+map/tree ():<RectangleShape2D#-9223371328923366729>
+map/ikill none 
+map/tree ():<RectangleShape2D#-9223371327849624876>
+MC/RMFF/opening same map, loading
+MC/json/head is { "instant_kill": 0.0, "name": "desolation" }
+MC/json/head is desolation
+map/ikill none 
+MC/json ikill false
+SCRIPT ERROR: Invalid call. Nonexistent function 'get_tile_map_layer' in base 'Nil'.
+          at: load_map (res://code/map/map_controller.gd:49)
+          GDScript backtrace (most recent call first):
+              [0] load_map (res://code/map/map_controller.gd:49)
+              [1] set_single_map_for_server (res://code/map/map_controller.gd:69)
+              [2] load_single_map (res://code/world/world.gd:69)
+              [3] create_game (res://code/globals/system_manager.gd:271)
+              [4] _on_player_disconnected (res://code/globals/system_manager.gd:383)
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56000&region=AS&map=desolation&count=0
+sysman/http sent done { "port": 56000, "region": "AS", "map": "desolation", "count": 0 }

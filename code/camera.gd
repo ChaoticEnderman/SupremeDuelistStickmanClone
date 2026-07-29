@@ -13,7 +13,7 @@ var pos2 : Vector2
 func _process(delta: float) -> void:
 	if SystemManager.active_world == null:
 		return
-	if SystemManager.active_world.world_type == World.WORLD_TYPE.OFFLINE:
+	if SystemManager.active_world.world_type == World.WORLD_TYPE.OFFLINE or SystemManager.active_world.world_type == World.WORLD_TYPE.SERVER:
 		pos1 = SystemManager.active_world.p1_position
 		pos2 = SystemManager.active_world.p2_position
 		camera_position = (pos1 + pos2) / 2

@@ -11,12 +11,15 @@ const NETWORK_PORT_MAX : int = 57000
 
 const MM_PORT : int = 55144
 
-const MM_URL : String = "127.0.0.1"
+const MM_URL : String = "192.168.1.111"
 
 const PACKED_SPLIT_TAG : float = -999.0
 
 ## IMPORTANT: region is defines as such: EU, NA, AS, SA, AF, OC
 var server_region : String
+
+## Syntax: Just the map name like "desolation" or "rebirth"
+var server_map : String
 
 var server_port : int
 

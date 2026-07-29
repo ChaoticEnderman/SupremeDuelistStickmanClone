@@ -499,18 +499,18 @@ func tick_check_tile_map_layer_collisions():
 			# After getting the ID, we will generate a similiar instance of the collision object
 			var collider = instance_from_id(collider_object_id)
 			# If it turns out to be the exact instance as the game map, it imply that the colliding object is the map tile
-			if collider == SystemManager.active_world.get_map_tile_map():
+			if collider == SystemManager.active_world.map.tile_map_layer:
 				# Get contact position to the map tile
 				var colliding_position = state.get_contact_collider_position(i)
-				var local_pos: Vector2 = SystemManager.active_world.get_map_tile_map().to_local(colliding_position)
+				var local_pos: Vector2 = SystemManager.active_world.map.tile_map_layer.to_local(colliding_position)
 				# Nearest neighbor vector return a list of all possible tiles that might be colliding
 				# Read the function for more info, but basically this is for solving an edge case
 				# So if it happens to be not exact we will still be able to list all possibilities and try all 
 				var potential_collision_vectors = nearest_neighbor_vector(local_pos)
 				for vector in potential_collision_vectors:
 					# Getting tile coords and custom damage data for the tiles
-					var tile_coords: Vector2i = SystemManager.active_world.get_map_tile_map().local_to_map(vector)
-					var tile_data = SystemManager.active_world.get_map_tile_map().get_cell_tile_data(tile_coords)
+					var tile_coords: Vector2i = SystemManager.active_world.map.tile_map_layer.local_to_map(vector)
+					var tile_data = SystemManager.active_world.map.tile_map_layer.get_cell_tile_data(tile_coords)
 					if tile_data != null:
 						#print("rag/touching map/tile ", tile_data, " dmg ", tile_data.get_custom_data("damage"))
 						damages.append(tile_data.get_custom_data("damage"))

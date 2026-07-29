@@ -388,8 +388,8 @@ func tick_check_tile_map_layer_collisions():
 					var potential_collision_vectors = nearest_neighbor_vector(local_pos)
 					for vector in potential_collision_vectors:
 						# Getting tile coords and custom damage data for the tiles
-						var tile_coords: Vector2i = SystemManager.active_world.get_map_tile_map().local_to_map(vector)
-						var tile_data = SystemManager.active_world.get_map_tile_map().get_cell_tile_data(tile_coords)
+						var tile_coords: Vector2i = SystemManager.active_world.get_map_tile_maps.local_to_map(vector)
+						var tile_data = SystemManager.active_world.get_map_tile_maps.get_cell_tile_data(tile_coords)
 						if tile_data != null:
 							#print("rag/touching map/tile ", tile_data, " dmg ", tile_data.get_custom_data("damage"))
 							damages.append(tile_data.get_custom_data("damage"))

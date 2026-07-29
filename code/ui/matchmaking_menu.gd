@@ -3,6 +3,12 @@ class_name MatchmakingMenu
 extends Control
 
 @onready var container : VBoxContainer = get_node("Control/ScrollContainer/VBoxContainer")
+@onready var dialog : AcceptDialog = get_node("AcceptDialog")
+
+var connecting_port : String = ""
+var connecting_time : int = 0
+
+var http_sync : int = 0
 
 func _ready():
 	print("MMM/ready")
@@ -48,8 +54,9 @@ func add_to_container():
 		texture_button.add_child(rich_text_label)
 
 func _on_game_connected(id: int):
-	print("MMM sysman/connecting id ", id, " port ", SystemManager.server_data[id * 3])
-	SystemManager.connect_server(int(SystemManager.server_data[id * 3]))
+	print("MMM sysman/connecting id ", id, " port ", SystemManager.server_data[id * 4])
+	SystemManager.connect_server(int(SystemManager.server_data[id * 4]))
+	connecting_port = SystemManager.server_data[id * 4]
 
 func _on_back_button_pressed() -> void:
 	GameState.change_system_state(GameState.SYSTEM_STATE.MENU)
@@ -62,21 +69,39 @@ func reload_server_data():
 	var index = 0
 	for c in container.get_children():
 		if c is TextureButton:
-			print("MMM sysman/current index is ", str(index), " ", SystemManager.server_data.size(), " ", container.get_children().size())
 			if SystemManager.server_data.size() > index:
 				var text : String = "\t\t"
 				text += "Server ID: " + SystemManager.server_data[index] + "\t\t\t\t"
 				text += "Region: " + SystemManager.server_data[index + 1] + "\t\t\t\t"
 				text += "Player Count: " + SystemManager.server_data[index + 2] + "\t\t\t\t"
+				text += "Game Map: " + SystemManager.server_data[index + 3] + "\t\t\t\t"
 				var rich_text_label : RichTextLabel = c.get_child(0)
 				rich_text_label.text = text
 			else:
-				print("MMM sysman/hiding")
 				c.visible = false
-			index += 3
+			index += 4
 
-func _on_reload_2_pressed() -> void:
-	SystemManager.reload_button(2)
+func show_waiting_dialog():
+	dialog.popup()
+	connecting_time = Time.get_unix_time_from_system()
+
+func join_game_signal():
+	dialog.hide()
+
+func _physics_process(delta: float) -> void:
+	http_sync += 1
+	if http_sync >= 60:
+		http_sync = 0
+		reload_server_data()
+	var text : String = "Connected to server with port " + connecting_port + ". You are the only one here, waiting for another player to join."
+	text += "Time elapsed: " + str(int(Time.get_unix_time_from_system()) - connecting_time) + " seconds "
+	dialog.dialog_text = text
 
 func _on_name_text_changed(new_text: String) -> void:
 	SystemManager.player_name_changed(new_text)
+
+func _on_accept_dialog_canceled() -> void:
+	SystemManager.disconnect_client()
+
+func _on_accept_dialog_confirmed() -> void:
+	SystemManager.disconnect_client()

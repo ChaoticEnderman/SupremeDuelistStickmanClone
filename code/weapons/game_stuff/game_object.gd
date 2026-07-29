@@ -138,7 +138,10 @@ func serialize_object_data(id: int) -> PackedFloat32Array:
 	data.append(self.angular_velocity)
 	
 	# TODO: 9th value for player, will finish later on
-	data.append(0.0)
+	if player.player_side == PlayerSpriteGlobal.PLAYER.LEFT:
+		data.append(0.0)
+	else:
+		data.append(1.0)
 	return data
 
 func deserialize_object_data(data: PackedFloat32Array) -> bool:
@@ -159,6 +162,11 @@ func deserialize_object_data(data: PackedFloat32Array) -> bool:
 	self.linear_velocity.y = data.get(i + 4)
 	self.angular_velocity = data.get(i + 5)
 	i = 9
+	if data.get(9) == 0.0:
+		player = SystemManager.active_world.player1
+	elif data.get(9) == 1.0:
+		player = SystemManager.active_world.player2
+ 
 	#data.get(i) then do something for player
 	
 	return true

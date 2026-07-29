@@ -133,6 +133,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Reload2" type="TextureButton" parent="Control/HBoxContainer" unique_id=64733413]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture_normal = ExtResource("4_r6oeu")
@@ -182,7 +183,16 @@ expand_icon = true
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=799688656]
 replication_config = SubResource("SceneReplicationConfig_s0qc0")
 
+[node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=1239558571]
+oversampling_override = 1.0
+title = "Looking for game"
+initial_position = 1
+size = Vector2i(360, 120)
+ok_button_text = "Cancel"
+
 [connection signal="text_changed" from="Control/HBoxContainer/Name" to="." method="_on_name_text_changed"]
 [connection signal="pressed" from="Control/HBoxContainer/Reload" to="." method="_on_reload_pressed"]
 [connection signal="pressed" from="Control/HBoxContainer/Reload2" to="." method="_on_reload_2_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="canceled" from="AcceptDialog" to="." method="_on_accept_dialog_canceled"]
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_accept_dialog_confirmed"]

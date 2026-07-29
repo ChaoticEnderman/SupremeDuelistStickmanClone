@@ -6,10 +6,9 @@ var tick : int
 
 func _init(player: Player, direction: Vector2, position: Vector2):
 	super._init(player, direction, position)
+	add_projectile_data(load("res://resources/projectile4.tres"))
 	
 func _ready() -> void:
-	var projectile_data : ProjectileData = load("res://resources/projectile4.tres")
-	add_projectile_data(projectile_data)
 	add_collision_shape(projectile_data.hitbox)
 	summon_as_projectile(direction, position)
 	GameState.game_tick.connect(_on_game_tick)

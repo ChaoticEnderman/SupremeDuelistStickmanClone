@@ -8,10 +8,11 @@ import (
 )
 
 type Server struct {
-	port    int
-	region  string
-	count   int
-	updated time.Time
+	port     int
+	region   string
+	count    int
+	game_map string
+	updated  time.Time
 }
 
 var servers []Server
@@ -29,31 +30,36 @@ func serverHandler(w http.ResponseWriter, r *http.Request) {
 	var receivedPort int
 	var receivedRegion string
 	var receivedCount int
+	var receivedMap string
 	receivedPort, _ = strconv.Atoi(r.FormValue("port"))
 	receivedRegion = r.FormValue("region")
 	receivedCount, _ = strconv.Atoi(r.FormValue("count"))
+	receivedMap = r.FormValue("map")
 	updated := time.Now()
 
 	var found bool = false
-	for _, value := range servers {
+	for index, _ := range servers {
 		// Finding the occurence of this server, if they exist then update current value instead
-		if value.port == receivedPort {
-			fmt.Println("Changing current value %d %s", receivedPort, updated.Format("00:00:00"))
+		if servers[index].port == receivedPort {
+			fmt.Println("Replacing current value ", receivedPort, updated.Format("00:00:00"))
+			servers[index].port = receivedPort
+			servers[index].region = receivedRegion
+			servers[index].count = receivedCount
+			servers[index].game_map = receivedMap
+			servers[index].updated = updated
 			found = true
-			value.region = receivedRegion
-			value.count = receivedCount
-			value.updated = updated
 		}
 	}
 	if !found {
 		appended := false
-		for _, value := range servers {
+		for index, _ := range servers {
 			// Check for any unclaimed positions and replace to that instead
-			if value.port == -1 {
-				value.port = receivedPort
-				value.region = receivedRegion
-				value.count = receivedCount
-				value.updated = updated
+			if servers[index].port == -1 {
+				servers[index].port = receivedPort
+				servers[index].region = receivedRegion
+				servers[index].count = receivedCount
+				servers[index].game_map = receivedMap
+				servers[index].updated = updated
 				appended = true
 			}
 		}
@@ -63,12 +69,13 @@ func serverHandler(w http.ResponseWriter, r *http.Request) {
 			server.port = receivedPort
 			server.region = receivedRegion
 			server.count = receivedCount
+			server.game_map = receivedMap
 			server.updated = updated
 
 			servers = append(servers, server)
 		}
 
-		fmt.Println("Adding new value %d %d %d", receivedPort, receivedRegion, receivedCount)
+		fmt.Println("Adding new value", receivedPort, receivedRegion, receivedCount)
 	}
 
 	fmt.Println(r.Form)
@@ -77,12 +84,14 @@ func serverHandler(w http.ResponseWriter, r *http.Request) {
 // Send a response to client for the servers available to connect, the port to connect, current player count and region (currently only asia region exist)
 func clientHandler(w http.ResponseWriter, r *http.Request) {
 	var text string
+	text += "Number of servers is " + strconv.Itoa(len(servers)) + ";"
 	for _, value := range servers {
 		// Port of -1 mean the server is invalidated
 		if value.port != -1 {
 			text += strconv.Itoa(value.port) + ","
-			text += string(value.region) + ","
+			text += value.region + ","
 			text += strconv.Itoa(value.count) + ","
+			text += value.game_map + ","
 		}
 	}
 	fmt.Fprintf(w, text)
@@ -103,9 +112,9 @@ func main() {
 		select {
 		case <-ticker.C:
 			for index, _ := range servers {
-				fmt.Println("Check current server: %d %s %d", servers[index].port, servers[index].region, servers[index].count)
+				fmt.Println("Check current server: ", servers[index].port, servers[index].region, servers[index].count)
 				// If has not received an update in a minute from now, the server will be removed from the mm server. Will be cleaned instead of removed and free a slot
-				if servers[index].updated.Add(1 * time.Minute).Before(time.Now()) {
+				if servers[index].updated.Add(5 * time.Minute).Before(time.Now()) {
 					servers[index].port = -1
 				}
 			}
