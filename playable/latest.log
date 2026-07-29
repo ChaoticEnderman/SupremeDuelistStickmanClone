@@ -5370,3 +5370,2163 @@ sysman/http polling 1 status 5
 sysman/count check  and  count is 0
 sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
 sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56003&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56003, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56001&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56001, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56002&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56002, "region": "AS", "map": "rebirth", "count": 0 }
+sysman/http polling 1 status 5
+sysman/count check  and  count is 0
+sysman/http server post sending port=56004&region=AS&map=rebirth&count=0
+sysman/http sent done { "port": 56004, "region": "AS", "map": "rebirth", "count": 0 }
