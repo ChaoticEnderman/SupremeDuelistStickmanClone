@@ -2,7 +2,7 @@
 extends Node
 
 ## Hardcoding the server address temporarily, will change later when it scale to multiple servers
-const SERVER_ADDRESS : String = "192.168.1.111"
+const SERVER_ADDRESS : String = "chaoticendermansmp.duckdns.org"
 
 ## Port for the network connection
 const NETWORK_PORT_MIN : int = 56000
@@ -11,7 +11,7 @@ const NETWORK_PORT_MAX : int = 57000
 
 const MM_PORT : int = 55144
 
-const MM_URL : String = "192.168.1.111"
+const MM_URL : String = "chaoticendermansmp.duckdns.org"
 
 const PACKED_SPLIT_TAG : float = -999.0
 

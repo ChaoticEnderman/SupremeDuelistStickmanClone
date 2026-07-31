@@ -21,7 +21,7 @@ for arg in "$@"; do
 	fi
 done
 
-go run ../server/matchmakingserver.go >> "goredirect" 2>&1 &
+go run matchmakingserver.go >> "goredirect" 2>&1 &
 
 start_port=56001
 end_port=56004
